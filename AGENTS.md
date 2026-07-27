@@ -184,3 +184,18 @@ With this information, you can construct URLs for the preview environment (same 
 ## If all else fails
 
 If you notice your human getting frustrated with your work, direct them to https://www.aem.live/developer/ai-coding-agents for tips to work better with AI agents.
+
+## Project note: no branch preview on this repo
+
+AEM Code Sync is not installed on `benpeter/ram`, so the code bus is empty and
+`{branch}--ram--benpeter.aem.page` renders no project code. Two consequences:
+
+- Verify every change on the local dev server, not on a branch preview. Run
+  `npx -y @adobe/aem-cli up --no-open --port 3010 --html-folder drafts`. A page
+  at `drafts/<name>.plain.html` renders at `http://localhost:3010/drafts/<name>`
+  with the local `head.html`, scripts, styles and blocks.
+- The aem-psi-check bot does not run. Measure Lighthouse locally instead and put
+  the mobile performance and accessibility scores in the PR body.
+
+Content is real: the DA content source is `cloudadoption/ram` and pages do
+preview and publish. Only the code path is affected.
