@@ -114,6 +114,10 @@ header .header .nav-primary {
   display: none;
 }
 
+header .header .nav-panels {
+  display: none;
+}
+
 header .header .nav-primary a:any-link {
   box-sizing: border-box;
   display: flex;
@@ -201,6 +205,21 @@ header .header .nav-utility li:first-child a {
     gap: 16px;
   }
 
+  header .header .nav-primary a[aria-expanded='true'] {
+    border-bottom: 2px solid #c20831;
+    color: #c20831;
+  }
+
+  header .header .nav-panel li a {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  header .header .nav-panel a:any-link {
+    color: #1a1717;
+    text-decoration: none;
+  }
+
   header .header .nav-utility ul {
     gap: 16px;
   }
@@ -240,4 +259,89 @@ header .header .nav-utility li:first-child a {
   header .header .nav-primary li:nth-child(3) a { width: 114px; }
   header .header .nav-primary li:nth-child(4) a { width: 120px; }
   header .header .nav-primary li:nth-child(5) a { width: 109px; }
+
+  header .header .nav-panels {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+  }
+
+  header .header .nav-panel {
+    box-sizing: border-box;
+    display: none;
+    width: 100%;
+    margin: 0;
+    padding: 40px 0;
+    background: #fafafa;
+    color: #1a1717;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+  }
+
+  header .header .nav-panel.is-open {
+    display: block;
+  }
+
+  header .header .nav-panel-book {
+    height: 298px;
+  }
+
+  header .header .nav-panel-explore {
+    height: 286px;
+  }
+
+  header .header .nav-panel-experience {
+    height: 266px;
+  }
+
+  header .header .nav-panel-information {
+    height: 330px;
+  }
+
+  header .header .nav-panel-safar-flyer {
+    height: 430px;
+  }
+
+  header .header .nav-panel-inner {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-flow: column;
+    column-gap: 40px;
+    width: calc(100% - 40px);
+    max-width: 1240px;
+    height: 100%;
+    margin: 0 auto;
+  }
+
+  header .header .nav-panel h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+  }
+
+  header .header .nav-panel ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  header .header .nav-panel li {
+    margin: 0;
+  }
+
+  header .header .nav-panel p {
+    display: flex;
+    grid-row: 1 / span 2;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    background: #eee;
+    font-weight: 700;
+  }
 }
