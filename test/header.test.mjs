@@ -41,7 +41,11 @@ await headerModule.link(async (specifier) => {
 });
 await headerModule.evaluate();
 
-const { classifyHeaderSections, setActivePanel } = headerModule.namespace;
+const {
+  classifyHeaderSections,
+  setActivePanel,
+  setDrawerState,
+} = headerModule.namespace;
 
 const createSection = (label) => ({
   querySelector: () => ({ textContent: label }),
@@ -148,4 +152,21 @@ test('opens one desktop panel at a time and synchronizes trigger state', () => {
   Object.values(triggers).forEach((trigger) => {
     assert.equal(trigger.getAttribute('aria-expanded'), 'false');
   });
+});
+
+test('synchronizes mobile drawer visibility and trigger state', () => {
+  const drawer = createToggleTarget();
+  const trigger = createToggleTarget();
+
+  setDrawerState(drawer, trigger, true);
+
+  assert.equal(drawer.classList.contains('is-open'), true);
+  assert.equal(drawer.getAttribute('aria-hidden'), 'false');
+  assert.equal(trigger.getAttribute('aria-expanded'), 'true');
+
+  setDrawerState(drawer, trigger, false);
+
+  assert.equal(drawer.classList.contains('is-open'), false);
+  assert.equal(drawer.getAttribute('aria-hidden'), 'true');
+  assert.equal(trigger.getAttribute('aria-expanded'), 'false');
 });
