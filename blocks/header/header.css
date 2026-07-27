@@ -6,6 +6,14 @@
   src: url('https://onesait-travel.azureedge.net/statics/RAM/fonts/museosans/museosans400.woff2') format('woff2');
 }
 
+@font-face {
+  font-family: ram-icon-font;
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('https://onesait-travel.azureedge.net/statics/RAM/fonts/travel-ram-icons/travel-ram-icons.woff') format('woff');
+}
+
 header {
   height: 94px;
 }
@@ -118,6 +126,231 @@ header .header .nav-panels {
   display: none;
 }
 
+header .header .nav-drawer {
+  display: none;
+}
+
+@media (width < 1200px) {
+header .header .nav-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #fff;
+  color: rgb(0 0 0 / 80%);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+header .header .nav-drawer.is-open {
+  display: block;
+}
+
+header .header .nav-drawer-header,
+header .header .nav-drawer-panel-header {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  background: #c20831;
+  color: #fff;
+}
+
+header .header .nav-drawer-header {
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+header .header .nav-drawer-brand {
+  display: flex;
+  align-items: center;
+}
+
+header .header .nav-drawer-brand img {
+  width: 40px;
+  height: 30px;
+}
+
+header .header .nav-drawer button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+
+header .header .nav-drawer .nav-drawer-close,
+header .header .nav-drawer .nav-drawer-back {
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  font-size: 0;
+}
+
+header .header .nav-drawer-close::before {
+  font-family: ram-icon-font, sans-serif;
+  font-size: 16px;
+  content: '\e905';
+}
+
+header .header .nav-drawer-back::before {
+  display: block;
+  margin: auto;
+  font-family: ram-icon-font, sans-serif;
+  font-size: 16px;
+  content: '\e908';
+}
+
+header .header .nav-drawer-search-wrap {
+  box-sizing: border-box;
+  height: 76px;
+  padding: 16px;
+}
+
+header .header .nav-drawer-search {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 40px 0 12px;
+  border: 1px solid #d8d7d4;
+  background: url('../../icons/search.svg') right 12px center / 16px 16px no-repeat;
+  color: rgb(0 0 0 / 80%);
+  font-size: 12px;
+}
+
+header .header .nav-drawer-utility ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+header .header .nav-drawer-utility {
+  padding: 16px;
+}
+
+header .header .nav-drawer-utility a:any-link {
+  display: block;
+  padding-block: 6px;
+  color: rgb(0 0 0 / 80%);
+  font-size: 12px;
+}
+
+header .header .nav-drawer-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #fff;
+  color: rgb(0 0 0 / 80%);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+header .header .nav-drawer-panel.is-open {
+  display: block;
+}
+
+header .header .nav-drawer-panel-header {
+  justify-content: space-between;
+}
+
+header .header .nav-drawer-panel-header span {
+  flex: 1;
+}
+
+header .header .nav-drawer-panel .nav-panel-inner {
+  box-sizing: border-box;
+  height: calc(100vh - 50px);
+  padding: 16px;
+  overflow-y: auto;
+}
+
+header .header .nav-drawer-panel h3 {
+  margin: 0;
+  padding: 16px 0;
+  border-bottom: 1px solid #ebeae8;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+header .header .nav-drawer-panel ul {
+  margin: 0 0 16px;
+  padding: 8px 0 8px 16px;
+  list-style: none;
+}
+
+header .header .nav-drawer-panel a:any-link {
+  color: rgb(0 0 0 / 80%);
+  font-size: 14px;
+  line-height: 28px;
+}
+
+header .header .nav-drawer-panel p {
+  margin: 16px 0;
+}
+
+header .header .nav-drawer .nav-primary-drawer {
+  display: block;
+}
+
+header .header .nav-drawer .nav-primary-drawer ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+header .header .nav-drawer .nav-primary-drawer a:any-link {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 56px;
+  margin: 0;
+  padding: 14px 16px;
+  color: rgb(0 0 0 / 80%);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22.4px;
+}
+
+header .header .nav-drawer .nav-primary-drawer a::after {
+  font-family: ram-icon-font, sans-serif;
+  font-size: 12px;
+  content: '\e909';
+}
+
+header .header .nav-drawer-toggle {
+  position: relative;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  margin-inline-start: 16px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 0;
+}
+
+header .header .nav-drawer-toggle::before {
+  font-family: ram-icon-font, sans-serif;
+  font-size: 16px;
+  content: '\e900';
+}
+}
+
 header .header .nav-primary a:any-link {
   box-sizing: border-box;
   display: flex;
@@ -164,6 +397,32 @@ header .header .nav-utility li:first-child a {
   font-size: 0;
 }
 
+@media (width < 1200px) {
+  header .header .nav-utility ul {
+    gap: 16px;
+  }
+
+  header .header .nav-utility li:last-child {
+    display: block;
+  }
+
+  header .header .nav-utility li:last-child a {
+    position: relative;
+    display: block;
+    width: 24px;
+    height: 24px;
+    font-size: 0;
+  }
+
+  header .header .nav-utility li:last-child a::before {
+    position: absolute;
+    inset: 2px;
+    font-family: ram-icon-font, sans-serif;
+    font-size: 20px;
+    content: '\e931';
+  }
+}
+
 @media (width >= 1200px) {
   header,
   header .header {
@@ -197,6 +456,10 @@ header .header .nav-utility li:first-child a {
   header .header .nav-primary {
     display: block;
     margin-inline-start: 145px;
+  }
+
+  header .header .nav-drawer-toggle {
+    display: none;
   }
 
   header .header .nav-primary ul {

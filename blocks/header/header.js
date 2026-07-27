@@ -125,6 +125,18 @@ export function setActivePanel(triggers, panels, activeKey) {
   });
 }
 
+/**
+ * Synchronizes the mobile drawer and its trigger.
+ * @param {Element} drawer mobile drawer
+ * @param {Element} trigger drawer toggle
+ * @param {boolean} isOpen whether the drawer is open
+ */
+export function setDrawerState(drawer, trigger, isOpen) {
+  drawer.classList.toggle('is-open', isOpen);
+  drawer.setAttribute('aria-hidden', String(!isOpen));
+  trigger.setAttribute('aria-expanded', String(isOpen));
+}
+
 function buildDesktopPanels(shell, primary, panelSections) {
   const panelContainer = document.createElement('div');
   panelContainer.className = 'nav-panels';
@@ -178,6 +190,124 @@ function buildDesktopPanels(shell, primary, panelSections) {
   return panelContainer;
 }
 
+function buildMobileDrawer(primary, utility, brand, desktopPanels) {
+  const toggle = document.createElement('button');
+  toggle.type = 'button';
+  toggle.className = 'nav-drawer-toggle';
+  toggle.setAttribute('aria-controls', 'nav-drawer');
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.setAttribute('aria-label', 'Open menu');
+  toggle.textContent = 'Menu';
+
+  const drawer = document.createElement('div');
+  drawer.className = 'nav-drawer';
+  drawer.id = 'nav-drawer';
+  drawer.setAttribute('aria-hidden', 'true');
+
+  const drawerHeader = document.createElement('div');
+  drawerHeader.className = 'nav-drawer-header';
+  const drawerBrand = brand.querySelector('a:first-child').cloneNode(true);
+  drawerBrand.className = 'nav-drawer-brand';
+  const close = document.createElement('button');
+  close.type = 'button';
+  close.className = 'nav-drawer-close';
+  close.setAttribute('aria-label', 'Close menu');
+  close.textContent = 'Close';
+  drawerHeader.append(drawerBrand, close);
+
+  const searchWrap = document.createElement('div');
+  searchWrap.className = 'nav-drawer-search-wrap';
+  const search = utility.querySelector('li:first-child a').cloneNode(true);
+  search.className = 'nav-drawer-search';
+  searchWrap.append(search);
+
+  const mobilePrimary = primary.cloneNode(true);
+  mobilePrimary.className = 'nav-primary nav-primary-drawer';
+  mobilePrimary.setAttribute('aria-label', 'Mobile primary navigation');
+
+  const mobileUtility = document.createElement('nav');
+  mobileUtility.className = 'nav-drawer-utility';
+  mobileUtility.setAttribute('aria-label', 'Mobile utility navigation');
+  const utilityList = utility.querySelector('ul').cloneNode(true);
+  utilityList.querySelector('li:first-child').remove();
+  mobileUtility.append(utilityList);
+
+  const panelContainer = document.createElement('div');
+  panelContainer.className = 'nav-drawer-panels';
+  const panels = {};
+  const triggers = {};
+
+  HEADER_PANELS.forEach(({ key, label }) => {
+    const source = desktopPanels.querySelector(`.nav-panel-${key}`);
+    const panel = source.cloneNode(true);
+    panel.className = `nav-drawer-panel nav-drawer-panel-${key}`;
+    panel.id = `nav-drawer-panel-${key}`;
+    panel.setAttribute('aria-hidden', 'true');
+
+    const panelHeader = document.createElement('div');
+    panelHeader.className = 'nav-drawer-panel-header';
+    const back = document.createElement('button');
+    back.type = 'button';
+    back.className = 'nav-drawer-back';
+    back.setAttribute('aria-label', `Back from ${label}`);
+    back.textContent = 'Back';
+    const title = document.createElement('span');
+    title.textContent = label;
+    const panelClose = close.cloneNode(true);
+    panelHeader.append(back, title, panelClose);
+    panel.prepend(panelHeader);
+
+    back.addEventListener('click', () => setActivePanel(triggers, panels));
+    panelClose.addEventListener('click', () => {
+      setActivePanel(triggers, panels);
+      setDrawerState(drawer, toggle, false);
+    });
+    panels[key] = panel;
+    panelContainer.append(panel);
+  });
+
+  mobilePrimary.querySelectorAll(':scope > ul > li > a').forEach((trigger) => {
+    const definition = HEADER_PANELS.find(
+      ({ label }) => label.toLowerCase() === trigger.textContent.trim().toLowerCase(),
+    );
+    if (!definition) {
+      throw new Error(`Missing mobile header panel definition: ${trigger.textContent.trim()}`);
+    }
+
+    const { key } = definition;
+    triggers[key] = trigger;
+    trigger.setAttribute('aria-haspopup', 'true');
+    trigger.setAttribute('aria-expanded', 'false');
+    trigger.setAttribute('aria-controls', panels[key].id);
+    trigger.addEventListener('click', (event) => {
+      event.preventDefault();
+      setActivePanel(triggers, panels, key);
+    });
+  });
+
+  const closeDrawer = () => {
+    setActivePanel(triggers, panels);
+    setDrawerState(drawer, toggle, false);
+  };
+  toggle.addEventListener('click', () => {
+    setDrawerState(drawer, toggle, toggle.getAttribute('aria-expanded') !== 'true');
+  });
+  close.addEventListener('click', closeDrawer);
+  drawer.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeDrawer();
+      toggle.focus();
+    }
+  });
+  window.matchMedia('(min-width: 1200px)').addEventListener('change', ({ matches }) => {
+    if (matches) closeDrawer();
+  });
+
+  drawer.append(drawerHeader, searchWrap, mobilePrimary, mobileUtility, panelContainer);
+  return { drawer, toggle };
+}
+
 /**
  * Loads and decorates the site header.
  * @param {Element} block header block
@@ -205,8 +335,10 @@ export default async function decorate(block) {
 
   const primary = buildRegion(sections.primary, 'nav', 'nav-primary');
   const utility = buildRegion(sections.utility, 'nav', 'nav-utility');
-  headerBar.append(brand, primary, utility);
-  shell.append(headerBar, buildDesktopPanels(shell, primary, sections.panels));
+  const desktopPanels = buildDesktopPanels(shell, primary, sections.panels);
+  const mobileDrawer = buildMobileDrawer(primary, utility, brand, desktopPanels);
+  headerBar.append(brand, primary, utility, mobileDrawer.toggle);
+  shell.append(headerBar, desktopPanels, mobileDrawer.drawer);
 
   block.replaceChildren(shell);
 }
