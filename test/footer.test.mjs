@@ -38,6 +38,7 @@ await footerModule.evaluate();
 
 const {
   classifyFooterSections,
+  configureFooterSearchInput,
   setActiveFooterGroup,
 } = footerModule.namespace;
 
@@ -47,7 +48,7 @@ const createSection = (className) => ({
   },
 });
 
-test('classifies authored footer sections by their section metadata styles', () => {
+test('classifies authored footer sections by their semantic section classes', () => {
   const navigation = createSection('footer-navigation');
   const search = createSection('footer-search');
   const payments = createSection('footer-payments');
@@ -79,6 +80,17 @@ test('rejects a footer document that omits a required authored section', () => {
     ]),
     /Missing footer section: Legal/,
   );
+});
+
+test('configures the footer search input so its visible label reflects entered text', () => {
+  const input = {};
+
+  configureFooterSearchInput(input);
+
+  assert.equal(input.id, 'footer-search-input');
+  assert.equal(input.name, 'q');
+  assert.equal(input.type, 'search');
+  assert.equal(input.placeholder, ' ');
 });
 
 const createToggleTarget = () => {
