@@ -52,10 +52,11 @@ test('classifies authored header sections by their semantic labels', () => {
   const primary = createSection('Primary navigation');
   const utility = createSection('Utility navigation');
 
-  assert.deepEqual(
-    classifyHeaderSections([utility, brand, primary]),
-    { brand, primary, utility },
-  );
+  const sections = classifyHeaderSections([utility, brand, primary]);
+
+  assert.equal(sections.brand, brand);
+  assert.equal(sections.primary, primary);
+  assert.equal(sections.utility, utility);
 });
 
 test('rejects a nav document that omits a required header section', () => {
