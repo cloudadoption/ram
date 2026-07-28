@@ -6,7 +6,9 @@ import {
   RateLimitError,
   buildFamilyClassifier,
   buildCrawlPlan,
+  buildNamespaceSummary,
   buildSeedEntries,
+  classifyNamedExclusion,
   createRobotsPolicy,
   extractLinks,
   fetchPage,
@@ -50,11 +52,43 @@ test('normalizes only same-host English page URLs', () => {
     `${ORIGIN}/en/flights-to-asia`,
   );
   assert.equal(normalizeUrl('/en/', ORIGIN), `${ORIGIN}/en/`);
+  assert.equal(normalizeUrl('/en_gb/', ORIGIN), `${ORIGIN}/en_gb/`);
+  assert.equal(
+    normalizeUrl('/en_gb/flights-to-gabon', ORIGIN),
+    `${ORIGIN}/en_gb/flights-to-gabon`,
+  );
   assert.equal(normalizeUrl('/en-gb/', ORIGIN), `${ORIGIN}/en-gb/`);
   assert.equal(normalizeUrl('/en-GB/seats', ORIGIN), null);
   assert.equal(normalizeUrl('/fr/route-map', ORIGIN), null);
   assert.equal(normalizeUrl('https://cargo.royalairmaroc.com/en/', ORIGIN), null);
   assert.equal(normalizeUrl('/en/image.webp', ORIGIN), null);
+});
+
+test('records underscore catalog and hyphen editorial as distinct namespaces', () => {
+  const namespaces = buildNamespaceSummary({
+    englishGbSitemapLocs: [
+      `${ORIGIN}/en_gb/flights-to-gabon`,
+      `${ORIGIN}/en_gb/flights-to-senegal`,
+    ],
+    englishSitemapLocs: [
+      `${ORIGIN}/en/`,
+      `${ORIGIN}/en/flights-to-gabon`,
+    ],
+  });
+
+  assert.equal(namespaces.count, 3);
+  assert.equal(
+    namespaces.entries.find(({ prefix }) => prefix === '/en/').sitemapUrlCount,
+    2,
+  );
+  assert.equal(
+    namespaces.entries.find(({ prefix }) => prefix === '/en_gb/').sitemapUrlCount,
+    2,
+  );
+  const editorial = namespaces.entries.find(({ prefix }) => prefix === '/en-gb/');
+  assert.equal(editorial.sitemapUrlCount, 0);
+  assert.match(editorial.sitemapUrlCountPattern, /case-sensitive.*both/i);
+  assert.equal(editorial.discoveryMode, 'chrome-crawl-only');
 });
 
 test('honors robots rules with the longest matching directive', () => {
@@ -206,6 +240,11 @@ test('crawls editorial and non-sitemap links but skips unsampled generated sitem
     sampledSet,
     sitemapSet,
   }), true);
+  assert.equal(shouldCrawlUrl(`${ORIGIN}/en_gb/flights-to-gabon`, {
+    classify,
+    sampledSet,
+    sitemapSet,
+  }), false);
   assert.equal(shouldCrawlUrl(sampledRoute, {
     classify,
     sampledSet,
@@ -216,6 +255,30 @@ test('crawls editorial and non-sitemap links but skips unsampled generated sitem
     sampledSet,
     sitemapSet,
   }), false);
+});
+
+test('names Liferay accordion fragment artifacts without treating them as pages', () => {
+  assert.equal(
+    classifyNamedExclusion({
+      url: `${ORIGIN}/en-gb/accordion-204006-1`,
+      status: 404,
+    }),
+    'liferay-accordion-fragment-artifact',
+  );
+  assert.equal(
+    classifyNamedExclusion({
+      url: `${ORIGIN}/en-gb/accordion-204006-1`,
+      status: 200,
+    }),
+    null,
+  );
+  assert.equal(
+    classifyNamedExclusion({
+      url: `${ORIGIN}/en-gb/information/travel-documents`,
+      status: 404,
+    }),
+    null,
+  );
 });
 
 test('rebuilds the pending frontier from append-only progress', () => {
@@ -299,25 +362,64 @@ test('reports family deltas with a count pattern for every figure', () => {
   const records = new Map([
     [
       `${ORIGIN}/en/flights-from-casablanca-to-paris`,
-      { url: `${ORIGIN}/en/flights-from-casablanca-to-paris` },
+      {
+        url: `${ORIGIN}/en/flights-from-casablanca-to-paris`,
+        status: 200,
+        finalUrl: `${ORIGIN}/en/flights-from-casablanca-to-paris`,
+      },
     ],
     [
       `${ORIGIN}/en/flights-from-rabat-to-paris`,
-      { url: `${ORIGIN}/en/flights-from-rabat-to-paris` },
+      {
+        url: `${ORIGIN}/en/flights-from-rabat-to-paris`,
+        status: 200,
+        finalUrl: `${ORIGIN}/en/flights-from-casablanca-to-paris`,
+      },
+    ],
+    [
+      `${ORIGIN}/en-gb/live-editorial`,
+      {
+        url: `${ORIGIN}/en-gb/live-editorial`,
+        status: 200,
+        finalUrl: `${ORIGIN}/en-gb/live-editorial`,
+      },
+    ],
+    [
+      `${ORIGIN}/en-gb/dead-editorial`,
+      {
+        url: `${ORIGIN}/en-gb/dead-editorial`,
+        status: 404,
+        finalUrl: `${ORIGIN}/en-gb/dead-editorial`,
+      },
     ],
   ]);
 
-  const summary = summarizeUnion({ classify, records, sitemapUrls });
+  const summary = summarizeUnion({
+    classify,
+    englishSitemapLocs: sitemapUrls,
+    records,
+    sitemapUrls,
+  });
   const route = summary.families.find(({ family }) => family === 'route-detail');
   const origin = summary.families.find(({ family }) => family === 'origin-landing');
 
-  assert.equal(summary.unionCount, 3);
-  assert.match(summary.unionCountPattern, /English sitemap.*crawl request URLs/);
+  assert.equal(summary.rawUnionCount, 5);
+  assert.match(summary.rawUnionCountPattern, /regardless of final status/);
+  assert.equal(summary.rawMissingFromSitemapCount, 3);
+  assert.equal(summary.livePagesMissingFromSitemapCount, 1);
+  assert.match(
+    summary.livePagesMissingFromSitemapCountPattern,
+    /final status == 200.*exact finalUrl.*exact English sitemap <loc>/,
+  );
+  assert.equal(summary.redirectAliasesIntoSitemapCount, 1);
   assert.equal(route.sitemapCount, 1);
   assert.equal(route.unionCount, 2);
   assert.equal(route.delta, 1);
   assert.ok(route.countPattern);
   assert.equal(origin.unionCount, 1);
   assert.equal(origin.delta, 0);
-  assert.deepEqual(summary.changedFamilies, ['route-detail']);
+  assert.deepEqual(
+    summary.changedFamilies,
+    ['editorial-unclassified', 'route-detail'],
+  );
 });
