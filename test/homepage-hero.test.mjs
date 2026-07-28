@@ -1,0 +1,114 @@
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import test from 'node:test';
+import vm from 'node:vm';
+
+const context = vm.createContext({
+  console,
+  document: {},
+  URL,
+  window: {},
+});
+
+const source = await readFile(
+  new URL('../blocks/homepage-hero/homepage-hero.js', import.meta.url),
+  'utf8',
+);
+const heroModule = new vm.SourceTextModule(source, { context });
+await heroModule.evaluate();
+
+const {
+  setActiveFlightSearchPanel,
+  submitFlightSearch,
+  validateFlightSearchPanel,
+} = heroModule.namespace;
+
+const createToggleTarget = () => {
+  const classes = new Set();
+  const attributes = new Map();
+  return {
+    hidden: false,
+    classList: {
+      contains: (name) => classes.has(name),
+      toggle: (name, force) => (force ? classes.add(name) : classes.delete(name)),
+    },
+    getAttribute: (name) => attributes.get(name),
+    setAttribute: (name, value) => attributes.set(name, value),
+  };
+};
+
+test('switches the visible flight search panel and synchronizes tab state', () => {
+  const tabs = Object.fromEntries(['booking', 'manage', 'status'].map((key) => [
+    key,
+    createToggleTarget(),
+  ]));
+  const panels = Object.fromEntries(['booking', 'manage', 'status'].map((key) => [
+    key,
+    createToggleTarget(),
+  ]));
+
+  setActiveFlightSearchPanel(tabs, panels, 'manage');
+
+  assert.equal(tabs.manage.classList.contains('is-active'), true);
+  assert.equal(tabs.manage.getAttribute('aria-selected'), 'true');
+  assert.equal(tabs.manage.getAttribute('aria-expanded'), 'true');
+  assert.equal(panels.manage.hidden, false);
+  assert.equal(panels.manage.classList.contains('is-active'), true);
+
+  ['booking', 'status'].forEach((key) => {
+    assert.equal(tabs[key].classList.contains('is-active'), false);
+    assert.equal(tabs[key].getAttribute('aria-selected'), 'false');
+    assert.equal(tabs[key].getAttribute('aria-expanded'), 'false');
+    assert.equal(panels[key].hidden, true);
+    assert.equal(panels[key].classList.contains('is-active'), false);
+  });
+});
+
+test('reports the required fields for each flight search panel', () => {
+  assert.deepEqual(
+    validateFlightSearchPanel('booking', {
+      destination: '',
+      origin: 'Casablanca, Morocco',
+    }),
+    { destination: 'Select destination is required' },
+  );
+  assert.deepEqual(
+    validateFlightSearchPanel('manage', {
+      reservationCode: '',
+      surname: '',
+    }),
+    {
+      reservationCode: 'Reservation Code is required',
+      surname: 'Surname is required',
+    },
+  );
+  assert.deepEqual(
+    validateFlightSearchPanel('status', {
+      departureDate: '',
+      destination: '',
+      origin: 'Casablanca, Morocco',
+    }),
+    {
+      departureDate: 'Departure date is required',
+      destination: 'Select destination is required',
+    },
+  );
+});
+
+test('returns the authored empty state without calling a search service', () => {
+  assert.deepEqual(
+    submitFlightSearch(
+      'booking',
+      {
+        destination: 'Marrakech',
+        origin: 'Casablanca, Morocco',
+      },
+      'No flights found!',
+    ),
+    {
+      errors: {},
+      message: 'No flights found!',
+      submitted: true,
+    },
+  );
+});
