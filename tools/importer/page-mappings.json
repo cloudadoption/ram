@@ -497,6 +497,966 @@
       ]
     },
     {
+      "url": "https://www.royalairmaroc.com/en-gb/silver-benefits",
+      "template": "feature-story",
+      "path": "/en-gb/silver-benefits",
+      "editorialPaths": [
+        "/safar-flyer-and-oneworld",
+        "/silver-benefits",
+        "/gold-benefits"
+      ],
+      "blocks": [
+        {
+          "name": "hero loyalty-tier tier-sibling",
+          "instances": [
+            "[data-analytics-asset-id=\"135854\"] #food-bg-default"
+          ],
+          "rows": [
+            {
+              "label": "Image",
+              "cells": [
+                {
+                  "kind": "background-picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"135854\"] #food-bg-default"
+                  ],
+                  "loading": "eager"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-intro tier-sibling",
+          "instances": [
+            "[data-analytics-asset-id=\"135865\"]"
+          ],
+          "rows": [
+            {
+              "label": "Content",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"135865\"]"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-status tier-sibling",
+          "instances": [
+            "[data-analytics-asset-id=\"135874\"]"
+          ],
+          "rows": [
+            {
+              "label": "Status",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"135874\"] img"
+                  ]
+                },
+                {
+                  "kind": "link",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"135874\"] a[href]"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-standfirst silver-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"135884\"]"
+          ],
+          "rows": [
+            {
+              "label": "Standfirst",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"135884\"]"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "cards loyalty-benefits tier-sibling",
+          "instances": [
+            "[data-analytics-asset-id=\"135893\"]",
+            "[data-analytics-asset-id=\"135952\"]"
+          ],
+          "rows": [
+            {
+              "label": "Benefit",
+              "repeat": [
+                "[data-analytics-asset-id=\"135893\"] .col-12.col-md-4, [data-analytics-asset-id=\"135952\"] .col-12.col-md-4"
+              ],
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "element",
+                  "tag": "h3",
+                  "selectors": [
+                    ".feature-title"
+                  ]
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    ":scope"
+                  ],
+                  "excludeSelectors": [
+                    ".feature-icon-div",
+                    ".feature-title"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-footnote silver-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"135971\"]"
+          ],
+          "rows": [
+            {
+              "label": "Content",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"135971\"] .seat-content-body"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-cta primary",
+          "instances": [
+            "[data-analytics-asset-id=\"135980\"]"
+          ],
+          "rows": [
+            {
+              "label": "Action",
+              "cells": [
+                {
+                  "kind": "link",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"135980\"] a[href]"
+                  ],
+                  "href": "/en-gb/register",
+                  "textSelectors": [
+                    "[data-analytics-asset-id=\"135980\"] button"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-presentation silver-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"135989\"]"
+          ],
+          "rows": [
+            {
+              "label": "Content",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"135989\"] .text-overlapped"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-left maintain silver-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136008\"]"
+          ],
+          "rows": [
+            {
+              "label": "Feature",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136008\"] img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136008\"] .text-overlapped"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-right upgrade silver-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136036\"]"
+          ],
+          "rows": [
+            {
+              "label": "Feature",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136036\"] img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136036\"] .text-overlapped"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-heading",
+          "instances": [
+            "[data-analytics-asset-id=\"136055\"]"
+          ],
+          "rows": [
+            {
+              "label": "Content",
+              "cells": [
+                {
+                  "kind": "element",
+                  "tag": "h2",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136055\"] center"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "cards loyalty-benefits compact silver-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136064\"]"
+          ],
+          "rows": [
+            {
+              "label": "Benefit",
+              "repeat": [
+                "[data-analytics-asset-id=\"136064\"] .col-12.col-md-4"
+              ],
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "element",
+                  "tag": "h3",
+                  "selectors": [
+                    ".feature-title"
+                  ]
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    ".f-fw-l"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-cta secondary",
+          "instances": [
+            "[data-analytics-asset-id=\"136103\"]"
+          ],
+          "rows": [
+            {
+              "label": "Action",
+              "cells": [
+                {
+                  "kind": "link",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136103\"] a[href]"
+                  ],
+                  "textSelectors": [
+                    "[data-analytics-asset-id=\"136103\"] button"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "https://www.royalairmaroc.com/en-gb/gold-benefits",
+      "template": "feature-story",
+      "path": "/en-gb/gold-benefits",
+      "editorialPaths": [
+        "/safar-flyer-and-oneworld",
+        "/gold-benefits",
+        "/platinum-benefits"
+      ],
+      "linkOverrides": {
+        "/en/safar-flyer/sign-in": "/en-gb/register"
+      },
+      "blocks": [
+        {
+          "name": "hero loyalty-tier tier-sibling",
+          "instances": [
+            "[data-analytics-asset-id=\"136112\"] #food-bg-default"
+          ],
+          "rows": [
+            {
+              "label": "Breadcrumb",
+              "repeatAsCells": ".page-heading .breadcrumbs__list > li",
+              "cell": {
+                "kind": "text"
+              }
+            },
+            {
+              "label": "Heading",
+              "cells": [
+                {
+                  "kind": "element",
+                  "tag": "h1",
+                  "selectors": [
+                    ".page-heading .page-heading__title"
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Image",
+              "cells": [
+                {
+                  "kind": "background-picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136112\"] #food-bg-default"
+                  ],
+                  "loading": "eager"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-intro tier-sibling",
+          "instances": [
+            "[data-analytics-asset-id=\"136123\"]"
+          ],
+          "rows": [
+            {
+              "label": "Content",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136123\"]"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-status tier-sibling",
+          "instances": [
+            "[data-analytics-asset-id=\"136132\"]"
+          ],
+          "rows": [
+            {
+              "label": "Status",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136132\"] img"
+                  ]
+                },
+                {
+                  "kind": "link",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136132\"] a[href]"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-standfirst gold-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136142\"]"
+          ],
+          "rows": [
+            {
+              "label": "Standfirst",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136142\"]"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "cards loyalty-benefits tier-sibling",
+          "instances": [
+            "[data-analytics-asset-id=\"136160\"]",
+            "[data-analytics-asset-id=\"136294\"]",
+            "[data-analytics-asset-id=\"136323\"]"
+          ],
+          "rows": [
+            {
+              "label": "Benefit",
+              "repeat": [
+                "[data-analytics-asset-id=\"136160\"] .col-12.col-md-4, [data-analytics-asset-id=\"136294\"] .col-12.col-md-4, [data-analytics-asset-id=\"136323\"] .col-12.col-md-4"
+              ],
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "element",
+                  "tag": "h3",
+                  "selectors": [
+                    ".feature-title"
+                  ]
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    ":scope"
+                  ],
+                  "excludeSelectors": [
+                    ".feature-icon-div",
+                    ".feature-title"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-footnote gold-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136342\"]"
+          ],
+          "rows": [
+            {
+              "label": "Content",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136342\"] .seat-content-body"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-cta primary",
+          "instances": [
+            "[data-analytics-asset-id=\"136351\"]"
+          ],
+          "rows": [
+            {
+              "label": "Action",
+              "cells": [
+                {
+                  "kind": "link",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136351\"] a[href]"
+                  ],
+                  "href": "/en-gb/register",
+                  "textSelectors": [
+                    "[data-analytics-asset-id=\"136351\"] button"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-right universe gold-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136369\"]"
+          ],
+          "rows": [
+            {
+              "label": "Feature",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136369\"] img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136369\"] .text-overlapped"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-left maintain gold-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136388\"]"
+          ],
+          "rows": [
+            {
+              "label": "Feature",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136388\"] img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136388\"] .text-overlapped"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-right upgrade gold-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136407\"]"
+          ],
+          "rows": [
+            {
+              "label": "Feature",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136407\"] img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136407\"] .text-overlapped"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-heading",
+          "instances": [
+            "[data-analytics-asset-id=\"136426\"]"
+          ],
+          "rows": [
+            {
+              "label": "Content",
+              "cells": [
+                {
+                  "kind": "element",
+                  "tag": "h2",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136426\"] center"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "cards loyalty-benefits compact gold-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136435\"]"
+          ],
+          "rows": [
+            {
+              "label": "Benefit",
+              "repeat": [
+                "[data-analytics-asset-id=\"136435\"] .col-12.col-md-4"
+              ],
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "element",
+                  "tag": "h3",
+                  "selectors": [
+                    ".feature-title"
+                  ]
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    ".f-fw-l"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-cta secondary",
+          "instances": [
+            "[data-analytics-asset-id=\"136474\"]"
+          ],
+          "rows": [
+            {
+              "label": "Action",
+              "cells": [
+                {
+                  "kind": "link",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136474\"] a[href]"
+                  ],
+                  "textSelectors": [
+                    "[data-analytics-asset-id=\"136474\"] button"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "https://www.royalairmaroc.com/en-gb/platinum-benefits",
+      "template": "feature-story",
+      "path": "/en-gb/platinum-benefits",
+      "editorialPaths": [
+        "/safar-flyer-and-oneworld",
+        "/platinum-benefits"
+      ],
+      "blocks": [
+        {
+          "name": "hero loyalty-tier tier-sibling",
+          "instances": [
+            "[data-analytics-asset-id=\"136492\"] #food-bg-default"
+          ],
+          "rows": [
+            {
+              "label": "Breadcrumb",
+              "repeatAsCells": ".page-heading .breadcrumbs__list > li",
+              "cell": {
+                "kind": "text"
+              }
+            },
+            {
+              "label": "Heading",
+              "cells": [
+                {
+                  "kind": "element",
+                  "tag": "h1",
+                  "selectors": [
+                    ".page-heading .page-heading__title"
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Image",
+              "cells": [
+                {
+                  "kind": "background-picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136492\"] #food-bg-default"
+                  ],
+                  "loading": "eager"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-intro tier-sibling",
+          "instances": [
+            "[data-analytics-asset-id=\"136523\"]"
+          ],
+          "rows": [
+            {
+              "label": "Content",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136523\"]"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-status tier-sibling",
+          "instances": [
+            "[data-analytics-asset-id=\"136532\"]"
+          ],
+          "rows": [
+            {
+              "label": "Status",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136532\"] img"
+                  ]
+                },
+                {
+                  "kind": "link",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136532\"] a[href]"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-standfirst platinum-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136542\"]"
+          ],
+          "rows": [
+            {
+              "label": "Standfirst",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136542\"]"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "cards loyalty-benefits tier-sibling",
+          "instances": [
+            "[data-analytics-asset-id=\"136590\"]",
+            "[data-analytics-asset-id=\"136629\"]",
+            "[data-analytics-asset-id=\"136687\"]",
+            "[data-analytics-asset-id=\"136735\"]"
+          ],
+          "rows": [
+            {
+              "label": "Benefit",
+              "repeat": [
+                "[data-analytics-asset-id=\"136590\"] .col-12.col-md-4, [data-analytics-asset-id=\"136629\"] .col-12.col-md-4, [data-analytics-asset-id=\"136687\"] .col-12.col-md-4, [data-analytics-asset-id=\"136735\"] .col-12.col-md-4"
+              ],
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "element",
+                  "tag": "h3",
+                  "selectors": [
+                    ".feature-title"
+                  ]
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    ":scope"
+                  ],
+                  "excludeSelectors": [
+                    ".feature-icon-div",
+                    ".feature-title"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-footnote platinum-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136764\"]"
+          ],
+          "rows": [
+            {
+              "label": "Content",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136764\"] .seat-content-body"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-cta primary",
+          "instances": [
+            "[data-analytics-asset-id=\"136773\"]"
+          ],
+          "rows": [
+            {
+              "label": "Action",
+              "cells": [
+                {
+                  "kind": "link",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136773\"] a[href]"
+                  ],
+                  "href": "/en-gb/register",
+                  "textSelectors": [
+                    "[data-analytics-asset-id=\"136773\"] button"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-right new-benefits platinum-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136782\"]"
+          ],
+          "rows": [
+            {
+              "label": "Feature",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136782\"] img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136782\"] .text-overlapped"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-right upgrade platinum-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136801\"]"
+          ],
+          "rows": [
+            {
+              "label": "Feature",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136801\"] img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136801\"] .text-overlapped"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-left maintain platinum-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136829\"]"
+          ],
+          "rows": [
+            {
+              "label": "Feature",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136829\"] img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"136829\"] .text-overlapped"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "url": "https://www.royalairmaroc.com/en-gb/seats",
       "template": "standard-article",
       "path": "/en-gb/seats",

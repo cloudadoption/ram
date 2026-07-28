@@ -117,6 +117,14 @@ function appendSection(root, document, block) {
   root.append(section);
 }
 
+function applyLinkOverrides(document, profile) {
+  const overrides = profile.linkOverrides || {};
+  document.querySelectorAll('a[href]').forEach((link) => {
+    const replacement = overrides[link.getAttribute('href')];
+    if (replacement) link.setAttribute('href', replacement);
+  });
+}
+
 function buildAnalysis(profile, outputDocument, sourceHtml, metadataPolicy) {
   const blocks = profile.blocks.map((block, index) => ({
     id: `section-${index + 1}`,
@@ -137,6 +145,8 @@ function buildAnalysis(profile, outputDocument, sourceHtml, metadataPolicy) {
       images,
       description: metadataPolicy.description,
       deviations: metadataPolicy.deviations,
+      linkOverrides: Object.entries(profile.linkOverrides || {})
+        .map(([source, target]) => ({ source, target })),
     },
     pageStructure: {
       sourceUrl: profile.url,
@@ -177,6 +187,7 @@ export function transformEditorialDocument(sourceHtml, { url, imageSources = {} 
   }
 
   const { document } = parseHTML(sourceHtml);
+  applyLinkOverrides(document, profile);
   cleanupDocument(document);
 
   const output = document.createElement('main');

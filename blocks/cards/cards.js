@@ -23,7 +23,8 @@ function decorateDefault(block) {
 
 function decorateLoyaltyBenefits(block) {
   const list = document.createElement('ul');
-  rowsWithLabel(readLabeledRows(block), 'benefit').forEach(({ cells }, index) => {
+  const benefitRows = rowsWithLabel(readLabeledRows(block), 'benefit');
+  benefitRows.forEach(({ cells }, index) => {
     const [imageCell, headingCell, contentCell] = cells;
     const picture = requireElement(
       imageCell?.querySelector('picture'),
@@ -46,6 +47,7 @@ function decorateLoyaltyBenefits(block) {
     item.append(picture, content);
     list.append(item);
   });
+  block.dataset.benefitCount = String(benefitRows.length);
   block.replaceChildren(list);
 }
 

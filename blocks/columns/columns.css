@@ -28,6 +28,9 @@
 }
 
 main .columns.loyalty-intro,
+main .columns.loyalty-status,
+main .columns.loyalty-standfirst,
+main .columns.loyalty-presentation,
 main .columns.loyalty-heading,
 main .columns.loyalty-footnote,
 main .columns.loyalty-cta,
@@ -46,6 +49,9 @@ main .columns-container:has(.columns[class*="loyalty-"]) .columns-wrapper {
 }
 
 main .columns-container:has(.columns.loyalty-intro),
+main .columns-container:has(.columns.loyalty-status),
+main .columns-container:has(.columns.loyalty-standfirst),
+main .columns-container:has(.columns.loyalty-presentation),
 main .columns-container:has(.columns.loyalty-cta) {
   margin-block: 0;
 }
@@ -62,12 +68,31 @@ main .columns-container:has(.columns.loyalty-content) {
   margin-block: 49px 0;
 }
 
+main .columns-container:has(.columns.loyalty-standfirst) {
+  margin-block-start: 10px;
+}
+
+main .columns-container:has(.columns.loyalty-presentation) {
+  margin-block-start: 48px;
+}
+
+main .columns-container:has(.columns.loyalty-status.tier-sibling) {
+  margin-block-start: -1px;
+}
+
 main .columns-container:has(.columns.loyalty-content)
   + .columns-container:has(.columns.loyalty-content) {
   margin-block-start: 0;
 }
 
+main .columns-container:has(.columns.loyalty-presentation)
+  + .columns-container:has(.columns.loyalty-content) {
+  margin-block-start: 0;
+}
+
 main .columns.loyalty-intro > .columns-loyalty-copy,
+main .columns.loyalty-standfirst > .columns-loyalty-copy,
+main .columns.loyalty-presentation > .columns-loyalty-copy,
 main .columns.loyalty-heading > .columns-loyalty-copy,
 main .columns.loyalty-footnote > .columns-loyalty-copy,
 main .columns.loyalty-cta > .columns-loyalty-copy {
@@ -80,6 +105,80 @@ main .columns.loyalty-intro {
   justify-content: center;
   min-height: 236px;
   text-align: center;
+}
+
+main .columns.loyalty-intro.tier-sibling {
+  min-height: 458px;
+}
+
+main .columns.loyalty-status .columns-loyalty-status-link,
+main .columns.loyalty-status .columns-loyalty-status-picture,
+main .columns.loyalty-status .columns-loyalty-status-picture img {
+  display: block;
+  width: 100%;
+}
+
+main .columns.loyalty-status .columns-loyalty-status-picture img {
+  height: auto;
+}
+
+main .columns.loyalty-status.tier-sibling {
+  width: calc(100% - 21px);
+  max-width: 1232px;
+}
+
+main .columns.loyalty-standfirst {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 129px;
+  padding: 10px 10.5px;
+  text-align: center;
+}
+
+main .columns.loyalty-standfirst > .columns-loyalty-copy {
+  gap: 0;
+}
+
+main .columns.loyalty-standfirst.silver-tier {
+  height: 129px;
+  min-height: 129px;
+}
+
+main .columns.loyalty-standfirst.gold-tier {
+  height: 89px;
+  min-height: 89px;
+}
+
+main .columns.loyalty-standfirst.platinum-tier {
+  height: 156px;
+  min-height: 156px;
+}
+
+main .columns.loyalty-standfirst h2,
+main .columns.loyalty-standfirst p {
+  margin: 0;
+  font-family: var(--ram-page-font-family);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 30px;
+}
+
+main .columns.loyalty-presentation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 313px;
+  min-height: 313px;
+  padding: 24px 10.5px;
+  text-align: center;
+}
+
+main .columns.loyalty-presentation .columns-loyalty-copy {
+  flex-direction: column;
+  gap: 12px;
 }
 
 main .columns.loyalty-intro > .columns-loyalty-copy {
@@ -118,8 +217,25 @@ main .columns.loyalty-intro p {
   line-height: 24px;
 }
 
+main .columns.loyalty-presentation .columns-loyalty-copy > p {
+  margin: 0;
+}
+
 main .columns.loyalty-intro .columns-loyalty-copy > h2 + h2 + p {
   display: none;
+}
+
+main .columns.loyalty-presentation .columns-loyalty-copy > p:first-child {
+  color: #c2002f;
+  font-family: ram-loyalty-heading, arial, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28.8px;
+}
+
+main .columns.loyalty-presentation .columns-loyalty-copy > p:not(:first-child) {
+  font-size: 14px;
+  line-height: 16.8px;
 }
 
 main .columns.loyalty-cta {
@@ -269,12 +385,78 @@ main .columns.loyalty-footnote {
   line-height: 17px;
 }
 
+main .columns.loyalty-footnote.silver-tier {
+  height: 17px;
+  min-height: 17px;
+}
+
+main .columns.loyalty-footnote.gold-tier {
+  height: 336px;
+  min-height: 336px;
+}
+
+main .columns.loyalty-footnote.platinum-tier {
+  height: 370px;
+  min-height: 370px;
+}
+
+main .columns.loyalty-content.silver-tier.maintain {
+  height: 624px;
+  min-height: 624px;
+}
+
+main .columns.loyalty-content.silver-tier.upgrade {
+  height: 643px;
+  min-height: 643px;
+}
+
+main .columns.loyalty-content.gold-tier.universe {
+  height: 604px;
+  min-height: 604px;
+}
+
+main .columns.loyalty-content.gold-tier.maintain {
+  height: 597px;
+  min-height: 597px;
+}
+
+main .columns.loyalty-content.gold-tier.upgrade {
+  height: 791px;
+  min-height: 791px;
+}
+
+main .columns.loyalty-content.platinum-tier.new-benefits {
+  height: 681px;
+  min-height: 681px;
+}
+
+main .columns.loyalty-content.platinum-tier.upgrade {
+  height: 942px;
+  min-height: 942px;
+}
+
+main .columns.loyalty-content.platinum-tier.maintain {
+  height: 624px;
+  min-height: 624px;
+}
+
 @media (width >= 600px) {
+  main .columns-container:has(.columns.loyalty-presentation) {
+    margin-block-start: 49px;
+  }
+
+  main .columns-container:has(.columns.loyalty-status.tier-sibling) {
+    margin-block-start: 0;
+  }
+
   main .columns-container:has(.columns.loyalty-content.new-benefits) {
     margin-block-start: 48px;
   }
 
   main .columns.loyalty-intro,
+  main .columns.loyalty-status,
+  main .columns.loyalty-standfirst,
+  main .columns.loyalty-presentation,
   main .columns.loyalty-heading,
   main .columns.loyalty-footnote,
   main .columns.loyalty-cta,
@@ -292,6 +474,35 @@ main .columns.loyalty-footnote {
 
   main .columns.loyalty-intro {
     min-height: 172px;
+  }
+
+  main .columns.loyalty-intro.tier-sibling {
+    min-height: 261px;
+  }
+
+  main .columns.loyalty-presentation {
+    height: 193px;
+    min-height: 193px;
+    padding: 0;
+    visibility: visible;
+  }
+
+  main .columns.loyalty-standfirst.silver-tier {
+    height: 43px;
+    min-height: 43px;
+    padding-block: 5px;
+  }
+
+  main .columns.loyalty-standfirst.gold-tier {
+    height: 45px;
+    min-height: 45px;
+    padding-block: 5px;
+  }
+
+  main .columns.loyalty-standfirst.platinum-tier {
+    height: 113px;
+    min-height: 113px;
+    padding-block: 5px;
   }
 
   main .columns.loyalty-cta.secondary {
@@ -331,9 +542,63 @@ main .columns.loyalty-footnote {
     line-height: 17px;
   }
 
+  main .columns.loyalty-footnote.silver-tier {
+    height: 17px;
+  }
+
+  main .columns.loyalty-footnote.gold-tier {
+    height: 168px;
+    min-height: 168px;
+  }
+
+  main .columns.loyalty-footnote.platinum-tier {
+    height: 185px;
+    min-height: 185px;
+  }
+
+  main .columns.loyalty-content.silver-tier.maintain,
+  main .columns.loyalty-content.platinum-tier.maintain {
+    height: 765px;
+    min-height: 765px;
+  }
+
+  main .columns.loyalty-content.gold-tier.maintain {
+    height: 782px;
+    min-height: 782px;
+  }
+
+  main .columns.loyalty-content.silver-tier.upgrade {
+    height: 866px;
+    min-height: 866px;
+  }
+
+  main .columns.loyalty-content.gold-tier.universe {
+    height: 825px;
+    min-height: 825px;
+  }
+
+  main .columns.loyalty-content.gold-tier.upgrade {
+    height: 863px;
+    min-height: 863px;
+  }
+
+  main .columns.loyalty-content.platinum-tier.upgrade {
+    height: 995px;
+    min-height: 995px;
+  }
+
+  main .columns.loyalty-content.platinum-tier.new-benefits {
+    height: 812px;
+    min-height: 812px;
+  }
+
 }
 
 @media (width >= 1200px) {
+  main .columns-container:has(.columns.loyalty-presentation) {
+    margin-block-start: 48px;
+  }
+
   main .columns-container:has(.columns.loyalty-heading) {
     margin-block-start: 23px;
   }
@@ -351,6 +616,9 @@ main .columns.loyalty-footnote {
   }
 
   main .columns.loyalty-intro,
+  main .columns.loyalty-status,
+  main .columns.loyalty-standfirst,
+  main .columns.loyalty-presentation,
   main .columns.loyalty-heading,
   main .columns.loyalty-footnote,
   main .columns.loyalty-cta,
@@ -358,8 +626,61 @@ main .columns.loyalty-footnote {
     width: calc(100% - 187px);
   }
 
+  main .columns.loyalty-presentation {
+    height: 60px;
+    min-height: 60px;
+    visibility: hidden;
+  }
+
+  main .columns.loyalty-standfirst.platinum-tier {
+    height: 70px;
+    min-height: 70px;
+  }
+
+  main .columns.loyalty-footnote.gold-tier {
+    height: 134px;
+    min-height: 134px;
+  }
+
+  main .columns.loyalty-footnote.platinum-tier {
+    height: 151px;
+    min-height: 151px;
+  }
+
+  main .columns.loyalty-content.silver-tier.maintain,
+  main .columns.loyalty-content.gold-tier.maintain,
+  main .columns.loyalty-content.platinum-tier.maintain {
+    height: 535px;
+    min-height: 535px;
+  }
+
+  main .columns.loyalty-content.silver-tier.upgrade {
+    height: 594px;
+    min-height: 594px;
+  }
+
+  main .columns.loyalty-content.gold-tier.universe {
+    height: 602px;
+    min-height: 602px;
+  }
+
+  main .columns.loyalty-content.gold-tier.upgrade,
+  main .columns.loyalty-content.platinum-tier.upgrade {
+    height: 593px;
+    min-height: 593px;
+  }
+
+  main .columns.loyalty-content.platinum-tier.new-benefits {
+    height: 506px;
+    min-height: 506px;
+  }
+
   main .columns.loyalty-intro {
     min-height: 151px;
+  }
+
+  main .columns.loyalty-standfirst {
+    min-height: 45px;
   }
 
   main .columns.loyalty-content .columns-loyalty-layout {

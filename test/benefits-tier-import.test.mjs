@@ -20,6 +20,7 @@ const tierPages = [
       benefitGroups: [['135893', 5], ['135952', 2]],
       footnote: '135971',
       primaryCta: '135980',
+      presentation: '135989',
       features: [
         ['136008', 'maintain'],
         ['136036', 'upgrade'],
@@ -133,13 +134,19 @@ function tierSource(page) {
         <div class="journal-content-article" data-analytics-asset-id="${ids.primaryCta}">
           <a href="/en/safar-flyer/sign-in"><button>I TAKE ADVANTAGE</button></a>
         </div>
+        ${ids.presentation ? `<div class="journal-content-article" data-analytics-asset-id="${ids.presentation}">
+          <div class="text-overlapped">
+            <p class="text-overlapped-title">PRESENT YOUR PERSONAL SAFAR FLYER CARD</p>
+            <p class="text-overlapped-description">Present your personal card when you travel.</p>
+          </div>
+        </div>` : ''}
         ${ids.features.map(([id, name], index) => `<div class="journal-content-article" data-analytics-asset-id="${id}">
           <div class="figure-text-overlapped${index % 2 === 0 ? ' figure-text-overlapped-reversed' : ''}">
             <img src="https://www.royalairmaroc.com/${page.slug}-${name}.jpg" alt="">
             <div class="text-overlapped">
               <p class="text-overlapped-title">${name.toUpperCase()}</p>
               <p class="text-overlapped-description">Feature copy from live.</p>
-              <a href="/en/${page.slug}">FIND OUT MORE</a>
+              <a href="${page.slug === 'gold-benefits' && name === 'universe' ? '/en/safar-flyer/sign-in' : `/en/${page.slug}`}">FIND OUT MORE</a>
             </div>
           </div>
         </div>`).join('')}
@@ -161,9 +168,9 @@ test('maps all three tier siblings through existing loyalty blocks', () => {
     assert.ok(profile, `Missing ${slug} profile`);
     assert.equal(profile.template, 'feature-story');
     assert.ok(profile.blocks.every(({ name }) => allowedBlocks.has(name.split(' ')[0])));
-    assert.ok(profile.blocks.some(({ name }) => name === 'hero loyalty-tier'));
-    assert.ok(profile.blocks.some(({ name }) => name === 'cards loyalty-benefits'));
-    assert.ok(profile.blocks.some(({ name }) => name === 'columns loyalty-intro'));
+    assert.ok(profile.blocks.some(({ name }) => name.startsWith('hero loyalty-tier')));
+    assert.ok(profile.blocks.some(({ name }) => name.startsWith('cards loyalty-benefits')));
+    assert.ok(profile.blocks.some(({ name }) => name.startsWith('columns loyalty-intro')));
   });
 });
 
@@ -190,13 +197,26 @@ test('imports each tier sibling with authored media and live metadata', () => {
     if (page.pageHeading) {
       assert.match(result.html, /<div>Breadcrumb<\/div>/);
       assert.match(result.html, /<div>Heading<\/div>/);
+      assert.match(result.html, new RegExp(`<h1>${page.pageHeading}</h1>`));
+    }
+    if (page.slug === 'silver-benefits') {
+      assert.match(result.html, /PRESENT YOUR PERSONAL SAFAR FLYER CARD/);
+    }
+    if (page.slug === 'gold-benefits') {
+      assert.doesNotMatch(result.html, /\/en\/safar-flyer\/sign-in/);
+      assert.match(result.html, /href="\/en-gb\/register"/);
+      assert.deepEqual(result.metadata.linkOverrides, [{
+        source: '/en/safar-flyer/sign-in',
+        target: '/en-gb/register',
+      }]);
     }
   });
 });
 
 test('loyalty decorators scale optional tier content and larger benefit sets', async () => {
-  const [hero, cards, columns] = await Promise.all([
+  const [hero, cardsScript, cardsStyles, columns] = await Promise.all([
     readFile(new URL('../blocks/hero/hero.js', import.meta.url), 'utf8'),
+    readFile(new URL('../blocks/cards/cards.js', import.meta.url), 'utf8'),
     readFile(new URL('../blocks/cards/cards.css', import.meta.url), 'utf8'),
     readFile(new URL('../blocks/columns/columns.js', import.meta.url), 'utf8'),
   ]);
@@ -204,8 +224,9 @@ test('loyalty decorators scale optional tier content and larger benefit sets', a
 
   assert.match(loyaltyHero, /'breadcrumb'/);
   assert.match(loyaltyHero, /'heading'/);
-  assert.match(columns, /function decorateLoyaltyIntro/);
+  assert.match(columns, /function decorateLoyaltyStatus/);
   assert.match(columns, /'status'/);
-  assert.match(columns, /'standfirst'/);
-  assert.match(cards, /li:nth-child\(12\)/);
+  assert.match(columns, /'loyalty-standfirst'/);
+  assert.match(cardsScript, /dataset\.benefitCount/);
+  assert.match(cardsStyles, /li:nth-child\(12\)/);
 });

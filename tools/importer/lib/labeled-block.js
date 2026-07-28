@@ -159,9 +159,14 @@ function buildLinkOrTextCell(document, root, editorialPaths) {
 }
 
 function buildCell(document, root, specification, editorialPaths, imageSources) {
-  const source = specification.kind === 'link' || specification.kind === 'link-or-text'
-    ? root
-    : selectFirst(root, specification.selectors);
+  let source = root;
+  if (
+    specification.kind !== 'link'
+    && specification.kind !== 'link-or-text'
+    && specification.selectors
+  ) {
+    source = selectFirst(root, specification.selectors);
+  }
 
   switch (specification.kind) {
     case 'direct-text':

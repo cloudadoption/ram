@@ -35,9 +35,40 @@ function decorateLoyaltySingleCell(block, label) {
   block.replaceChildren(content);
 }
 
+function decorateLoyaltyStatus(block) {
+  const row = requireElement(
+    rowWithLabel(readLabeledRows(block), 'status'),
+    'Loyalty status requires an authored status row',
+  );
+  const picture = requireElement(
+    row.cells[0]?.querySelector('picture'),
+    'Loyalty status requires an authored image',
+  );
+  const link = requireElement(
+    row.cells[1]?.querySelector('a'),
+    'Loyalty status requires an authored link',
+  );
+  picture.className = 'columns-loyalty-status-picture';
+  link.className = 'columns-loyalty-status-link';
+  link.replaceChildren(picture);
+  block.replaceChildren(link);
+}
+
 export default function decorate(block) {
   if (block.classList.contains('loyalty-content')) {
     decorateLoyaltyContent(block);
+    return;
+  }
+  if (block.classList.contains('loyalty-status')) {
+    decorateLoyaltyStatus(block);
+    return;
+  }
+  if (block.classList.contains('loyalty-standfirst')) {
+    decorateLoyaltySingleCell(block, 'standfirst');
+    return;
+  }
+  if (block.classList.contains('loyalty-presentation')) {
+    decorateLoyaltySingleCell(block, 'content');
     return;
   }
   if (block.classList.contains('loyalty-cta')) {
