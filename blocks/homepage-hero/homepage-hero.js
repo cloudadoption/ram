@@ -198,7 +198,7 @@ function panelFields(panelKey) {
       name: 'destination',
     },
     {
-      label: 'Departure date',
+      label: 'DEPARTURE',
       name: 'departureDate',
       type: 'date',
     },
