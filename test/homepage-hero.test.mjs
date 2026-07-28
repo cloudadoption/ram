@@ -23,9 +23,12 @@ await heroModule.link(() => {});
 await heroModule.evaluate();
 
 const {
+  getPanelSubTabs,
   panelFields,
   setActiveFlightSearchPanel,
   submitFlightSearch,
+  swapFlightSearchValues,
+  SWAP_LABEL,
   validateFlightSearchPanel,
 } = heroModule.namespace;
 
@@ -130,6 +133,40 @@ test('uses the field labels visible in the open live panels', () => {
     { label: 'Select origin', name: 'origin' },
     { label: 'Select destination', name: 'destination' },
   ]);
+});
+
+test('uses the Manage booking and Check-in sub-tab row from live', () => {
+  assert.deepEqual(
+    plainObject(getPanelSubTabs('manage')),
+    ['Manage booking', 'Check-in'],
+  );
+});
+
+test('uses the Flight route and Flight number sub-tab row from live', () => {
+  assert.deepEqual(
+    plainObject(getPanelSubTabs('status')),
+    ['Flight route', 'Flight number'],
+  );
+});
+
+test('swaps origin and destination locally with the live accessible name', () => {
+  const values = {
+    destination: 'Marrakech, Morocco',
+    origin: 'Casablanca, Morocco',
+  };
+
+  assert.equal(SWAP_LABEL, 'Swap origin and destination');
+  assert.deepEqual(
+    plainObject(swapFlightSearchValues(values)),
+    {
+      destination: 'Casablanca, Morocco',
+      origin: 'Marrakech, Morocco',
+    },
+  );
+  assert.deepEqual(values, {
+    destination: 'Marrakech, Morocco',
+    origin: 'Casablanca, Morocco',
+  });
 });
 
 test('returns the authored empty state without calling a search service', () => {
