@@ -28,6 +28,10 @@ const testSource = source
     'export function panelFields(panelKey)',
   )
   .replace(
+    'function prepareHeroPicture(cell, variant)',
+    'export function prepareHeroPicture(cell, variant)',
+  )
+  .replace(
     'function swapFlightSearchValues(values)',
     'export function swapFlightSearchValues(values)',
   );
@@ -38,6 +42,7 @@ await heroModule.evaluate();
 const {
   getPanelSubTabs,
   panelFields,
+  prepareHeroPicture,
   setActiveFlightSearchPanel,
   submitFlightSearch,
   swapFlightSearchValues,
@@ -160,6 +165,35 @@ test('uses the Flight route and Flight number sub-tab row from live', () => {
     plainObject(getPanelSubTabs('status')),
     ['Flight route', 'Flight number'],
   );
+});
+
+test('keeps the authored hero picture and its alternative text', () => {
+  const classes = new Set();
+  const image = {
+    alt: 'Authored hero alternative text',
+    decoding: '',
+    fetchPriority: '',
+    loading: '',
+  };
+  const picture = {
+    classList: {
+      add: (...names) => names.forEach((name) => classes.add(name)),
+    },
+    querySelector: (selector) => (selector === 'img' ? image : null),
+  };
+  const cell = {
+    querySelector: (selector) => (selector === 'picture' ? picture : null),
+  };
+
+  const result = prepareHeroPicture(cell, 'desktop');
+
+  assert.equal(result, picture);
+  assert.equal(classes.has('homepage-hero-picture'), true);
+  assert.equal(classes.has('is-desktop'), true);
+  assert.equal(image.alt, 'Authored hero alternative text');
+  assert.equal(image.decoding, 'async');
+  assert.equal(image.fetchPriority, 'high');
+  assert.equal(image.loading, 'eager');
 });
 
 test('swaps origin and destination locally with the live accessible name', () => {
