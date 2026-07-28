@@ -15,6 +15,7 @@ const source = await readFile(
   'utf8',
 );
 const heroModule = new vm.SourceTextModule(source, { context });
+await heroModule.link(() => {});
 await heroModule.evaluate();
 
 const {
@@ -22,6 +23,8 @@ const {
   submitFlightSearch,
   validateFlightSearchPanel,
 } = heroModule.namespace;
+
+const plainObject = (value) => JSON.parse(JSON.stringify(value));
 
 const createToggleTarget = () => {
   const classes = new Set();
@@ -66,28 +69,28 @@ test('switches the visible flight search panel and synchronizes tab state', () =
 
 test('reports the required fields for each flight search panel', () => {
   assert.deepEqual(
-    validateFlightSearchPanel('booking', {
+    plainObject(validateFlightSearchPanel('booking', {
       destination: '',
       origin: 'Casablanca, Morocco',
-    }),
+    })),
     { destination: 'Select destination is required' },
   );
   assert.deepEqual(
-    validateFlightSearchPanel('manage', {
+    plainObject(validateFlightSearchPanel('manage', {
       reservationCode: '',
       surname: '',
-    }),
+    })),
     {
       reservationCode: 'Reservation Code is required',
       surname: 'Surname is required',
     },
   );
   assert.deepEqual(
-    validateFlightSearchPanel('status', {
+    plainObject(validateFlightSearchPanel('status', {
       departureDate: '',
       destination: '',
       origin: 'Casablanca, Morocco',
-    }),
+    })),
     {
       departureDate: 'Departure date is required',
       destination: 'Select destination is required',
@@ -97,14 +100,14 @@ test('reports the required fields for each flight search panel', () => {
 
 test('returns the authored empty state without calling a search service', () => {
   assert.deepEqual(
-    submitFlightSearch(
+    plainObject(submitFlightSearch(
       'booking',
       {
         destination: 'Marrakech',
         origin: 'Casablanca, Morocco',
       },
       'No flights found!',
-    ),
+    )),
     {
       errors: {},
       message: 'No flights found!',

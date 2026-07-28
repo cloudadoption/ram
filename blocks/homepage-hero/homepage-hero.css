@@ -1,0 +1,517 @@
+@font-face {
+  font-family: ram-homepage-font;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./assets/museosans-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: ram-homepage-icons;
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./assets/ram-icons.woff') format('woff');
+}
+
+@font-face {
+  font-family: ram-homepage-heading;
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('./assets/museo-300.woff2') format('woff2');
+}
+
+main .homepage-hero {
+  position: relative;
+  box-sizing: border-box;
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  background: #1a1717;
+  color: #1a1717;
+  font-family: ram-homepage-font, Arial, sans-serif;
+}
+
+body:has(main .homepage-hero) header .header {
+  background: rgb(26 23 23 / 55%);
+}
+
+main > .section:has(.homepage-hero) {
+  margin-bottom: 0;
+}
+
+main .homepage-hero .homepage-hero-media {
+  position: relative;
+  top: -56px;
+  height: 440px;
+  margin-bottom: -56px;
+  overflow: hidden;
+}
+
+main .homepage-hero .homepage-hero-picture,
+main .homepage-hero .homepage-hero-picture img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+main .homepage-hero .homepage-hero-picture img {
+  object-fit: cover;
+  object-position: center;
+}
+
+main .homepage-hero .homepage-hero-copy {
+  position: absolute;
+  inset: auto 19px 0 16px;
+  color: #fff;
+}
+
+main .homepage-hero .homepage-hero-title {
+  box-sizing: border-box;
+  max-width: 356px;
+  margin: 0 0 0 37px;
+  color: #fff;
+  font-family: ram-homepage-heading, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.45px;
+  line-height: 32px;
+}
+
+main .homepage-hero .homepage-hero-title::before {
+  position: absolute;
+  inset-block-start: 8px;
+  inset-inline-start: 0;
+  width: 14px;
+  height: 16px;
+  background: url('./assets/ram-chevron.svg') center / contain no-repeat;
+  content: '';
+}
+
+main .homepage-hero .homepage-hero-subtitle {
+  max-width: 356px;
+  margin: 0 0 8px 37px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 32px;
+}
+
+main .homepage-hero .homepage-hero-cta:any-link {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 225px;
+  min-height: 48px;
+  margin-inline-start: auto;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 0;
+  background: #c20831;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  text-decoration: none;
+}
+
+main .homepage-hero .homepage-hero-cta::after {
+  width: 7px;
+  height: 7px;
+  margin-inline-start: 8px;
+  border-block-start: 1px solid currentcolor;
+  border-inline-end: 1px solid currentcolor;
+  content: '';
+  transform: rotate(45deg);
+}
+
+main .homepage-hero .flight-search {
+  box-sizing: border-box;
+  width: 90%;
+  max-width: 1080px;
+  min-height: 419px;
+  margin: 16px auto 0;
+  padding-bottom: 8px;
+}
+
+main .homepage-hero .flight-search-item {
+  margin-bottom: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #fff;
+}
+
+main .homepage-hero .flight-search-tab {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 0;
+  background: #fff;
+  color: #1a1717;
+  font-size: 16px;
+  line-height: 22.4px;
+  text-align: start;
+  cursor: pointer;
+}
+
+main .homepage-hero .flight-search-icon,
+main .homepage-hero .flight-search-chevron {
+  color: #7b7a78;
+  font-family: ram-homepage-icons, sans-serif;
+  font-size: 14px;
+}
+
+main .homepage-hero .flight-search-icon.is-plane::before {
+  content: '\e91d';
+}
+
+main .homepage-hero .flight-search-icon.is-calendar::before {
+  content: '\e901';
+}
+
+main .homepage-hero .flight-search-icon.is-clock::before {
+  content: '\e90b';
+}
+
+main .homepage-hero .flight-search-chevron {
+  margin-inline-start: auto;
+}
+
+main .homepage-hero .flight-search-chevron::before {
+  content: '\e907';
+}
+
+main .homepage-hero .flight-search-tab.is-active {
+  color: #1a1717;
+  font-weight: 700;
+}
+
+main .homepage-hero .flight-search-tab.is-active .flight-search-icon {
+  color: #c20831;
+}
+
+main .homepage-hero .flight-search-tab.is-active .flight-search-chevron {
+  transform: rotate(180deg);
+}
+
+main .homepage-hero .flight-search-panel {
+  box-sizing: border-box;
+  min-height: 255px;
+  padding: 16px;
+  background: #fff;
+}
+
+main .homepage-hero .flight-search-panel[hidden] {
+  display: none;
+}
+
+main .homepage-hero .flight-search-form {
+  margin: 0;
+}
+
+main .homepage-hero .flight-search-trip-types {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 0 16px;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  overflow: hidden;
+  background: #f7f7f7;
+}
+
+main .homepage-hero .flight-search-trip-type {
+  min-width: 0;
+}
+
+main .homepage-hero .flight-search-trip-type input {
+  position: absolute;
+  opacity: 0;
+}
+
+main .homepage-hero .flight-search-trip-type span {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 4px;
+  color: #595855;
+  font-size: 11px;
+  line-height: 14px;
+  text-align: center;
+}
+
+main .homepage-hero .flight-search-trip-type input:checked + span {
+  border-bottom: 1px solid #c20831;
+  background: #fff;
+  color: #c20831;
+}
+
+main .homepage-hero .flight-search-fields {
+  display: grid;
+  gap: 12px;
+}
+
+main .homepage-hero .flight-search-field {
+  display: block;
+}
+
+main .homepage-hero .flight-search-field-label {
+  display: block;
+  margin-bottom: -17px;
+  padding: 7px 12px 0;
+  color: #7b7a78;
+  font-size: 10px;
+  line-height: 12px;
+  pointer-events: none;
+}
+
+main .homepage-hero .flight-search-field-control {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  min-height: 58px;
+  padding: 15px 12px 0;
+  border: 1px solid #d8d7d4;
+  background: #fff;
+}
+
+main .homepage-hero .flight-search-input {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #595855;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+main .homepage-hero .flight-search-input[readonly] {
+  cursor: default;
+}
+
+main .homepage-hero .flight-search-input[aria-invalid='true'] {
+  color: #c20831;
+}
+
+main .homepage-hero .flight-search-field-control:has(.flight-search-input[aria-invalid='true']) {
+  border-color: #c20831;
+}
+
+main .homepage-hero .flight-search-field-suffix {
+  margin-inline-start: 8px;
+  color: #c20831;
+  font-size: 12px;
+}
+
+main .homepage-hero .flight-search-error {
+  display: block;
+  min-height: 14px;
+  margin-top: 2px;
+  color: #c20831;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+main .homepage-hero .flight-search-submit {
+  box-sizing: border-box;
+  min-height: 46px;
+  padding: 10px 24px;
+  border: 0;
+  background: #c20831;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+main .homepage-hero .flight-search-submit:disabled {
+  background: #ebeae8;
+  color: #7b7a78;
+  cursor: not-allowed;
+}
+
+main .homepage-hero .flight-search-submit[hidden] {
+  display: none;
+}
+
+main .homepage-hero .flight-search-empty {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 8px 0 0;
+  padding: 14px 16px;
+  border-radius: 4px;
+  background: #fff;
+  color: #c20831;
+  font-size: 16px;
+  text-align: center;
+}
+
+main .homepage-hero .flight-search-empty[hidden] {
+  display: none;
+}
+
+main .homepage-hero .flight-search-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (width >= 600px) {
+  main .homepage-hero .homepage-hero-copy {
+    inset-inline: 5%;
+  }
+
+  main .homepage-hero .homepage-hero-title,
+  main .homepage-hero .homepage-hero-subtitle {
+    margin-inline-start: 34px;
+  }
+
+  main .homepage-hero .flight-search {
+    min-height: 369px;
+  }
+
+  main .homepage-hero .flight-search-panel {
+    min-height: 205px;
+  }
+
+  main .homepage-hero .flight-search-fields {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  main .homepage-hero .flight-search-submit {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (width >= 1200px) {
+  main .homepage-hero {
+    min-height: 580px;
+  }
+
+  main .homepage-hero .homepage-hero-media {
+    top: -80px;
+    height: 636px;
+  }
+
+  main .homepage-hero .homepage-hero-copy {
+    inset: 107px 0 auto;
+    width: 1080px;
+    margin-inline: auto;
+  }
+
+  main .homepage-hero .homepage-hero-title {
+    max-width: 352px;
+    margin: 0;
+    font-size: 40px;
+    font-weight: 500;
+    letter-spacing: normal;
+    line-height: 44px;
+  }
+
+  main .homepage-hero .homepage-hero-title::before {
+    inset-block-start: 8px;
+    inset-inline-start: -40px;
+  }
+
+  main .homepage-hero .homepage-hero-subtitle {
+    max-width: 350px;
+    margin: 8px 0;
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  main .homepage-hero .homepage-hero-cta:any-link {
+    width: fit-content;
+    min-width: 195px;
+    min-height: 41px;
+    margin-inline-start: 0;
+    padding: 10px 16px;
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  main .homepage-hero .flight-search {
+    position: relative;
+    z-index: 1;
+    min-height: 212px;
+    margin-top: -324px;
+    padding: 0;
+  }
+
+  main .homepage-hero .flight-search-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-radius: 18px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  main .homepage-hero .flight-search-item {
+    display: contents;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  main .homepage-hero .flight-search-tab {
+    grid-row: 1;
+    justify-content: center;
+    min-height: 38px;
+    border-bottom: 1px solid #d8d7d4;
+    padding: 0 12px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  main .homepage-hero .flight-search-tab.is-active {
+    border-bottom-color: #c20831;
+    color: #c20831;
+  }
+
+  main .homepage-hero .flight-search-chevron {
+    display: none;
+  }
+
+  main .homepage-hero .flight-search-panel {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    min-height: 166px;
+    padding: 24px;
+  }
+
+  main .homepage-hero .flight-search-trip-types {
+    width: 390px;
+    margin-bottom: 16px;
+  }
+
+  main .homepage-hero .flight-search-fields {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  main .homepage-hero .flight-search-field-control {
+    min-height: 48px;
+  }
+
+  main .homepage-hero .flight-search-error {
+    min-height: 0;
+  }
+
+  main .homepage-hero .flight-search-submit {
+    grid-column: auto;
+  }
+}
