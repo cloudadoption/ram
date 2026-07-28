@@ -131,79 +131,6 @@ test('builds sorted seeds with every source retained', () => {
     additionalSeeds: [`${ORIGIN}/en-gb/information/travel-documents`],
   });
 
-  test('samples large generated families while enumerating bounded families', () => {
-    const numberedUrls = (prefix, count) => Array.from(
-      { length: count },
-      (_, index) => `${ORIGIN}/en/${prefix}-${String(index + 1).padStart(2, '0')}`,
-    );
-    const routeUrls = Array.from(
-      { length: 35 },
-      (_, index) => (
-        `${ORIGIN}/en/flights-from-origin-${String(index + 1).padStart(2, '0')}-to-target`
-      ),
-    );
-    const destinationUrls = numberedUrls('flights-to-destination', 35);
-    const originUrls = numberedUrls('flights-from-origin', 35);
-    const sitemapIndex = `${ORIGIN}/en/sitemap/to-city/page-1`;
-    const staticPage = `${ORIGIN}/en/route-map`;
-
-    const plan = buildCrawlPlan({
-      additionalSeeds: [],
-      generatedSampleSize: 30,
-      sitemapUrls: [
-        ...routeUrls,
-        ...destinationUrls,
-        ...originUrls,
-        sitemapIndex,
-        staticPage,
-      ],
-      siteScope,
-    });
-
-    assert.equal(plan.generatedSamples['route-detail'].length, 30);
-    assert.equal(plan.generatedSamples['destination-landing'].length, 30);
-    assert.equal(plan.generatedSamples['origin-landing'].length, 30);
-    assert.equal(plan.seeds.some(({ url }) => url === sitemapIndex), true);
-    assert.equal(plan.seeds.some(({ url }) => url === staticPage), true);
-    assert.equal(
-      plan.coverage.find(({ family }) => family === 'route-detail').mode,
-      'sampled',
-    );
-    assert.equal(
-      plan.coverage.find(({ family }) => family === 'english-static-unclassified').mode,
-      'enumerated',
-    );
-  });
-
-  test('crawls editorial and non-sitemap links but skips unsampled generated sitemap URLs', () => {
-    const classify = buildFamilyClassifier(siteScope);
-    const sampledRoute = `${ORIGIN}/en/flights-from-rabat-to-paris`;
-    const unsampledRoute = `${ORIGIN}/en/flights-from-casablanca-to-paris`;
-    const sitemapSet = new Set([sampledRoute, unsampledRoute]);
-    const sampledSet = new Set([sampledRoute]);
-
-    assert.equal(shouldCrawlUrl(`${ORIGIN}/en-gb/new-page`, {
-      classify,
-      sampledSet,
-      sitemapSet,
-    }), true);
-    assert.equal(shouldCrawlUrl(`${ORIGIN}/en/vols-pour-paris`, {
-      classify,
-      sampledSet,
-      sitemapSet,
-    }), true);
-    assert.equal(shouldCrawlUrl(sampledRoute, {
-      classify,
-      sampledSet,
-      sitemapSet,
-    }), true);
-    assert.equal(shouldCrawlUrl(unsampledRoute, {
-      classify,
-      sampledSet,
-      sitemapSet,
-    }), false);
-  });
-
   assert.deepEqual(seeds, [
     { url: `${ORIGIN}/en/`, sources: ['root', 'sitemap'] },
     {
@@ -216,6 +143,79 @@ test('builds sorted seeds with every source retained', () => {
       sources: ['catalog', 'known-correction'],
     },
   ]);
+});
+
+test('samples large generated families while enumerating bounded families', () => {
+  const numberedUrls = (prefix, count) => Array.from(
+    { length: count },
+    (_, index) => `${ORIGIN}/en/${prefix}-${String(index + 1).padStart(2, '0')}`,
+  );
+  const routeUrls = Array.from(
+    { length: 35 },
+    (_, index) => (
+      `${ORIGIN}/en/flights-from-origin-${String(index + 1).padStart(2, '0')}-to-target`
+    ),
+  );
+  const destinationUrls = numberedUrls('flights-to-destination', 35);
+  const originUrls = numberedUrls('flights-from-origin', 35);
+  const sitemapIndex = `${ORIGIN}/en/sitemap/to-city/page-1`;
+  const staticPage = `${ORIGIN}/en/route-map`;
+
+  const plan = buildCrawlPlan({
+    additionalSeeds: [],
+    generatedSampleSize: 30,
+    sitemapUrls: [
+      ...routeUrls,
+      ...destinationUrls,
+      ...originUrls,
+      sitemapIndex,
+      staticPage,
+    ],
+    siteScope,
+  });
+
+  assert.equal(plan.generatedSamples['route-detail'].length, 30);
+  assert.equal(plan.generatedSamples['destination-landing'].length, 30);
+  assert.equal(plan.generatedSamples['origin-landing'].length, 30);
+  assert.equal(plan.seeds.some(({ url }) => url === sitemapIndex), true);
+  assert.equal(plan.seeds.some(({ url }) => url === staticPage), true);
+  assert.equal(
+    plan.coverage.find(({ family }) => family === 'route-detail').mode,
+    'sampled',
+  );
+  assert.equal(
+    plan.coverage.find(({ family }) => family === 'english-static-unclassified').mode,
+    'enumerated',
+  );
+});
+
+test('crawls editorial and non-sitemap links but skips unsampled generated sitemap URLs', () => {
+  const classify = buildFamilyClassifier(siteScope);
+  const sampledRoute = `${ORIGIN}/en/flights-from-rabat-to-paris`;
+  const unsampledRoute = `${ORIGIN}/en/flights-from-casablanca-to-paris`;
+  const sitemapSet = new Set([sampledRoute, unsampledRoute]);
+  const sampledSet = new Set([sampledRoute]);
+
+  assert.equal(shouldCrawlUrl(`${ORIGIN}/en-gb/new-page`, {
+    classify,
+    sampledSet,
+    sitemapSet,
+  }), true);
+  assert.equal(shouldCrawlUrl(`${ORIGIN}/en/vols-pour-paris`, {
+    classify,
+    sampledSet,
+    sitemapSet,
+  }), true);
+  assert.equal(shouldCrawlUrl(sampledRoute, {
+    classify,
+    sampledSet,
+    sitemapSet,
+  }), true);
+  assert.equal(shouldCrawlUrl(unsampledRoute, {
+    classify,
+    sampledSet,
+    sitemapSet,
+  }), false);
 });
 
 test('rebuilds the pending frontier from append-only progress', () => {
@@ -312,7 +312,7 @@ test('reports family deltas with a count pattern for every figure', () => {
   const origin = summary.families.find(({ family }) => family === 'origin-landing');
 
   assert.equal(summary.unionCount, 3);
-  assert.match(summary.unionCountPattern, /unique requested URLs/);
+  assert.match(summary.unionCountPattern, /English sitemap.*crawl request URLs/);
   assert.equal(route.sitemapCount, 1);
   assert.equal(route.unionCount, 2);
   assert.equal(route.delta, 1);

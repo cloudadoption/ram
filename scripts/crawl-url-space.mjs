@@ -17,6 +17,11 @@ import { pathToFileURL } from 'node:url';
 const ORIGIN = 'https://www.royalairmaroc.com';
 const HOSTNAME = 'www.royalairmaroc.com';
 const ROOT_SEEDS = [`${ORIGIN}/en/`, `${ORIGIN}/en-gb/`];
+const SAMPLED_GENERATED_FAMILIES = new Set([
+  'destination-landing',
+  'origin-landing',
+  'route-detail',
+]);
 const PAGE_ASSET_PATTERN = /\.(?:avif|bmp|css|csv|docx?|eot|gif|ico|jpe?g|js|json|map|mp3|mp4|pdf|png|pptx?|svg|tiff?|ttf|webp|woff2?|xlsx?|xml|zip)$/i;
 const LINK_PATTERN = /<(?:a|area)\b[^>]*\bhref\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))/gi;
 const REDIRECT_STATUSES = new Set([301, 302, 303, 307, 308]);
@@ -331,6 +336,93 @@ export function buildSeedEntries({
     .sort((a, b) => compareSeedUrls(a.url, b.url));
 }
 
+function sampleEvenly(urls, sampleSize) {
+  if (urls.length <= sampleSize) return [...urls];
+  if (sampleSize === 1) return [urls[0]];
+
+  const selected = new Set();
+  for (let index = 0; index < sampleSize; index += 1) {
+    const position = Math.round((index * (urls.length - 1)) / (sampleSize - 1));
+    selected.add(urls[position]);
+  }
+  return [...selected];
+}
+
+export function buildCrawlPlan({
+  additionalSeeds = [],
+  generatedSampleSize,
+  sitemapUrls,
+  siteScope,
+}) {
+  const classify = buildFamilyClassifier(siteScope);
+  const sitemapGroups = new Map();
+
+  sitemapUrls.forEach((url) => {
+    const { name } = classify(url);
+    if (!sitemapGroups.has(name)) sitemapGroups.set(name, []);
+    sitemapGroups.get(name).push(url);
+  });
+
+  const generatedSamples = {};
+  const selectedSitemapUrls = [];
+  const coverage = [...sitemapGroups.entries()]
+    .sort(([a], [b]) => compareStrings(a, b))
+    .map(([family, urls]) => {
+      const sortedUrls = [...urls].sort(compareStrings);
+      const sampled = SAMPLED_GENERATED_FAMILIES.has(family);
+      const selected = sampled
+        ? sampleEvenly(sortedUrls, generatedSampleSize)
+        : sortedUrls;
+      if (sampled) generatedSamples[family] = selected;
+      selectedSitemapUrls.push(...selected);
+
+      return {
+        family,
+        mode: sampled ? 'sampled' : 'enumerated',
+        englishSitemapCount: sortedUrls.length,
+        englishSitemapCountPattern: (
+          `English sitemap URLs classified as "${family}"`
+        ),
+        crawlTargetCount: selected.length,
+        crawlTargetCountPattern: sampled
+          ? `Up to ${generatedSampleSize} evenly spaced URLs from the sorted `
+            + `"${family}" English sitemap family, including both endpoints`
+          : `Every English sitemap URL classified as "${family}"`,
+      };
+    });
+
+  const seeds = buildSeedEntries({
+    additionalSeeds,
+    sitemapUrls: selectedSitemapUrls,
+    siteScope,
+  });
+
+  return {
+    coverage,
+    generatedSampleSize,
+    generatedSamples,
+    sampledUrls: Object.values(generatedSamples).flat().sort(compareStrings),
+    seeds,
+  };
+}
+
+export function shouldCrawlUrl(url, {
+  classify,
+  sampledSet,
+  sitemapSet,
+}) {
+  const normalized = normalizeUrl(url, ORIGIN);
+  if (!normalized) return false;
+
+  const { pathname } = new URL(normalized);
+  if (pathname.startsWith('/en-gb/')) return true;
+  if (!sitemapSet.has(normalized)) return true;
+
+  const { name } = classify(normalized);
+  if (!SAMPLED_GENERATED_FAMILIES.has(name)) return true;
+  return sampledSet.has(normalized);
+}
+
 export function rebuildProgress(events) {
   const metadataEvents = events.filter(({ type }) => type === 'metadata');
   if (metadataEvents.length !== 1) {
@@ -535,10 +627,16 @@ export async function fetchPage(url, {
   };
 }
 
-export function summarizeUnion({ classify, records, sitemapUrls }) {
+export function summarizeUnion({
+  classify,
+  coverage = [],
+  records,
+  sitemapUrls,
+}) {
   const sitemapCounts = new Map();
   const sitemapSet = new Set(sitemapUrls);
   const unionCounts = new Map();
+  const crawlRecordCounts = new Map();
   const patterns = new Map();
 
   sitemapUrls.forEach((url) => {
@@ -549,10 +647,21 @@ export function summarizeUnion({ classify, records, sitemapUrls }) {
 
   records.forEach((record, url) => {
     const family = classify(url);
+    crawlRecordCounts.set(
+      family.name,
+      (crawlRecordCounts.get(family.name) || 0) + 1,
+    );
+    patterns.set(family.name, family.countPattern);
+  });
+
+  const unionUrls = new Set([...sitemapUrls, ...records.keys()]);
+  unionUrls.forEach((url) => {
+    const family = classify(url);
     unionCounts.set(family.name, (unionCounts.get(family.name) || 0) + 1);
     patterns.set(family.name, family.countPattern);
   });
 
+  const coverageByFamily = new Map(coverage.map((entry) => [entry.family, entry]));
   const familyNames = [...new Set([
     ...sitemapCounts.keys(),
     ...unionCounts.keys(),
@@ -563,24 +672,30 @@ export function summarizeUnion({ classify, records, sitemapUrls }) {
     const unionCount = unionCounts.get(family) || 0;
     return {
       family,
+      crawlMode: coverageByFamily.get(family)?.mode || 'enumerated',
+      crawlModePattern: coverageByFamily.has(family)
+        ? `Mode declared by crawl plan for "${family}"`
+        : 'Family discovered outside the English sitemap and therefore enumerated',
+      crawlRecordCount: crawlRecordCounts.get(family) || 0,
+      crawlRecordCountPattern: `Completed crawl records classified by: ${patterns.get(family)}`,
       sitemapCount,
       sitemapCountPattern: `Exact sitemap URLs classified by: ${patterns.get(family)}`,
       unionCount,
-      unionCountPattern: `Unique requested URLs classified by: ${patterns.get(family)}`,
+      unionCountPattern: `Unique union of English sitemap and crawl request URLs classified by: ${patterns.get(family)}`,
       delta: unionCount - sitemapCount,
-      deltaPattern: 'unionCount - sitemapCount for this family',
+      deltaPattern: 'unionCount - English sitemap count for this family',
       countPattern: patterns.get(family),
     };
   });
 
   return {
     sitemapCount: sitemapUrls.length,
-    sitemapCountPattern: 'Unique canonical <loc> entries in /en/sitemap.xml',
-    unionCount: records.size,
-    unionCountPattern: 'unique requested URLs with one completed page event',
-    missingFromSitemapCount: [...records.keys()]
+    sitemapCountPattern: 'Unique canonical <loc> entries in the English /en/sitemap.xml only',
+    unionCount: unionUrls.size,
+    unionCountPattern: 'Unique canonical URL union of English sitemap <loc> entries and completed crawl request URLs',
+    missingFromSitemapCount: [...unionUrls]
       .filter((url) => !sitemapSet.has(url)).length,
-    missingFromSitemapCountPattern: 'Union record URLs minus exact canonical sitemap URLs',
+    missingFromSitemapCountPattern: 'Union URLs minus exact English sitemap URLs',
     families,
     changedFamilies: families
       .filter(({ delta }) => delta !== 0)
@@ -611,18 +726,103 @@ function createRequestGate(intervalMs) {
   };
 }
 
-function extractSitemapUrls(xml) {
-  const urls = new Set();
+function extractLocValues(xml) {
+  const values = [];
   const pattern = /<loc\b[^>]*>\s*([\s\S]*?)\s*<\/loc>/gi;
   let match = pattern.exec(xml);
 
   while (match) {
-    const normalized = normalizeUrl(decodeHtmlEntities(match[1].trim()), ORIGIN);
-    if (normalized) urls.add(normalized);
+    values.push(decodeHtmlEntities(match[1].trim()));
     match = pattern.exec(xml);
   }
+  return values;
+}
 
+function extractSitemapUrls(xml) {
+  const urls = new Set();
+  extractLocValues(xml).forEach((value) => {
+    const normalized = normalizeUrl(value, ORIGIN);
+    if (normalized) urls.add(normalized);
+  });
   return [...urls].sort(compareStrings);
+}
+
+async function fetchRequiredText(url, {
+  fetchImpl,
+  gate,
+  label,
+  robots,
+  timeoutMs,
+  userAgent,
+}) {
+  const result = await fetchWithRedirects(url, {
+    fetchImpl,
+    gate,
+    robots,
+    timeoutMs,
+    userAgent,
+  });
+  if (!result.response || result.response.status !== 200) {
+    throw createCrawlStalledError(
+      `${label} returned HTTP ${result.response?.status ?? 'none'}`,
+    );
+  }
+  return result.response.text();
+}
+
+async function fetchSiteSitemapFloor({
+  concurrency,
+  fetchImpl,
+  gate,
+  robots,
+  timeoutMs,
+  userAgent,
+}) {
+  const indexUrl = `${ORIGIN}/sitemap_index.xml`;
+  const indexXml = await fetchRequiredText(indexUrl, {
+    fetchImpl,
+    gate,
+    label: 'sitemap_index.xml',
+    robots,
+    timeoutMs,
+    userAgent,
+  });
+  const localeSitemapUrls = [...new Set(extractLocValues(indexXml))]
+    .filter((url) => canonicalizeSameHost(url, ORIGIN, false, false))
+    .sort(compareStrings);
+  const localeResults = [];
+
+  for (let index = 0; index < localeSitemapUrls.length; index += concurrency) {
+    const batch = localeSitemapUrls.slice(index, index + concurrency);
+    // eslint-disable-next-line no-await-in-loop
+    const results = await Promise.all(batch.map(async (url) => {
+      const result = await fetchWithRedirects(url, {
+        fetchImpl,
+        gate,
+        robots,
+        timeoutMs,
+        userAgent,
+      });
+      const status = result.response?.status ?? 0;
+      const urlCount = status === 200
+        ? extractLocValues(await result.response.text()).length
+        : 0;
+      return { status, url, urlCount };
+    }));
+    localeResults.push(...results);
+  }
+
+  const count = localeResults.reduce((sum, entry) => sum + entry.urlCount, 0);
+  const successfulCount = localeResults.filter(({ status }) => status === 200).length;
+
+  return {
+    count,
+    countPattern: 'Sum of <loc> entry counts returned by the locale sitemap URLs listed in sitemap_index.xml; non-200 sitemap responses contribute zero, so this is a site floor',
+    localeSitemapCount: localeSitemapUrls.length,
+    localeSitemapCountPattern: 'Unique <loc> entries in sitemap_index.xml that resolve to www.royalairmaroc.com',
+    successfulLocaleSitemapCount: successfulCount,
+    successfulLocaleSitemapCountPattern: 'Listed locale sitemap requests whose final status is HTTP 200',
+  };
 }
 
 function readProgressLog(filePath) {
@@ -689,8 +889,10 @@ function countSeedSources(seeds) {
 }
 
 async function initializeProgress({
+  concurrency,
   fetchImpl,
   gate,
+  generatedSampleSize,
   intervalMs,
   scopePath,
   statePath,
@@ -713,30 +915,38 @@ async function initializeProgress({
   const robotsTxt = await robotsResult.response.text();
   const robots = createRobotsPolicy(robotsTxt);
 
-  const sitemapResult = await fetchWithRedirects(`${ORIGIN}/en/sitemap.xml`, {
+  const siteSitemapFloor = await fetchSiteSitemapFloor({
+    concurrency,
     fetchImpl,
     gate,
     robots,
     timeoutMs,
     userAgent,
   });
-  if (!sitemapResult.response || sitemapResult.response.status !== 200) {
-    throw createCrawlStalledError(
-      `/en/sitemap.xml returned HTTP ${sitemapResult.response?.status ?? 'none'}`,
-    );
-  }
-  const sitemapUrls = extractSitemapUrls(await sitemapResult.response.text());
+
+  const englishSitemapUrl = `${ORIGIN}/en/sitemap.xml`;
+  const englishSitemapXml = await fetchRequiredText(englishSitemapUrl, {
+    fetchImpl,
+    gate,
+    label: '/en/sitemap.xml',
+    robots,
+    timeoutMs,
+    userAgent,
+  });
+  const sitemapUrls = extractSitemapUrls(englishSitemapXml);
   if (sitemapUrls.length === 0) {
     throw new Error('English sitemap contained no canonical in-scope URLs');
   }
 
   const additionalSeeds = KNOWN_CORRECTED_EDITORIAL_PATHS
     .map((pathname) => `${ORIGIN}${pathname}`);
-  const seeds = buildSeedEntries({
+  const crawlPlan = buildCrawlPlan({
     additionalSeeds,
+    generatedSampleSize,
     sitemapUrls,
     siteScope,
   });
+  const { seeds } = crawlPlan;
   const knownStrayUrls = (siteScope.templates || [])
     .filter(({ contentSet }) => contentSet === 'observed-non-sitemap-alias')
     .flatMap(({ urls = [] }) => urls)
@@ -746,11 +956,11 @@ async function initializeProgress({
 
   const metadata = {
     type: 'metadata',
-    schemaVersion: 1,
+    schemaVersion: 2,
     origin: ORIGIN,
     scopePrefixes: ['/en/', '/en-gb/'],
     requestPolicy: {
-      concurrency: null,
+      concurrency,
       intervalMs,
       timeoutMs,
       userAgent,
@@ -760,17 +970,20 @@ async function initializeProgress({
       text: robotsTxt,
       directives: robots.directives,
     },
-    sitemap: {
-      url: `${ORIGIN}/en/sitemap.xml`,
+    siteSitemapFloor,
+    englishSitemap: {
+      label: 'English sitemap only',
+      url: englishSitemapUrl,
       urls: sitemapUrls,
       count: sitemapUrls.length,
-      countPattern: 'Unique canonical <loc> entries within /en/ scope',
+      countPattern: 'Unique canonical <loc> entries in /en/sitemap.xml only',
     },
+    crawlPlan,
     siteScopePath: scopePath,
     siteScopeSha256: hashFile(scopePath),
     seeds,
     seedCount: seeds.length,
-    seedCountPattern: 'Unique normalized union of roots, sitemap, catalog URLs and corrections',
+    seedCountPattern: 'Unique normalized union of roots, bounded English sitemap targets, catalog URLs and corrections',
     seedSources: countSeedSources(seeds),
     knownStrayUrls,
     knownStrayCount: knownStrayUrls.length,
@@ -786,10 +999,10 @@ function buildCatalogOutput({ metadata, records, siteScope }) {
   const classify = buildFamilyClassifier(siteScope);
   const summary = summarizeUnion({
     classify,
+    coverage: metadata.crawlPlan.coverage,
     records,
-    sitemapUrls: metadata.sitemap.urls,
+    sitemapUrls: metadata.englishSitemap.urls,
   });
-  const sitemapSet = new Set(metadata.sitemap.urls);
   const knownStraySet = new Set(metadata.knownStrayUrls);
   const foundKnownStrays = [...knownStraySet].filter((url) => records.has(url));
   const statusCounts = new Map();
@@ -808,21 +1021,40 @@ function buildCatalogOutput({ metadata, records, siteScope }) {
       url: metadata.robots.url,
       directives: metadata.robots.directives,
     },
+    siteSitemapFloor: metadata.siteSitemapFloor,
+    englishSitemap: {
+      label: metadata.englishSitemap.label,
+      count: summary.sitemapCount,
+      countPattern: summary.sitemapCountPattern,
+    },
     seeds: {
       count: metadata.seedCount,
       countPattern: metadata.seedCountPattern,
       sources: metadata.seedSources,
     },
+    crawlCoverage: {
+      statement: 'The /en-gb/ tree and non-sitemap /en/ links are enumerated. Route-detail, destination-landing and origin-landing English sitemap families are sampled.',
+      generatedSampleSize: metadata.crawlPlan.generatedSampleSize,
+      generatedSampleSizePattern: 'Configured maximum evenly spaced sample per large generated English sitemap family',
+      enumeratedFamilies: summary.families
+        .filter(({ crawlMode }) => crawlMode === 'enumerated')
+        .map(({ family }) => family),
+      sampledFamilies: summary.families
+        .filter(({ crawlMode }) => crawlMode === 'sampled')
+        .map(({ family }) => family),
+    },
     summary: {
-      sitemapCount: summary.sitemapCount,
-      sitemapCountPattern: summary.sitemapCountPattern,
-      unionCount: summary.unionCount,
-      unionCountPattern: summary.unionCountPattern,
-      missingFromSitemapCount: summary.missingFromSitemapCount,
-      missingFromSitemapCountPattern: summary.missingFromSitemapCountPattern,
-      sitemapUrlsWithoutRecordCount: [...sitemapSet]
-        .filter((url) => !records.has(url)).length,
-      sitemapUrlsWithoutRecordCountPattern: 'Exact sitemap URLs minus completed union records',
+      crawlRecordCount: records.size,
+      crawlRecordCountPattern: 'Unique requested URLs with one completed crawl record under the bounded crawl plan',
+      union: {
+        count: summary.unionCount,
+        countPattern: summary.unionCountPattern,
+      },
+      deltaAgainstEnglishSitemap: {
+        count: summary.missingFromSitemapCount,
+        countPattern: summary.missingFromSitemapCountPattern,
+        scope: 'This is a delta against the English /en/sitemap.xml only, not against the 72-locale site floor.',
+      },
       knownStrays: {
         expectedCount: knownStraySet.size,
         expectedCountPattern: metadata.knownStrayCountPattern,
@@ -836,12 +1068,25 @@ function buildCatalogOutput({ metadata, records, siteScope }) {
         .map(([status, count]) => ({
           status,
           count,
-          countPattern: `Completed union records where final status == ${status}`,
+          countPattern: `Completed crawl records where final status == ${status}`,
         })),
-      families: summary.families,
+      families: summary.families.map((family) => ({
+        family: family.family,
+        crawlMode: family.crawlMode,
+        crawlModePattern: family.crawlModePattern,
+        crawlRecordCount: family.crawlRecordCount,
+        crawlRecordCountPattern: family.crawlRecordCountPattern,
+        englishSitemapCount: family.sitemapCount,
+        englishSitemapCountPattern: family.sitemapCountPattern,
+        unionCount: family.unionCount,
+        unionCountPattern: family.unionCountPattern,
+        deltaAgainstEnglishSitemap: family.delta,
+        deltaAgainstEnglishSitemapPattern: family.deltaPattern,
+        familyPattern: family.countPattern,
+      })),
       changedFamilies: summary.changedFamilies,
       changedFamilyCount: summary.changedFamilies.length,
-      changedFamilyCountPattern: 'Family rows where unionCount - sitemapCount is nonzero',
+      changedFamilyCountPattern: 'Family rows where union count minus English sitemap count is nonzero',
     },
     records: [...records.values()]
       .sort((a, b) => compareStrings(a.url, b.url))
@@ -877,8 +1122,10 @@ async function runCrawl(options) {
 
   if (!existsSync(statePath)) {
     initialized = await initializeProgress({
+      concurrency: options.concurrency,
       fetchImpl: fetch,
       gate,
+      generatedSampleSize: options.generatedSampleSize,
       intervalMs: options.intervalMs,
       scopePath,
       statePath,
@@ -898,9 +1145,10 @@ async function runCrawl(options) {
     );
   }
 
-  progress.metadata.requestPolicy.concurrency = options.concurrency;
   const classify = buildFamilyClassifier(siteScope);
   const robots = createRobotsPolicy(progress.metadata.robots.text);
+  const sitemapSet = new Set(progress.metadata.englishSitemap.urls);
+  const sampledSet = new Set(progress.metadata.crawlPlan.sampledUrls);
   let processedThisRun = 0;
   let consecutiveForbidden = 0;
   let stopping = false;
@@ -947,6 +1195,11 @@ async function runCrawl(options) {
           ? [...record.links, normalizedFinal]
           : record.links;
         const newLinks = [...new Set(discovered)]
+          .filter((url) => shouldCrawlUrl(url, {
+            classify,
+            sampledSet,
+            sitemapSet,
+          }))
           .filter((url) => !progress.seen.has(url))
           .sort(compareStrings);
         newLinks.forEach((url) => progress.seen.add(url));
@@ -1004,10 +1257,10 @@ async function runCrawl(options) {
   process.stdout.write(
     `${[
       'Crawl frontier exhausted.',
-      `pattern=${output.summary.unionCountPattern}`,
-      `union=${output.summary.unionCount}`,
-      `pattern=${output.summary.missingFromSitemapCountPattern}`,
-      `outside_sitemap=${output.summary.missingFromSitemapCount}`,
+      `pattern=${output.summary.union.countPattern}`,
+      `union=${output.summary.union.count}`,
+      `pattern=${output.summary.deltaAgainstEnglishSitemap.countPattern}`,
+      `outside_english_sitemap=${output.summary.deltaAgainstEnglishSitemap.count}`,
       `changed_families=${output.summary.changedFamilies.join(',') || 'none'}`,
     ].join(' ')}\n`,
   );
@@ -1024,6 +1277,7 @@ function parseInteger(value, option, minimum = 1) {
 function parseArgs(rawArgs) {
   const options = {
     concurrency: 3,
+    generatedSampleSize: 30,
     intervalMs: 200,
     maxPages: Number.POSITIVE_INFINITY,
     outputPath: 'catalog/url-space.json',
@@ -1040,6 +1294,9 @@ function parseArgs(rawArgs) {
     const value = rawArgs[index + 1];
     if (option === '--concurrency') {
       options.concurrency = parseInteger(value, option);
+      index += 1;
+    } else if (option === '--generated-sample') {
+      options.generatedSampleSize = parseInteger(value, option);
       index += 1;
     } else if (option === '--interval') {
       options.intervalMs = parseInteger(value, option);
@@ -1079,6 +1336,8 @@ Usage: node scripts/crawl-url-space.mjs [options]
 
 Options:
   --concurrency N     Concurrent fetches per deterministic batch (default: 3)
+  --generated-sample N
+                      Even sample per large generated family (default: 30)
   --interval MS       Minimum gap between request starts (default: 200)
   --max-pages N       Pause after N new page records; rerun to resume
   --output PATH       Final union catalog (default: catalog/url-space.json)
