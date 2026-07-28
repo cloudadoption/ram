@@ -267,6 +267,13 @@ test('names Liferay accordion fragment artifacts without treating them as pages'
   );
   assert.equal(
     classifyNamedExclusion({
+      url: `${ORIGIN}/en-gb/information/accordion-133658-1`,
+      status: 404,
+    }),
+    'liferay-accordion-fragment-artifact',
+  );
+  assert.equal(
+    classifyNamedExclusion({
       url: `${ORIGIN}/en-gb/accordion-204006-1`,
       status: 200,
     }),

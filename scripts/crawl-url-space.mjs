@@ -16,12 +16,22 @@ import { pathToFileURL } from 'node:url';
 
 const ORIGIN = 'https://www.royalairmaroc.com';
 const HOSTNAME = 'www.royalairmaroc.com';
+const CRAWL_SCOPE_PREFIXES = ['/en/', '/en-gb/'];
 const ROOT_SEEDS = [`${ORIGIN}/en/`, `${ORIGIN}/en-gb/`];
+const SITE_NAMESPACE_PREFIXES = ['/en/', '/en_gb/', '/en-gb/'];
 const SAMPLED_GENERATED_FAMILIES = new Set([
   'destination-landing',
   'origin-landing',
   'route-detail',
 ]);
+const NAMED_EXCLUSION_RULES = [
+  {
+    name: 'liferay-accordion-fragment-artifact',
+    urlPattern: '^https://www\\.royalairmaroc\\.com/en-gb/(?:[^/]+/)*accordion-[0-9]+-[0-9]+$',
+    finalStatus: 404,
+    rationale: 'Liferay accordion widget fragment links are link-graph artifacts, not pages.',
+  },
+];
 const PAGE_ASSET_PATTERN = /\.(?:avif|bmp|css|csv|docx?|eot|gif|ico|jpe?g|js|json|map|mp3|mp4|pdf|png|pptx?|svg|tiff?|ttf|webp|woff2?|xlsx?|xml|zip)$/i;
 const LINK_PATTERN = /<(?:a|area)\b[^>]*\bhref\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))/gi;
 const REDIRECT_STATUSES = new Set([301, 302, 303, 307, 308]);
@@ -106,21 +116,20 @@ function canonicalizeSameHost(
     pathname = pathname.replace(/\/{2,}/g, '/');
     if (
       normalizeScopeRoots
-      && (pathname === '/en' || pathname === '/en-gb')
+      && ['/en', '/en_gb', '/en-gb'].includes(pathname)
     ) {
       pathname = `${pathname}/`;
     }
 
-    const inEnglishScope = ['/en', '/en-gb'].includes(pathname)
-      || pathname.startsWith('/en/')
-      || pathname.startsWith('/en-gb/');
+    const inEnglishScope = SITE_NAMESPACE_PREFIXES
+      .some((prefix) => pathname === prefix.slice(0, -1) || pathname.startsWith(prefix));
     if (requireEnglishScope && !inEnglishScope) return null;
     if (requireEnglishScope && PAGE_ASSET_PATTERN.test(pathname)) return null;
 
     if (
       pathname.length > 1
       && pathname.endsWith('/')
-      && !['/en/', '/en-gb/'].includes(pathname)
+      && !SITE_NAMESPACE_PREFIXES.includes(pathname)
     ) {
       pathname = pathname.slice(0, -1);
     }
@@ -133,6 +142,99 @@ function canonicalizeSameHost(
 
 export function normalizeUrl(value, baseUrl = ORIGIN) {
   return canonicalizeSameHost(value, baseUrl, true);
+}
+
+function exactSitemapUrlsForPrefix(locValues, prefix) {
+  return [...new Set(locValues)].filter((value) => {
+    try {
+      const url = new URL(value);
+      return url.hostname.toLowerCase() === HOSTNAME
+        && url.pathname.startsWith(prefix);
+    } catch {
+      return false;
+    }
+  });
+}
+
+export function buildNamespaceSummary({
+  englishGbSitemapLocs,
+  englishSitemapLocs,
+}) {
+  const sitemapSources = [
+    {
+      label: 'English /en/sitemap.xml',
+      locs: englishSitemapLocs,
+      url: `${ORIGIN}/en/sitemap.xml`,
+    },
+    {
+      label: 'English GB /en_gb/sitemap.xml',
+      locs: englishGbSitemapLocs,
+      url: `${ORIGIN}/en_gb/sitemap.xml`,
+    },
+  ];
+  const namespace = ({
+    contentSet,
+    discoveryMode,
+    name,
+    prefix,
+    sourceLabels,
+  }) => {
+    const sources = sitemapSources.filter(({ label }) => sourceLabels.includes(label));
+    const sitemapUrlCount = sources.reduce(
+      (sum, { locs }) => sum + exactSitemapUrlsForPrefix(locs, prefix).length,
+      0,
+    );
+    const sitemapLabels = `${sources.length > 1 ? 'both ' : ''}${
+      sources.map(({ label }) => label).join(' and ')
+    }`;
+    return {
+      name,
+      prefix,
+      contentSet,
+      discoveryMode,
+      sitemapUrlCount,
+      sitemapUrlCountPattern: `Unique exact <loc> strings with a case-sensitive pathname prefix "${prefix}" across ${sitemapLabels}`,
+      sitemapSources: sources.map(({ url }) => url),
+    };
+  };
+
+  return {
+    count: SITE_NAMESPACE_PREFIXES.length,
+    countPattern: 'Distinct live URL namespace prefixes explicitly modeled by this artifact',
+    entries: [
+      namespace({
+        contentSet: 'English generated catalog',
+        discoveryMode: 'sitemap-with-bounded-sampling',
+        name: 'english-catalog',
+        prefix: '/en/',
+        sourceLabels: ['English /en/sitemap.xml'],
+      }),
+      namespace({
+        contentSet: 'Separate English GB generated locale catalog',
+        discoveryMode: 'sitemap',
+        name: 'english-gb-locale-catalog',
+        prefix: '/en_gb/',
+        sourceLabels: ['English GB /en_gb/sitemap.xml'],
+      }),
+      namespace({
+        contentSet: 'English GB editorial site and navigation tree',
+        discoveryMode: 'chrome-crawl-only',
+        name: 'english-gb-editorial',
+        prefix: '/en-gb/',
+        sourceLabels: [
+          'English /en/sitemap.xml',
+          'English GB /en_gb/sitemap.xml',
+        ],
+      }),
+    ],
+  };
+}
+
+export function classifyNamedExclusion({ status, url }) {
+  const match = NAMED_EXCLUSION_RULES.find((rule) => (
+    status === rule.finalStatus && new RegExp(rule.urlPattern).test(url)
+  ));
+  return match?.name || null;
 }
 
 function robotsPatternToRegex(pattern) {
@@ -263,7 +365,7 @@ export function buildFamilyClassifier(siteScope) {
     if (!normalized) {
       return familyResult(
         'outside-english-scope',
-        'Final URL is not a canonical /en/ or lowercase /en-gb/ page URL',
+        'Final URL is not a canonical /en/, /en_gb/ or lowercase /en-gb/ page URL',
       );
     }
 
@@ -301,6 +403,12 @@ export function buildFamilyClassifier(siteScope) {
       return familyResult(
         'editorial-unclassified',
         'Canonical pathname starts /en-gb/ and has no exact site-scope URL match',
+      );
+    }
+    if (pathname.startsWith('/en_gb/')) {
+      return familyResult(
+        'english-gb-locale-catalog-unclassified',
+        'Canonical pathname starts /en_gb/ and belongs to the separate locale catalog',
       );
     }
     return familyResult(
@@ -416,6 +524,7 @@ export function shouldCrawlUrl(url, {
 
   const { pathname } = new URL(normalized);
   if (pathname.startsWith('/en-gb/')) return true;
+  if (pathname.startsWith('/en_gb/')) return false;
   if (!sitemapSet.has(normalized)) return true;
 
   const { name } = classify(normalized);
@@ -632,7 +741,9 @@ export function summarizeUnion({
   coverage = [],
   records,
   sitemapUrls,
+  englishSitemapLocs = sitemapUrls,
 }) {
+  const exactEnglishSitemapLocs = new Set(englishSitemapLocs);
   const sitemapCounts = new Map();
   const sitemapSet = new Set(sitemapUrls);
   const unionCounts = new Map();
@@ -677,25 +788,43 @@ export function summarizeUnion({
         ? `Mode declared by crawl plan for "${family}"`
         : 'Family discovered outside the English sitemap and therefore enumerated',
       crawlRecordCount: crawlRecordCounts.get(family) || 0,
-      crawlRecordCountPattern: `Completed crawl records classified by: ${patterns.get(family)}`,
+      crawlRecordCountPattern: `Completed crawl records of every final status classified by: ${patterns.get(family)}`,
       sitemapCount,
       sitemapCountPattern: `Exact sitemap URLs classified by: ${patterns.get(family)}`,
       unionCount,
-      unionCountPattern: `Unique union of English sitemap and crawl request URLs classified by: ${patterns.get(family)}`,
+      unionCountPattern: `Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: ${patterns.get(family)}`,
       delta: unionCount - sitemapCount,
-      deltaPattern: 'unionCount - English sitemap count for this family',
+      deltaPattern: 'Raw union count across every final status minus English sitemap count for this family',
       countPattern: patterns.get(family),
     };
   });
 
+  const livePagesMissingFromSitemap = [...records.values()]
+    .filter(({ finalUrl, status }) => (
+      status === 200
+      && typeof finalUrl === 'string'
+      && !exactEnglishSitemapLocs.has(finalUrl)
+    ));
+  const redirectAliasesIntoSitemap = [...records.values()]
+    .filter(({ finalUrl, status, url }) => (
+      status === 200
+      && typeof finalUrl === 'string'
+      && !exactEnglishSitemapLocs.has(url)
+      && exactEnglishSitemapLocs.has(finalUrl)
+    ));
+
   return {
     sitemapCount: sitemapUrls.length,
     sitemapCountPattern: 'Unique canonical <loc> entries in the English /en/sitemap.xml only',
-    unionCount: unionUrls.size,
-    unionCountPattern: 'Unique canonical URL union of English sitemap <loc> entries and completed crawl request URLs',
-    missingFromSitemapCount: [...unionUrls]
+    rawUnionCount: unionUrls.size,
+    rawUnionCountPattern: 'Unique canonical URL union of English sitemap <loc> entries and completed crawl request URLs regardless of final status',
+    rawMissingFromSitemapCount: [...unionUrls]
       .filter((url) => !sitemapSet.has(url)).length,
-    missingFromSitemapCountPattern: 'Union URLs minus exact English sitemap URLs',
+    rawMissingFromSitemapCountPattern: 'Raw requested-URL union across every final status minus exact canonical English sitemap URLs',
+    livePagesMissingFromSitemapCount: livePagesMissingFromSitemap.length,
+    livePagesMissingFromSitemapCountPattern: 'Completed crawl records where final status == 200 and the exact finalUrl string is absent from exact English sitemap <loc> strings',
+    redirectAliasesIntoSitemapCount: redirectAliasesIntoSitemap.length,
+    redirectAliasesIntoSitemapCountPattern: 'Completed crawl records where final status == 200, the exact requested URL string is absent from exact English sitemap <loc> strings, and the exact finalUrl string is present',
     families,
     changedFamilies: families
       .filter(({ delta }) => delta !== 0)
@@ -933,10 +1062,27 @@ async function initializeProgress({
     timeoutMs,
     userAgent,
   });
+  const englishSitemapLocs = [...new Set(extractLocValues(englishSitemapXml))]
+    .sort(compareStrings);
   const sitemapUrls = extractSitemapUrls(englishSitemapXml);
   if (sitemapUrls.length === 0) {
     throw new Error('English sitemap contained no canonical in-scope URLs');
   }
+  const englishGbSitemapUrl = `${ORIGIN}/en_gb/sitemap.xml`;
+  const englishGbSitemapXml = await fetchRequiredText(englishGbSitemapUrl, {
+    fetchImpl,
+    gate,
+    label: '/en_gb/sitemap.xml',
+    robots,
+    timeoutMs,
+    userAgent,
+  });
+  const englishGbSitemapLocs = [...new Set(extractLocValues(englishGbSitemapXml))]
+    .sort(compareStrings);
+  const siteNamespaces = buildNamespaceSummary({
+    englishGbSitemapLocs,
+    englishSitemapLocs,
+  });
 
   const additionalSeeds = KNOWN_CORRECTED_EDITORIAL_PATHS
     .map((pathname) => `${ORIGIN}${pathname}`);
@@ -956,9 +1102,10 @@ async function initializeProgress({
 
   const metadata = {
     type: 'metadata',
-    schemaVersion: 2,
+    schemaVersion: 3,
     origin: ORIGIN,
-    scopePrefixes: ['/en/', '/en-gb/'],
+    crawlScopePrefixes: CRAWL_SCOPE_PREFIXES,
+    siteNamespaces,
     requestPolicy: {
       concurrency,
       intervalMs,
@@ -975,6 +1122,7 @@ async function initializeProgress({
       label: 'English sitemap only',
       url: englishSitemapUrl,
       urls: sitemapUrls,
+      exactLocs: englishSitemapLocs,
       count: sitemapUrls.length,
       countPattern: 'Unique canonical <loc> entries in /en/sitemap.xml only',
     },
@@ -1000,6 +1148,7 @@ function buildCatalogOutput({ metadata, records, siteScope }) {
   const summary = summarizeUnion({
     classify,
     coverage: metadata.crawlPlan.coverage,
+    englishSitemapLocs: metadata.englishSitemap.exactLocs,
     records,
     sitemapUrls: metadata.englishSitemap.urls,
   });
@@ -1010,11 +1159,29 @@ function buildCatalogOutput({ metadata, records, siteScope }) {
   records.forEach(({ status }) => {
     statusCounts.set(status, (statusCounts.get(status) || 0) + 1);
   });
+  const namedExclusions = NAMED_EXCLUSION_RULES.map((rule) => {
+    const matchedCount = [...records.values()]
+      .filter((record) => classifyNamedExclusion(record) === rule.name)
+      .length;
+    return {
+      name: rule.name,
+      urlPattern: rule.urlPattern,
+      finalStatus: rule.finalStatus,
+      rationale: rule.rationale,
+      matchedRequestedUrlCount: matchedCount,
+      matchedRequestedUrlCountPattern: (
+        `Completed crawl records whose requested URL matches "${rule.urlPattern}" `
+        + `and final status == ${rule.finalStatus}`
+      ),
+      effect: 'Excluded from live page counts; retained in raw requested-URL counts and records.',
+    };
+  });
 
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     site: ORIGIN,
-    scopePrefixes: metadata.scopePrefixes,
+    siteNamespaces: metadata.siteNamespaces,
+    crawlScopePrefixes: metadata.crawlScopePrefixes,
     countRule: 'Every count is paired with the selector, set operation or classifier that produced it.',
     requestPolicy: metadata.requestPolicy,
     robots: {
@@ -1033,7 +1200,7 @@ function buildCatalogOutput({ metadata, records, siteScope }) {
       sources: metadata.seedSources,
     },
     crawlCoverage: {
-      statement: 'The /en-gb/ tree and non-sitemap /en/ links are enumerated. Route-detail, destination-landing and origin-landing English sitemap families are sampled.',
+      statement: 'The sitemap-absent /en-gb/ editorial tree and non-sitemap /en/ links are enumerated. The separate sitemap-covered /en_gb/ locale catalog is recorded but not crawled. Route-detail, destination-landing and origin-landing English /en/ sitemap families are sampled.',
       generatedSampleSize: metadata.crawlPlan.generatedSampleSize,
       generatedSampleSizePattern: 'Configured maximum evenly spaced sample per large generated English sitemap family',
       enumeratedFamilies: summary.families
@@ -1043,23 +1210,36 @@ function buildCatalogOutput({ metadata, records, siteScope }) {
         .filter(({ crawlMode }) => crawlMode === 'sampled')
         .map(({ family }) => family),
     },
+    namedExclusions,
     summary: {
       crawlRecordCount: records.size,
-      crawlRecordCountPattern: 'Unique requested URLs with one completed crawl record under the bounded crawl plan',
-      union: {
-        count: summary.unionCount,
-        countPattern: summary.unionCountPattern,
+      crawlRecordCountPattern: 'Unique requested URLs with one completed crawl record of any final status under the bounded crawl plan',
+      livePagesOmittedByEnglishSitemap: {
+        count: summary.livePagesMissingFromSitemapCount,
+        countPattern: summary.livePagesMissingFromSitemapCountPattern,
+        statusScope: 'Final status == 200 only.',
       },
-      deltaAgainstEnglishSitemap: {
-        count: summary.missingFromSitemapCount,
-        countPattern: summary.missingFromSitemapCountPattern,
-        scope: 'This is a delta against the English /en/sitemap.xml only, not against the 72-locale site floor.',
+      redirectAliasesIntoEnglishSitemap: {
+        count: summary.redirectAliasesIntoSitemapCount,
+        countPattern: summary.redirectAliasesIntoSitemapCountPattern,
+        statusScope: 'Final status == 200 only.',
+      },
+      rawRequestedUrlUnion: {
+        count: summary.rawUnionCount,
+        countPattern: summary.rawUnionCountPattern,
+        statusScope: 'Includes every final status recorded by the crawl.',
+      },
+      rawRequestedUrlDeltaAgainstEnglishSitemap: {
+        count: summary.rawMissingFromSitemapCount,
+        countPattern: summary.rawMissingFromSitemapCountPattern,
+        statusScope: 'Includes every final status recorded by the crawl.',
+        scope: 'This is a raw requested-URL delta against the English /en/sitemap.xml only, not a live-page count and not a delta against the 72-locale site floor.',
       },
       knownStrays: {
         expectedCount: knownStraySet.size,
         expectedCountPattern: metadata.knownStrayCountPattern,
         foundCount: foundKnownStrays.length,
-        foundCountPattern: 'Known stray URLs with a completed union record',
+        foundCountPattern: 'Known stray requested URLs with a completed crawl record of any final status',
         missingCount: knownStraySet.size - foundKnownStrays.length,
         missingCountPattern: 'expectedCount - foundCount',
       },
@@ -1078,15 +1258,15 @@ function buildCatalogOutput({ metadata, records, siteScope }) {
         crawlRecordCountPattern: family.crawlRecordCountPattern,
         englishSitemapCount: family.sitemapCount,
         englishSitemapCountPattern: family.sitemapCountPattern,
-        unionCount: family.unionCount,
-        unionCountPattern: family.unionCountPattern,
-        deltaAgainstEnglishSitemap: family.delta,
-        deltaAgainstEnglishSitemapPattern: family.deltaPattern,
+        rawUnionCount: family.unionCount,
+        rawUnionCountPattern: family.unionCountPattern,
+        rawDeltaAgainstEnglishSitemap: family.delta,
+        rawDeltaAgainstEnglishSitemapPattern: family.deltaPattern,
         familyPattern: family.countPattern,
       })),
       changedFamilies: summary.changedFamilies,
       changedFamilyCount: summary.changedFamilies.length,
-      changedFamilyCountPattern: 'Family rows where union count minus English sitemap count is nonzero',
+      changedFamilyCountPattern: 'Family rows where raw union count across every final status minus English sitemap count is nonzero',
     },
     records: [...records.values()]
       .sort((a, b) => compareStrings(a.url, b.url))
@@ -1094,7 +1274,13 @@ function buildCatalogOutput({ metadata, records, siteScope }) {
         links,
         type,
         ...record
-      }) => record),
+      }) => {
+        const namedExclusion = classifyNamedExclusion(record);
+        return {
+          ...record,
+          ...(namedExclusion ? { namedExclusion } : {}),
+        };
+      }),
   };
 }
 
@@ -1257,10 +1443,10 @@ async function runCrawl(options) {
   process.stdout.write(
     `${[
       'Crawl frontier exhausted.',
-      `pattern=${output.summary.union.countPattern}`,
-      `union=${output.summary.union.count}`,
-      `pattern=${output.summary.deltaAgainstEnglishSitemap.countPattern}`,
-      `outside_english_sitemap=${output.summary.deltaAgainstEnglishSitemap.count}`,
+      `pattern=${output.summary.livePagesOmittedByEnglishSitemap.countPattern}`,
+      `live_pages_outside_english_sitemap=${output.summary.livePagesOmittedByEnglishSitemap.count}`,
+      `pattern=${output.summary.rawRequestedUrlDeltaAgainstEnglishSitemap.countPattern}`,
+      `raw_requested_url_delta=${output.summary.rawRequestedUrlDeltaAgainstEnglishSitemap.count}`,
       `changed_families=${output.summary.changedFamilies.join(',') || 'none'}`,
     ].join(' ')}\n`,
   );
