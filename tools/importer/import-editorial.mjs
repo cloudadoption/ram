@@ -13,6 +13,7 @@ import { parseHTML } from 'linkedom';
 import { launch } from 'puppeteer-core';
 
 import {
+  buildDaDocument,
   classifyEditorialUrl,
   findImportProfile,
   transformEditorialDocument,
@@ -27,7 +28,7 @@ const CHROME_CANDIDATES = [
 ].filter(Boolean);
 
 function parseArguments(argv) {
-  const options = { phase: 'all' };
+  const options = { phase: 'all', format: 'local' };
   for (let index = 0; index < argv.length; index += 1) {
     const name = argv[index];
     if (!name.startsWith('--')) throw new Error(`Unexpected argument: ${name}`);
@@ -39,6 +40,12 @@ function parseArguments(argv) {
   if (!options.url) throw new Error('--url is required');
   if (!['all', 'analyze', 'map', 'import'].includes(options.phase)) {
     throw new Error('--phase must be all, analyze, map, or import');
+  }
+  if (!['local', 'da'].includes(options.format)) {
+    throw new Error('--format must be local or da');
+  }
+  if (options.format === 'da' && !options['media-base']) {
+    throw new Error('--media-base is required when --format is da');
   }
   return options;
 }
@@ -97,6 +104,18 @@ async function captureLive(url, workDir) {
     await page.setViewport({ width: 1440, height: 900, deviceScaleFactor: 1 });
     await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
     await settle(page);
+    await page.evaluate(() => {
+      document.querySelectorAll('body *').forEach((element) => {
+        const background = getComputedStyle(element).backgroundImage;
+        const match = background.match(/^url\(["']?(.+?)["']?\)$/);
+        if (match) {
+          element.setAttribute(
+            'data-import-background-image',
+            new URL(match[1], document.baseURI).href,
+          );
+        }
+      });
+    });
     const html = await page.content();
     await page.screenshot({ path: join(workDir, 'screenshot.png'), fullPage: true });
     return html;
@@ -170,10 +189,13 @@ async function writeMappingArtifacts(result, workDir) {
   }));
 }
 
-function buildImageSources(downloadedImages, slug) {
+function buildImageSources(downloadedImages, slug, mediaBase) {
+  const prefix = mediaBase
+    ? `${mediaBase.replace(/\/$/, '')}/${slug}/`
+    : `./images/${slug}/`;
   return Object.fromEntries(downloadedImages.map(({ source, file }) => [
     source,
-    `./images/${slug}/${file}`,
+    `${prefix}${file}`,
   ]));
 }
 
@@ -242,7 +264,11 @@ async function main() {
     return;
   }
 
-  const imageSources = buildImageSources(metadata.downloadedImages, slug);
+  const imageSources = buildImageSources(
+    metadata.downloadedImages,
+    slug,
+    options['media-base'],
+  );
   const result = transformEditorialDocument(sourceHtml, { url, imageSources });
   if (options.phase === 'all' || options.phase === 'map') {
     await writeMappingArtifacts(result, workDir);
@@ -254,7 +280,10 @@ async function main() {
 
   await mkdir(dirname(output), { recursive: true });
   await copyOutputImages(metadata.downloadedImages, workDir, output, slug);
-  await writeFile(output, `${result.html}\n`);
+  const outputHtml = options.format === 'da'
+    ? buildDaDocument(result.html)
+    : result.html;
+  await writeFile(output, `${outputHtml}\n`);
   await writeFile(join(workDir, 'import-report.json'), `${JSON.stringify({
     sourceUrl: url,
     output,

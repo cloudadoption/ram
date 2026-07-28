@@ -5,20 +5,21 @@ const normalizePath = (value) => {
 
 export function normalizeEditorialHref(href, editorialPaths = []) {
   if (!href) return '';
+  const value = href.trim();
 
   let parsed;
   try {
-    parsed = new URL(href, 'https://www.royalairmaroc.com');
+    parsed = new URL(value, 'https://www.royalairmaroc.com');
   } catch {
-    return href;
+    return value;
   }
 
-  const isAbsolute = /^[a-z][a-z\d+.-]*:/i.test(href);
-  if (isAbsolute && parsed.origin !== 'https://www.royalairmaroc.com') return href;
+  const isAbsolute = /^[a-z][a-z\d+.-]*:/i.test(value);
+  if (isAbsolute && parsed.origin !== 'https://www.royalairmaroc.com') return value;
 
   const pathname = normalizePath(parsed.pathname);
   const match = pathname.match(/^\/(?:en|en-GB|en-gb)(\/.*)$/);
-  if (!match || !editorialPaths.includes(normalizePath(match[1]))) return href;
+  if (!match || !editorialPaths.includes(normalizePath(match[1]))) return value;
 
   return `/en-gb${match[1]}${parsed.search}${parsed.hash}`;
 }

@@ -1,3 +1,11 @@
+@font-face {
+  font-family: ram-loyalty-heading;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://onesait-travel.azureedge.net/statics/RAM/fonts/museo/museo700.woff2') format('woff2');
+}
+
 .columns > div {
   display: flex;
   flex-direction: column;
@@ -17,6 +25,439 @@
 
 .columns > div > .columns-img-col img {
   display: block;
+}
+
+main .columns.loyalty-intro,
+main .columns.loyalty-heading,
+main .columns.loyalty-footnote,
+main .columns.loyalty-cta,
+main .columns.loyalty-content {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1253px;
+  margin-inline: auto;
+  color: #1a1717;
+  font-family: var(--ram-page-font-family);
+}
+
+main .columns-container:has(.columns[class*="loyalty-"]) .columns-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+main .columns-container:has(.columns.loyalty-intro),
+main .columns-container:has(.columns.loyalty-cta) {
+  margin-block: 0;
+}
+
+main .columns-container:has(.columns.loyalty-heading) {
+  margin-block: 24px 0;
+}
+
+main .columns-container:has(.columns.loyalty-footnote) {
+  margin-block: 24px 16px;
+}
+
+main .columns-container:has(.columns.loyalty-content) {
+  margin-block: 49px 0;
+}
+
+main .columns-container:has(.columns.loyalty-content)
+  + .columns-container:has(.columns.loyalty-content) {
+  margin-block-start: 0;
+}
+
+main .columns.loyalty-intro > .columns-loyalty-copy,
+main .columns.loyalty-heading > .columns-loyalty-copy,
+main .columns.loyalty-footnote > .columns-loyalty-copy,
+main .columns.loyalty-cta > .columns-loyalty-copy {
+  flex-direction: column;
+}
+
+main .columns.loyalty-intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 236px;
+  text-align: center;
+}
+
+main .columns.loyalty-intro > .columns-loyalty-copy {
+  align-items: center;
+  gap: 8px;
+}
+
+main .columns.loyalty-heading h2 {
+  margin: 0;
+  font-family: var(--ram-page-font-family);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 32px;
+}
+
+main .columns.loyalty-footnote p {
+  margin: 0;
+}
+
+main .columns.loyalty-intro h2 {
+  margin: 0;
+  font-family: var(--ram-page-font-family);
+  font-size: 27px;
+  font-weight: 300;
+  line-height: 32px;
+}
+
+main .columns.loyalty-intro h2 + h2 {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+main .columns.loyalty-intro p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+main .columns.loyalty-intro .columns-loyalty-copy > h2 + h2 + p {
+  display: none;
+}
+
+main .columns.loyalty-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 97px;
+  text-align: center;
+}
+
+main .columns.loyalty-cta.secondary {
+  min-height: 120px;
+}
+
+main .columns.loyalty-cta a:any-link,
+main .columns.loyalty-content a:any-link {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  background: #c20831;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 18px;
+  text-decoration: none;
+}
+
+main .columns.loyalty-content .columns-loyalty-layout {
+  position: relative;
+  display: grid;
+  gap: 0;
+  align-content: start;
+  box-sizing: border-box;
+  padding: 30px 10.5px;
+}
+
+main .columns.loyalty-content.new-benefits {
+  min-height: 674px;
+}
+
+main .columns.loyalty-content.flyer-system {
+  min-height: 582px;
+  transform: translateY(-1px);
+}
+
+main .columns.loyalty-content.silver-upgrade {
+  min-height: 626px;
+}
+
+main .columns.loyalty-content .columns-loyalty-picture,
+main .columns.loyalty-content .columns-loyalty-picture img {
+  display: block;
+  width: 100%;
+}
+
+main .columns.loyalty-content .columns-loyalty-picture img {
+  height: auto;
+}
+
+main .columns.loyalty-content.silver-upgrade .columns-loyalty-picture img {
+  max-width: 801px;
+}
+
+main .columns.loyalty-content.flyer-system .columns-loyalty-layout {
+  transform: translateY(1px);
+}
+
+main .columns.loyalty-content.flyer-system .columns-loyalty-picture img {
+  transform: translateY(-1px);
+}
+
+main .columns.loyalty-footnote,
+main .columns.loyalty-cta.secondary {
+  transform: translateY(-1px);
+}
+
+main .columns.loyalty-content .columns-loyalty-copy {
+  position: relative;
+  z-index: 1;
+  display: block;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+}
+
+main .columns.loyalty-content.new-benefits .columns-loyalty-copy {
+  height: 417px;
+}
+
+main .columns.loyalty-content.flyer-system .columns-loyalty-copy {
+  height: 320px;
+}
+
+main .columns.loyalty-content.silver-upgrade .columns-loyalty-copy {
+  height: 330px;
+}
+
+main .columns.loyalty-content .columns-loyalty-copy > p:first-child {
+  margin: 0 0 16px;
+  color: #c2002f;
+  font-family: ram-loyalty-heading, arial, sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 43.2px;
+  text-align: center;
+}
+
+main .columns.loyalty-content .columns-loyalty-copy > h2 {
+  height: 0;
+  margin: 56px 0 0;
+}
+
+main .columns.loyalty-content .columns-loyalty-copy > p:not(:first-child) {
+  margin: 28px 0 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 16.8px;
+}
+
+main .columns.loyalty-content .columns-loyalty-copy > a:any-link {
+  display: flex;
+  width: 305px;
+  min-height: 40px;
+  margin: 30px auto 0;
+  padding: 6.864px 45.712px;
+  background: #c2002f;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+main .columns.loyalty-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 96px;
+  text-align: center;
+}
+
+main .columns.loyalty-footnote {
+  min-height: 34px;
+  font-size: 10px;
+  line-height: 17px;
+}
+
+@media (width >= 600px) {
+  main .columns-container:has(.columns.loyalty-content.new-benefits) {
+    margin-block-start: 48px;
+  }
+
+  main .columns.loyalty-intro,
+  main .columns.loyalty-heading,
+  main .columns.loyalty-footnote,
+  main .columns.loyalty-cta,
+  main .columns.loyalty-content {
+    width: 100%;
+  }
+
+  main .columns.loyalty-content.flyer-system,
+  main .columns.loyalty-content.flyer-system .columns-loyalty-layout,
+  main .columns.loyalty-content.flyer-system .columns-loyalty-picture img,
+  main .columns.loyalty-footnote,
+  main .columns.loyalty-cta.secondary {
+    transform: none;
+  }
+
+  main .columns.loyalty-intro {
+    min-height: 172px;
+  }
+
+  main .columns.loyalty-cta.secondary {
+    min-height: 97px;
+  }
+
+  main .columns.loyalty-content.new-benefits {
+    min-height: 829px;
+  }
+
+  main .columns.loyalty-content.flyer-system {
+    min-height: 789px;
+  }
+
+  main .columns.loyalty-content.silver-upgrade {
+    min-height: 814px;
+  }
+
+  main .columns.loyalty-content.new-benefits .columns-loyalty-copy {
+    height: 280px;
+  }
+
+  main .columns.loyalty-content.flyer-system .columns-loyalty-copy {
+    height: 226px;
+  }
+
+  main .columns.loyalty-content.silver-upgrade .columns-loyalty-copy {
+    height: 220px;
+  }
+
+  main .columns.loyalty-heading {
+    min-height: 48px;
+  }
+
+  main .columns.loyalty-footnote {
+    min-height: 17px;
+    line-height: 17px;
+  }
+
+}
+
+@media (width >= 1200px) {
+  main .columns-container:has(.columns.loyalty-heading) {
+    margin-block-start: 23px;
+  }
+
+  main .columns-container:has(.columns.loyalty-content.new-benefits) {
+    margin-block-start: 49px;
+  }
+
+  main .columns.loyalty-content.silver-upgrade {
+    transform: translateY(-1px);
+  }
+
+  main .columns.loyalty-content {
+    width: calc(100% - 208px);
+  }
+
+  main .columns.loyalty-intro,
+  main .columns.loyalty-heading,
+  main .columns.loyalty-footnote,
+  main .columns.loyalty-cta,
+  main .columns.loyalty-content:not(.new-benefits, .flyer-system, .silver-upgrade) {
+    width: calc(100% - 187px);
+  }
+
+  main .columns.loyalty-intro {
+    min-height: 151px;
+  }
+
+  main .columns.loyalty-content .columns-loyalty-layout {
+    align-items: center;
+    padding: 30px 0;
+    min-height: 450px;
+  }
+
+  main .columns.loyalty-content.image-left .columns-loyalty-layout {
+    grid-template-columns: 65% 35%;
+  }
+
+  main .columns.loyalty-content.image-right .columns-loyalty-layout {
+    grid-template-columns: 35% 65%;
+  }
+
+  main .columns.loyalty-content.new-benefits,
+  main .columns.loyalty-content.new-benefits .columns-loyalty-layout {
+    min-height: 506px;
+  }
+
+  main .columns.loyalty-content.flyer-system,
+  main .columns.loyalty-content.flyer-system .columns-loyalty-layout {
+    min-height: 518px;
+  }
+
+  main .columns.loyalty-content.silver-upgrade,
+  main .columns.loyalty-content.silver-upgrade .columns-loyalty-layout {
+    min-height: 594px;
+  }
+
+  main .columns.loyalty-content .columns-loyalty-copy {
+    width: 573px;
+    margin: 0;
+  }
+
+  main .columns.loyalty-content.image-left .columns-loyalty-media {
+    grid-column: 1;
+  }
+
+  main .columns.loyalty-content.image-left .columns-loyalty-copy {
+    grid-column: 2;
+    margin-left: -142px;
+    padding: 50px 0 50px 50px;
+  }
+
+  main .columns.loyalty-content.image-right .columns-loyalty-media {
+    grid-column: 2;
+  }
+
+  main .columns.loyalty-content.image-right .columns-loyalty-copy {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 50px 50px 50px 0;
+  }
+
+  main .columns.loyalty-content .columns-loyalty-picture img {
+    object-fit: cover;
+  }
+
+  main .columns.loyalty-content.new-benefits .columns-loyalty-picture img {
+    height: 446px;
+  }
+
+  main .columns.loyalty-content.flyer-system .columns-loyalty-picture img {
+    height: 458px;
+  }
+
+  main .columns.loyalty-content.silver-upgrade .columns-loyalty-picture img {
+    height: 534px;
+  }
+
+  main .columns.loyalty-content .columns-loyalty-copy > p:first-child {
+    margin: 0;
+    text-align: left;
+  }
+
+  main .columns.loyalty-content .columns-loyalty-copy > h2 {
+    margin: 0;
+  }
+
+  main .columns.loyalty-content .columns-loyalty-copy > a:any-link {
+    width: 262px;
+    margin: 30px 0 0;
+    padding-inline: 24px;
+  }
+
+  main .columns.loyalty-content.new-benefits .columns-loyalty-copy {
+    height: 326px;
+  }
+
+  main .columns.loyalty-content.flyer-system .columns-loyalty-copy {
+    height: 338px;
+  }
+
+  main .columns.loyalty-content.silver-upgrade .columns-loyalty-copy {
+    height: 414px;
+  }
 }
 
 @media (width >= 900px) {

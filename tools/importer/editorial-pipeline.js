@@ -13,6 +13,10 @@ const mappings = JSON.parse(readFileSync(mappingFile, 'utf8'));
 const normalizeUrl = (value) => value.replace(/\/$/, '');
 const normalizeSpace = (value = '') => value.replace(/\s+/g, ' ').trim();
 
+export function buildDaDocument(mainHtml) {
+  return `<body><header></header><main>${mainHtml}</main><footer></footer></body>`;
+}
+
 export function classifyEditorialUrl(url, catalog) {
   const normalized = normalizeUrl(url);
   const parsed = new URL(normalized);

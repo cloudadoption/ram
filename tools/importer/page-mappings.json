@@ -207,6 +207,296 @@
       ]
     },
     {
+      "url": "https://www.royalairmaroc.com/en-gb/blue-benefits",
+      "template": "feature-story",
+      "path": "/en-gb/blue-benefits",
+      "editorialPaths": [
+        "/safar-flyer-and-oneworld",
+        "/silver-benefits"
+      ],
+      "blocks": [
+        {
+          "name": "hero loyalty-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"135464\"] #food-bg"
+          ],
+          "rows": [
+            {
+              "label": "Image",
+              "cells": [
+                {
+                  "kind": "background-picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"135464\"] #food-bg"
+                  ],
+                  "loading": "eager"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-intro",
+          "instances": [
+            "[data-analytics-asset-id=\"135504\"]"
+          ],
+          "rows": [
+            {
+              "label": "Content",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"135504\"]"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "cards loyalty-benefits",
+          "instances": [
+            "[data-analytics-asset-id=\"135513\"]",
+            "[data-analytics-asset-id=\"135570\"]",
+            "[data-analytics-asset-id=\"135599\"]"
+          ],
+          "rows": [
+            {
+              "label": "Benefit",
+              "repeat": [
+                "[data-analytics-asset-id=\"135513\"] .col-12.col-md-4, [data-analytics-asset-id=\"135570\"] .col-12.col-md-4, [data-analytics-asset-id=\"135599\"] .col-12.col-md-4"
+              ],
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "element",
+                  "tag": "h3",
+                  "selectors": [
+                    ".feature-title"
+                  ]
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    ":scope"
+                  ],
+                  "excludeSelectors": [
+                    ".feature-icon-div",
+                    ".feature-title"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-cta primary",
+          "instances": [
+            "[data-analytics-asset-id=\"135618\"]"
+          ],
+          "rows": [
+            {
+              "label": "Action",
+              "cells": [
+                {
+                  "kind": "link",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"135618\"] a[href]"
+                  ],
+                  "href": "/en-gb/register",
+                  "textSelectors": [
+                    "[data-analytics-asset-id=\"135618\"] button"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-right new-benefits",
+          "instances": [
+            "[data-analytics-asset-id=\"135627\"]"
+          ],
+          "rows": [
+            {
+              "label": "Feature",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"135627\"] img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"135627\"] .text-overlapped"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-left flyer-system",
+          "instances": [
+            "[data-analytics-asset-id=\"135673\"]"
+          ],
+          "rows": [
+            {
+              "label": "Feature",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"135673\"] img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"135673\"] .text-overlapped"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-right silver-upgrade",
+          "instances": [
+            "[data-analytics-asset-id=\"135692\"]"
+          ],
+          "rows": [
+            {
+              "label": "Feature",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"135692\"] img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"135692\"] .text-overlapped"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-heading",
+          "instances": [
+            "[data-analytics-asset-id=\"135720\"]"
+          ],
+          "rows": [
+            {
+              "label": "Content",
+              "cells": [
+                {
+                  "kind": "element",
+                  "tag": "h2",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"135720\"] center"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "cards loyalty-benefits compact",
+          "instances": [
+            "[data-analytics-asset-id=\"135729\"]"
+          ],
+          "rows": [
+            {
+              "label": "Benefit",
+              "repeat": [
+                "[data-analytics-asset-id=\"135729\"] .col-12.col-md-4"
+              ],
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "element",
+                  "tag": "h3",
+                  "selectors": [
+                    ".feature-title"
+                  ]
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    ".f-fw-l"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-footnote",
+          "instances": [
+            "[data-analytics-asset-id=\"135768\"]"
+          ],
+          "rows": [
+            {
+              "label": "Content",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"135768\"] .seat-content-body"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns loyalty-cta secondary",
+          "instances": [
+            "[data-analytics-asset-id=\"135777\"]"
+          ],
+          "rows": [
+            {
+              "label": "Action",
+              "cells": [
+                {
+                  "kind": "link",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"135777\"] a[href]"
+                  ],
+                  "textSelectors": [
+                    "[data-analytics-asset-id=\"135777\"] button"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "url": "https://www.royalairmaroc.com/en-gb/seats",
       "template": "standard-article",
       "path": "/en-gb/seats",
