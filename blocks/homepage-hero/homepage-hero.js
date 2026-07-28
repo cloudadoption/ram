@@ -440,28 +440,45 @@ function readValidationMessages(rows) {
   return messages;
 }
 
-function buildHeroMedia(desktopUrl, mobileUrl, copyCell) {
+function prepareHeroPicture(cell, variant, eager = true) {
+  let picture = cell?.querySelector('picture');
+
+  if (!picture) {
+    const asset = cell?.querySelector('a[href]');
+    if (asset) {
+      picture = document.createElement('picture');
+      const legacyImage = document.createElement('img');
+      legacyImage.alt = 'Royal Air Maroc';
+      legacyImage.src = asset.href;
+      picture.append(legacyImage);
+    }
+  }
+
+  const image = picture?.querySelector('img');
+  if (!picture || !image) {
+    throw new Error(`Homepage hero requires an authored ${variant} image`);
+  }
+
+  picture.classList.add('homepage-hero-picture', `is-${variant}`);
+  image.decoding = 'async';
+  image.fetchPriority = eager ? 'high' : 'auto';
+  image.loading = eager ? 'eager' : 'lazy';
+  return picture;
+}
+
+function buildHeroMedia(desktopCell, mobileCell, copyCell) {
   const media = createElement('div', 'homepage-hero-media');
-  const picture = createElement('picture', 'homepage-hero-picture');
-  const source = createElement('source');
-  const image = createElement('img');
   const copy = createElement('div', 'homepage-hero-copy');
   const heading = copyCell.querySelector('h1, h2, h3');
   const subtitle = [...copyCell.querySelectorAll('p')].find((paragraph) => !paragraph.querySelector('a'));
   const cta = copyCell.querySelector('a[href]');
+  const desktop = window.matchMedia('(min-width: 1200px)').matches;
+  const desktopPicture = prepareHeroPicture(desktopCell, 'desktop', desktop);
+  const mobilePicture = prepareHeroPicture(mobileCell, 'mobile', !desktop);
 
   if (!heading || !subtitle || !cta) {
     throw new Error('Homepage hero copy requires a heading, subtitle, and CTA link');
   }
-
-  source.media = '(min-width: 1200px)';
-  source.srcset = desktopUrl;
-  image.alt = 'Royal Air Maroc';
-  image.decoding = 'async';
-  image.fetchPriority = 'high';
-  image.loading = 'eager';
-  image.src = mobileUrl;
-  picture.append(source, image);
 
   heading.className = 'homepage-hero-title';
   heading.id = heading.id || 'homepage-hero-title';
@@ -469,7 +486,7 @@ function buildHeroMedia(desktopUrl, mobileUrl, copyCell) {
   cta.className = 'homepage-hero-cta';
   cta.removeAttribute('title');
   copy.append(heading, subtitle, cta);
-  media.append(picture, copy);
+  media.append(desktopPicture, mobilePicture, copy);
   return media;
 }
 
@@ -480,15 +497,13 @@ function buildHeroMedia(desktopUrl, mobileUrl, copyCell) {
 export default function decorate(block) {
   const [contentRow, emptyRow, ...validationRows] = [...block.children];
   const [desktopCell, mobileCell, copyCell] = contentRow ? [...contentRow.children] : [];
-  const desktopAsset = desktopCell?.querySelector('a[href]');
-  const mobileAsset = mobileCell?.querySelector('a[href]');
   const emptyMessage = emptyRow?.textContent.trim();
 
-  if (!desktopAsset || !mobileAsset || !copyCell || !emptyMessage) {
+  if (!desktopCell || !mobileCell || !copyCell || !emptyMessage) {
     throw new Error('Homepage hero requires desktop and mobile assets, hero copy, and an empty state');
   }
 
-  const media = buildHeroMedia(desktopAsset.href, mobileAsset.href, copyCell);
+  const media = buildHeroMedia(desktopCell, mobileCell, copyCell);
   const validationMessages = readValidationMessages(validationRows);
   const search = buildFlightSearch(emptyMessage, validationMessages);
   block.replaceChildren(media, search);

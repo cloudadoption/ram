@@ -54,6 +54,10 @@ main .homepage-hero .homepage-hero-picture img {
   object-position: center;
 }
 
+main .homepage-hero .homepage-hero-picture.is-desktop {
+  display: none;
+}
+
 main .homepage-hero .homepage-hero-copy {
   position: absolute;
   inset: auto 19px 0 16px;
@@ -423,6 +427,14 @@ main .homepage-hero .flight-search-sr-only {
 @media (width >= 1200px) {
   main .homepage-hero {
     min-height: 580px;
+  }
+
+  main .homepage-hero .homepage-hero-picture.is-desktop {
+    display: block;
+  }
+
+  main .homepage-hero .homepage-hero-picture.is-mobile {
+    display: none;
   }
 
   main .homepage-hero .homepage-hero-media {

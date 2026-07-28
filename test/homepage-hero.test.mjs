@@ -63,6 +63,10 @@ const testSource = source
     'export function panelFields(panelKey)',
   )
   .replace(
+    'function prepareHeroPicture(cell, variant, eager = true)',
+    'export function prepareHeroPicture(cell, variant, eager = true)',
+  )
+  .replace(
     'function swapFlightSearchValues(values)',
     'export function swapFlightSearchValues(values)',
   );
@@ -75,6 +79,7 @@ const {
   createPanelSubTabs,
   getPanelSubTabs,
   panelFields,
+  prepareHeroPicture,
   setActiveFlightSearchPanel,
   submitFlightSearch,
   swapFlightSearchValues,
@@ -223,6 +228,93 @@ test('uses the Flight route and Flight number sub-tab row from live', () => {
     plainObject(getPanelSubTabs('status')),
     ['Flight route', 'Flight number'],
   );
+});
+
+test('keeps the authored hero picture and its alternative text', () => {
+  const classes = new Set();
+  const image = {
+    alt: 'Authored hero alternative text',
+    decoding: '',
+    fetchPriority: '',
+    loading: '',
+  };
+  const picture = {
+    classList: {
+      add: (...names) => names.forEach((name) => classes.add(name)),
+    },
+    querySelector: (selector) => (selector === 'img' ? image : null),
+  };
+  const cell = {
+    querySelector: (selector) => (selector === 'picture' ? picture : null),
+  };
+
+  const result = prepareHeroPicture(cell, 'desktop');
+
+  assert.equal(result, picture);
+  assert.equal(classes.has('homepage-hero-picture'), true);
+  assert.equal(classes.has('is-desktop'), true);
+  assert.equal(image.alt, 'Authored hero alternative text');
+  assert.equal(image.decoding, 'async');
+  assert.equal(image.fetchPriority, 'high');
+  assert.equal(image.loading, 'eager');
+});
+
+test('defers the inactive authored hero picture', () => {
+  const image = {
+    alt: 'Authored hero alternative text',
+    decoding: '',
+    fetchPriority: '',
+    loading: '',
+  };
+  const picture = {
+    classList: {
+      add: () => {},
+    },
+    querySelector: (selector) => (selector === 'img' ? image : null),
+  };
+  const cell = {
+    querySelector: (selector) => (selector === 'picture' ? picture : null),
+  };
+
+  const result = prepareHeroPicture(cell, 'mobile', false);
+
+  assert.equal(result, picture);
+  assert.equal(image.alt, 'Authored hero alternative text');
+  assert.equal(image.decoding, 'async');
+  assert.equal(image.fetchPriority, 'auto');
+  assert.equal(image.loading, 'lazy');
+});
+
+test('keeps the linked hero asset working until authored content is published', () => {
+  const classes = new Set();
+  const image = {
+    alt: '',
+    decoding: '',
+    fetchPriority: '',
+    loading: '',
+    src: '',
+  };
+  const picture = {
+    classList: {
+      add: (...names) => names.forEach((name) => classes.add(name)),
+    },
+    querySelector: (selector) => (selector === 'img' ? image : null),
+    append: () => {},
+  };
+  context.document.createElement = (tagName) => (tagName === 'picture' ? picture : image);
+  const cell = {
+    querySelector: (selector) => (
+      selector === 'a[href]' ? { href: '/blocks/homepage-hero/assets/hero-mobile.jpg' } : null
+    ),
+  };
+
+  const result = prepareHeroPicture(cell, 'mobile');
+
+  assert.equal(result, picture);
+  assert.equal(image.src, '/blocks/homepage-hero/assets/hero-mobile.jpg');
+  assert.equal(image.alt, 'Royal Air Maroc');
+  assert.equal(classes.has('homepage-hero-picture'), true);
+  assert.equal(classes.has('is-mobile'), true);
 });
 
 test('swaps origin and destination locally with the live accessible name', () => {
