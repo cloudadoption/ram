@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { access, readFile } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 const read = (path) => readFile(new URL(path, import.meta.url), 'utf8');
@@ -10,18 +10,25 @@ test('keeps hero and booking launchpad implementation independent', async () => 
     heroCSS,
     launchpadJS,
     launchpadCSS,
+    legacyJS,
+    legacyCSS,
   ] = await Promise.all([
     read('../blocks/hero/hero.js'),
     read('../blocks/hero/hero.css'),
     read('../blocks/booking-launchpad/booking-launchpad.js'),
     read('../blocks/booking-launchpad/booking-launchpad.css'),
+    read('../blocks/homepage-hero/homepage-hero.js'),
+    read('../blocks/homepage-hero/homepage-hero.css'),
   ]);
 
   assert.doesNotMatch(heroJS, /booking-launchpad|flight-search/);
   assert.doesNotMatch(heroCSS, /booking-launchpad|flight-search/);
   assert.doesNotMatch(launchpadJS, /homepage-hero|hero-homepage/);
   assert.doesNotMatch(launchpadCSS, /homepage-hero|hero-homepage/);
-  await assert.rejects(access(new URL('../blocks/homepage-hero', import.meta.url)));
+  assert.match(legacyJS, /hero homepage/);
+  assert.match(legacyJS, /booking-launchpad/);
+  assert.doesNotMatch(legacyJS, /flight-search|prepareHomepagePicture/);
+  assert.match(legacyCSS, /Transition bridge has no styles/);
 });
 
 test('provides combined and independently placeable authored fixtures', async () => {
