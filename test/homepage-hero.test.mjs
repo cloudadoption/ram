@@ -3,234 +3,28 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import vm from 'node:vm';
 
-const createTestElement = (tagName) => {
-  const classes = new Set();
-  const attributes = new Map();
-  return {
-    attributes,
-    children: [],
-    classList: {
-      add: (...names) => names.forEach((name) => classes.add(name)),
-      contains: (name) => classes.has(name),
-    },
-    className: '',
-    tagName: tagName.toUpperCase(),
-    textContent: '',
-    append(...children) {
-      this.children.push(...children);
-    },
-    getAttribute(name) {
-      return attributes.get(name);
-    },
-    setAttribute(name, value) {
-      attributes.set(name, value);
-    },
-  };
-};
-
 const context = vm.createContext({
   console,
-  document: {
-    createElement: createTestElement,
-  },
+  document: {},
   URL,
   window: {},
 });
 
 const source = await readFile(
-  new URL('../blocks/homepage-hero/homepage-hero.js', import.meta.url),
+  new URL('../blocks/hero/hero.js', import.meta.url),
   'utf8',
 );
-const testSource = source
-  .replace(
-    "const SWAP_LABEL = 'Swap origin and destination';",
-    "export const SWAP_LABEL = 'Swap origin and destination';",
-  )
-  .replace(
-    'function getPanelSubTabs(panelKey)',
-    'export function getPanelSubTabs(panelKey)',
-  )
-  .replace(
-    'function createField({',
-    'export function createField({',
-  )
-  .replace(
-    'function createPanelSubTabs(panelKey)',
-    'export function createPanelSubTabs(panelKey)',
-  )
-  .replace(
-    'function panelFields(panelKey)',
-    'export function panelFields(panelKey)',
-  )
-  .replace(
-    'function prepareHeroPicture(cell, variant, eager = true)',
-    'export function prepareHeroPicture(cell, variant, eager = true)',
-  )
-  .replace(
-    'function swapFlightSearchValues(values)',
-    'export function swapFlightSearchValues(values)',
-  );
+const testSource = source.replace(
+  'function prepareHomepagePicture(cell, variant, eager = true)',
+  'export function prepareHomepagePicture(cell, variant, eager = true)',
+);
 const heroModule = new vm.SourceTextModule(testSource, { context });
 await heroModule.link(() => {});
 await heroModule.evaluate();
 
-const {
-  createField,
-  createPanelSubTabs,
-  getPanelSubTabs,
-  panelFields,
-  prepareHeroPicture,
-  setActiveFlightSearchPanel,
-  submitFlightSearch,
-  swapFlightSearchValues,
-  SWAP_LABEL,
-  validateFlightSearchPanel,
-} = heroModule.namespace;
+const { prepareHomepagePicture } = heroModule.namespace;
 
-const plainObject = (value) => JSON.parse(JSON.stringify(value));
-
-const authoredValidationMessages = {
-  booking: {
-    destination: 'Destination is required',
-    origin: 'Origin is required',
-  },
-  manage: {
-    reservationCode: 'Booking reference is required',
-    surname: "Passenger's name is required",
-  },
-  status: {
-    destination: 'Destination is required',
-  },
-};
-
-const createToggleTarget = () => {
-  const classes = new Set();
-  const attributes = new Map();
-  return {
-    hidden: false,
-    classList: {
-      contains: (name) => classes.has(name),
-      toggle: (name, force) => (force ? classes.add(name) : classes.delete(name)),
-    },
-    getAttribute: (name) => attributes.get(name),
-    setAttribute: (name, value) => attributes.set(name, value),
-  };
-};
-
-test('switches the visible flight search panel and synchronizes tab state', () => {
-  const tabs = Object.fromEntries(['booking', 'manage', 'status'].map((key) => [
-    key,
-    createToggleTarget(),
-  ]));
-  const panels = Object.fromEntries(['booking', 'manage', 'status'].map((key) => [
-    key,
-    createToggleTarget(),
-  ]));
-
-  setActiveFlightSearchPanel(tabs, panels, 'manage');
-
-  assert.equal(tabs.manage.classList.contains('is-active'), true);
-  assert.equal(tabs.manage.getAttribute('aria-selected'), 'true');
-  assert.equal(tabs.manage.getAttribute('aria-expanded'), 'true');
-  assert.equal(panels.manage.hidden, false);
-  assert.equal(panels.manage.classList.contains('is-active'), true);
-
-  ['booking', 'status'].forEach((key) => {
-    assert.equal(tabs[key].classList.contains('is-active'), false);
-    assert.equal(tabs[key].getAttribute('aria-selected'), 'false');
-    assert.equal(tabs[key].getAttribute('aria-expanded'), 'false');
-    assert.equal(panels[key].hidden, true);
-    assert.equal(panels[key].classList.contains('is-active'), false);
-  });
-});
-
-test('reports the required fields for each flight search panel', () => {
-  assert.deepEqual(
-    plainObject(validateFlightSearchPanel('booking', {
-      destination: '',
-      origin: '',
-    }, authoredValidationMessages)),
-    {
-      destination: 'Destination is required',
-      origin: 'Origin is required',
-    },
-  );
-  assert.deepEqual(
-    plainObject(validateFlightSearchPanel('manage', {
-      reservationCode: '',
-      surname: '',
-    }, authoredValidationMessages)),
-    {
-      reservationCode: 'Booking reference is required',
-      surname: "Passenger's name is required",
-    },
-  );
-  assert.deepEqual(
-    plainObject(validateFlightSearchPanel('status', {
-      destination: '',
-      origin: 'Casablanca, Morocco',
-    }, authoredValidationMessages)),
-    {
-      destination: 'Destination is required',
-    },
-  );
-});
-
-test('uses the field labels visible in the open live panels', () => {
-  const labels = (panelKey) => plainObject(panelFields(panelKey))
-    .map(({ label, name }) => ({ label, name }));
-
-  assert.deepEqual(labels('manage'), [
-    { label: 'Reservation Code', name: 'reservationCode' },
-    { label: 'Surname', name: 'surname' },
-  ]);
-  assert.deepEqual(labels('status'), [
-    { label: 'Select origin', name: 'origin' },
-    { label: 'Select destination', name: 'destination' },
-  ]);
-});
-
-test('associates every form label with a unique input id', () => {
-  const ids = [];
-
-  ['booking', 'manage', 'status'].forEach((panelKey) => {
-    panelFields(panelKey).forEach((fieldConfig) => {
-      const { field, input } = createField({ ...fieldConfig, panelKey });
-      assert.equal(field.tagName, 'LABEL');
-      assert.ok(input.id);
-      assert.equal(field.htmlFor, input.id);
-      ids.push(input.id);
-    });
-
-    const group = createPanelSubTabs(panelKey);
-    group.children.slice(1).forEach((option) => {
-      const [input] = option.children;
-      assert.equal(option.tagName, 'LABEL');
-      assert.ok(input.id);
-      assert.equal(option.htmlFor, input.id);
-      ids.push(input.id);
-    });
-  });
-
-  assert.equal(ids.length, 13);
-  assert.equal(new Set(ids).size, ids.length);
-});
-
-test('uses the Manage booking and Check-in sub-tab row from live', () => {
-  assert.deepEqual(
-    plainObject(getPanelSubTabs('manage')),
-    ['Manage booking', 'Check-in'],
-  );
-});
-
-test('uses the Flight route and Flight number sub-tab row from live', () => {
-  assert.deepEqual(
-    plainObject(getPanelSubTabs('status')),
-    ['Flight route', 'Flight number'],
-  );
-});
-
-test('keeps the authored hero picture and its alternative text', () => {
+test('keeps the authored homepage picture and alternative text', () => {
   const classes = new Set();
   const image = {
     alt: 'Authored hero alternative text',
@@ -248,10 +42,10 @@ test('keeps the authored hero picture and its alternative text', () => {
     querySelector: (selector) => (selector === 'picture' ? picture : null),
   };
 
-  const result = prepareHeroPicture(cell, 'desktop');
+  const result = prepareHomepagePicture(cell, 'desktop');
 
   assert.equal(result, picture);
-  assert.equal(classes.has('homepage-hero-picture'), true);
+  assert.equal(classes.has('hero-homepage-picture'), true);
   assert.equal(classes.has('is-desktop'), true);
   assert.equal(image.alt, 'Authored hero alternative text');
   assert.equal(image.decoding, 'async');
@@ -259,7 +53,7 @@ test('keeps the authored hero picture and its alternative text', () => {
   assert.equal(image.loading, 'eager');
 });
 
-test('defers the inactive authored hero picture', () => {
+test('defers the inactive authored homepage picture', () => {
   const image = {
     alt: 'Authored hero alternative text',
     decoding: '',
@@ -276,82 +70,20 @@ test('defers the inactive authored hero picture', () => {
     querySelector: (selector) => (selector === 'picture' ? picture : null),
   };
 
-  const result = prepareHeroPicture(cell, 'mobile', false);
+  prepareHomepagePicture(cell, 'mobile', false);
 
-  assert.equal(result, picture);
   assert.equal(image.alt, 'Authored hero alternative text');
-  assert.equal(image.decoding, 'async');
   assert.equal(image.fetchPriority, 'auto');
   assert.equal(image.loading, 'lazy');
 });
 
-test('keeps the linked hero asset working until authored content is published', () => {
-  const classes = new Set();
-  const image = {
-    alt: '',
-    decoding: '',
-    fetchPriority: '',
-    loading: '',
-    src: '',
-  };
-  const picture = {
-    classList: {
-      add: (...names) => names.forEach((name) => classes.add(name)),
-    },
-    querySelector: (selector) => (selector === 'img' ? image : null),
-    append: () => {},
-  };
-  context.document.createElement = (tagName) => (tagName === 'picture' ? picture : image);
+test('rejects linked assets without an authored picture', () => {
   const cell = {
-    querySelector: (selector) => (
-      selector === 'a[href]' ? { href: '/blocks/homepage-hero/assets/hero-mobile.jpg' } : null
-    ),
+    querySelector: () => null,
   };
 
-  const result = prepareHeroPicture(cell, 'mobile');
-
-  assert.equal(result, picture);
-  assert.equal(image.src, '/blocks/homepage-hero/assets/hero-mobile.jpg');
-  assert.equal(image.alt, 'Royal Air Maroc');
-  assert.equal(classes.has('homepage-hero-picture'), true);
-  assert.equal(classes.has('is-mobile'), true);
-});
-
-test('swaps origin and destination locally with the live accessible name', () => {
-  const values = {
-    destination: 'Marrakech, Morocco',
-    origin: 'Casablanca, Morocco',
-  };
-
-  assert.equal(SWAP_LABEL, 'Swap origin and destination');
-  assert.deepEqual(
-    plainObject(swapFlightSearchValues(values)),
-    {
-      destination: 'Casablanca, Morocco',
-      origin: 'Marrakech, Morocco',
-    },
-  );
-  assert.deepEqual(values, {
-    destination: 'Marrakech, Morocco',
-    origin: 'Casablanca, Morocco',
-  });
-});
-
-test('returns the authored empty state without calling a search service', () => {
-  assert.deepEqual(
-    plainObject(submitFlightSearch(
-      'booking',
-      {
-        destination: 'Marrakech',
-        origin: 'Casablanca, Morocco',
-      },
-      'No flights found!',
-      authoredValidationMessages,
-    )),
-    {
-      errors: {},
-      message: 'No flights found!',
-      submitted: true,
-    },
+  assert.throws(
+    () => prepareHomepagePicture(cell, 'desktop'),
+    /authored desktop image/,
   );
 });

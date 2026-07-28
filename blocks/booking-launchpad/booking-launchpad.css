@@ -1,0 +1,385 @@
+main .booking-launchpad-container .booking-launchpad-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+main .booking-launchpad {
+  box-sizing: border-box;
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  background: #1a1717;
+  color: #1a1717;
+  font-family: var(--ram-homepage-font-family);
+}
+
+main .booking-launchpad .flight-search {
+  box-sizing: border-box;
+  width: 90%;
+  max-width: 1080px;
+  min-height: 419px;
+  margin: 16px auto 0;
+  padding-bottom: 8px;
+}
+
+main .booking-launchpad .flight-search-item {
+  margin-bottom: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #fff;
+}
+
+main .booking-launchpad .flight-search-tab {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 0;
+  background: #fff;
+  color: #1a1717;
+  font-size: 16px;
+  line-height: 22.4px;
+  text-align: start;
+  cursor: pointer;
+}
+
+main .booking-launchpad .flight-search-icon,
+main .booking-launchpad .flight-search-chevron {
+  color: #7b7a78;
+  font-family: ram-icons, sans-serif;
+  font-size: 14px;
+}
+
+main .booking-launchpad .flight-search-icon.is-plane::before {
+  content: '\e91d';
+}
+
+main .booking-launchpad .flight-search-icon.is-calendar::before {
+  content: '\e901';
+}
+
+main .booking-launchpad .flight-search-icon.is-clock::before {
+  content: '\e90b';
+}
+
+main .booking-launchpad .flight-search-chevron {
+  margin-inline-start: auto;
+}
+
+main .booking-launchpad .flight-search-chevron::before {
+  content: '\e907';
+}
+
+main .booking-launchpad .flight-search-tab.is-active {
+  color: #1a1717;
+  font-weight: 700;
+}
+
+main .booking-launchpad .flight-search-tab.is-active .flight-search-icon {
+  color: #c20831;
+}
+
+main .booking-launchpad .flight-search-tab.is-active .flight-search-chevron {
+  transform: rotate(180deg);
+}
+
+main .booking-launchpad .flight-search-panel {
+  box-sizing: border-box;
+  min-height: 255px;
+  padding: 16px;
+  background: #fff;
+}
+
+main .booking-launchpad .flight-search-panel[hidden] {
+  display: none;
+}
+
+main .booking-launchpad .flight-search-form {
+  margin: 0;
+}
+
+main .booking-launchpad .flight-search-trip-types {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 0 16px;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  overflow: hidden;
+  background: #f7f7f7;
+}
+
+main .booking-launchpad .flight-search-trip-types.has-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+main .booking-launchpad .flight-search-trip-type {
+  min-width: 0;
+}
+
+main .booking-launchpad .flight-search-trip-type input {
+  position: absolute;
+  opacity: 0;
+}
+
+main .booking-launchpad .flight-search-trip-type span {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 4px;
+  color: #595855;
+  font-size: 11px;
+  line-height: 14px;
+  text-align: center;
+}
+
+main .booking-launchpad .flight-search-trip-type input:checked + span {
+  border-bottom: 1px solid #c20831;
+  background: #fff;
+  color: #c20831;
+}
+
+main .booking-launchpad .flight-search-fields {
+  display: grid;
+  gap: 12px;
+}
+
+main .booking-launchpad .flight-search-field {
+  display: block;
+}
+
+main .booking-launchpad .flight-search-field-label {
+  display: block;
+  margin-bottom: -17px;
+  padding: 7px 12px 0;
+  color: #7b7a78;
+  font-size: 10px;
+  line-height: 12px;
+  pointer-events: none;
+}
+
+main .booking-launchpad .flight-search-field-control {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  min-height: 58px;
+  padding: 15px 12px 0;
+  border: 1px solid #d8d7d4;
+  background: #fff;
+}
+
+main .booking-launchpad .flight-search-input {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #595855;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+main .booking-launchpad .flight-search-input[readonly] {
+  cursor: default;
+}
+
+main .booking-launchpad .flight-search-input[aria-invalid='true'] {
+  color: #c20831;
+}
+
+main .booking-launchpad .flight-search-field-control:has(.flight-search-input[aria-invalid='true']) {
+  border-color: #c20831;
+}
+
+main .booking-launchpad .flight-search-field-suffix {
+  margin-inline-start: 8px;
+  color: #c20831;
+  font-size: 12px;
+}
+
+main .booking-launchpad .flight-search-swap {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  margin-inline-start: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+}
+
+main .booking-launchpad .flight-search-swap::before {
+  display: block;
+  width: 18px;
+  height: 18px;
+  margin: auto;
+  background: url('/icons/swap-origin-destination.svg') center / contain no-repeat;
+  content: '';
+}
+
+main .booking-launchpad .flight-search-swap:focus-visible {
+  outline: 2px solid #c20831;
+  outline-offset: 2px;
+}
+
+main .booking-launchpad .flight-search-error {
+  display: block;
+  min-height: 14px;
+  margin-top: 2px;
+  color: #c20831;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+main .booking-launchpad .flight-search-submit {
+  box-sizing: border-box;
+  min-height: 46px;
+  padding: 10px 24px;
+  border: 0;
+  background: #c20831;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+main .booking-launchpad .flight-search-submit:disabled {
+  background: #ebeae8;
+  color: #7b7a78;
+  cursor: not-allowed;
+}
+
+main .booking-launchpad .flight-search-submit[hidden] {
+  display: none;
+}
+
+main .booking-launchpad .flight-search-empty {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 8px 0 0;
+  padding: 14px 16px;
+  border-radius: 4px;
+  background: #fff;
+  color: #c20831;
+  font-size: 16px;
+  text-align: center;
+}
+
+main .booking-launchpad .flight-search-empty[hidden] {
+  display: none;
+}
+
+main .booking-launchpad .flight-search-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (width >= 600px) {
+  main .booking-launchpad .flight-search {
+    min-height: 369px;
+  }
+
+  main .booking-launchpad .flight-search-panel {
+    min-height: 205px;
+  }
+
+  main .booking-launchpad .flight-search-fields {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  main .booking-launchpad .flight-search-submit {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (width >= 1200px) {
+  main .booking-launchpad .flight-search {
+    min-height: 212px;
+    padding: 0;
+  }
+
+  main .hero-wrapper:has(> .hero.homepage) + .booking-launchpad-wrapper {
+    position: relative;
+    z-index: 1;
+    min-height: 268px;
+    margin-top: -268px;
+  }
+
+  main .hero-wrapper:has(> .hero.homepage) + .booking-launchpad-wrapper .flight-search {
+    margin-top: 0;
+  }
+
+  main .booking-launchpad .flight-search-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-radius: 18px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  main .booking-launchpad .flight-search-item {
+    display: contents;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  main .booking-launchpad .flight-search-tab {
+    grid-row: 1;
+    justify-content: center;
+    min-height: 38px;
+    padding: 0 12px;
+    border-bottom: 1px solid #d8d7d4;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  main .booking-launchpad .flight-search-tab.is-active {
+    border-bottom-color: #c20831;
+    color: #c20831;
+  }
+
+  main .booking-launchpad .flight-search-chevron {
+    display: none;
+  }
+
+  main .booking-launchpad .flight-search-panel {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    min-height: 166px;
+    padding: 24px;
+  }
+
+  main .booking-launchpad .flight-search-trip-types {
+    width: 390px;
+    margin-bottom: 16px;
+  }
+
+  main .booking-launchpad .flight-search-fields {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  main .booking-launchpad .flight-search-field-control {
+    min-height: 48px;
+  }
+
+  main .booking-launchpad .flight-search-error {
+    min-height: 0;
+  }
+
+  main .booking-launchpad .flight-search-submit {
+    grid-column: auto;
+  }
+}

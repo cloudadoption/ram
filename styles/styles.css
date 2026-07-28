@@ -10,6 +10,22 @@
  * governing permissions and limitations under the License.
  */
 
+@font-face {
+  font-family: ram-homepage-font;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://onesait-travel.azureedge.net/statics/RAM/fonts/museosans/museosans400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: ram-homepage-heading;
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('https://onesait-travel.azureedge.net/statics/RAM/fonts/museo/museo300.woff2') format('woff2');
+}
+
 :root {
   /* colors */
   --background-color: white;
@@ -22,6 +38,8 @@
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
   --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --ram-homepage-font-family: ram-homepage-font, arial, sans-serif;
+  --ram-homepage-heading-family: ram-homepage-heading, arial, sans-serif;
 
   /* body sizes */
   --body-font-size-m: 22px;

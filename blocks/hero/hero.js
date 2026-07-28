@@ -1,0 +1,60 @@
+function createElement(tagName, className) {
+  const element = document.createElement(tagName);
+  if (className) element.className = className;
+  return element;
+}
+
+function prepareHomepagePicture(cell, variant, eager = true) {
+  const picture = cell?.querySelector('picture');
+  const image = picture?.querySelector('img');
+
+  if (!picture || !image) {
+    throw new Error(`Homepage hero requires an authored ${variant} image`);
+  }
+
+  picture.classList.add('hero-homepage-picture', `is-${variant}`);
+  image.decoding = 'async';
+  image.fetchPriority = eager ? 'high' : 'auto';
+  image.loading = eager ? 'eager' : 'lazy';
+  return picture;
+}
+
+function decorateHomepage(block) {
+  const cells = [...block.querySelectorAll(':scope > div > div')];
+  const pictureCells = cells.filter((cell) => cell.querySelector('picture'));
+  const copyCell = cells.find((cell) => cell.querySelector('h1, h2, h3'));
+  const [desktopCell, mobileCell] = pictureCells;
+  const heading = copyCell?.querySelector('h1, h2, h3');
+  const subtitle = [...(copyCell?.querySelectorAll('p') || [])]
+    .find((paragraph) => !paragraph.querySelector('a'));
+  const cta = copyCell?.querySelector('a[href]');
+
+  if (!desktopCell || !mobileCell || !heading || !subtitle || !cta) {
+    throw new Error('Homepage hero requires two authored images, a heading, subtitle, and CTA');
+  }
+
+  const desktop = window.matchMedia('(min-width: 1200px)').matches;
+  const desktopPicture = prepareHomepagePicture(desktopCell, 'desktop', desktop);
+  const mobilePicture = prepareHomepagePicture(mobileCell, 'mobile', !desktop);
+  const media = createElement('div', 'hero-homepage-media');
+  const copy = createElement('div', 'hero-homepage-copy');
+
+  heading.className = 'hero-homepage-title';
+  subtitle.className = 'hero-homepage-subtitle';
+  cta.className = 'hero-homepage-cta';
+  cta.removeAttribute('title');
+  copy.append(heading, subtitle, cta);
+  media.append(
+    ...(desktop ? [desktopPicture, mobilePicture] : [mobilePicture, desktopPicture]),
+    copy,
+  );
+  block.replaceChildren(media);
+}
+
+/**
+ * Decorates hero variants.
+ * @param {Element} block Hero block
+ */
+export default function decorate(block) {
+  if (block.classList.contains('homepage')) decorateHomepage(block);
+}
