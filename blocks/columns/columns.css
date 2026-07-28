@@ -798,6 +798,17 @@ main .columns.loyalty-content.platinum-tier.maintain {
   }
 }
 
+@media (width >= 900px) and (width < 1200px) {
+  body.dreamafrica .columns > div {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  body.dreamafrica .columns > div > div {
+    width: 100%;
+  }
+}
+
 body.buy-transfer-miles main > .section:is(:nth-child(2), :nth-child(5)) .columns > div,
 body.corporate-program main > .section:is(:nth-child(6), :nth-child(8)) .columns > div {
   gap: 0;

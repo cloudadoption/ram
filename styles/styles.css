@@ -601,6 +601,37 @@ body.dreamafrica main h3 {
   line-height: 24px;
 }
 
+body.dreamafrica main > .section:nth-child(2) > div > a:has(picture) {
+  position: relative;
+  display: block;
+  width: 200px;
+  max-width: 100%;
+  margin-bottom: 16px;
+  overflow: hidden;
+  color: #fff;
+}
+
+body.dreamafrica main > .section:nth-child(2) > div > a img {
+  display: block;
+  width: 100%;
+}
+
+body.dreamafrica main > .section:nth-child(2) > div > a:has(picture)::after {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  padding: 8px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='28' viewBox='0 0 40 28'%3E%3Crect width='40' height='28' rx='6' fill='%23f00'/%3E%3Cpath d='M17 8l10 6-10 6z' fill='%23fff'/%3E%3C/svg%3E")
+      center / 40px 28px no-repeat,
+    linear-gradient(rgb(0 0 0 / 55%), transparent 55%);
+  content: "Spotlight on Morocco and Africa";
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 12px;
+  text-shadow: 0 1px 2px #000;
+}
+
 body.dreamafrica main > .section:nth-child(1) { height: 25px; }
 body.dreamafrica main > .section:nth-child(2) { height: 589px; }
 body.dreamafrica main > .section:nth-child(3) { height: 646px; }
@@ -713,6 +744,10 @@ body.dreamafrica main > .section:nth-child(6) img {
     line-height: 34px;
   }
 
+  body.dreamafrica main > .section:nth-child(2) > div > a:has(picture) {
+    width: 300px;
+  }
+
   body.dreamafrica main > .section:nth-child(1) { height: 61px; }
   body.dreamafrica main > .section:nth-child(2) { height: 423px; }
   body.dreamafrica main > .section:nth-child(3) { height: 464px; }
@@ -781,6 +816,11 @@ body.dreamafrica main > .section:nth-child(6) img {
   body.corporate-program main > .section:nth-child(8) { height: 594px; }
 
   body.dreamafrica main > .section:nth-child(1) { height: 97px; }
+
+  body.dreamafrica main > .section:nth-child(2) > div > a:has(picture) {
+    display: none;
+  }
+
   body.dreamafrica main > .section:nth-child(2) { height: 304px; }
   body.dreamafrica main > .section:nth-child(3) { height: 421px; }
   body.dreamafrica main > .section:nth-child(4) { height: 404px; }

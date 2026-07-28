@@ -129,6 +129,33 @@ function buildBackgroundPictureCell(document, source, specification, imageSource
   return picture;
 }
 
+function buildYoutubeThumbnailCell(document, source, specification, imageSources) {
+  if (!source) {
+    throw new Error(
+      `Missing YouTube embed for selectors ${selectors(specification.selectors).join(', ')}`,
+    );
+  }
+  const embed = new URL(source.getAttribute('src'));
+  const match = embed.pathname.match(/^\/embed\/([A-Za-z0-9_-]+)$/);
+  if (!['www.youtube.com', 'youtube.com'].includes(embed.hostname) || !match) {
+    throw new Error(`Unsupported YouTube embed URL: ${embed.href}`);
+  }
+
+  const videoId = match[1];
+  const thumbnailUrl = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+  const image = document.createElement('img');
+  image.setAttribute('loading', specification.loading || 'lazy');
+  image.setAttribute('src', imageSources[thumbnailUrl] || thumbnailUrl);
+  image.setAttribute('alt', specification.alt);
+
+  const picture = document.createElement('picture');
+  picture.append(image);
+  const link = document.createElement('a');
+  link.setAttribute('href', `https://www.youtube.com/watch?v=${videoId}`);
+  link.append(picture);
+  return link;
+}
+
 function buildRichCell(document, source, specification, editorialPaths) {
   if (!source) return document.createDocumentFragment();
   const clone = source.cloneNode(true);
@@ -206,6 +233,8 @@ function buildCell(document, root, specification, editorialPaths, imageSources) 
       return buildPictureCell(document, source, specification, imageSources);
     case 'background-picture':
       return buildBackgroundPictureCell(document, source, specification, imageSources);
+    case 'youtube-thumbnail':
+      return buildYoutubeThumbnailCell(document, source, specification, imageSources);
     case 'rich':
       return buildRichCell(document, source, specification, editorialPaths);
     case 'text':

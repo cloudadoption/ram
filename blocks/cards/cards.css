@@ -154,6 +154,16 @@ main .cards.loyalty-benefits.compact > ul > li:nth-child(3) { top: 379px; }
   }
 }
 
+body.dreamafrica main > .section:nth-child(9) .cards img {
+  aspect-ratio: 8 / 3;
+}
+
+@media (width >= 600px) and (width < 1200px) {
+  body.dreamafrica main > .section:nth-child(9) .cards > ul {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (width >= 900px) {
   main .cards.loyalty-benefits > ul {
     width: calc(100% - 63px);

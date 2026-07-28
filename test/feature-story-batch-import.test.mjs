@@ -87,7 +87,9 @@ function dreamAfricaSource() {
       <head><title>#DREAMAFRICA#MEETMOROCCO</title></head>
       <body>
         ${article('129019', `<img class="banner-image" src="${image('dream-banner')}" alt="">`)}
-        ${article('129056', '<h2>A new brand message, carrying forward our mission and our ambitions!</h2><div>Royal Air Maroc is revealing a new brand message.</div>')}
+        ${article('129056', `<iframe src="https://www.youtube.com/embed/_KMGy0hvECQ?controls=0"></iframe>
+          <h2>A new brand message, carrying forward our mission and our ambitions!</h2>
+          <div class="brand-intro-copy">Royal Air Maroc is revealing a new brand message.</div>`)}
         ${article('129075', `<img src="${image('dream-mission')}" alt=""><h2>Our mission</h2><p>Unveiling the potential of our country and continent.</p>`)}
         ${article('129094', `<h2>Our ambition</h2><p>Contributing to a strong, talented Africa.</p><img src="${image('dream-ambition')}" alt="">`)}
         ${article('129113', '<h2>Our service reflects our mission</h2><p>Bringing you the best of Morocco and Africa.</p>')}
@@ -160,6 +162,8 @@ test('imports default content and unlabeled existing blocks for the first batch'
     }
     if (page.slug === 'dreamafrica-meetmorocco') {
       assert.match(result.html, /<h2>A new brand message[^<]+<\/h2><p>Royal Air Maroc/);
+      assert.match(result.html, /href="https:\/\/www\.youtube\.com\/watch\?v=_KMGy0hvECQ"/);
+      assert.match(result.html, /src="https:\/\/i\.ytimg\.com\/vi\/_KMGy0hvECQ\/maxresdefault\.jpg"/);
     }
   });
 });

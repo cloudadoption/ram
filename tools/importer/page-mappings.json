@@ -1984,12 +1984,38 @@
           ],
           "rows": [
             {
+              "label": "Video",
+              "cells": [
+                {
+                  "kind": "youtube-thumbnail",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"129056\"] iframe"
+                  ],
+                  "alt": "Watch Spotlight on Morocco and Africa by Royal Air Maroc",
+                  "loading": "lazy"
+                }
+              ]
+            },
+            {
+              "label": "Heading",
+              "cells": [
+                {
+                  "kind": "element",
+                  "tag": "h2",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"129056\"] h2"
+                  ]
+                }
+              ]
+            },
+            {
               "label": "Content",
               "cells": [
                 {
                   "kind": "rich",
                   "selectors": [
-                    "[data-analytics-asset-id=\"129056\"]"
+                    "[data-analytics-asset-id=\"129056\"] .flex-c.flex-g-16.f-body-l.f-fw-l",
+                    "[data-analytics-asset-id=\"129056\"] .brand-intro-copy"
                   ]
                 }
               ]
