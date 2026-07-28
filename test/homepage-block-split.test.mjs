@@ -25,7 +25,7 @@ test('keeps hero and booking launchpad implementation independent', async () => 
   assert.doesNotMatch(heroCSS, /booking-launchpad|flight-search/);
   assert.doesNotMatch(launchpadJS, /homepage-hero|hero-homepage/);
   assert.doesNotMatch(launchpadCSS, /homepage-hero|hero-homepage/);
-  assert.match(legacyJS, /hero homepage/);
+  assert.match(legacyJS, /createBlock\('hero', \[heroRow\], 'homepage'\)/);
   assert.match(legacyJS, /booking-launchpad/);
   assert.doesNotMatch(legacyJS, /flight-search|prepareHomepagePicture/);
   assert.match(legacyCSS, /Transition bridge has no styles/);
