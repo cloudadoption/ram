@@ -2,6 +2,8 @@
 coverage/*
 logs/*
 node_modules/*
+catalog/.url-crawl-progress.ndjson
+catalog/url-space.json.tmp
 
 helix-importer-ui
 .DS_Store
