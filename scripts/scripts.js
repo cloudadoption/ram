@@ -11,6 +11,9 @@ import {
   loadCSS,
   buildBlock,
 } from './aem.js';
+import { setDocumentLocale } from './locale.js';
+
+setDocumentLocale(document, window.location.pathname);
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
   const innerTT = window.trustedTypes.createPolicy('tt-inner', {
@@ -160,7 +163,6 @@ export function decorateMain(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-  document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
