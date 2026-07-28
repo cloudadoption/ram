@@ -84,7 +84,10 @@ test('accepts only source-site HTTPS images with image responses', () => {
 test('imports the baggage hub into its three existing authored blocks', () => {
   const source = `<!doctype html>
     <html lang="en-GB">
-      <head><title>Baggage information</title></head>
+      <head>
+        <title>Baggage information</title>
+        <meta name="description" content="Learn about Royal Air Maroc baggage policies, allowances, and fees for checked and carry-on luggage.">
+      </head>
       <body>
         <section class="page-heading">
           <ul class="breadcrumbs__list">
@@ -130,6 +133,11 @@ test('imports the baggage hub into its three existing authored blocks', () => {
 
   assert.equal(result.template, 'feature-story');
   assert.equal(result.path, '/en-gb/baggage-information');
+  assert.deepEqual(result.metadata.description, {
+    source: 'live',
+    value: 'Learn about Royal Air Maroc baggage policies, allowances, and fees for checked and carry-on luggage.',
+  });
+  assert.deepEqual(result.metadata.deviations, []);
   assert.match(result.html, /class="baggage-categories"/);
   assert.match(result.html, /class="baggage-support"/);
   assert.match(result.html, /class="restricted-items"/);
@@ -143,6 +151,7 @@ test('imports the baggage hub into its three existing authored blocks', () => {
 });
 
 test('imports seats into the shared interior hero and repeatable seat guide', () => {
+  const authoredDescription = 'Choose your preferred seat on Royal Air Maroc flights and enjoy a more comfortable travel experience.';
   const aircraft = Array.from({ length: 6 }, (_, index) => `
     <li>
       Aircraft ${index + 1}: 12C/100Y
@@ -181,6 +190,12 @@ test('imports seats into the shared interior hero and repeatable seat guide', ()
 
   assert.equal(result.template, 'standard-article');
   assert.equal(result.path, '/en-gb/seats');
+  assert.equal(result.metadata.description.source, 'authored');
+  assert.equal(result.metadata.description.value, authoredDescription);
+  assert.equal(result.metadata.deviations.length, 1);
+  assert.equal(result.metadata.deviations[0].type, 'authored-meta-description');
+  assert.equal(result.metadata.deviations[0].value, authoredDescription);
+  assert.equal((result.html.match(new RegExp(authoredDescription, 'g')) || []).length, 1);
   assert.match(result.html, /class="hero interior"/);
   assert.match(result.html, /class="seat-guide"/);
   assert.equal((result.html.match(/<div>Aircraft<\/div>/g) || []).length, 6);
