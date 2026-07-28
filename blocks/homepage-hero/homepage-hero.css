@@ -15,14 +15,6 @@
 }
 
 @font-face {
-  font-family: ram-flight-swap;
-  font-style: normal;
-  font-weight: 400;
-  font-display: block;
-  src: url('./assets/aall-swap.woff') format('woff');
-}
-
-@font-face {
   font-family: ram-homepage-heading;
   font-style: normal;
   font-weight: 300;
@@ -334,15 +326,16 @@ main .homepage-hero .flight-search-swap {
   border: 0;
   border-radius: 50%;
   background: #fff;
-  color: #7b7a78;
   cursor: pointer;
 }
 
 main .homepage-hero .flight-search-swap::before {
-  font-family: ram-flight-swap, sans-serif;
-  font-size: 18px;
-  line-height: 1;
-  content: '\e92d';
+  display: block;
+  width: 18px;
+  height: 18px;
+  margin: auto;
+  background: url('/icons/swap-origin-destination.svg') center / contain no-repeat;
+  content: '';
 }
 
 main .homepage-hero .flight-search-swap:focus-visible {
