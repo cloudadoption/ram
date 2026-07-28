@@ -1,0 +1,116 @@
+main .quick-links-container {
+  margin-block: 0;
+}
+
+main .quick-links-container .quick-links-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+main .quick-links {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  background: #fff;
+  box-shadow: 10px 2px 21px -15px #111;
+  color: #c20831;
+  font-family: var(--ram-homepage-font-family);
+}
+
+main .quick-links ul {
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
+  width: calc(100% - 70px);
+  max-width: 1020px;
+  height: 84px;
+  min-height: 84px;
+  margin: 0 auto;
+  padding: 8px 0;
+  list-style: none;
+}
+
+main .quick-links .quick-links-item {
+  flex: 1 1 0;
+  height: 68px;
+  min-width: 0;
+  border-inline-end: 1px solid #ebeae8;
+}
+
+main .quick-links .quick-links-item:last-child {
+  border-inline-end: 0;
+}
+
+main .quick-links .quick-links-link:any-link {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  height: 100%;
+  padding: 6px 4px;
+  color: #c20831;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+  text-decoration: none;
+}
+
+main .quick-links .quick-links-icon {
+  font-family: ram-icons, sans-serif;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+main .quick-links .quick-links-icon.is-ticket::before {
+  content: '\e930';
+}
+
+main .quick-links .quick-links-icon.is-upgrade::before {
+  content: '\e92f';
+}
+
+main .quick-links .quick-links-icon.is-seat::before {
+  content: '\e92a';
+}
+
+main .quick-links .quick-links-icon.is-baggage::before {
+  content: '\e92c';
+}
+
+main .quick-links .quick-links-icon.is-cart::before {
+  content: '\e92d';
+}
+
+@media (width >= 600px) {
+  main .quick-links ul {
+    height: 66px;
+    min-height: 66px;
+  }
+
+  main .quick-links .quick-links-item {
+    height: 50px;
+  }
+
+  main .quick-links .quick-links-link:any-link {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media (width >= 1200px) {
+  main .quick-links ul {
+    height: 52px;
+    min-height: 52px;
+  }
+
+  main .quick-links .quick-links-item {
+    height: 36px;
+    border-inline-end: 0;
+  }
+
+  main .quick-links .quick-links-link:any-link {
+    flex-direction: row;
+    gap: 4px;
+  }
+}

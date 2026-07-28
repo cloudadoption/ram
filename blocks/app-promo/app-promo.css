@@ -1,0 +1,191 @@
+main .app-promo-container {
+  margin-block: 97px 0;
+}
+
+main .app-promo-container .app-promo-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+main .app-promo {
+  position: relative;
+  box-sizing: border-box;
+  width: 100vw;
+  min-height: 540px;
+  margin-inline: calc(50% - 50vw);
+  padding-block-end: 60px;
+  background:
+    url('./assets/plot.png') bottom center / auto 328px repeat-x,
+    linear-gradient(to bottom, #f7f7f7 calc(100% - 328px), #c20831 0);
+  color: #1a1717;
+  font-family: var(--ram-homepage-font-family);
+}
+
+main .app-promo .app-promo-card {
+  position: relative;
+  display: block;
+  min-height: 377px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+}
+
+main .app-promo .app-promo-content {
+  z-index: 1;
+  padding: 16px;
+}
+
+main .app-promo .app-promo-content h2 {
+  margin: 0 0 8px;
+  font-family: var(--ram-homepage-heading-family);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 32px;
+}
+
+main .app-promo .app-promo-content p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+main .app-promo .app-promo-stores {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+main .app-promo .app-promo-stores picture,
+main .app-promo .app-promo-stores img {
+  display: block;
+  width: 100px;
+  max-height: 36px;
+  object-fit: contain;
+}
+
+main .app-promo .app-promo-qr {
+  display: none;
+}
+
+main .app-promo .app-promo-phone,
+main .app-promo .app-promo-phone img {
+  position: absolute;
+  inset: auto 0 0 auto;
+  display: block;
+  align-self: end;
+  width: 150px;
+  max-height: 295px;
+}
+
+main .app-promo .app-promo-phone img {
+  object-fit: contain;
+  object-position: bottom center;
+}
+
+main .app-promo .app-promo-campaign,
+main .app-promo .app-promo-campaign img {
+  position: absolute;
+  inset: auto auto 60px 50%;
+  display: block;
+  width: 188px;
+  height: 35px;
+  transform: translateX(-50%);
+}
+
+main .app-promo .app-promo-campaign img {
+  object-fit: contain;
+}
+
+@media (width >= 600px) {
+  main .app-promo-container {
+    margin-block-start: 96px;
+  }
+
+  main .app-promo .app-promo-card {
+    display: grid;
+    min-height: 315px;
+    grid-template-columns: minmax(0, 1fr) 280px;
+  }
+
+  main .app-promo .app-promo-content {
+    padding: 40px 0 24px 40px;
+  }
+
+  main .app-promo .app-promo-content p {
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  main .app-promo .app-promo-stores {
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  main .app-promo .app-promo-phone,
+  main .app-promo .app-promo-phone img {
+    position: static;
+    width: 100%;
+    max-height: 295px;
+  }
+}
+
+@media (width >= 1200px) {
+  main .app-promo-container {
+    margin-block-start: 14px;
+  }
+
+  main .app-promo {
+    min-height: 660px;
+    padding-block-start: 168px;
+  }
+
+  main .app-promo .app-promo-card {
+    grid-template-columns: minmax(0, 1fr) 316px;
+    width: 90%;
+    max-width: 1240px;
+    min-height: 324px;
+    margin-inline: auto;
+    border-radius: 20px;
+    overflow: visible;
+  }
+
+  main .app-promo .app-promo-content {
+    position: relative;
+    padding: 60px 180px 40px 60px;
+  }
+
+  main .app-promo .app-promo-content h2 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  main .app-promo .app-promo-qr {
+    position: absolute;
+    inset: 145px 60px auto auto;
+    display: block;
+  }
+
+  main .app-promo .app-promo-qr,
+  main .app-promo .app-promo-qr img {
+    width: 64px;
+    height: 64px;
+  }
+
+  main .app-promo .app-promo-phone,
+  main .app-promo .app-promo-phone img {
+    width: 316px;
+    max-height: 424px;
+  }
+
+  main .app-promo .app-promo-phone {
+    margin-top: -100px;
+  }
+
+  main .app-promo .app-promo-campaign,
+  main .app-promo .app-promo-campaign img {
+    inset-block-end: 54px;
+    width: 286px;
+    height: 54px;
+  }
+}

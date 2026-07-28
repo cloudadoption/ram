@@ -1,0 +1,155 @@
+main .travel-benefits-container {
+  margin-block: 0;
+}
+
+main .travel-benefits-container .travel-benefits-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+main .travel-benefits {
+  width: 90%;
+  max-width: 1240px;
+  margin-inline: auto;
+  color: #1a1717;
+  font-family: var(--ram-homepage-font-family);
+}
+
+main .travel-benefits .travel-benefits-heading h2 {
+  margin: 0 0 16px;
+  font-family: var(--ram-homepage-heading-family);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 32px;
+}
+
+main .travel-benefits ul {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+main .travel-benefits .travel-benefits-item {
+  min-height: 0;
+  border-start-end-radius: 20px;
+  border-end-start-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 6px rgb(0 0 0 / 12%);
+}
+
+main .travel-benefits .travel-benefits-link:any-link {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 12px;
+  color: #1a1717;
+  text-decoration: none;
+}
+
+main .travel-benefits .travel-benefits-picture,
+main .travel-benefits .travel-benefits-picture img {
+  display: block;
+  width: 56px;
+  height: 56px;
+}
+
+main .travel-benefits .travel-benefits-picture img {
+  object-fit: contain;
+}
+
+main .travel-benefits .travel-benefits-content h3 {
+  margin: 0 0 8px;
+  font-family: var(--ram-homepage-font-family);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+main .travel-benefits .travel-benefits-content p {
+  display: none;
+  margin: 0;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+main .travel-benefits .travel-benefits-action {
+  display: flex;
+  align-items: center;
+  color: #c20831;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+main .travel-benefits .travel-benefits-action::after {
+  width: 7px;
+  height: 7px;
+  margin-inline-start: 8px;
+  border-block-start: 1px solid currentcolor;
+  border-inline-end: 1px solid currentcolor;
+  content: '';
+  transform: rotate(45deg);
+}
+
+@media (width >= 600px) {
+  main .travel-benefits .travel-benefits-item {
+    min-height: 95.5px;
+  }
+}
+
+@media (width >= 1200px) {
+  main .travel-benefits .travel-benefits-heading h2 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  main .travel-benefits ul {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+
+  main .travel-benefits .travel-benefits-item {
+    min-height: 385px;
+  }
+
+  main .travel-benefits .travel-benefits-link:any-link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 24px 24px 0;
+  }
+
+  main .travel-benefits .travel-benefits-picture,
+  main .travel-benefits .travel-benefits-picture img {
+    width: 140px;
+    height: 140px;
+  }
+
+  main .travel-benefits .travel-benefits-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  main .travel-benefits .travel-benefits-content h3 {
+    min-height: 72px;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  main .travel-benefits .travel-benefits-content p {
+    display: block;
+  }
+
+  main .travel-benefits .travel-benefits-action {
+    margin-top: auto;
+    padding-block: 8px;
+    font-size: 14px;
+    line-height: 21px;
+  }
+}
