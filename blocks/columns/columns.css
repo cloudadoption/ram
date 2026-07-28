@@ -27,6 +27,39 @@
   display: block;
 }
 
+body.dreamafrica .columns img {
+  aspect-ratio: 7 / 3;
+  object-fit: cover;
+}
+
+@media (width >= 600px) and (width < 1200px) {
+  body.dreamafrica .columns img {
+    aspect-ratio: 13 / 3;
+  }
+}
+
+@media (width >= 900px) and (width < 1200px) {
+  body.dreamafrica .columns > div {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  body.dreamafrica .columns > div > div {
+    order: 1;
+    width: 100%;
+  }
+
+  body.dreamafrica .columns > div > .columns-img-col {
+    order: 0;
+  }
+}
+
+@media (width >= 1200px) {
+  body.dreamafrica .columns img {
+    aspect-ratio: auto;
+  }
+}
+
 main .columns.loyalty-intro,
 main .columns.loyalty-status,
 main .columns.loyalty-standfirst,
@@ -795,5 +828,57 @@ main .columns.loyalty-content.platinum-tier.maintain {
   .columns > div > div {
     flex: 1;
     order: unset;
+  }
+}
+
+body.buy-transfer-miles main > .section:is(:nth-child(2), :nth-child(5)) .columns > div,
+body.corporate-program main > .section:is(:nth-child(6), :nth-child(8)) .columns > div {
+  gap: 0;
+}
+
+body.buy-transfer-miles main > .section:is(:nth-child(2), :nth-child(5))
+  .columns > div > div:not(.columns-img-col) > p:first-child,
+body.corporate-program main > .section:is(:nth-child(6), :nth-child(8))
+  .columns > div > div:not(.columns-img-col) > p:first-child {
+  color: #c6003d;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+}
+
+body.corporate-program main > .section:is(:nth-child(6), :nth-child(8))
+  .columns > div > .columns-img-col img {
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+}
+
+body.buy-transfer-miles main > .section:nth-child(2) .columns a:any-link {
+  display: inline-block;
+  padding: 8px 24px;
+  background: #c6003d;
+  color: #fff;
+}
+
+@media (width >= 900px) {
+  body.buy-transfer-miles main > .section:is(:nth-child(2), :nth-child(5))
+    .columns > div > div,
+  body.corporate-program main > .section:is(:nth-child(6), :nth-child(8))
+    .columns > div > div {
+    box-sizing: border-box;
+    padding-inline: 12px;
+  }
+
+  body.buy-transfer-miles main > .section:is(:nth-child(2), :nth-child(5))
+    .columns > div > div:not(.columns-img-col) > p:first-child,
+  body.corporate-program main > .section:is(:nth-child(6), :nth-child(8))
+    .columns > div > div:not(.columns-img-col) > p:first-child {
+    text-align: start;
+  }
+
+  body.corporate-program main > .section:is(:nth-child(6), :nth-child(8))
+    .columns > div > .columns-img-col img {
+    max-height: 100%;
   }
 }

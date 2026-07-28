@@ -90,10 +90,14 @@ test('normalizes known editorial links without changing deliberate locale links'
   );
 });
 
-test('accepts only source-site HTTPS images with image responses', () => {
+test('accepts approved HTTPS image hosts with image responses', () => {
   assert.doesNotThrow(() => validateImageSource(
     'https://www.royalairmaroc.com/documents/d/ram/seats',
     'image/png',
+  ));
+  assert.doesNotThrow(() => validateImageSource(
+    'https://i.ytimg.com/vi/video/maxresdefault.jpg',
+    'image/jpeg',
   ));
   assert.throws(
     () => validateImageSource('http://www.royalairmaroc.com/image.jpg', 'image/jpeg'),
