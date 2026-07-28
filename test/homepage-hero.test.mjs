@@ -196,6 +196,32 @@ test('keeps the authored hero picture and its alternative text', () => {
   assert.equal(image.loading, 'eager');
 });
 
+test('defers the inactive authored hero picture', () => {
+  const image = {
+    alt: 'Authored hero alternative text',
+    decoding: '',
+    fetchPriority: '',
+    loading: '',
+  };
+  const picture = {
+    classList: {
+      add: () => {},
+    },
+    querySelector: (selector) => (selector === 'img' ? image : null),
+  };
+  const cell = {
+    querySelector: (selector) => (selector === 'picture' ? picture : null),
+  };
+
+  const result = prepareHeroPicture(cell, 'mobile', false);
+
+  assert.equal(result, picture);
+  assert.equal(image.alt, 'Authored hero alternative text');
+  assert.equal(image.decoding, 'async');
+  assert.equal(image.fetchPriority, 'auto');
+  assert.equal(image.loading, 'lazy');
+});
+
 test('swaps origin and destination locally with the live accessible name', () => {
   const values = {
     destination: 'Marrakech, Morocco',
