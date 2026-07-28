@@ -18,6 +18,7 @@ const ALLOWED_TAGS = new Set([
   'STRONG',
   'UL',
 ]);
+const BLOCK_TAGS = new Set(['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'OL', 'P', 'UL']);
 
 const normalizeSpace = (value = '') => value.replace(/\s+/g, ' ').trim();
 
@@ -62,6 +63,7 @@ function copyAllowedNode(node, document, editorialPaths) {
     const copied = copyAllowedNode(child, document, editorialPaths);
     if (copied) copy.append(copied);
   });
+  if (node.tagName === 'A' && !normalizeSpace(copy.textContent)) return null;
   return copy;
 }
 
@@ -133,7 +135,28 @@ function buildRichCell(document, source, specification, editorialPaths) {
   selectors(specification.excludeSelectors).forEach((selector) => {
     clone.querySelectorAll(selector).forEach((element) => element.remove());
   });
-  return copyAllowedNode(clone, document, editorialPaths);
+  if (specification.stripLinks) {
+    clone.querySelectorAll('a').forEach((link) => link.replaceWith(...link.childNodes));
+  }
+  const copied = copyAllowedNode(clone, document, editorialPaths);
+  if (copied.nodeType !== 11) return copied;
+
+  const content = document.createDocumentFragment();
+  let paragraph;
+  [...copied.childNodes].forEach((node) => {
+    if (node.nodeType === 1 && BLOCK_TAGS.has(node.tagName)) {
+      paragraph = undefined;
+      content.append(node);
+      return;
+    }
+    if (node.nodeType === 3 && !normalizeSpace(node.textContent)) return;
+    if (!paragraph) {
+      paragraph = document.createElement('p');
+      content.append(paragraph);
+    }
+    paragraph.append(node);
+  });
+  return content;
 }
 
 function buildDirectTextCell(document, root) {
@@ -198,10 +221,20 @@ function appendCell(row, document, content) {
   row.append(cell);
 }
 
-function appendRow(block, document, definition, roots, editorialPaths, imageSources) {
+function appendRow(
+  block,
+  document,
+  definition,
+  roots,
+  editorialPaths,
+  imageSources,
+  includeLabel,
+) {
   roots.forEach((root) => {
     const row = document.createElement('div');
-    appendCell(row, document, document.createTextNode(definition.label));
+    if (includeLabel) {
+      appendCell(row, document, document.createTextNode(definition.label));
+    }
     definition.cells.forEach((cell) => {
       appendCell(
         row,
@@ -221,11 +254,14 @@ export default function parseLabeledBlock(
 ) {
   const block = document.createElement('div');
   block.className = definition.name;
+  const includeLabel = definition.labeled !== false;
 
   definition.rows.forEach((rowDefinition) => {
     if (rowDefinition.repeatAsCells) {
       const row = document.createElement('div');
-      appendCell(row, document, document.createTextNode(rowDefinition.label));
+      if (includeLabel) {
+        appendCell(row, document, document.createTextNode(rowDefinition.label));
+      }
       selectAll(document, rowDefinition.repeatAsCells).forEach((root) => {
         appendCell(
           row,
@@ -246,8 +282,52 @@ export default function parseLabeledBlock(
     const roots = rowDefinition.repeat
       ? selectAll(document, rowDefinition.repeat)
       : [document];
-    appendRow(block, document, rowDefinition, roots, editorialPaths, imageSources);
+    appendRow(
+      block,
+      document,
+      rowDefinition,
+      roots,
+      editorialPaths,
+      imageSources,
+      includeLabel,
+    );
   });
 
   return block;
+}
+
+export function parseDefaultContent(
+  document,
+  definition,
+  editorialPaths = [],
+  imageSources = {},
+) {
+  const content = document.createDocumentFragment();
+
+  definition.rows.forEach((rowDefinition) => {
+    let roots = [document];
+    if (rowDefinition.repeatAsCells) {
+      roots = selectAll(document, rowDefinition.repeatAsCells);
+    } else if (rowDefinition.repeat) {
+      roots = selectAll(document, rowDefinition.repeat);
+    }
+    const cells = rowDefinition.repeatAsCells
+      ? [rowDefinition.cell]
+      : rowDefinition.cells;
+
+    roots.forEach((root) => {
+      cells.forEach((cell) => {
+        const value = buildCell(
+          document,
+          root,
+          cell,
+          editorialPaths,
+          imageSources,
+        );
+        if (value) content.append(value);
+      });
+    });
+  });
+
+  return content;
 }

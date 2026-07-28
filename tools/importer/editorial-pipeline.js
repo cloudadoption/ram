@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 
 import { parseHTML } from 'linkedom';
 
-import parseLabeledBlock from './lib/labeled-block.js';
+import parseLabeledBlock, { parseDefaultContent } from './lib/labeled-block.js';
 import cleanupDocument from './transformers/cleanup.js';
 
 export { normalizeEditorialHref } from './transformers/links.js';
@@ -100,6 +100,7 @@ function buildMetadataBlock(document, sourceDocument, profile) {
     ['Title', sourceDocument.title],
     ['Description', metadataPolicy.description.value],
     ['HTML Lang', sourceDocument.documentElement.getAttribute('lang') || 'en-GB'],
+    ['template', profile.metadata?.template || profile.template],
   ].filter(([, value]) => value);
 
   values.forEach(([label, value]) => {
@@ -117,6 +118,23 @@ function appendSection(root, document, block) {
   root.append(section);
 }
 
+function appendDefinition(root, document, definition, profile, imageSources) {
+  const content = definition.type === 'default'
+    ? parseDefaultContent(
+      document,
+      definition,
+      profile.editorialPaths,
+      imageSources,
+    )
+    : parseLabeledBlock(
+      document,
+      definition,
+      profile.editorialPaths,
+      imageSources,
+    );
+  appendSection(root, document, content);
+}
+
 function applyLinkOverrides(document, profile) {
   const overrides = profile.linkOverrides || {};
   document.querySelectorAll('a[href]').forEach((link) => {
@@ -131,8 +149,8 @@ function buildAnalysis(profile, outputDocument, sourceHtml, metadataPolicy) {
     name: block.name,
     selector: block.instances[0],
     instances: block.instances,
-    decision: 'block',
-    blockName: block.name,
+    decision: block.type === 'default' ? 'default' : 'block',
+    blockName: block.type === 'default' ? null : block.name,
   }));
   const images = [...outputDocument.querySelectorAll('img[src]')]
     .map((image) => image.getAttribute('src'));
@@ -192,15 +210,12 @@ export function transformEditorialDocument(sourceHtml, { url, imageSources = {} 
 
   const output = document.createElement('main');
   profile.blocks.forEach((definition) => {
-    appendSection(
+    appendDefinition(
       output,
       document,
-      parseLabeledBlock(
-        document,
-        definition,
-        profile.editorialPaths,
-        imageSources,
-      ),
+      definition,
+      profile,
+      imageSources,
     );
   });
   const metadataPolicy = buildMetadataBlock(document, document, profile);

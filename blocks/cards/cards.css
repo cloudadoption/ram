@@ -313,3 +313,41 @@ main .cards.loyalty-benefits.compact > ul > li:nth-child(3) { top: 379px; }
     min-height: 230px;
   }
 }
+
+body.corporate-program main > .section:nth-child(4) .cards > ul > li {
+  border: 0;
+}
+
+body.corporate-program main > .section:nth-child(4) .cards > ul {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+body.corporate-program main > .section:nth-child(4) .cards .cards-card-image {
+  line-height: 0;
+}
+
+body.corporate-program main > .section:nth-child(4) .cards img {
+  width: 80px;
+  height: 80px;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+body.corporate-program main > .section:nth-child(4) .cards .cards-card-body {
+  margin: 4px 8px;
+  font-size: 10px;
+  line-height: 13px;
+}
+
+@media (width >= 600px) {
+  body.corporate-program main > .section:nth-child(4) .cards > ul {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  body.corporate-program main > .section:nth-child(4) .cards img {
+    width: 120px;
+    height: 120px;
+  }
+}

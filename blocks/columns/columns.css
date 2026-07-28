@@ -797,3 +797,55 @@ main .columns.loyalty-content.platinum-tier.maintain {
     order: unset;
   }
 }
+
+body.buy-transfer-miles main > .section:is(:nth-child(2), :nth-child(5)) .columns > div,
+body.corporate-program main > .section:is(:nth-child(6), :nth-child(8)) .columns > div {
+  gap: 0;
+}
+
+body.buy-transfer-miles main > .section:is(:nth-child(2), :nth-child(5))
+  .columns > div > div:not(.columns-img-col) > p:first-child,
+body.corporate-program main > .section:is(:nth-child(6), :nth-child(8))
+  .columns > div > div:not(.columns-img-col) > p:first-child {
+  color: #c6003d;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+}
+
+body.corporate-program main > .section:is(:nth-child(6), :nth-child(8))
+  .columns > div > .columns-img-col img {
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+}
+
+body.buy-transfer-miles main > .section:nth-child(2) .columns a:any-link {
+  display: inline-block;
+  padding: 8px 24px;
+  background: #c6003d;
+  color: #fff;
+}
+
+@media (width >= 900px) {
+  body.buy-transfer-miles main > .section:is(:nth-child(2), :nth-child(5))
+    .columns > div > div,
+  body.corporate-program main > .section:is(:nth-child(6), :nth-child(8))
+    .columns > div > div {
+    box-sizing: border-box;
+    padding-inline: 12px;
+  }
+
+  body.buy-transfer-miles main > .section:is(:nth-child(2), :nth-child(5))
+    .columns > div > div:not(.columns-img-col) > p:first-child,
+  body.corporate-program main > .section:is(:nth-child(6), :nth-child(8))
+    .columns > div > div:not(.columns-img-col) > p:first-child {
+    text-align: start;
+  }
+
+  body.corporate-program main > .section:is(:nth-child(6), :nth-child(8))
+    .columns > div > .columns-img-col img {
+    max-height: 100%;
+  }
+}

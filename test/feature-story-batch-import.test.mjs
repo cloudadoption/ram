@@ -72,10 +72,10 @@ function corporateSource() {
           <p>Benefit copy ${index + 1}</p>
         </div>`).join(''))}
         ${article('137279', '<p>Awards are travel benefits.</p>')}
-        ${article('137337', `<img src="${image('corporate-members')}" alt=""><h3>Join Safar Flyer</h3><p>Employees can join.</p><a href="/en/register">Join us</a>`)}
+        ${article('137337', `<img src="${image('corporate-members')}" alt=""><h3>Join Safar Flyer</h3><p>Employees can join.</p><a href="/en/safar-flyer/join-us">Join us</a>`)}
         ${article('137356', '<h3>How to create a Safar Flyer Corporate account?</h3>')}
         ${article('137384', `<img src="${image('corporate-account')}" alt=""><strong>Fast membership</strong><p>Complete the form.</p>`)}
-        ${article('137403', '<a href="/en/register">Create a Safar Flyer Corporate account</a>')}
+        ${article('137403', '<a href="/en/safar-flyer/sign-in">Create a Safar Flyer Corporate account</a>')}
         ${article('137421', `<img src="${image('corporate-card')}" alt=""><h3>Present your personal Safar Flyer card</h3><p>Identify yourself when purchasing a ticket.</p>`)}
       </body>
     </html>`;
@@ -87,7 +87,7 @@ function dreamAfricaSource() {
       <head><title>#DREAMAFRICA#MEETMOROCCO</title></head>
       <body>
         ${article('129019', `<img class="banner-image" src="${image('dream-banner')}" alt="">`)}
-        ${article('129056', '<h2>A new brand message, carrying forward our mission and our ambitions!</h2><p>Royal Air Maroc is revealing a new brand message.</p>')}
+        ${article('129056', '<h2>A new brand message, carrying forward our mission and our ambitions!</h2><div>Royal Air Maroc is revealing a new brand message.</div>')}
         ${article('129075', `<img src="${image('dream-mission')}" alt=""><h2>Our mission</h2><p>Unveiling the potential of our country and continent.</p>`)}
         ${article('129094', `<h2>Our ambition</h2><p>Contributing to a strong, talented Africa.</p><img src="${image('dream-ambition')}" alt="">`)}
         ${article('129113', '<h2>Our service reflects our mission</h2><p>Bringing you the best of Morocco and Africa.</p>')}
@@ -151,5 +151,15 @@ test('imports default content and unlabeled existing blocks for the first batch'
     assert.equal(result.metadata.description.source, page.descriptionSource);
     page.expected.forEach((text) => assert.match(result.html, new RegExp(text)));
     assert.doesNotMatch(result.html, /<div>(Feature|Card|Content)<\/div>/);
+    assert.doesNotMatch(result.html, /Open in a new window|href=""/);
+    assert.doesNotMatch(result.html, /\/en-GB\/|href="\/en\//);
+    assert.match(result.html, /<div>template<\/div><div>[^<]+<\/div>/);
+    if (page.slug === 'corporate-program') {
+      assert.match(result.html, /href="\/en-gb\/register"/);
+      assert.match(result.html, /href="\/en-gb\/login"/);
+    }
+    if (page.slug === 'dreamafrica-meetmorocco') {
+      assert.match(result.html, /<h2>A new brand message[^<]+<\/h2><p>Royal Air Maroc/);
+    }
   });
 });

@@ -366,3 +366,456 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+/* Template rules intentionally override the boilerplate content defaults. */
+/* stylelint-disable no-descending-specificity */
+body.buy-transfer-miles,
+body.corporate-program,
+body.dreamafrica {
+  color: #000;
+  font-family: var(--ram-page-font-family);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 21px;
+}
+
+body.buy-transfer-miles {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+body.buy-transfer-miles main > .section,
+body.corporate-program main > .section,
+body.dreamafrica main > .section {
+  box-sizing: border-box;
+  margin-block: 0;
+}
+
+body.buy-transfer-miles main > .section > div,
+body.corporate-program main > .section > div {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1256px;
+  margin-inline: auto;
+  padding-inline: 10px;
+}
+
+body.buy-transfer-miles main h1,
+body.corporate-program main h1 {
+  margin: 0;
+  font-family: var(--ram-homepage-heading-family);
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 45px;
+  text-transform: uppercase;
+}
+
+body.buy-transfer-miles main h2,
+body.buy-transfer-miles main h3,
+body.corporate-program main h2,
+body.corporate-program main h3 {
+  font-family: var(--ram-page-font-family);
+  font-weight: 400;
+}
+
+body.buy-transfer-miles main h2 {
+  margin-block: 36px 8px;
+  color: #c6003d;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+body.buy-transfer-miles main h3,
+body.corporate-program main h2,
+body.corporate-program main h3 {
+  margin-block: 0 8px;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+body.buy-transfer-miles main h3 {
+  color: #c6003d;
+}
+
+body.buy-transfer-miles main :is(h2, h3, p, ul):empty,
+body.corporate-program main :is(h2, h3, p, ul):empty,
+body.dreamafrica main :is(h2, h3, p, ul):empty {
+  display: none;
+}
+
+body.buy-transfer-miles main p,
+body.buy-transfer-miles main ul,
+body.corporate-program main p,
+body.corporate-program main ul,
+body.dreamafrica main p,
+body.dreamafrica main ul {
+  margin-block: 0 12px;
+}
+
+body.buy-transfer-miles main > .section:nth-child(1) > div > ul,
+body.corporate-program main > .section:nth-child(1) > div > ul {
+  display: none;
+}
+
+body.buy-transfer-miles main > .section:nth-child(1) { height: 378px; }
+
+body.buy-transfer-miles main > .section:nth-child(2) {
+  height: 569px;
+  margin-top: 16px;
+}
+
+body.buy-transfer-miles main > .section:nth-child(3) {
+  height: 316px;
+  margin-top: 21px;
+}
+
+body.buy-transfer-miles main > .section:nth-child(4) {
+  height: 247px;
+  margin-top: 16px;
+  text-align: center;
+}
+
+body.buy-transfer-miles main > .section:nth-child(5) {
+  height: 575px;
+  margin-top: 1px;
+}
+
+body.buy-transfer-miles main > .section:nth-child(6) {
+  height: 630px;
+  margin-top: 21px;
+}
+
+body.buy-transfer-miles main > .section:nth-child(1) h2 {
+  max-width: 330px;
+}
+
+body.buy-transfer-miles main > .section:nth-child(3) p,
+body.buy-transfer-miles main > .section:nth-child(6) p {
+  margin-bottom: 5px;
+}
+
+body.buy-transfer-miles main > .section:nth-child(4) img {
+  display: block;
+  width: 80px;
+  height: 80px;
+  margin-inline: auto;
+  object-fit: contain;
+}
+
+body.corporate-program main {
+  text-align: center;
+}
+
+body.corporate-program main > .section:nth-child(3),
+body.corporate-program main > .section:nth-child(5),
+body.corporate-program main > .section:nth-child(7) {
+  display: flex;
+  align-items: center;
+}
+
+body.corporate-program main > .section:nth-child(7) img {
+  width: 80px;
+  max-height: 80px;
+  object-fit: contain;
+}
+
+body.corporate-program main > .section:nth-child(1) { height: 96px; }
+body.corporate-program main > .section:nth-child(2) { height: 320px; }
+
+body.corporate-program main > .section:nth-child(3) {
+  height: 369px;
+  margin-top: 24px;
+}
+
+body.corporate-program main > .section:nth-child(4) {
+  height: 907px;
+  margin-top: 16px;
+}
+
+body.corporate-program main > .section:nth-child(5) {
+  height: 118px;
+  margin-top: 23px;
+  font-size: 10px;
+  line-height: 13px;
+}
+
+body.corporate-program main > .section:nth-child(6) {
+  height: 652px;
+  margin-top: 16px;
+}
+
+body.corporate-program main > .section:nth-child(7) {
+  height: 438px;
+  margin-top: 24px;
+}
+
+body.corporate-program main > .section:nth-child(8) {
+  height: 727px;
+  margin-top: 48px;
+}
+
+body.corporate-program main > .section:nth-child(2) > div,
+body.corporate-program main > .section:nth-child(2) picture,
+body.corporate-program main > .section:nth-child(2) img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  padding: 0;
+  object-fit: cover;
+}
+
+body.corporate-program main > .section:nth-child(2) img {
+  object-position: left center;
+}
+
+body.corporate-program main > .section:nth-child(3) a {
+  display: block;
+  margin-top: 12px;
+}
+
+body.dreamafrica {
+  color: #1a1717;
+  font-size: 12px;
+  line-height: 17px;
+}
+
+body.dreamafrica main {
+  margin-inline: 15px;
+}
+
+body.dreamafrica main > .section > div {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 0;
+}
+
+body.dreamafrica main h2,
+body.dreamafrica main h3 {
+  margin-block: 0 12px;
+  font-family: var(--ram-page-font-family);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+body.dreamafrica main > .section:nth-child(1) { height: 25px; }
+body.dreamafrica main > .section:nth-child(2) { height: 589px; }
+body.dreamafrica main > .section:nth-child(3) { height: 646px; }
+body.dreamafrica main > .section:nth-child(4) { height: 582px; }
+
+body.dreamafrica main > .section:nth-child(5) {
+  height: 402px;
+  margin-top: 25px;
+}
+
+body.dreamafrica main > .section:nth-child(6) {
+  height: 340px;
+  margin-top: 7px;
+}
+
+body.dreamafrica main > .section:nth-child(7) {
+  height: 651px;
+  margin-top: 24px;
+}
+
+body.dreamafrica main > .section:nth-child(8) {
+  height: 731px;
+  margin-top: 33px;
+}
+
+body.dreamafrica main > .section:nth-child(9) {
+  height: 852px;
+  margin-top: 8px;
+}
+
+body.dreamafrica main > .section:nth-child(1) picture,
+body.dreamafrica main > .section:nth-child(1) img,
+body.dreamafrica main > .section:nth-child(6) picture,
+body.dreamafrica main > .section:nth-child(6) img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+@media (width >= 600px) {
+  body.buy-transfer-miles {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  body.buy-transfer-miles main > .section:nth-child(1) > div > ul,
+  body.corporate-program main > .section:nth-child(1) > div > ul {
+    display: block;
+    margin-bottom: 0;
+    font-size: 10px;
+    line-height: 15px;
+  }
+
+  body.buy-transfer-miles main > .section:nth-child(1) h2 {
+    max-width: none;
+  }
+
+  body.buy-transfer-miles main > .section:nth-child(1) { height: 252px; }
+  body.buy-transfer-miles main > .section:nth-child(2) { height: 810px; }
+
+  body.buy-transfer-miles main > .section:nth-child(3) {
+    height: 249px;
+    margin-top: 23px;
+  }
+
+  body.buy-transfer-miles main > .section:nth-child(4) { height: 315px; }
+
+  body.buy-transfer-miles main > .section:nth-child(5) {
+    height: 723px;
+    margin-top: 0;
+  }
+
+  body.buy-transfer-miles main > .section:nth-child(6) {
+    height: 446px;
+    margin-top: 24px;
+  }
+
+  body.corporate-program main > .section:nth-child(3) {
+    height: 213px;
+  }
+
+  body.corporate-program main > .section:nth-child(4) {
+    height: 470px;
+  }
+
+  body.corporate-program main > .section:nth-child(5) {
+    height: 67px;
+    margin-top: 24px;
+  }
+
+  body.corporate-program main > .section:nth-child(6) { height: 689px; }
+
+  body.corporate-program main > .section:nth-child(7) {
+    height: 396px;
+    margin-top: 25px;
+  }
+
+  body.corporate-program main > .section:nth-child(8) { height: 848px; }
+
+  body.dreamafrica {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  body.dreamafrica main h2,
+  body.dreamafrica main h3 {
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  body.dreamafrica main > .section:nth-child(1) { height: 61px; }
+  body.dreamafrica main > .section:nth-child(2) { height: 423px; }
+  body.dreamafrica main > .section:nth-child(3) { height: 464px; }
+  body.dreamafrica main > .section:nth-child(4) { height: 551px; }
+
+  body.dreamafrica main > .section:nth-child(5) {
+    height: 197px;
+    margin-top: 24px;
+  }
+
+  body.dreamafrica main > .section:nth-child(7) { height: 258px; }
+
+  body.dreamafrica main > .section:nth-child(8) {
+    height: 347px;
+    margin-top: 32px;
+  }
+
+  body.dreamafrica main > .section:nth-child(9) { height: 932px; }
+}
+
+@media (width >= 1200px) {
+  body.buy-transfer-miles main > .section > div,
+  body.corporate-program main > .section > div {
+    padding-inline: 0;
+  }
+
+  body.buy-transfer-miles main h1,
+  body.corporate-program main h1 {
+    font-size: 50px;
+    line-height: 75px;
+  }
+
+  body.buy-transfer-miles main h2 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  body.buy-transfer-miles main > .section:nth-child(1) { height: 315px; }
+  body.buy-transfer-miles main > .section:nth-child(2) { height: 552px; }
+
+  body.buy-transfer-miles main > .section:nth-child(3) {
+    height: 249px;
+    margin-top: 24px;
+  }
+
+  body.buy-transfer-miles main > .section:nth-child(4) { height: 264px; }
+  body.buy-transfer-miles main > .section:nth-child(5) { height: 506px; }
+  body.buy-transfer-miles main > .section:nth-child(6) { height: 429px; }
+
+  body.corporate-program main > .section:nth-child(1) { height: 197px; }
+  body.corporate-program main > .section:nth-child(3) { height: 192px; }
+  body.corporate-program main > .section:nth-child(4) { height: 453px; }
+
+  body.corporate-program main > .section:nth-child(5) {
+    height: 67px;
+    margin-top: 25px;
+  }
+
+  body.corporate-program main > .section:nth-child(6) { height: 569px; }
+
+  body.corporate-program main > .section:nth-child(7) {
+    height: 363px;
+    margin-top: 24px;
+  }
+
+  body.corporate-program main > .section:nth-child(8) { height: 594px; }
+
+  body.dreamafrica main > .section:nth-child(1) { height: 97px; }
+  body.dreamafrica main > .section:nth-child(2) { height: 304px; }
+  body.dreamafrica main > .section:nth-child(3) { height: 421px; }
+  body.dreamafrica main > .section:nth-child(4) { height: 404px; }
+  body.dreamafrica main > .section:nth-child(5) { height: 158px; }
+
+  body.dreamafrica main > .section:nth-child(6) {
+    height: 340px;
+    margin-top: 8px;
+  }
+
+  body.dreamafrica main > .section:nth-child(7) { height: 174px; }
+
+  body.dreamafrica main > .section:nth-child(8) {
+    height: 242px;
+    margin-top: 33px;
+  }
+
+  body.dreamafrica main > .section:nth-child(9) {
+    height: 332px;
+    margin-top: 7px;
+  }
+}
+
+body.corporate-program main > .section:nth-child(5) p {
+  margin: 0;
+}
+
+body.buy-transfer-miles main > .section:is(:nth-child(3), :nth-child(6))
+  ul:not(:has(li)) {
+  display: none;
+}
+
+@media (width >= 600px) {
+  body.dreamafrica main > .section:is(:nth-child(4), :nth-child(5), :nth-child(7)) {
+    line-height: 23px;
+  }
+}
+/* stylelint-enable no-descending-specificity */

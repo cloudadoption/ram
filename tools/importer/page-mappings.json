@@ -1459,6 +1459,712 @@
       ]
     },
     {
+      "url": "https://www.royalairmaroc.com/en-gb/buy-and-transfer-miles",
+      "template": "feature-story",
+      "path": "/en-gb/buy-and-transfer-miles",
+      "editorialPaths": [
+        "/information",
+        "/safar-flyer/buy-award-miles",
+        "/information/service-claims"
+      ],
+      "metadata": {
+        "template": "buy-transfer-miles",
+        "descriptionWhenMissing": {
+          "value": "Complete your balance by purchasing Miles and enjoy award tickets, upgrades, or other exclusive benefits faster.",
+          "basisSelectors": [
+            "[data-analytics-asset-id=\"138009\"] .text-overlapped-description"
+          ]
+        }
+      },
+      "blocks": [
+        {
+          "name": "default content header",
+          "type": "default",
+          "instances": [
+            ".page-heading",
+            "[data-analytics-asset-id=\"138000\"]"
+          ],
+          "rows": [
+            {
+              "label": "Breadcrumb",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    ".page-heading .breadcrumbs__list"
+                  ],
+                  "stripLinks": true
+                }
+              ]
+            },
+            {
+              "label": "Heading",
+              "cells": [
+                {
+                  "kind": "element",
+                  "tag": "h1",
+                  "selectors": [
+                    ".page-heading .journal-content-article h2",
+                    ".page-heading h2"
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Intro",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"138000\"] section"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns",
+          "labeled": false,
+          "instances": [
+            "[data-analytics-asset-id=\"138009\"]"
+          ],
+          "rows": [
+            {
+              "label": "Feature",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"138009\"] img"
+                  ],
+                  "loading": "eager"
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"138009\"] .text-overlapped"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "default content purchase conditions",
+          "type": "default",
+          "instances": [
+            "[data-analytics-asset-id=\"138048\"]"
+          ],
+          "rows": [
+            {
+              "label": "Content",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"138048\"]"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "default content agency",
+          "type": "default",
+          "instances": [
+            "[data-analytics-asset-id=\"138057\"]"
+          ],
+          "rows": [
+            {
+              "label": "Image",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"138057\"] img"
+                  ],
+                  "loading": "lazy"
+                }
+              ]
+            },
+            {
+              "label": "Content",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"138057\"]"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns",
+          "labeled": false,
+          "instances": [
+            "[data-analytics-asset-id=\"202944\"]"
+          ],
+          "rows": [
+            {
+              "label": "Feature",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"202944\"] img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"202944\"] .text-overlapped"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "default content transfer details",
+          "type": "default",
+          "instances": [
+            "[data-analytics-asset-id=\"138095\"]",
+            "[data-analytics-asset-id=\"138104\"]"
+          ],
+          "rows": [
+            {
+              "label": "Instructions",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"138095\"]"
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Conditions",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"138104\"]"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "https://www.royalairmaroc.com/en-gb/corporate-program",
+      "template": "feature-story",
+      "path": "/en-gb/corporate-program",
+      "editorialPaths": [
+        "/register"
+      ],
+      "linkOverrides": {
+        "/en/safar-flyer/join-us": "/en-gb/register",
+        "/en/safar-flyer/sign-in": "/en-gb/login"
+      },
+      "metadata": {
+        "template": "corporate-program"
+      },
+      "blocks": [
+        {
+          "name": "default content header",
+          "type": "default",
+          "instances": [
+            ".page-heading"
+          ],
+          "rows": [
+            {
+              "label": "Breadcrumb",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    ".page-heading .breadcrumbs__list"
+                  ],
+                  "stripLinks": true
+                }
+              ]
+            },
+            {
+              "label": "Heading",
+              "cells": [
+                {
+                  "kind": "element",
+                  "tag": "h1",
+                  "selectors": [
+                    ".page-heading .journal-content-article h2",
+                    ".page-heading h2"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "default content banner",
+          "type": "default",
+          "instances": [
+            "[data-analytics-asset-id=\"137190\"]"
+          ],
+          "rows": [
+            {
+              "label": "Image",
+              "cells": [
+                {
+                  "kind": "background-picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"137190\"] #food-bg-default"
+                  ],
+                  "loading": "eager",
+                  "alt": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "default content introduction",
+          "type": "default",
+          "instances": [
+            "[data-analytics-asset-id=\"315134\"]",
+            "[data-analytics-asset-id=\"137201\"]"
+          ],
+          "rows": [
+            {
+              "label": "Application",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"315134\"]"
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Introduction",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"137201\"]"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "cards",
+          "labeled": false,
+          "instances": [
+            "[data-analytics-asset-id=\"137210\"]"
+          ],
+          "rows": [
+            {
+              "label": "Benefit",
+              "repeat": [
+                "[data-analytics-asset-id=\"137210\"] .col-12.col-md-4"
+              ],
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    ":scope"
+                  ],
+                  "excludeSelectors": [
+                    "img"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "default content footnote",
+          "type": "default",
+          "instances": [
+            "[data-analytics-asset-id=\"137279\"]"
+          ],
+          "rows": [
+            {
+              "label": "Content",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"137279\"]"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns",
+          "labeled": false,
+          "instances": [
+            "[data-analytics-asset-id=\"137337\"]"
+          ],
+          "rows": [
+            {
+              "label": "Feature",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"137337\"]"
+                  ],
+                  "excludeSelectors": [
+                    "img"
+                  ]
+                },
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"137337\"] img"
+                  ],
+                  "loading": "lazy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "default content account creation",
+          "type": "default",
+          "instances": [
+            "[data-analytics-asset-id=\"137356\"]",
+            "[data-analytics-asset-id=\"137384\"]",
+            "[data-analytics-asset-id=\"137403\"]"
+          ],
+          "rows": [
+            {
+              "label": "Heading",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"137356\"]"
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Image",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"137384\"] img"
+                  ],
+                  "loading": "lazy"
+                }
+              ]
+            },
+            {
+              "label": "Content",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"137384\"]"
+                  ],
+                  "excludeSelectors": [
+                    "img"
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Action",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"137403\"]"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns",
+          "labeled": false,
+          "instances": [
+            "[data-analytics-asset-id=\"137421\"]"
+          ],
+          "rows": [
+            {
+              "label": "Feature",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"137421\"]"
+                  ],
+                  "excludeSelectors": [
+                    "img"
+                  ]
+                },
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"137421\"] img"
+                  ],
+                  "loading": "lazy"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "https://www.royalairmaroc.com/en-gb/dreamafrica-meetmorocco",
+      "template": "feature-story",
+      "path": "/en-gb/dreamafrica-meetmorocco",
+      "editorialPaths": [],
+      "metadata": {
+        "template": "dreamafrica",
+        "descriptionWhenMissing": {
+          "value": "A new brand message, carrying forward our mission and our ambitions!",
+          "basisSelectors": [
+            "[data-analytics-asset-id=\"129056\"] h2"
+          ]
+        }
+      },
+      "blocks": [
+        {
+          "name": "default content banner",
+          "type": "default",
+          "instances": [
+            "[data-analytics-asset-id=\"129019\"]"
+          ],
+          "rows": [
+            {
+              "label": "Image",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"129019\"] img"
+                  ],
+                  "loading": "eager"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "default content introduction",
+          "type": "default",
+          "instances": [
+            "[data-analytics-asset-id=\"129056\"]"
+          ],
+          "rows": [
+            {
+              "label": "Content",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"129056\"]"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns",
+          "labeled": false,
+          "instances": [
+            "[data-analytics-asset-id=\"129075\"]"
+          ],
+          "rows": [
+            {
+              "label": "Feature",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"129075\"] img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"129075\"]"
+                  ],
+                  "excludeSelectors": [
+                    "img"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "columns",
+          "labeled": false,
+          "instances": [
+            "[data-analytics-asset-id=\"129094\"]"
+          ],
+          "rows": [
+            {
+              "label": "Feature",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"129094\"]"
+                  ],
+                  "excludeSelectors": [
+                    "img"
+                  ]
+                },
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"129094\"] img"
+                  ],
+                  "loading": "lazy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "default content service",
+          "type": "default",
+          "instances": [
+            "[data-analytics-asset-id=\"129113\"]"
+          ],
+          "rows": [
+            {
+              "label": "Content",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"129113\"]"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "default content campaign image",
+          "type": "default",
+          "instances": [
+            "[data-analytics-asset-id=\"129122\"]"
+          ],
+          "rows": [
+            {
+              "label": "Image",
+              "cells": [
+                {
+                  "kind": "background-picture",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"129122\"] #food-bg"
+                  ],
+                  "loading": "lazy",
+                  "alt": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "default content campaign",
+          "type": "default",
+          "instances": [
+            "[data-analytics-asset-id=\"129141\"]"
+          ],
+          "rows": [
+            {
+              "label": "Content",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"129141\"]"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "default content brand film",
+          "type": "default",
+          "instances": [
+            "[data-analytics-asset-id=\"129150\"]"
+          ],
+          "rows": [
+            {
+              "label": "Content",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "[data-analytics-asset-id=\"129150\"]"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "cards",
+          "labeled": false,
+          "instances": [
+            "[data-analytics-asset-id=\"129159\"]"
+          ],
+          "rows": [
+            {
+              "label": "Card",
+              "repeat": [
+                "[data-analytics-asset-id=\"129159\"] .link-card"
+              ],
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "img"
+                  ],
+                  "loading": "lazy"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "url": "https://www.royalairmaroc.com/en-gb/seats",
       "template": "standard-article",
       "path": "/en-gb/seats",

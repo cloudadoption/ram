@@ -6,6 +6,7 @@ const REMOVE_SELECTORS = [
   '#onetrust-banner-sdk',
   '.onetrust-pc-dark-filter',
   '#ot-sdk-btn-floating',
+  '.sr-only',
 ];
 
 export default function cleanupDocument(document) {
