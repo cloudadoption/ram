@@ -1,0 +1,832 @@
+{
+  "schemaVersion": 1,
+  "capturedOn": "2026-07-28",
+  "site": {
+    "source": "https://www.royalairmaroc.com",
+    "code": "cloudadoption/ram",
+    "content": "cloudadoption/ram"
+  },
+  "invariants": [
+    "Preserve /en-gb/ and /en/ as disjoint content prefixes.",
+    "Never infer that a slug exists under both prefixes.",
+    "DA documents serve authored pages; BYOM serves generated route, destination and sitemap families.",
+    "Narrow BYOM mounts must precede the DA root mount."
+  ],
+  "knownSiteInventory": [
+    {
+      "metric": "locale-sitemaps",
+      "count": 72,
+      "countPattern": "<loc> entries in sitemap_index.xml matching a locale sitemap URL"
+    },
+    {
+      "metric": "base-languages",
+      "count": 9,
+      "countPattern": "Distinct base language token before an optional underscore in the 72 locale sitemap path segments",
+      "values": [
+        "ar",
+        "de",
+        "en",
+        "es",
+        "fr",
+        "it",
+        "nl",
+        "pt",
+        "ru"
+      ]
+    }
+  ],
+  "reconciliation": {
+    "editorialNavigation": {
+      "count": 79,
+      "countPattern": "Unique href=\"/en-GB/[^\"]+\" values in the shoot.mjs-rendered header DOM, with only the prefix case corrected to /en-gb/",
+      "sourceStates": [
+        {
+          "state": "content",
+          "count": 60,
+          "countPattern": "Rendered editorial pages whose title is not a 404 title and whose #content class does not contain home-layout"
+        },
+        {
+          "state": "homepage-shell",
+          "count": 7,
+          "countPattern": "Rendered non-home editorial URLs whose #content class contains home-layout"
+        },
+        {
+          "state": "not-found",
+          "count": 12,
+          "countPattern": "Rendered editorial URLs whose <title> starts with \"404 Page\""
+        }
+      ]
+    },
+    "englishSitemap": {
+      "count": 37156,
+      "countPattern": "<loc> entries in https://www.royalairmaroc.com/en/sitemap.xml",
+      "groups": [
+        {
+          "template": "route-detail",
+          "count": 36577,
+          "countPattern": "^https://www\\.royalairmaroc\\.com/en/flights-from-[^/]+-to-[^/]+$"
+        },
+        {
+          "template": "destination-landing",
+          "count": 263,
+          "countPattern": "^https://www\\.royalairmaroc\\.com/en/flights-to-[^/]+$"
+        },
+        {
+          "template": "origin-landing",
+          "count": 262,
+          "countPattern": "^https://www\\.royalairmaroc\\.com/en/flights-from-(?!.*-to-)[^/]+$"
+        },
+        {
+          "template": "sitemap-index",
+          "count": 42,
+          "countPattern": "^https://www\\.royalairmaroc\\.com/en/sitemap/[^/]+/page-[0-9]+$"
+        },
+        {
+          "template": "english-static",
+          "count": 11,
+          "countPattern": "Remaining <loc> entries after excluding /en/, the three generated flight-family regexes and /en/sitemap/[^/]+/page-[0-9]+"
+        },
+        {
+          "template": "en-homepage",
+          "count": 1,
+          "countPattern": "^https://www\\.royalairmaroc\\.com/en/$"
+        }
+      ]
+    },
+    "observedOutsideEnglishSitemap": {
+      "count": 65,
+      "countPattern": "Unique rendered chrome hrefs with an /en/ path minus exact /en/sitemap.xml <loc> entries",
+      "coverage": "observed-chrome-links-only; not an exhaustive site count"
+    }
+  },
+  "sampling": {
+    "renderedBy": ".mossy/tools/shoot.mjs --url URL --dom",
+    "editorial": {
+      "population": 79,
+      "sampleCount": 79,
+      "samplePattern": "All unique editorial navigation URLs because the population is below 1000"
+    },
+    "englishSitemap": {
+      "sampleCount": 32,
+      "samplePattern": "All 12 static URLs plus the first five sitemap-order URLs from each family with more than 20 URLs"
+    },
+    "nonSitemapAliases": {
+      "sampleCount": 3,
+      "samplePattern": "One rendered representative from each observed alias regex family"
+    }
+  },
+  "templates": [
+    {
+      "name": "collection-listing",
+      "prefix": "/en-gb/",
+      "contentSet": "editorial",
+      "deliveryMechanism": {
+        "type": "da-document",
+        "source": "cloudadoption/ram"
+      },
+      "description": "Editorial landing with filters, tabs, cards or lists backed by a live collection portlet.",
+      "assignmentPattern": "Rendered #main-content contains AssetPublisherPortlet, AssetCategoriesNavigationPortlet or SiteNavigationSiteMapPortlet after excluding RAM service portlets.",
+      "urlCount": 11,
+      "countPattern": "Editorial assignment rows where template == \"collection-listing\"",
+      "representativePages": [
+        "https://www.royalairmaroc.com/en-gb/information/contact-us",
+        "https://www.royalairmaroc.com/en-gb/destinations/our-network",
+        "https://www.royalairmaroc.com/en-gb/cash-miles",
+        "https://www.royalairmaroc.com/en-gb/information/news",
+        "https://www.royalairmaroc.com/en-gb/safar-flyer/our-partners"
+      ],
+      "urls": [
+        "https://www.royalairmaroc.com/en-gb/cash-miles",
+        "https://www.royalairmaroc.com/en-gb/destinations/our-network",
+        "https://www.royalairmaroc.com/en-gb/help-and-support",
+        "https://www.royalairmaroc.com/en-gb/information/contact-us",
+        "https://www.royalairmaroc.com/en-gb/information/frequently-asked-questions",
+        "https://www.royalairmaroc.com/en-gb/information/news",
+        "https://www.royalairmaroc.com/en-gb/information/worldwide-agencies",
+        "https://www.royalairmaroc.com/en-gb/our-fleet",
+        "https://www.royalairmaroc.com/en-gb/safar-flyer/faq-and-contact",
+        "https://www.royalairmaroc.com/en-gb/safar-flyer/our-offers",
+        "https://www.royalairmaroc.com/en-gb/safar-flyer/our-partners"
+      ],
+      "blocks": [
+        "article-hero",
+        "breadcrumbs",
+        "filter-tabs",
+        "card-list",
+        "accordion",
+        "pagination"
+      ]
+    },
+    {
+      "name": "feature-story",
+      "prefix": "/en-gb/",
+      "contentSet": "editorial",
+      "deliveryMechanism": {
+        "type": "da-document",
+        "source": "cloudadoption/ram"
+      },
+      "description": "Image-led or benefit-led editorial page composed from banners, cards, carousels and feature grids.",
+      "assignmentPattern": "Rendered #main-content has a class token matching banner|benefit|card|carousel|feature|hero after service, collection and table/accordion rules.",
+      "urlCount": 15,
+      "countPattern": "Editorial assignment rows where template == \"feature-story\"",
+      "representativePages": [
+        "https://www.royalairmaroc.com/en-gb/information/special-attendance",
+        "https://www.royalairmaroc.com/en-gb/dreamafrica-meetmorocco",
+        "https://www.royalairmaroc.com/en-gb/baggage-information",
+        "https://www.royalairmaroc.com/en-gb/royal-air-maroc-app",
+        "https://www.royalairmaroc.com/en-gb/blue-benefits"
+      ],
+      "urls": [
+        "https://www.royalairmaroc.com/en-gb/baggage-information",
+        "https://www.royalairmaroc.com/en-gb/blue-benefits",
+        "https://www.royalairmaroc.com/en-gb/buy-and-transfer-miles",
+        "https://www.royalairmaroc.com/en-gb/corporate-program",
+        "https://www.royalairmaroc.com/en-gb/dreamafrica-meetmorocco",
+        "https://www.royalairmaroc.com/en-gb/en-cas-d-irr%C3%A9gularit%C3%A9s-vols",
+        "https://www.royalairmaroc.com/en-gb/family-program",
+        "https://www.royalairmaroc.com/en-gb/gold-benefits",
+        "https://www.royalairmaroc.com/en-gb/information/check-in-conditions",
+        "https://www.royalairmaroc.com/en-gb/information/special-attendance",
+        "https://www.royalairmaroc.com/en-gb/platinum-benefits",
+        "https://www.royalairmaroc.com/en-gb/ram-resale",
+        "https://www.royalairmaroc.com/en-gb/royal-air-maroc-app",
+        "https://www.royalairmaroc.com/en-gb/silver-benefits",
+        "https://www.royalairmaroc.com/en-gb/status-booster"
+      ],
+      "blocks": [
+        "article-hero",
+        "breadcrumbs",
+        "feature-grid",
+        "image-card",
+        "media",
+        "promo-banner",
+        "cta"
+      ]
+    },
+    {
+      "name": "interactive-service",
+      "prefix": "/en-gb/",
+      "contentSet": "editorial",
+      "deliveryMechanism": {
+        "type": "da-document",
+        "source": "cloudadoption/ram"
+      },
+      "description": "Editorial service shell around a booking, lookup, calculator or contact form surface.",
+      "assignmentPattern": "Rendered #main-content contains a portlet id beginning ram_airways_.",
+      "urlCount": 14,
+      "countPattern": "Editorial assignment rows where template == \"interactive-service\"",
+      "representativePages": [
+        "https://www.royalairmaroc.com/en-gb/information/service-claims",
+        "https://www.royalairmaroc.com/en-gb/booking/book-a-flight",
+        "https://www.royalairmaroc.com/en-gb/add-extra-luggage",
+        "https://www.royalairmaroc.com/en-gb/booking/flight-info",
+        "https://www.royalairmaroc.com/en-gb/flight-schedule"
+      ],
+      "urls": [
+        "https://www.royalairmaroc.com/en-gb/add-extra-luggage",
+        "https://www.royalairmaroc.com/en-gb/booking/book-a-flight",
+        "https://www.royalairmaroc.com/en-gb/booking/flight-info",
+        "https://www.royalairmaroc.com/en-gb/booking/manage-booking",
+        "https://www.royalairmaroc.com/en-gb/booking/online-check-in",
+        "https://www.royalairmaroc.com/en-gb/booking/payment-methods",
+        "https://www.royalairmaroc.com/en-gb/booking/select-seat",
+        "https://www.royalairmaroc.com/en-gb/flight-schedule",
+        "https://www.royalairmaroc.com/en-gb/get-my-card-number",
+        "https://www.royalairmaroc.com/en-gb/information/service-claims",
+        "https://www.royalairmaroc.com/en-gb/information/travel-with-animals",
+        "https://www.royalairmaroc.com/en-gb/information/visa-and-vaccinations",
+        "https://www.royalairmaroc.com/en-gb/miles-calculator",
+        "https://www.royalairmaroc.com/en-gb/safar-flyer/forgot-my-pin"
+      ],
+      "blocks": [
+        "article-hero",
+        "breadcrumbs",
+        "service-widget-shell",
+        "form-shell",
+        "info-card",
+        "accordion",
+        "responsive-table",
+        "app-promo"
+      ],
+      "scopeNote": "Migrate the rendered marketing shell only where the underlying service is out of scope."
+    },
+    {
+      "name": "live-not-found",
+      "prefix": "/en-gb/",
+      "contentSet": "editorial",
+      "deliveryMechanism": {
+        "type": "da-document",
+        "source": "cloudadoption/ram"
+      },
+      "description": "Nav target whose working lowercase /en-gb/ path currently renders the live 404 shell.",
+      "assignmentPattern": "Rendered <title> starts with \"404 Page\".",
+      "urlCount": 12,
+      "countPattern": "Editorial assignment rows where template == \"live-not-found\"",
+      "representativePages": [
+        "https://www.royalairmaroc.com/en-gb/applications-mobile",
+        "https://www.royalairmaroc.com/en-gb/baggage-assistance",
+        "https://www.royalairmaroc.com/en-gb/business-class",
+        "https://www.royalairmaroc.com/en-gb/children-and-pregnancy",
+        "https://www.royalairmaroc.com/en-gb/dining-on-board"
+      ],
+      "urls": [
+        "https://www.royalairmaroc.com/en-gb/applications-mobile",
+        "https://www.royalairmaroc.com/en-gb/baggage-assistance",
+        "https://www.royalairmaroc.com/en-gb/business-class",
+        "https://www.royalairmaroc.com/en-gb/children-and-pregnancy",
+        "https://www.royalairmaroc.com/en-gb/dining-on-board",
+        "https://www.royalairmaroc.com/en-gb/economy-class",
+        "https://www.royalairmaroc.com/en-gb/experience/entertainment",
+        "https://www.royalairmaroc.com/en-gb/how-to-spend-miles",
+        "https://www.royalairmaroc.com/en-gb/lounge-areas",
+        "https://www.royalairmaroc.com/en-gb/oneworld",
+        "https://www.royalairmaroc.com/en-gb/safar-flyer/sign-in",
+        "https://www.royalairmaroc.com/en-gb/special-services"
+      ],
+      "blocks": [
+        "error-hero"
+      ],
+      "sourceState": "not-found"
+    },
+    {
+      "name": "navigation-landing-alias",
+      "prefix": "/en-gb/",
+      "contentSet": "editorial",
+      "deliveryMechanism": {
+        "type": "da-document",
+        "source": "cloudadoption/ram"
+      },
+      "description": "Nav grouping target whose URL currently renders the live homepage shell rather than distinct page content.",
+      "assignmentPattern": "Rendered #content class contains home-layout for a non-home URL.",
+      "urlCount": 7,
+      "countPattern": "Editorial assignment rows where template == \"navigation-landing-alias\"",
+      "representativePages": [
+        "https://www.royalairmaroc.com/en-gb/before-travel",
+        "https://www.royalairmaroc.com/en-gb/booking",
+        "https://www.royalairmaroc.com/en-gb/discover-safar-flyer",
+        "https://www.royalairmaroc.com/en-gb/earn-and-spend-miles",
+        "https://www.royalairmaroc.com/en-gb/get-help"
+      ],
+      "urls": [
+        "https://www.royalairmaroc.com/en-gb/before-travel",
+        "https://www.royalairmaroc.com/en-gb/booking",
+        "https://www.royalairmaroc.com/en-gb/discover-safar-flyer",
+        "https://www.royalairmaroc.com/en-gb/earn-and-spend-miles",
+        "https://www.royalairmaroc.com/en-gb/get-help",
+        "https://www.royalairmaroc.com/en-gb/information/special-needs",
+        "https://www.royalairmaroc.com/en-gb/loyalty"
+      ],
+      "blocks": [
+        "homepage-shell"
+      ],
+      "sourceState": "homepage-shell"
+    },
+    {
+      "name": "standard-article",
+      "prefix": "/en-gb/",
+      "contentSet": "editorial",
+      "deliveryMechanism": {
+        "type": "da-document",
+        "source": "cloudadoption/ram"
+      },
+      "description": "Single-column editorial detail with hero, breadcrumbs and rich content.",
+      "assignmentPattern": "Rendered content page remaining after service, collection, structured-reference and feature-story rules.",
+      "urlCount": 10,
+      "countPattern": "Editorial assignment rows where template == \"standard-article\"",
+      "representativePages": [
+        "https://www.royalairmaroc.com/en-gb/information/travel-documents",
+        "https://www.royalairmaroc.com/en-gb/discover-morocco",
+        "https://www.royalairmaroc.com/en-gb/dreamliner",
+        "https://www.royalairmaroc.com/en-gb/experience/children",
+        "https://www.royalairmaroc.com/en-gb/royal-air-maroc-joins-the-united-for-wildlife-taskforce"
+      ],
+      "urls": [
+        "https://www.royalairmaroc.com/en-gb/discover-morocco",
+        "https://www.royalairmaroc.com/en-gb/dreamliner",
+        "https://www.royalairmaroc.com/en-gb/experience/children",
+        "https://www.royalairmaroc.com/en-gb/information/travel-documents",
+        "https://www.royalairmaroc.com/en-gb/royal-air-maroc-joins-the-united-for-wildlife-taskforce",
+        "https://www.royalairmaroc.com/en-gb/royal-air-maroc-lounges",
+        "https://www.royalairmaroc.com/en-gb/safar-flyer/claim-missing-miles",
+        "https://www.royalairmaroc.com/en-gb/safar-flyer/terms-and-conditions",
+        "https://www.royalairmaroc.com/en-gb/seats",
+        "https://www.royalairmaroc.com/en-gb/sky-press"
+      ],
+      "blocks": [
+        "article-hero",
+        "breadcrumbs",
+        "rich-text",
+        "media",
+        "cta"
+      ]
+    },
+    {
+      "name": "structured-reference",
+      "prefix": "/en-gb/",
+      "contentSet": "editorial",
+      "deliveryMechanism": {
+        "type": "da-document",
+        "source": "cloudadoption/ram"
+      },
+      "description": "Reference-heavy editorial detail organized by accordions, tables, callouts and feature lists.",
+      "assignmentPattern": "Rendered #main-content has a class token matching accordion|table after service and collection rules.",
+      "urlCount": 10,
+      "countPattern": "Editorial assignment rows where template == \"structured-reference\"",
+      "representativePages": [
+        "https://www.royalairmaroc.com/en-gb/airport-transit",
+        "https://www.royalairmaroc.com/en-gb/reduced-mobility",
+        "https://www.royalairmaroc.com/en-gb/how-it-works",
+        "https://www.royalairmaroc.com/en-gb/information/fare-conditions",
+        "https://www.royalairmaroc.com/en-gb/safar-flyer/earn-miles"
+      ],
+      "urls": [
+        "https://www.royalairmaroc.com/en-gb/airport-transit",
+        "https://www.royalairmaroc.com/en-gb/how-it-works",
+        "https://www.royalairmaroc.com/en-gb/information/fare-conditions",
+        "https://www.royalairmaroc.com/en-gb/information/services-fees",
+        "https://www.royalairmaroc.com/en-gb/information/special-meals",
+        "https://www.royalairmaroc.com/en-gb/partners-lounge",
+        "https://www.royalairmaroc.com/en-gb/reduced-mobility",
+        "https://www.royalairmaroc.com/en-gb/safar-flyer-and-oneworld",
+        "https://www.royalairmaroc.com/en-gb/safar-flyer/earn-miles",
+        "https://www.royalairmaroc.com/en-gb/unattendance-minors"
+      ],
+      "blocks": [
+        "article-hero",
+        "breadcrumbs",
+        "rich-text",
+        "accordion",
+        "responsive-table",
+        "info-callout",
+        "feature-grid"
+      ]
+    },
+    {
+      "name": "en-homepage",
+      "prefix": "/en/",
+      "contentSet": "english-static",
+      "deliveryMechanism": {
+        "type": "da-document",
+        "source": "cloudadoption/ram"
+      },
+      "description": "English homepage with booking shell, offers, destinations and promotional modules.",
+      "assignmentPattern": "Exact URL membership in the en-homepage URL set",
+      "urlCount": 1,
+      "countPattern": "Exact entries in templates[\"en-homepage\"].urls",
+      "representativePages": [
+        "https://www.royalairmaroc.com/en/"
+      ],
+      "urls": [
+        "https://www.royalairmaroc.com/en/"
+      ],
+      "blocks": [
+        "hero",
+        "booking-widget-shell",
+        "quick-links",
+        "offer-cards",
+        "destination-cards",
+        "promo-banner",
+        "app-promo"
+      ]
+    },
+    {
+      "name": "travel-guide",
+      "prefix": "/en/",
+      "contentSet": "english-static",
+      "deliveryMechanism": {
+        "type": "da-document",
+        "source": "cloudadoption/ram"
+      },
+      "description": "Long-form destination guide with image-led sections and supporting calls to action.",
+      "assignmentPattern": "Exact URL membership in the travel-guide URL set",
+      "urlCount": 5,
+      "countPattern": "Exact entries in templates[\"travel-guide\"].urls",
+      "representativePages": [
+        "https://www.royalairmaroc.com/en/best-time-to-visit-morocco",
+        "https://www.royalairmaroc.com/en/casablanca-travel-guide",
+        "https://www.royalairmaroc.com/en/marrakesh-travel-guide",
+        "https://www.royalairmaroc.com/en/morocco-travel-guide",
+        "https://www.royalairmaroc.com/en/top-things-to-do-in-morocco"
+      ],
+      "urls": [
+        "https://www.royalairmaroc.com/en/best-time-to-visit-morocco",
+        "https://www.royalairmaroc.com/en/casablanca-travel-guide",
+        "https://www.royalairmaroc.com/en/marrakesh-travel-guide",
+        "https://www.royalairmaroc.com/en/morocco-travel-guide",
+        "https://www.royalairmaroc.com/en/top-things-to-do-in-morocco"
+      ],
+      "blocks": [
+        "article-hero",
+        "breadcrumbs",
+        "rich-text",
+        "image-card-grid",
+        "info-callout",
+        "faq",
+        "related-links"
+      ]
+    },
+    {
+      "name": "campaign-landing",
+      "prefix": "/en/",
+      "contentSet": "english-static",
+      "deliveryMechanism": {
+        "type": "da-document",
+        "source": "cloudadoption/ram"
+      },
+      "description": "Time-bound offer or market campaign landing page.",
+      "assignmentPattern": "Exact URL membership in the campaign-landing URL set",
+      "urlCount": 4,
+      "countPattern": "Exact entries in templates[\"campaign-landing\"].urls",
+      "representativePages": [
+        "https://www.royalairmaroc.com/en/cyber-monday-deals",
+        "https://www.royalairmaroc.com/en/early-birds-flight-deals",
+        "https://www.royalairmaroc.com/en/flights-gambia-to-europe",
+        "https://www.royalairmaroc.com/en/private-sales"
+      ],
+      "urls": [
+        "https://www.royalairmaroc.com/en/cyber-monday-deals",
+        "https://www.royalairmaroc.com/en/early-birds-flight-deals",
+        "https://www.royalairmaroc.com/en/flights-gambia-to-europe",
+        "https://www.royalairmaroc.com/en/private-sales"
+      ],
+      "blocks": [
+        "campaign-hero",
+        "offer-cards",
+        "rich-text",
+        "cta",
+        "terms-accordion"
+      ]
+    },
+    {
+      "name": "mobile-app-campaign",
+      "prefix": "/en/",
+      "contentSet": "english-static",
+      "deliveryMechanism": {
+        "type": "da-document",
+        "source": "cloudadoption/ram"
+      },
+      "description": "Mobile application campaign with feature explanation and store calls to action.",
+      "assignmentPattern": "Exact URL membership in the mobile-app-campaign URL set",
+      "urlCount": 1,
+      "countPattern": "Exact entries in templates[\"mobile-app-campaign\"].urls",
+      "representativePages": [
+        "https://www.royalairmaroc.com/en/mobile-app"
+      ],
+      "urls": [
+        "https://www.royalairmaroc.com/en/mobile-app"
+      ],
+      "blocks": [
+        "campaign-hero",
+        "feature-grid",
+        "media",
+        "app-store-cta"
+      ]
+    },
+    {
+      "name": "route-map",
+      "prefix": "/en/",
+      "contentSet": "english-static",
+      "deliveryMechanism": {
+        "type": "da-document",
+        "source": "cloudadoption/ram"
+      },
+      "description": "Authored shell for the network map and destination discovery surface.",
+      "assignmentPattern": "Exact URL membership in the route-map URL set",
+      "urlCount": 1,
+      "countPattern": "Exact entries in templates[\"route-map\"].urls",
+      "representativePages": [
+        "https://www.royalairmaroc.com/en/route-map"
+      ],
+      "urls": [
+        "https://www.royalairmaroc.com/en/route-map"
+      ],
+      "blocks": [
+        "article-hero",
+        "route-map-shell",
+        "destination-search",
+        "destination-list"
+      ]
+    },
+    {
+      "name": "route-detail",
+      "prefix": "/en/",
+      "contentSet": "generated-flight-catalog",
+      "deliveryMechanism": {
+        "type": "byom",
+        "mountType": "markup",
+        "mountPrefix": "/en/flights-from-",
+        "suffix": ".html",
+        "ordering": "Place this narrow mount before the DA root mount because mount matching takes the first prefix hit."
+      },
+      "description": "One city-pair template over route data.",
+      "assignmentPattern": "^https://www\\.royalairmaroc\\.com/en/flights-from-[^/]+-to-[^/]+$",
+      "urlCount": 36577,
+      "countPattern": "Exact <loc> entries in /en/sitemap.xml matching ^https://www\\.royalairmaroc\\.com/en/flights-from-[^/]+-to-[^/]+$",
+      "representativePages": [
+        "https://www.royalairmaroc.com/en/flights-from-lyon-to-dallas",
+        "https://www.royalairmaroc.com/en/flights-from-moscow-to-ndjamena",
+        "https://www.royalairmaroc.com/en/flights-from-valencia-1-to-lomé",
+        "https://www.royalairmaroc.com/en/flights-from-bilbao-to-dallas",
+        "https://www.royalairmaroc.com/en/flights-from-niamey-to-saint-petersburg"
+      ],
+      "urlPattern": "^https://www\\.royalairmaroc\\.com/en/flights-from-[^/]+-to-[^/]+$",
+      "blocks": [
+        "seo-hero",
+        "booking-widget-shell",
+        "fare-cards",
+        "route-summary",
+        "travel-content",
+        "faq",
+        "related-routes"
+      ]
+    },
+    {
+      "name": "destination-landing",
+      "prefix": "/en/",
+      "contentSet": "generated-flight-catalog",
+      "deliveryMechanism": {
+        "type": "byom",
+        "mountType": "markup",
+        "mountPrefix": "/en/flights-to-",
+        "suffix": ".html",
+        "ordering": "Place this narrow mount before the DA root mount because mount matching takes the first prefix hit."
+      },
+      "description": "One destination template over destination data.",
+      "assignmentPattern": "^https://www\\.royalairmaroc\\.com/en/flights-to-[^/]+$",
+      "urlCount": 263,
+      "countPattern": "Exact <loc> entries in /en/sitemap.xml matching ^https://www\\.royalairmaroc\\.com/en/flights-to-[^/]+$",
+      "representativePages": [
+        "https://www.royalairmaroc.com/en/flights-to-united-states",
+        "https://www.royalairmaroc.com/en/flights-to-chad",
+        "https://www.royalairmaroc.com/en/flights-to-togo",
+        "https://www.royalairmaroc.com/en/flights-to-russia",
+        "https://www.royalairmaroc.com/en/flights-to-benin"
+      ],
+      "urlPattern": "^https://www\\.royalairmaroc\\.com/en/flights-to-[^/]+$",
+      "blocks": [
+        "seo-hero",
+        "booking-widget-shell",
+        "fare-cards",
+        "destination-content",
+        "origin-links",
+        "faq"
+      ]
+    },
+    {
+      "name": "origin-landing",
+      "prefix": "/en/",
+      "contentSet": "generated-flight-catalog",
+      "deliveryMechanism": {
+        "type": "byom",
+        "mountType": "markup",
+        "mountPrefix": "/en/flights-from-",
+        "suffix": ".html",
+        "ordering": "Place this narrow mount before the DA root mount because mount matching takes the first prefix hit."
+      },
+      "description": "One origin template over origin data.",
+      "assignmentPattern": "^https://www\\.royalairmaroc\\.com/en/flights-from-(?!.*-to-)[^/]+$",
+      "urlCount": 262,
+      "countPattern": "Exact <loc> entries in /en/sitemap.xml matching ^https://www\\.royalairmaroc\\.com/en/flights-from-(?!.*-to-)[^/]+$",
+      "representativePages": [
+        "https://www.royalairmaroc.com/en/flights-from-lyon",
+        "https://www.royalairmaroc.com/en/flights-from-moscow",
+        "https://www.royalairmaroc.com/en/flights-from-valencia-1",
+        "https://www.royalairmaroc.com/en/flights-from-bilbao",
+        "https://www.royalairmaroc.com/en/flights-from-niamey"
+      ],
+      "urlPattern": "^https://www\\.royalairmaroc\\.com/en/flights-from-(?!.*-to-)[^/]+$",
+      "blocks": [
+        "seo-hero",
+        "booking-widget-shell",
+        "fare-cards",
+        "origin-content",
+        "destination-links",
+        "faq"
+      ]
+    },
+    {
+      "name": "sitemap-index",
+      "prefix": "/en/",
+      "contentSet": "generated-flight-catalog",
+      "deliveryMechanism": {
+        "type": "byom",
+        "mountType": "markup",
+        "mountPrefix": "/en/sitemap/",
+        "suffix": ".html",
+        "ordering": "Place this narrow mount before the DA root mount because mount matching takes the first prefix hit."
+      },
+      "description": "Generated paginated link index over route and destination data.",
+      "assignmentPattern": "^https://www\\.royalairmaroc\\.com/en/sitemap/[^/]+/page-[0-9]+$",
+      "urlCount": 42,
+      "countPattern": "Exact <loc> entries in /en/sitemap.xml matching ^https://www\\.royalairmaroc\\.com/en/sitemap/[^/]+/page-[0-9]+$",
+      "representativePages": [
+        "https://www.royalairmaroc.com/en/sitemap/to-country/page-1",
+        "https://www.royalairmaroc.com/en/sitemap/to-city/page-1",
+        "https://www.royalairmaroc.com/en/sitemap/city-to-city-flights/page-1",
+        "https://www.royalairmaroc.com/en/sitemap/city-to-city-flights/page-2",
+        "https://www.royalairmaroc.com/en/sitemap/city-to-city-flights/page-3"
+      ],
+      "urlPattern": "^https://www\\.royalairmaroc\\.com/en/sitemap/[^/]+/page-[0-9]+$",
+      "blocks": [
+        "page-heading",
+        "link-list",
+        "pagination"
+      ]
+    },
+    {
+      "name": "destination-alias",
+      "prefix": "/en/",
+      "contentSet": "observed-non-sitemap-alias",
+      "deliveryMechanism": {
+        "type": "byom",
+        "mountType": "markup",
+        "mountPrefix": "/en/vols-pour-",
+        "suffix": ".html",
+        "ordering": "Place this narrow mount before the DA root mount because mount matching takes the first prefix hit."
+      },
+      "description": "Live chrome-linked alias family absent from exact /en/sitemap.xml entries.",
+      "assignmentPattern": "^https://www\\.royalairmaroc\\.com/en/vols-pour-[^/]+$",
+      "urlCount": 59,
+      "countPattern": "Unique rendered chrome hrefs matching ^https://www\\.royalairmaroc\\.com/en/vols-pour-[^/]+$ and absent from exact /en/sitemap.xml <loc> entries",
+      "coverage": "observed-chrome-links-only; not an exhaustive site count",
+      "representativePages": [
+        "https://www.royalairmaroc.com/en/vols-pour-paris"
+      ],
+      "urls": [
+        "https://www.royalairmaroc.com/en/vols-pour-abidjan",
+        "https://www.royalairmaroc.com/en/vols-pour-accra",
+        "https://www.royalairmaroc.com/en/vols-pour-agadir",
+        "https://www.royalairmaroc.com/en/vols-pour-amsterdam",
+        "https://www.royalairmaroc.com/en/vols-pour-bamako",
+        "https://www.royalairmaroc.com/en/vols-pour-bangui",
+        "https://www.royalairmaroc.com/en/vols-pour-banjul",
+        "https://www.royalairmaroc.com/en/vols-pour-barcelone",
+        "https://www.royalairmaroc.com/en/vols-pour-bologne",
+        "https://www.royalairmaroc.com/en/vols-pour-bordeaux",
+        "https://www.royalairmaroc.com/en/vols-pour-brazzaville",
+        "https://www.royalairmaroc.com/en/vols-pour-bruxelles",
+        "https://www.royalairmaroc.com/en/vols-pour-caire",
+        "https://www.royalairmaroc.com/en/vols-pour-casablanca",
+        "https://www.royalairmaroc.com/en/vols-pour-conakry",
+        "https://www.royalairmaroc.com/en/vols-pour-dakar",
+        "https://www.royalairmaroc.com/en/vols-pour-dakhla",
+        "https://www.royalairmaroc.com/en/vols-pour-djeddah",
+        "https://www.royalairmaroc.com/en/vols-pour-doha",
+        "https://www.royalairmaroc.com/en/vols-pour-douala",
+        "https://www.royalairmaroc.com/en/vols-pour-duba%C3%AF",
+        "https://www.royalairmaroc.com/en/vols-pour-f%C3%A8s",
+        "https://www.royalairmaroc.com/en/vols-pour-francfort",
+        "https://www.royalairmaroc.com/en/vols-pour-gen%C3%A8ve",
+        "https://www.royalairmaroc.com/en/vols-pour-istanbul",
+        "https://www.royalairmaroc.com/en/vols-pour-kinshasa",
+        "https://www.royalairmaroc.com/en/vols-pour-la%C3%A2youne",
+        "https://www.royalairmaroc.com/en/vols-pour-lagos",
+        "https://www.royalairmaroc.com/en/vols-pour-lisbonne",
+        "https://www.royalairmaroc.com/en/vols-pour-lom%C3%A9",
+        "https://www.royalairmaroc.com/en/vols-pour-londres",
+        "https://www.royalairmaroc.com/en/vols-pour-lyon",
+        "https://www.royalairmaroc.com/en/vols-pour-madrid",
+        "https://www.royalairmaroc.com/en/vols-pour-malabo",
+        "https://www.royalairmaroc.com/en/vols-pour-malaga",
+        "https://www.royalairmaroc.com/en/vols-pour-marseille",
+        "https://www.royalairmaroc.com/en/vols-pour-miami",
+        "https://www.royalairmaroc.com/en/vols-pour-monrovia",
+        "https://www.royalairmaroc.com/en/vols-pour-montr%C3%A9al",
+        "https://www.royalairmaroc.com/en/vols-pour-nador",
+        "https://www.royalairmaroc.com/en/vols-pour-nantes",
+        "https://www.royalairmaroc.com/en/vols-pour-new-york",
+        "https://www.royalairmaroc.com/en/vols-pour-niamey",
+        "https://www.royalairmaroc.com/en/vols-pour-nice",
+        "https://www.royalairmaroc.com/en/vols-pour-nouakchott",
+        "https://www.royalairmaroc.com/en/vols-pour-ouagadougou",
+        "https://www.royalairmaroc.com/en/vols-pour-ouarzazate",
+        "https://www.royalairmaroc.com/en/vols-pour-oujda",
+        "https://www.royalairmaroc.com/en/vols-pour-paris",
+        "https://www.royalairmaroc.com/en/vols-pour-praia",
+        "https://www.royalairmaroc.com/en/vols-pour-rabat",
+        "https://www.royalairmaroc.com/en/vols-pour-riyad",
+        "https://www.royalairmaroc.com/en/vols-pour-rome",
+        "https://www.royalairmaroc.com/en/vols-pour-t%C3%A9touan",
+        "https://www.royalairmaroc.com/en/vols-pour-tanger",
+        "https://www.royalairmaroc.com/en/vols-pour-toulouse",
+        "https://www.royalairmaroc.com/en/vols-pour-tunis",
+        "https://www.royalairmaroc.com/en/vols-pour-washington-dc",
+        "https://www.royalairmaroc.com/en/vols-pour-yaound%C3%A9"
+      ],
+      "blocks": [
+        "seo-hero",
+        "booking-widget-shell",
+        "fare-cards",
+        "destination-content",
+        "origin-links",
+        "faq"
+      ]
+    },
+    {
+      "name": "regional-destination-landing",
+      "prefix": "/en/",
+      "contentSet": "observed-non-sitemap-alias",
+      "deliveryMechanism": {
+        "type": "byom",
+        "mountType": "markup",
+        "mountPrefix": "/en/flights-to-",
+        "suffix": ".html",
+        "ordering": "Place this narrow mount before the DA root mount because mount matching takes the first prefix hit."
+      },
+      "description": "Live chrome-linked alias family absent from exact /en/sitemap.xml entries.",
+      "assignmentPattern": "^https://www\\.royalairmaroc\\.com/en/flights-to-(africa|asia|europe|north-america|south-america)$",
+      "urlCount": 5,
+      "countPattern": "Unique rendered chrome hrefs matching ^https://www\\.royalairmaroc\\.com/en/flights-to-(africa|asia|europe|north-america|south-america)$ and absent from exact /en/sitemap.xml <loc> entries",
+      "coverage": "observed-chrome-links-only; not an exhaustive site count",
+      "representativePages": [
+        "https://www.royalairmaroc.com/en/flights-to-asia"
+      ],
+      "urls": [
+        "https://www.royalairmaroc.com/en/flights-to-africa",
+        "https://www.royalairmaroc.com/en/flights-to-asia",
+        "https://www.royalairmaroc.com/en/flights-to-europe",
+        "https://www.royalairmaroc.com/en/flights-to-north-america",
+        "https://www.royalairmaroc.com/en/flights-to-south-america"
+      ],
+      "blocks": [
+        "seo-hero",
+        "booking-widget-shell",
+        "destination-cards",
+        "regional-content",
+        "faq"
+      ]
+    },
+    {
+      "name": "route-alias",
+      "prefix": "/en/",
+      "contentSet": "observed-non-sitemap-alias",
+      "deliveryMechanism": {
+        "type": "byom",
+        "mountType": "markup",
+        "mountPrefix": "/en/vols-de-",
+        "suffix": ".html",
+        "ordering": "Place this narrow mount before the DA root mount because mount matching takes the first prefix hit."
+      },
+      "description": "Live chrome-linked alias family absent from exact /en/sitemap.xml entries.",
+      "assignmentPattern": "^https://www\\.royalairmaroc\\.com/en/vols-de-[^/]+-a-[^/]+$",
+      "urlCount": 1,
+      "countPattern": "Unique rendered chrome hrefs matching ^https://www\\.royalairmaroc\\.com/en/vols-de-[^/]+-a-[^/]+$ and absent from exact /en/sitemap.xml <loc> entries",
+      "coverage": "observed-chrome-links-only; not an exhaustive site count",
+      "representativePages": [
+        "https://www.royalairmaroc.com/en/vols-de-casablanca-a-milan"
+      ],
+      "urls": [
+        "https://www.royalairmaroc.com/en/vols-de-casablanca-a-milan"
+      ],
+      "blocks": [
+        "seo-hero",
+        "booking-widget-shell",
+        "fare-cards",
+        "route-summary",
+        "travel-content",
+        "faq",
+        "related-routes"
+      ]
+    }
+  ]
+}
