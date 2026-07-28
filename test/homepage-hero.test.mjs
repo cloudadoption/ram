@@ -19,6 +19,7 @@ await heroModule.link(() => {});
 await heroModule.evaluate();
 
 const {
+  panelFields,
   setActiveFlightSearchPanel,
   submitFlightSearch,
   validateFlightSearchPanel,
@@ -116,6 +117,13 @@ test('reports the required fields for each flight search panel', () => {
       origin: 'Origin is required',
     },
   );
+});
+
+test('uses the verbatim live departure field label', () => {
+  const departureField = plainObject(panelFields('status'))
+    .find(({ name }) => name === 'departureDate');
+
+  assert.equal(departureField.label, 'DEPARTURE');
 });
 
 test('returns the authored empty state without calling a search service', () => {
