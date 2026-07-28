@@ -30,12 +30,16 @@ main .seat-guide h2 {
 }
 
 main .seat-guide > p {
+  position: relative;
+  top: 1px;
   margin: 0 0 16px;
   font-size: 14px;
   line-height: 16.8px;
 }
 
 main .seat-guide ul {
+  position: relative;
+  top: 0.2px;
   margin: 0;
   padding: 0;
   list-style-position: inside;
@@ -79,14 +83,12 @@ main .seat-guide .seat-guide-visually-hidden {
   overflow: hidden;
 }
 
-@media (width < 1200px) {
+@media (width >= 1200px) {
   main .seat-guide > p {
-    position: relative;
-    top: 1px;
+    position: static;
   }
 
   main .seat-guide ul {
-    position: relative;
-    top: 0.2px;
+    position: static;
   }
 }
