@@ -1,0 +1,22 @@
+{
+  "url": "https://main--ram--cloudadoption.aem.live/en-gb/example",
+  "width": 375,
+  "textCharacters": 497,
+  "contentBox": {
+    "x": 0,
+    "y": 86,
+    "width": 375,
+    "height": 320
+  },
+  "blocks": [
+    {
+      "name": "hero",
+      "box": {
+        "x": 0,
+        "y": 86,
+        "width": 375,
+        "height": 320
+      }
+    }
+  ]
+}
