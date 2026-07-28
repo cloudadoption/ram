@@ -26,6 +26,30 @@
   src: url('https://onesait-travel.azureedge.net/statics/RAM/fonts/museo/museo300.woff2') format('woff2');
 }
 
+@font-face {
+  font-family: ram-page-font;
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('https://onesait-travel.azureedge.net/statics/RAM/fonts/museosans/museosans300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: ram-page-font;
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('https://onesait-travel.azureedge.net/statics/RAM/fonts/museosans/museosans500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: ram-page-font;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://onesait-travel.azureedge.net/statics/RAM/fonts/museosans/museosans700.woff2') format('woff2');
+}
+
 :root {
   /* colors */
   --background-color: white;
@@ -40,6 +64,7 @@
   --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
   --ram-homepage-font-family: ram-homepage-font, arial, sans-serif;
   --ram-homepage-heading-family: ram-homepage-heading, arial, sans-serif;
+  --ram-page-font-family: ram-page-font, arial, sans-serif;
 
   /* body sizes */
   --body-font-size-m: 22px;

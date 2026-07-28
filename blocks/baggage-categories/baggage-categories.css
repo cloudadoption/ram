@@ -1,0 +1,201 @@
+main .baggage-categories-container {
+  margin: 0;
+}
+
+main .baggage-categories-container .baggage-categories-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+main .baggage-categories {
+  color: #1a1717;
+  font-family: var(--ram-page-font-family);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+main .baggage-categories .baggage-categories-header {
+  width: 90%;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding: 16px 0 48px;
+}
+
+main .baggage-categories .baggage-categories-breadcrumb {
+  display: none;
+}
+
+main .baggage-categories .baggage-categories-heading {
+  max-width: 642px;
+}
+
+main .baggage-categories .baggage-categories-heading h1 {
+  margin: 0;
+  color: #b02736;
+  font-family: var(--ram-page-font-family);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 38.4px;
+}
+
+main .baggage-categories .baggage-categories-standfirst {
+  max-width: 642px;
+  margin-top: 24px;
+}
+
+main .baggage-categories .baggage-categories-standfirst p {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 28.8px;
+}
+
+main .baggage-categories .baggage-categories-panel {
+  box-sizing: border-box;
+  width: calc(100% - 30px);
+  margin-inline: auto;
+  padding: 24px;
+  padding-inline: 0;
+  background: #f7f7f7 url('/blocks/destination-deals/assets/gray-plot.webp') top center repeat;
+}
+
+main .baggage-categories ul {
+  display: grid;
+  gap: 24px;
+  width: 90%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+main .baggage-categories .baggage-categories-item {
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 16px;
+  border-start-end-radius: 20px;
+  border-end-start-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+}
+
+main .baggage-categories .baggage-categories-link:any-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #1a1717;
+  text-decoration: none;
+}
+
+main .baggage-categories .baggage-categories-picture,
+main .baggage-categories .baggage-categories-picture img {
+  display: block;
+  width: 29.8px;
+  height: 29.8px;
+}
+
+main .baggage-categories .baggage-categories-picture img {
+  object-fit: contain;
+}
+
+main .baggage-categories .baggage-categories-title {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28.8px;
+}
+
+main .baggage-categories .baggage-categories-arrow {
+  width: 8px;
+  height: 8px;
+  margin-inline: 4px;
+  border-block-start: 1px solid #c20831;
+  border-inline-end: 1px solid #c20831;
+  transform: rotate(45deg);
+}
+
+@media (width >= 600px) {
+  main .baggage-categories .baggage-categories-header {
+    padding-top: 48px;
+  }
+
+  main .baggage-categories .baggage-categories-standfirst p {
+    white-space: nowrap;
+  }
+}
+
+@media (width >= 1200px) {
+  main .baggage-categories .baggage-categories-header {
+    padding-top: 32px;
+    padding-bottom: 56px;
+  }
+
+  main .baggage-categories .baggage-categories-breadcrumb {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  main .baggage-categories .baggage-categories-breadcrumb ol {
+    display: flex;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  main .baggage-categories .baggage-categories-breadcrumb li + li::before {
+    margin-inline-end: 14px;
+    color: #7b7a78;
+    content: '|';
+  }
+
+  main .baggage-categories .baggage-categories-breadcrumb p {
+    margin: 0;
+  }
+
+  main .baggage-categories .baggage-categories-breadcrumb a:any-link {
+    color: #595855;
+    text-decoration: none;
+  }
+
+  main .baggage-categories .baggage-categories-breadcrumb li:last-child {
+    color: #9a1c3e;
+    font-weight: 600;
+  }
+
+  main .baggage-categories ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  main .baggage-categories .baggage-categories-link:any-link {
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 73.8px;
+  }
+
+  main .baggage-categories .baggage-categories-panel {
+    padding-bottom: 24px;
+  }
+
+  main .baggage-categories .baggage-categories-picture,
+  main .baggage-categories .baggage-categories-picture img {
+    width: 36px;
+    height: 36px;
+  }
+
+  main .baggage-categories .baggage-categories-title {
+    width: 100%;
+    font-size: 24px;
+    line-height: 28.8px;
+  }
+
+  main .baggage-categories .baggage-categories-arrow {
+    position: absolute;
+    align-self: flex-end;
+    margin-top: 59px;
+  }
+}
