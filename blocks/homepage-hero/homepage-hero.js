@@ -19,7 +19,7 @@ const PANEL_DEFINITIONS = [
 const REQUIRED_FIELDS = {
   booking: ['destination', 'origin'],
   manage: ['reservationCode', 'surname'],
-  status: ['departureDate', 'destination', 'origin'],
+  status: ['destination'],
 };
 
 /**
@@ -176,7 +176,7 @@ function panelFields(panelKey) {
   if (panelKey === 'manage') {
     return [
       {
-        label: 'Reservation code',
+        label: 'Reservation Code',
         name: 'reservationCode',
       },
       {
@@ -196,11 +196,6 @@ function panelFields(panelKey) {
     {
       label: 'Select destination',
       name: 'destination',
-    },
-    {
-      label: 'DEPARTURE',
-      name: 'departureDate',
-      type: 'date',
     },
   ];
 }
