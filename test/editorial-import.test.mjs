@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 import {
+  buildDaDocument,
   classifyEditorialUrl,
   normalizeEditorialHref,
   transformEditorialDocument,
@@ -12,6 +13,14 @@ import validateImageSource from '../tools/importer/lib/media.js';
 const readJson = async (path) => JSON.parse(
   await readFile(new URL(path, import.meta.url), 'utf8'),
 );
+
+test('wraps imported sections in the DA document skeleton', () => {
+  const html = buildDaDocument('<div><div class="hero"></div></div>');
+
+  assert.match(html, /^<body><header><\/header><main>/);
+  assert.match(html, /<div><div class="hero"><\/div><\/div>/);
+  assert.match(html, /<\/main><footer><\/footer><\/body>$/);
+});
 
 test('maps all 79 editorial URLs to the seven catalog templates', async () => {
   const catalog = await readJson('../catalog/site-scope.json');

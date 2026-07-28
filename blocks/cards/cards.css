@@ -25,3 +25,183 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+main .cards.loyalty-benefits {
+  width: 100%;
+  max-width: 1253px;
+  margin-inline: auto;
+  color: #1a1717;
+  font-family: var(--ram-page-font-family);
+}
+
+main .cards-container:has(.cards.loyalty-benefits) {
+  margin-block: 16px 0;
+}
+
+main .cards-container:has(.cards.loyalty-benefits) .cards-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+main .cards.loyalty-benefits > ul {
+  position: relative;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  align-content: space-around;
+  min-height: 1601px;
+  text-align: center;
+}
+
+main .cards.loyalty-benefits.compact > ul {
+  min-height: 546px;
+}
+
+main .cards.loyalty-benefits > ul > .cards-loyalty-item {
+  position: absolute;
+  inset-inline-start: 0;
+  width: 100%;
+  border: 0;
+}
+
+main .cards.loyalty-benefits .cards-loyalty-picture,
+main .cards.loyalty-benefits .cards-loyalty-picture img {
+  display: block;
+  width: fit-content;
+  max-width: 110px;
+  height: auto;
+  margin-inline: auto;
+}
+
+main .cards.loyalty-benefits .cards-loyalty-picture img {
+  width: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+main .cards.loyalty-benefits .cards-loyalty-content {
+  margin-top: 12px;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+main .cards.loyalty-benefits .cards-loyalty-content p {
+  margin: 0;
+}
+
+main .cards.loyalty-benefits .cards-loyalty-heading {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+}
+
+main .cards.loyalty-benefits .cards-loyalty-content a:any-link {
+  color: #1a1717;
+}
+
+main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(1) { top: 9px; }
+main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(2) { top: 237px; }
+main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(3) { top: 453px; }
+main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(4) { top: 685px; }
+main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(5) { top: 918px; }
+main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(6) { top: 1155px; }
+main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(7) { top: 1381px; }
+main .cards.loyalty-benefits.compact > ul > li:nth-child(1) { top: 9px; }
+main .cards.loyalty-benefits.compact > ul > li:nth-child(2) { top: 202px; }
+main .cards.loyalty-benefits.compact > ul > li:nth-child(3) { top: 379px; }
+
+@media (width >= 600px) {
+  main .cards.loyalty-benefits > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  main .cards.loyalty-benefits > ul > .cards-loyalty-item {
+    position: static;
+    width: auto;
+  }
+}
+
+@media (width >= 900px) {
+  main .cards.loyalty-benefits {
+    width: calc(100% - 63px);
+  }
+
+  main .cards.loyalty-benefits > ul > .cards-loyalty-item {
+    position: absolute;
+    width: calc(100% / 3);
+  }
+
+  main .cards.loyalty-benefits > ul > li:nth-child(1),
+  main .cards.loyalty-benefits > ul > li:nth-child(4),
+  main .cards.loyalty-benefits > ul > li:nth-child(6) {
+    inset-inline-start: 0;
+  }
+
+  main .cards.loyalty-benefits > ul > li:nth-child(2),
+  main .cards.loyalty-benefits > ul > li:nth-child(5),
+  main .cards.loyalty-benefits > ul > li:nth-child(7) {
+    inset-inline-start: calc(100% / 3);
+  }
+
+  main .cards.loyalty-benefits > ul > li:nth-child(3) {
+    inset-inline-start: calc(200% / 3);
+  }
+
+  main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(1) { top: 9px; }
+
+  main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(2),
+  main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(3) { top: 7px; }
+
+  main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(4),
+  main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(5) { top: 256px; }
+  main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(6) { top: 527px; }
+  main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(7) { top: 525px; }
+
+  main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(4),
+  main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(6) {
+    inset-inline-start: calc(100% / 6);
+  }
+
+  main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(5),
+  main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(7) {
+    inset-inline-start: 50%;
+  }
+
+  main .cards.loyalty-benefits.compact > ul > .cards-loyalty-item {
+    top: 9px;
+  }
+
+  main .cards.loyalty-benefits:not(.compact) > ul {
+    min-height: 779px;
+    align-content: space-around;
+  }
+
+  main .cards.loyalty-benefits.compact > ul {
+    min-height: 243px;
+    align-items: center;
+  }
+}
+
+@media (width >= 1200px) {
+  main .cards.loyalty-benefits {
+    width: calc(100% - 187px);
+  }
+
+  main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(1) { top: 10px; }
+
+  main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(2),
+  main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(3) { top: 7px; }
+
+  main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(4),
+  main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(5) { top: 257px; }
+  main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(6) { top: 477px; }
+  main .cards.loyalty-benefits:not(.compact) > ul > li:nth-child(7) { top: 475px; }
+
+  main .cards.loyalty-benefits:not(.compact) > ul {
+    min-height: 710px;
+  }
+
+  main .cards.loyalty-benefits.compact > ul {
+    min-height: 210px;
+  }
+}

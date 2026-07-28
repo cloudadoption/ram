@@ -35,14 +35,39 @@ The command performs:
 2. Mapping: writes section, authoring, visual tree, and per-block source context.
 3. Infrastructure selection: validates the URL against the catalog template and
    uses the matching template import script, parser, and transformers.
-4. Content import: writes DA-compatible plain HTML and an import report with
+4. Content import: writes local plain HTML and an import report with
    `handEdits: 0`.
 
 Images are downloaded during analysis. Content import copies them to an
 `images/<page>/` directory beside the output file and writes relative authored
-image references. Generated content therefore does not hotlink the legacy site.
-Upload those binaries through the DA media flow when importing the generated
-document into DA.
+image references for local preview. Generated content therefore does not
+hotlink the legacy site.
+
+For DA upload, rerun the import phase with the DA document skeleton and absolute
+Content Bus image references:
+
+```sh
+node tools/importer/import-editorial.mjs \
+  --url https://www.royalairmaroc.com/en-gb/seats \
+  --template standard-article \
+  --phase import \
+  --format da \
+  --media-base https://content.da.live/cloudadoption/ram/en-gb/images \
+  --work-dir migration-work/seats \
+  --output migration-work/seats/seats.da.html
+```
+
+Upload every binary from the work directory to the matching
+`/en-gb/images/<page>/` DA path, then put and preview the document:
+
+```sh
+for file in migration-work/seats/images/*; do
+  .mossy/tools/da.sh asset \
+    "/en-gb/images/seats/$(basename "$file")" "$file"
+done
+.mossy/tools/da.sh put /en-gb/seats migration-work/seats/seats.da.html
+.mossy/tools/da.sh preview /en-gb/seats
+```
 
 Run an individual phase with `--phase analyze`, `--phase map`, or
 `--phase import`. Later phases reuse `cleaned.html` from the same work directory.

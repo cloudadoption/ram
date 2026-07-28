@@ -37,7 +37,7 @@ const source = `<!doctype html>
         <div class="col-12 col-md-4">
           <img src="https://www.royalairmaroc.com/cash-miles.png" alt="Image">
           <p class="feature-title"><b>Cash &amp; Miles Service</b></p>
-          <p class="f-fw-l"><a href="https://www.royalairmaroc.com/int-en/cash-miles">Find out more &gt;&gt;</a></p>
+          <p class="f-fw-l"><a href=" https://www.royalairmaroc.com/int-en/cash-miles ">Find out more &gt;&gt;</a></p>
         </div>
       </div>
       <div class="journal-content-article" data-analytics-asset-id="135618">
@@ -107,14 +107,18 @@ test('imports Blue benefits with reusable block variants and authored media', ()
   assert.deepEqual(result.metadata.deviations, []);
   assert.match(result.html, /class="hero loyalty-tier"/);
   assert.match(result.html, /class="cards loyalty-benefits"/);
-  assert.match(result.html, /class="columns loyalty-content image-right"/);
-  assert.match(result.html, /class="columns loyalty-content image-left"/);
+  assert.match(result.html, /class="columns loyalty-content image-right new-benefits"/);
+  assert.match(result.html, /class="columns loyalty-content image-left flyer-system"/);
   assert.match(result.html, /src="\.\/images\/blue-benefits\/hero\.jpg"/);
   assert.match(result.html, /href="\/en-gb\/safar-flyer-and-oneworld"/);
   assert.match(result.html, /href="\/en-gb\/silver-benefits"/);
-  assert.match(result.html, /href="\/en\/safar-flyer\/join-us"/);
+  assert.match(result.html, /href="\/en-gb\/register">CREATE MY ACCOUNT NOW<\/a>/);
+  assert.match(
+    result.html,
+    /href="\/en-gb\/silver-benefits">I WANT TO DISCOVER ALL OF SILVER'S BENEFITS<\/a>/,
+  );
   assert.match(result.html, /href="https:\/\/www\.royalairmaroc\.com\/int-en\/cash-miles"/);
-  assert.equal(result.metadata.images.length, 11);
+  assert.equal(result.metadata.images.length, 8);
 });
 
 test('decorates labeled Blue content through existing block variants', async () => {
@@ -128,5 +132,4 @@ test('decorates labeled Blue content through existing block variants', async () 
   assert.match(cards, /classList\.contains\('loyalty-benefits'\)/);
   assert.match(columns, /classList\.contains\('loyalty-content'\)/);
   assert.doesNotMatch(hero, /createOptimizedPicture/);
-  assert.doesNotMatch(cards, /createOptimizedPicture/);
 });

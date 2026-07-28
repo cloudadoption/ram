@@ -82,7 +82,7 @@ function buildLinkCell(document, root, specification, editorialPaths) {
   const link = document.createElement('a');
   link.setAttribute(
     'href',
-    normalizeEditorialHref(source.getAttribute('href'), editorialPaths),
+    specification.href || normalizeEditorialHref(source.getAttribute('href'), editorialPaths),
   );
   const textSource = selectFirst(root, specification.textSelectors) || source;
   const textClone = textSource.cloneNode(true);
@@ -106,9 +106,34 @@ function buildPictureCell(document, source, specification, imageSources) {
   return picture;
 }
 
-function buildRichCell(document, source, editorialPaths) {
+function buildBackgroundPictureCell(document, source, specification, imageSources) {
+  if (!source) {
+    throw new Error(
+      `Missing background image for selectors ${selectors(specification.selectors).join(', ')}`,
+    );
+  }
+  const sourceUrl = source.getAttribute('data-import-background-image');
+  if (!sourceUrl) {
+    throw new Error(
+      `Missing captured background image for selectors ${selectors(specification.selectors).join(', ')}`,
+    );
+  }
+  const image = document.createElement('img');
+  image.setAttribute('loading', specification.loading || 'lazy');
+  image.setAttribute('src', imageSources[sourceUrl] || sourceUrl);
+  image.setAttribute('alt', specification.alt || '');
+  const picture = document.createElement('picture');
+  picture.append(image);
+  return picture;
+}
+
+function buildRichCell(document, source, specification, editorialPaths) {
   if (!source) return document.createDocumentFragment();
-  return copyAllowedNode(source, document, editorialPaths);
+  const clone = source.cloneNode(true);
+  selectors(specification.excludeSelectors).forEach((selector) => {
+    clone.querySelectorAll(selector).forEach((element) => element.remove());
+  });
+  return copyAllowedNode(clone, document, editorialPaths);
 }
 
 function buildDirectTextCell(document, root) {
@@ -151,8 +176,10 @@ function buildCell(document, root, specification, editorialPaths, imageSources) 
       return buildMappedTextCell(document, source, specification);
     case 'picture':
       return buildPictureCell(document, source, specification, imageSources);
+    case 'background-picture':
+      return buildBackgroundPictureCell(document, source, specification, imageSources);
     case 'rich':
-      return buildRichCell(document, source, editorialPaths);
+      return buildRichCell(document, source, specification, editorialPaths);
     case 'text':
       return buildTextCell(document, source);
     default:

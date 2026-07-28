@@ -100,6 +100,23 @@ function decorateInterior(block) {
   block.replaceChildren(content, picture);
 }
 
+function decorateLoyaltyTier(block) {
+  const rows = readLabeledRows(block);
+  const picture = requireElement(
+    rowWithLabel(rows, 'image')?.cells[0]?.querySelector('picture'),
+    'Loyalty tier hero requires an authored image',
+  );
+  const image = requireElement(
+    picture.querySelector('img'),
+    'Loyalty tier hero picture requires an image',
+  );
+  picture.className = 'hero-loyalty-tier-picture';
+  image.decoding = 'async';
+  image.fetchPriority = 'high';
+  image.loading = 'eager';
+  block.replaceChildren(picture);
+}
+
 /**
  * Decorates hero variants.
  * @param {Element} block Hero block
@@ -107,4 +124,5 @@ function decorateInterior(block) {
 export default function decorate(block) {
   if (block.classList.contains('homepage')) decorateHomepage(block);
   if (block.classList.contains('interior')) decorateInterior(block);
+  if (block.classList.contains('loyalty-tier')) decorateLoyaltyTier(block);
 }
