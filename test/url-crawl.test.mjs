@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
+/* eslint-disable import/extensions */
 import {
   RateLimitError,
   buildFamilyClassifier,
@@ -12,6 +13,7 @@ import {
   rebuildProgress,
   summarizeUnion,
 } from '../scripts/crawl-url-space.mjs';
+/* eslint-enable import/extensions */
 
 const ORIGIN = 'https://www.royalairmaroc.com';
 
