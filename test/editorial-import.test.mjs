@@ -42,6 +42,25 @@ test('maps all 79 editorial URLs to the seven catalog templates', async () => {
   ).name, 'standard-article');
 });
 
+test('maps the complete live regions represented by Baggage blocks', async () => {
+  const mappings = await readJson('../tools/importer/page-mappings.json');
+  const profile = mappings.profiles.find(
+    ({ path }) => path === '/en-gb/baggage-information',
+  );
+  const instances = Object.fromEntries(
+    profile.blocks.map(({ name, instances: selectors }) => [name, selectors]),
+  );
+
+  assert.deepEqual(instances['baggage-categories'], [
+    '.bck-pattern-1',
+    '.page-heading',
+  ]);
+  assert.deepEqual(instances['restricted-items'], [
+    '.prohibited-section',
+    '.prohibited-section + div',
+  ]);
+});
+
 test('normalizes known editorial links without changing deliberate locale links', () => {
   assert.equal(
     normalizeEditorialHref('/en-GB/checked-baggage', ['/checked-baggage']),
