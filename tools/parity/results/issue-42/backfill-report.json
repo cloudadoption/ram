@@ -1,0 +1,4375 @@
+[
+  {
+    "slug": "homepage",
+    "width": 375,
+    "liveUrl": "https://www.royalairmaroc.com/en-us",
+    "liveFinalUrl": "https://www.royalairmaroc.com/en-us",
+    "liveStatus": 200,
+    "targetUrl": "https://main--ram--cloudadoption.aem.live/",
+    "targetFinalUrl": "https://main--ram--cloudadoption.aem.live/",
+    "targetStatus": 200,
+    "thresholds": {
+      "minimumTextRatio": 0.3,
+      "maxContentHeightDelta": 100,
+      "maxBlockHeightDelta": 60,
+      "maxPositionDelta": 60
+    },
+    "text": {
+      "liveTextCharacters": 1903,
+      "targetTextCharacters": 1194,
+      "minimumRatio": 0.3,
+      "ratio": 0.627,
+      "passed": true
+    },
+    "geometry": {
+      "contentHeightDelta": -40,
+      "maxBlockHeightDelta": 64,
+      "maxPositionDelta": 40,
+      "maxHorizontalDelta": 0,
+      "rows": [
+        {
+          "name": "hero homepage",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 86,
+              "width": 375,
+              "height": 392
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 94,
+              "width": 375,
+              "height": 384
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "ram-homepage-font 22px/35.2px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgb(26, 23, 23)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": -8
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 22px/35.2px 400"
+            },
+            "background": {
+              "live": "rgba(0, 0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "booking-launchpad",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 494,
+              "width": 375,
+              "height": 419
+            },
+            "normalizedY": 408,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 494,
+              "width": 375,
+              "height": 419
+            },
+            "normalizedY": 400,
+            "computedStyle": {
+              "font": "ram-homepage-font 22px/35.2px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgb(26, 23, 23)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": -8,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 22px/35.2px 400"
+            },
+            "background": {
+              "live": "rgba(0, 0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "quick-links",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 945,
+              "width": 375,
+              "height": 84
+            },
+            "normalizedY": 859,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 913,
+              "width": 375,
+              "height": 84
+            },
+            "normalizedY": 819,
+            "computedStyle": {
+              "font": "ram-homepage-font 22px/35.2px 400",
+              "color": "rgb(194, 8, 49)",
+              "background": "rgb(255, 255, 255)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": -40,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 22px/35.2px 400"
+            },
+            "color": {
+              "live": "rgb(26, 23, 23)",
+              "target": "rgb(194, 8, 49)"
+            },
+            "background": {
+              "live": "rgba(0, 0, 0, 0)",
+              "target": "rgb(255, 255, 255)"
+            }
+          }
+        },
+        {
+          "name": "destination-deals",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 1029,
+              "width": 375,
+              "height": 631
+            },
+            "normalizedY": 943,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 997,
+              "width": 375,
+              "height": 631
+            },
+            "normalizedY": 903,
+            "computedStyle": {
+              "font": "ram-homepage-font 22px/35.2px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgb(247, 247, 247)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "24px 0px 24px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": -40,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 22px/35.2px 400"
+            },
+            "background": {
+              "live": "rgba(0, 0, 0, 0)",
+              "target": "rgb(247, 247, 247)"
+            },
+            "padding": {
+              "live": "0px 0px 0px 0px",
+              "target": "24px 0px 24px 0px"
+            }
+          }
+        },
+        {
+          "name": "promotions",
+          "live": {
+            "box": {
+              "x": 19,
+              "y": 1724,
+              "width": 338,
+              "height": 352
+            },
+            "normalizedY": 1638,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 19,
+              "y": 1740,
+              "width": 338,
+              "height": 304
+            },
+            "normalizedY": 1646,
+            "computedStyle": {
+              "font": "ram-homepage-font 22px/35.2px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 18.75px 0px 18.75px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 8,
+            "width": 0,
+            "height": -48
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 22px/35.2px 400"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 18.75px 0px 18.75px"
+            }
+          }
+        },
+        {
+          "name": "travel-benefits",
+          "live": {
+            "box": {
+              "x": 19,
+              "y": 2140,
+              "width": 338,
+              "height": 516
+            },
+            "normalizedY": 2054,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 19,
+              "y": 2108,
+              "width": 338,
+              "height": 516
+            },
+            "normalizedY": 2014,
+            "computedStyle": {
+              "font": "ram-homepage-font 22px/35.2px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 18.75px 0px 18.75px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": -40,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 22px/35.2px 400"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 18.75px 0px 18.75px"
+            }
+          }
+        },
+        {
+          "name": "loyalty-banner",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 2656,
+              "width": 375,
+              "height": 620
+            },
+            "normalizedY": 2570,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 2624,
+              "width": 375,
+              "height": 620
+            },
+            "normalizedY": 2530,
+            "computedStyle": {
+              "font": "ram-homepage-font 22px/35.2px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgb(247, 247, 247)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "56px 18.75px 20px 18.75px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": -40,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 22px/35.2px 400"
+            },
+            "background": {
+              "live": "rgba(0, 0, 0, 0)",
+              "target": "rgb(247, 247, 247)"
+            },
+            "padding": {
+              "live": "0px 0px 0px 0px",
+              "target": "56px 18.75px 20px 18.75px"
+            }
+          }
+        },
+        {
+          "name": "newsletter-signup",
+          "live": {
+            "box": {
+              "x": 19,
+              "y": 3276,
+              "width": 338,
+              "height": 532
+            },
+            "normalizedY": 3190,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 19,
+              "y": 3244,
+              "width": 338,
+              "height": 532
+            },
+            "normalizedY": 3150,
+            "computedStyle": {
+              "font": "ram-homepage-font 22px/35.2px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 18.75px 0px 18.75px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": -40,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 22px/35.2px 400"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 18.75px 0px 18.75px"
+            }
+          }
+        },
+        {
+          "name": "app-promo",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 3841,
+              "width": 375,
+              "height": 604
+            },
+            "normalizedY": 3755,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 3873,
+              "width": 375,
+              "height": 540
+            },
+            "normalizedY": 3779,
+            "computedStyle": {
+              "font": "ram-homepage-font 22px/35.2px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 60px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 24,
+            "width": 0,
+            "height": -64
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 22px/35.2px 400"
+            },
+            "padding": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 0px 60px 0px"
+            }
+          }
+        }
+      ],
+      "passed": false
+    },
+    "missingBlocks": [],
+    "unexpectedBlocks": [],
+    "passed": false
+  },
+  {
+    "slug": "homepage",
+    "width": 900,
+    "liveUrl": "https://www.royalairmaroc.com/en-us",
+    "liveFinalUrl": "https://www.royalairmaroc.com/en-us",
+    "liveStatus": 200,
+    "targetUrl": "https://main--ram--cloudadoption.aem.live/",
+    "targetFinalUrl": "https://main--ram--cloudadoption.aem.live/",
+    "targetStatus": 200,
+    "thresholds": {
+      "minimumTextRatio": 0.3,
+      "maxContentHeightDelta": 100,
+      "maxBlockHeightDelta": 60,
+      "maxPositionDelta": 60
+    },
+    "text": {
+      "liveTextCharacters": 1903,
+      "targetTextCharacters": 1248,
+      "minimumRatio": 0.3,
+      "ratio": 0.656,
+      "passed": true
+    },
+    "geometry": {
+      "contentHeightDelta": -8,
+      "maxBlockHeightDelta": 64,
+      "maxPositionDelta": 56,
+      "maxHorizontalDelta": 0,
+      "rows": [
+        {
+          "name": "hero homepage",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 118,
+              "width": 900,
+              "height": 360
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 94,
+              "width": 900,
+              "height": 384
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "ram-homepage-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgb(26, 23, 23)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 24
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 18px/28.8px 400"
+            },
+            "background": {
+              "live": "rgba(0, 0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "booking-launchpad",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 494,
+              "width": 900,
+              "height": 369
+            },
+            "normalizedY": 376,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 494,
+              "width": 900,
+              "height": 369
+            },
+            "normalizedY": 400,
+            "computedStyle": {
+              "font": "ram-homepage-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgb(26, 23, 23)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 24,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 18px/28.8px 400"
+            },
+            "background": {
+              "live": "rgba(0, 0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "quick-links",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 895,
+              "width": 900,
+              "height": 66
+            },
+            "normalizedY": 777,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 863,
+              "width": 900,
+              "height": 66
+            },
+            "normalizedY": 769,
+            "computedStyle": {
+              "font": "ram-homepage-font 18px/28.8px 400",
+              "color": "rgb(194, 8, 49)",
+              "background": "rgb(255, 255, 255)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": -8,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(26, 23, 23)",
+              "target": "rgb(194, 8, 49)"
+            },
+            "background": {
+              "live": "rgba(0, 0, 0, 0)",
+              "target": "rgb(255, 255, 255)"
+            }
+          }
+        },
+        {
+          "name": "destination-deals",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 961,
+              "width": 900,
+              "height": 631
+            },
+            "normalizedY": 843,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 929,
+              "width": 900,
+              "height": 631
+            },
+            "normalizedY": 835,
+            "computedStyle": {
+              "font": "ram-homepage-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgb(247, 247, 247)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "24px 0px 24px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": -8,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 18px/28.8px 400"
+            },
+            "background": {
+              "live": "rgba(0, 0, 0, 0)",
+              "target": "rgb(247, 247, 247)"
+            },
+            "padding": {
+              "live": "0px 0px 0px 0px",
+              "target": "24px 0px 24px 0px"
+            }
+          }
+        },
+        {
+          "name": "promotions",
+          "live": {
+            "box": {
+              "x": 45,
+              "y": 1656,
+              "width": 810,
+              "height": 367
+            },
+            "normalizedY": 1538,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 45,
+              "y": 1648,
+              "width": 810,
+              "height": 343
+            },
+            "normalizedY": 1554,
+            "computedStyle": {
+              "font": "ram-homepage-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 45px 0px 45px",
+              "padding": "0px 0px 14px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 16,
+            "width": 0,
+            "height": -24
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 18px/28.8px 400"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 45px 0px 45px"
+            },
+            "padding": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 0px 14px 0px"
+            }
+          }
+        },
+        {
+          "name": "travel-benefits",
+          "live": {
+            "box": {
+              "x": 45,
+              "y": 2088,
+              "width": 810,
+              "height": 478
+            },
+            "normalizedY": 1970,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 45,
+              "y": 2056,
+              "width": 810,
+              "height": 478
+            },
+            "normalizedY": 1962,
+            "computedStyle": {
+              "font": "ram-homepage-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 45px 0px 45px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": -8,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 18px/28.8px 400"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 45px 0px 45px"
+            }
+          }
+        },
+        {
+          "name": "loyalty-banner",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 2566,
+              "width": 900,
+              "height": 620
+            },
+            "normalizedY": 2448,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 2534,
+              "width": 900,
+              "height": 620
+            },
+            "normalizedY": 2440,
+            "computedStyle": {
+              "font": "ram-homepage-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgb(247, 247, 247)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "56px 45px 20px 45px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": -8,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 18px/28.8px 400"
+            },
+            "background": {
+              "live": "rgba(0, 0, 0, 0)",
+              "target": "rgb(247, 247, 247)"
+            },
+            "padding": {
+              "live": "0px 0px 0px 0px",
+              "target": "56px 45px 20px 45px"
+            }
+          }
+        },
+        {
+          "name": "newsletter-signup",
+          "live": {
+            "box": {
+              "x": 45,
+              "y": 3186,
+              "width": 810,
+              "height": 651
+            },
+            "normalizedY": 3068,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 45,
+              "y": 3154,
+              "width": 810,
+              "height": 651
+            },
+            "normalizedY": 3060,
+            "computedStyle": {
+              "font": "ram-homepage-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 45px 0px 45px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": -8,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 18px/28.8px 400"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 45px 0px 45px"
+            }
+          }
+        },
+        {
+          "name": "app-promo",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 3869,
+              "width": 900,
+              "height": 604
+            },
+            "normalizedY": 3751,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 3901,
+              "width": 900,
+              "height": 540
+            },
+            "normalizedY": 3807,
+            "computedStyle": {
+              "font": "ram-homepage-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 60px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 56,
+            "width": 0,
+            "height": -64
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 18px/28.8px 400"
+            },
+            "padding": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 0px 60px 0px"
+            }
+          }
+        }
+      ],
+      "passed": false
+    },
+    "missingBlocks": [],
+    "unexpectedBlocks": [],
+    "passed": false
+  },
+  {
+    "slug": "homepage",
+    "width": 1440,
+    "liveUrl": "https://www.royalairmaroc.com/en-us",
+    "liveFinalUrl": "https://www.royalairmaroc.com/en-us",
+    "liveStatus": 200,
+    "targetUrl": "https://main--ram--cloudadoption.aem.live/",
+    "targetFinalUrl": "https://main--ram--cloudadoption.aem.live/",
+    "targetStatus": 200,
+    "thresholds": {
+      "minimumTextRatio": 0.3,
+      "maxContentHeightDelta": 100,
+      "maxBlockHeightDelta": 60,
+      "maxPositionDelta": 60
+    },
+    "text": {
+      "liveTextCharacters": 2212,
+      "targetTextCharacters": 1473,
+      "minimumRatio": 0.3,
+      "ratio": 0.666,
+      "passed": true
+    },
+    "geometry": {
+      "contentHeightDelta": 24,
+      "maxBlockHeightDelta": 50,
+      "maxPositionDelta": 48,
+      "maxHorizontalDelta": 0,
+      "rows": [
+        {
+          "name": "hero homepage",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 118,
+              "width": 1440,
+              "height": 556
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 118,
+              "width": 1440,
+              "height": 580
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "ram-homepage-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgb(26, 23, 23)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 24
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 18px/28.8px 400"
+            },
+            "background": {
+              "live": "rgba(0, 0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "booking-launchpad",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 430,
+              "width": 1440,
+              "height": 212
+            },
+            "normalizedY": 312,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 430,
+              "width": 1440,
+              "height": 212
+            },
+            "normalizedY": 312,
+            "computedStyle": {
+              "font": "ram-homepage-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgb(26, 23, 23)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 18px/28.8px 400"
+            },
+            "background": {
+              "live": "rgba(0, 0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "quick-links",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 674,
+              "width": 1440,
+              "height": 52
+            },
+            "normalizedY": 556,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 698,
+              "width": 1440,
+              "height": 52
+            },
+            "normalizedY": 580,
+            "computedStyle": {
+              "font": "ram-homepage-font 18px/28.8px 400",
+              "color": "rgb(194, 8, 49)",
+              "background": "rgb(255, 255, 255)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 24,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(26, 23, 23)",
+              "target": "rgb(194, 8, 49)"
+            },
+            "background": {
+              "live": "rgba(0, 0, 0, 0)",
+              "target": "rgb(255, 255, 255)"
+            }
+          }
+        },
+        {
+          "name": "destination-deals",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 726,
+              "width": 1440,
+              "height": 751
+            },
+            "normalizedY": 608,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 750,
+              "width": 1440,
+              "height": 751
+            },
+            "normalizedY": 632,
+            "computedStyle": {
+              "font": "ram-homepage-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgb(247, 247, 247)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "112px 0px 24px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 24,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 18px/28.8px 400"
+            },
+            "background": {
+              "live": "rgba(0, 0, 0, 0)",
+              "target": "rgb(247, 247, 247)"
+            },
+            "padding": {
+              "live": "0px 0px 0px 0px",
+              "target": "112px 0px 24px 0px"
+            }
+          }
+        },
+        {
+          "name": "promotions",
+          "live": {
+            "box": {
+              "x": 100,
+              "y": 1541,
+              "width": 1240,
+              "height": 512
+            },
+            "normalizedY": 1423,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 100,
+              "y": 1589,
+              "width": 1240,
+              "height": 488
+            },
+            "normalizedY": 1471,
+            "computedStyle": {
+              "font": "ram-homepage-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 100px 0px 100px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 48,
+            "width": 0,
+            "height": -24
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 18px/28.8px 400"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 100px 0px 100px"
+            }
+          }
+        },
+        {
+          "name": "travel-benefits",
+          "live": {
+            "box": {
+              "x": 100,
+              "y": 2117,
+              "width": 1240,
+              "height": 441
+            },
+            "normalizedY": 1999,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 100,
+              "y": 2141,
+              "width": 1240,
+              "height": 441
+            },
+            "normalizedY": 2023,
+            "computedStyle": {
+              "font": "ram-homepage-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 100px 0px 100px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 24,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 18px/28.8px 400"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 100px 0px 100px"
+            }
+          }
+        },
+        {
+          "name": "loyalty-banner",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 2558,
+              "width": 1440,
+              "height": 640
+            },
+            "normalizedY": 2440,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 2582,
+              "width": 1440,
+              "height": 640
+            },
+            "normalizedY": 2464,
+            "computedStyle": {
+              "font": "ram-homepage-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgb(247, 247, 247)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "83px 100px 81px 100px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 24,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 18px/28.8px 400"
+            },
+            "background": {
+              "live": "rgba(0, 0, 0, 0)",
+              "target": "rgb(247, 247, 247)"
+            },
+            "padding": {
+              "live": "0px 0px 0px 0px",
+              "target": "83px 100px 81px 100px"
+            }
+          }
+        },
+        {
+          "name": "newsletter-signup",
+          "live": {
+            "box": {
+              "x": 100,
+              "y": 3198,
+              "width": 1240,
+              "height": 392
+            },
+            "normalizedY": 3080,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 100,
+              "y": 3222,
+              "width": 1240,
+              "height": 392
+            },
+            "normalizedY": 3104,
+            "computedStyle": {
+              "font": "ram-homepage-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 100px 0px 100px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 24,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 18px/28.8px 400"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 100px 0px 100px"
+            }
+          }
+        },
+        {
+          "name": "app-promo",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 3654,
+              "width": 1440,
+              "height": 610
+            },
+            "normalizedY": 3536,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 3628,
+              "width": 1440,
+              "height": 660
+            },
+            "normalizedY": 3510,
+            "computedStyle": {
+              "font": "ram-homepage-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "168px 0px 60px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": -26,
+            "width": 0,
+            "height": 50
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-homepage-font 18px/28.8px 400"
+            },
+            "padding": {
+              "live": "0px 0px 0px 0px",
+              "target": "168px 0px 60px 0px"
+            }
+          }
+        }
+      ],
+      "passed": true
+    },
+    "missingBlocks": [],
+    "unexpectedBlocks": [],
+    "passed": true
+  },
+  {
+    "slug": "baggage-information",
+    "width": 375,
+    "liveUrl": "https://www.royalairmaroc.com/en-gb/baggage-information",
+    "liveFinalUrl": "https://www.royalairmaroc.com/en-gb/baggage-information",
+    "liveStatus": 200,
+    "targetUrl": "https://main--ram--cloudadoption.aem.live/baggage-information",
+    "targetFinalUrl": "https://main--ram--cloudadoption.aem.live/baggage-information",
+    "targetStatus": 200,
+    "thresholds": {
+      "minimumTextRatio": 0.3,
+      "maxContentHeightDelta": 8,
+      "maxBlockHeightDelta": 4,
+      "maxPositionDelta": 4
+    },
+    "text": {
+      "liveTextCharacters": 2626,
+      "targetTextCharacters": 1035,
+      "minimumRatio": 0.3,
+      "ratio": 0.394,
+      "passed": true
+    },
+    "geometry": {
+      "contentHeightDelta": 470,
+      "maxBlockHeightDelta": 248,
+      "maxPositionDelta": 222,
+      "maxHorizontalDelta": 30,
+      "rows": [
+        {
+          "name": "baggage-categories",
+          "live": {
+            "box": {
+              "x": 15,
+              "y": 278,
+              "width": 345,
+              "height": 539
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgb(247, 247, 247)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 94,
+              "width": 375,
+              "height": 761
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "ram-page-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": -15,
+            "y": 0,
+            "width": 30,
+            "height": 222
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-page-font 16px/24px 400"
+            },
+            "background": {
+              "live": "rgb(247, 247, 247)",
+              "target": "rgba(0, 0, 0, 0)"
+            }
+          }
+        },
+        {
+          "name": "baggage-support",
+          "live": {
+            "box": {
+              "x": 52,
+              "y": 857,
+              "width": 271,
+              "height": 761
+            },
+            "normalizedY": 579,
+            "computedStyle": {
+              "font": "sans-serif 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 60px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 52,
+              "y": 895,
+              "width": 271,
+              "height": 761
+            },
+            "normalizedY": 801,
+            "computedStyle": {
+              "font": "sans-serif 16px/24px 400",
+              "color": "rgb(19, 19, 19)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 52px 0px 52px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 222,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "color": {
+              "live": "rgb(26, 23, 23)",
+              "target": "rgb(19, 19, 19)"
+            },
+            "margin": {
+              "live": "0px 0px 60px 0px",
+              "target": "0px 52px 0px 52px"
+            }
+          }
+        },
+        {
+          "name": "restricted-items",
+          "live": {
+            "box": {
+              "x": 52,
+              "y": 1678,
+              "width": 271,
+              "height": 1110
+            },
+            "normalizedY": 1400,
+            "computedStyle": {
+              "font": "sans-serif 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 52,
+              "y": 1716,
+              "width": 271,
+              "height": 1358
+            },
+            "normalizedY": 1622,
+            "computedStyle": {
+              "font": "sans-serif 16px/24px 400",
+              "color": "rgb(19, 19, 19)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 52px 0px 52px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 222,
+            "width": 0,
+            "height": 248
+          },
+          "computedStyleDifferences": {
+            "color": {
+              "live": "rgb(26, 23, 23)",
+              "target": "rgb(19, 19, 19)"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 52px 0px 52px"
+            }
+          }
+        }
+      ],
+      "passed": false
+    },
+    "missingBlocks": [],
+    "unexpectedBlocks": [],
+    "passed": false
+  },
+  {
+    "slug": "baggage-information",
+    "width": 900,
+    "liveUrl": "https://www.royalairmaroc.com/en-gb/baggage-information",
+    "liveFinalUrl": "https://www.royalairmaroc.com/en-gb/baggage-information",
+    "liveStatus": 200,
+    "targetUrl": "https://main--ram--cloudadoption.aem.live/baggage-information",
+    "targetFinalUrl": "https://main--ram--cloudadoption.aem.live/baggage-information",
+    "targetStatus": 200,
+    "thresholds": {
+      "minimumTextRatio": 0.3,
+      "maxContentHeightDelta": 8,
+      "maxBlockHeightDelta": 4,
+      "maxPositionDelta": 4
+    },
+    "text": {
+      "liveTextCharacters": 2626,
+      "targetTextCharacters": 1035,
+      "minimumRatio": 0.3,
+      "ratio": 0.394,
+      "passed": true
+    },
+    "geometry": {
+      "contentHeightDelta": 363,
+      "maxBlockHeightDelta": 187,
+      "maxPositionDelta": 187,
+      "maxHorizontalDelta": 30,
+      "rows": [
+        {
+          "name": "baggage-categories",
+          "live": {
+            "box": {
+              "x": 15,
+              "y": 243,
+              "width": 870,
+              "height": 539
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgb(247, 247, 247)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 94,
+              "width": 900,
+              "height": 726
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "ram-page-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": -15,
+            "y": 0,
+            "width": 30,
+            "height": 187
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-page-font 16px/24px 400"
+            },
+            "background": {
+              "live": "rgb(247, 247, 247)",
+              "target": "rgba(0, 0, 0, 0)"
+            }
+          }
+        },
+        {
+          "name": "baggage-support",
+          "live": {
+            "box": {
+              "x": 79,
+              "y": 822,
+              "width": 743,
+              "height": 487
+            },
+            "normalizedY": 579,
+            "computedStyle": {
+              "font": "sans-serif 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 60px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 79,
+              "y": 860,
+              "width": 743,
+              "height": 487
+            },
+            "normalizedY": 766,
+            "computedStyle": {
+              "font": "sans-serif 16px/24px 400",
+              "color": "rgb(19, 19, 19)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 78.5px 0px 78.5px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 187,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "color": {
+              "live": "rgb(26, 23, 23)",
+              "target": "rgb(19, 19, 19)"
+            },
+            "margin": {
+              "live": "0px 0px 60px 0px",
+              "target": "0px 78.5px 0px 78.5px"
+            }
+          }
+        },
+        {
+          "name": "restricted-items",
+          "live": {
+            "box": {
+              "x": 79,
+              "y": 1369,
+              "width": 743,
+              "height": 599
+            },
+            "normalizedY": 1126,
+            "computedStyle": {
+              "font": "sans-serif 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 79,
+              "y": 1407,
+              "width": 743,
+              "height": 774
+            },
+            "normalizedY": 1313,
+            "computedStyle": {
+              "font": "sans-serif 16px/24px 400",
+              "color": "rgb(19, 19, 19)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 78.5px 0px 78.5px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 187,
+            "width": 0,
+            "height": 175
+          },
+          "computedStyleDifferences": {
+            "color": {
+              "live": "rgb(26, 23, 23)",
+              "target": "rgb(19, 19, 19)"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 78.5px 0px 78.5px"
+            }
+          }
+        }
+      ],
+      "passed": false
+    },
+    "missingBlocks": [],
+    "unexpectedBlocks": [],
+    "passed": false
+  },
+  {
+    "slug": "baggage-information",
+    "width": 1440,
+    "liveUrl": "https://www.royalairmaroc.com/en-gb/baggage-information",
+    "liveFinalUrl": "https://www.royalairmaroc.com/en-gb/baggage-information",
+    "liveStatus": 200,
+    "targetUrl": "https://main--ram--cloudadoption.aem.live/baggage-information",
+    "targetFinalUrl": "https://main--ram--cloudadoption.aem.live/baggage-information",
+    "targetStatus": 200,
+    "thresholds": {
+      "minimumTextRatio": 0.3,
+      "maxContentHeightDelta": 8,
+      "maxBlockHeightDelta": 4,
+      "maxPositionDelta": 4
+    },
+    "text": {
+      "liveTextCharacters": 2777,
+      "targetTextCharacters": 1081,
+      "minimumRatio": 0.3,
+      "ratio": 0.389,
+      "passed": true
+    },
+    "geometry": {
+      "contentHeightDelta": 398,
+      "maxBlockHeightDelta": 247,
+      "maxPositionDelta": 247,
+      "maxHorizontalDelta": 30,
+      "rows": [
+        {
+          "name": "baggage-categories",
+          "live": {
+            "box": {
+              "x": 15,
+              "y": 307,
+              "width": 1410,
+              "height": 284
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "ram-primary-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgb(247, 247, 247)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 118,
+              "width": 1440,
+              "height": 531
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "ram-page-font 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": -15,
+            "y": 0,
+            "width": 30,
+            "height": 247
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "ram-primary-font 16px/24px 400",
+              "target": "ram-page-font 16px/24px 400"
+            },
+            "background": {
+              "live": "rgb(247, 247, 247)",
+              "target": "rgba(0, 0, 0, 0)"
+            }
+          }
+        },
+        {
+          "name": "baggage-support",
+          "live": {
+            "box": {
+              "x": 170,
+              "y": 631,
+              "width": 1100,
+              "height": 487
+            },
+            "normalizedY": 324,
+            "computedStyle": {
+              "font": "sans-serif 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 60px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 170,
+              "y": 689,
+              "width": 1100,
+              "height": 487
+            },
+            "normalizedY": 571,
+            "computedStyle": {
+              "font": "sans-serif 16px/24px 400",
+              "color": "rgb(19, 19, 19)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 170px 0px 170px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 247,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "color": {
+              "live": "rgb(26, 23, 23)",
+              "target": "rgb(19, 19, 19)"
+            },
+            "margin": {
+              "live": "0px 0px 60px 0px",
+              "target": "0px 170px 0px 170px"
+            }
+          }
+        },
+        {
+          "name": "restricted-items",
+          "live": {
+            "box": {
+              "x": 170,
+              "y": 1178,
+              "width": 1100,
+              "height": 375
+            },
+            "normalizedY": 871,
+            "computedStyle": {
+              "font": "sans-serif 16px/24px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 170,
+              "y": 1236,
+              "width": 1100,
+              "height": 526
+            },
+            "normalizedY": 1118,
+            "computedStyle": {
+              "font": "sans-serif 16px/24px 400",
+              "color": "rgb(19, 19, 19)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 170px 0px 170px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 247,
+            "width": 0,
+            "height": 151
+          },
+          "computedStyleDifferences": {
+            "color": {
+              "live": "rgb(26, 23, 23)",
+              "target": "rgb(19, 19, 19)"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 170px 0px 170px"
+            }
+          }
+        }
+      ],
+      "passed": false
+    },
+    "missingBlocks": [],
+    "unexpectedBlocks": [],
+    "passed": false
+  },
+  {
+    "slug": "seats",
+    "width": 375,
+    "liveUrl": "https://www.royalairmaroc.com/en-gb/seats",
+    "liveFinalUrl": "https://www.royalairmaroc.com/en-gb/seats",
+    "liveStatus": 200,
+    "targetUrl": "https://main--ram--cloudadoption.aem.live/seats",
+    "targetFinalUrl": "https://main--ram--cloudadoption.aem.live/seats",
+    "targetStatus": 200,
+    "thresholds": {
+      "minimumTextRatio": 0.3,
+      "maxContentHeightDelta": 8,
+      "maxBlockHeightDelta": 4,
+      "maxPositionDelta": 4
+    },
+    "text": {
+      "liveTextCharacters": 2707,
+      "targetTextCharacters": 850,
+      "minimumRatio": 0.3,
+      "ratio": 0.314,
+      "passed": true
+    },
+    "geometry": {
+      "contentHeightDelta": -17,
+      "maxBlockHeightDelta": 17,
+      "maxPositionDelta": 0,
+      "maxHorizontalDelta": 21,
+      "rows": [
+        {
+          "name": "hero interior",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 48,
+              "width": 375,
+              "height": 107
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 20px 0px",
+              "padding": "27.2px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 94,
+              "width": 375,
+              "height": 107
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "ram-page-font 22px/35.2px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "27px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 22px/35.2px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            },
+            "margin": {
+              "live": "0px 0px 20px 0px",
+              "target": "0px 0px 0px 0px"
+            },
+            "padding": {
+              "live": "27.2px 0px 0px 0px",
+              "target": "27px 0px 0px 0px"
+            }
+          }
+        },
+        {
+          "name": "seat-guide",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 199,
+              "width": 375,
+              "height": 479
+            },
+            "normalizedY": 151,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 500",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 10.5px 0px 10.5px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 11,
+              "y": 245,
+              "width": 354,
+              "height": 462
+            },
+            "normalizedY": 151,
+            "computedStyle": {
+              "font": "ram-page-font 14px/21px 500",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 11,
+            "y": 0,
+            "width": -21,
+            "height": -17
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 500",
+              "target": "ram-page-font 14px/21px 500"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            },
+            "padding": {
+              "live": "0px 10.5px 0px 10.5px",
+              "target": "0px 0px 0px 0px"
+            }
+          }
+        }
+      ],
+      "passed": false
+    },
+    "missingBlocks": [],
+    "unexpectedBlocks": [],
+    "passed": false
+  },
+  {
+    "slug": "seats",
+    "width": 900,
+    "liveUrl": "https://www.royalairmaroc.com/en-gb/seats",
+    "liveFinalUrl": "https://www.royalairmaroc.com/en-gb/seats",
+    "liveStatus": 200,
+    "targetUrl": "https://main--ram--cloudadoption.aem.live/seats",
+    "targetFinalUrl": "https://main--ram--cloudadoption.aem.live/seats",
+    "targetStatus": 200,
+    "thresholds": {
+      "minimumTextRatio": 0.3,
+      "maxContentHeightDelta": 8,
+      "maxBlockHeightDelta": 4,
+      "maxPositionDelta": 4
+    },
+    "text": {
+      "liveTextCharacters": 2707,
+      "targetTextCharacters": 850,
+      "minimumRatio": 0.3,
+      "ratio": 0.314,
+      "passed": true
+    },
+    "geometry": {
+      "contentHeightDelta": -17,
+      "maxBlockHeightDelta": 16,
+      "maxPositionDelta": 0,
+      "maxHorizontalDelta": 21,
+      "rows": [
+        {
+          "name": "hero interior",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 80,
+              "width": 900,
+              "height": 75
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 20px 0px",
+              "padding": "27.2px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 94,
+              "width": 900,
+              "height": 75
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "ram-page-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "27px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            },
+            "margin": {
+              "live": "0px 0px 20px 0px",
+              "target": "0px 0px 0px 0px"
+            },
+            "padding": {
+              "live": "27.2px 0px 0px 0px",
+              "target": "27px 0px 0px 0px"
+            }
+          }
+        },
+        {
+          "name": "seat-guide",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 199,
+              "width": 900,
+              "height": 428
+            },
+            "normalizedY": 119,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 500",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 10.5px 0px 10.5px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 11,
+              "y": 213,
+              "width": 879,
+              "height": 412
+            },
+            "normalizedY": 119,
+            "computedStyle": {
+              "font": "ram-page-font 14px/21px 500",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 11,
+            "y": 0,
+            "width": -21,
+            "height": -16
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 500",
+              "target": "ram-page-font 14px/21px 500"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            },
+            "padding": {
+              "live": "0px 10.5px 0px 10.5px",
+              "target": "0px 0px 0px 0px"
+            }
+          }
+        }
+      ],
+      "passed": false
+    },
+    "missingBlocks": [],
+    "unexpectedBlocks": [],
+    "passed": false
+  },
+  {
+    "slug": "seats",
+    "width": 1440,
+    "liveUrl": "https://www.royalairmaroc.com/en-gb/seats",
+    "liveFinalUrl": "https://www.royalairmaroc.com/en-gb/seats",
+    "liveStatus": 200,
+    "targetUrl": "https://main--ram--cloudadoption.aem.live/seats",
+    "targetFinalUrl": "https://main--ram--cloudadoption.aem.live/seats",
+    "targetStatus": 200,
+    "thresholds": {
+      "minimumTextRatio": 0.3,
+      "maxContentHeightDelta": 8,
+      "maxBlockHeightDelta": 4,
+      "maxPositionDelta": 4
+    },
+    "text": {
+      "liveTextCharacters": 2325,
+      "targetTextCharacters": 876,
+      "minimumRatio": 0.3,
+      "ratio": 0.377,
+      "passed": true
+    },
+    "geometry": {
+      "contentHeightDelta": -16,
+      "maxBlockHeightDelta": 16,
+      "maxPositionDelta": 0,
+      "maxHorizontalDelta": 21,
+      "rows": [
+        {
+          "name": "hero interior",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 80,
+              "width": 1440,
+              "height": 408
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 20px 0px",
+              "padding": "27.2px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 118,
+              "width": 1440,
+              "height": 408
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "ram-page-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "27px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            },
+            "margin": {
+              "live": "0px 0px 20px 0px",
+              "target": "0px 0px 0px 0px"
+            },
+            "padding": {
+              "live": "27.2px 0px 0px 0px",
+              "target": "27px 0px 0px 0px"
+            }
+          }
+        },
+        {
+          "name": "seat-guide",
+          "live": {
+            "box": {
+              "x": 94,
+              "y": 532,
+              "width": 1253,
+              "height": 428
+            },
+            "normalizedY": 452,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 500",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 93.5px 0px 93.5px",
+              "padding": "0px 10.5px 0px 10.5px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 104,
+              "y": 570,
+              "width": 1232,
+              "height": 412
+            },
+            "normalizedY": 452,
+            "computedStyle": {
+              "font": "ram-page-font 14px/21px 500",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 10,
+            "y": 0,
+            "width": -21,
+            "height": -16
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 500",
+              "target": "ram-page-font 14px/21px 500"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            },
+            "margin": {
+              "live": "0px 93.5px 0px 93.5px",
+              "target": "0px 0px 0px 0px"
+            },
+            "padding": {
+              "live": "0px 10.5px 0px 10.5px",
+              "target": "0px 0px 0px 0px"
+            }
+          }
+        }
+      ],
+      "passed": false
+    },
+    "missingBlocks": [],
+    "unexpectedBlocks": [],
+    "passed": false
+  },
+  {
+    "slug": "blue-benefits",
+    "width": 375,
+    "liveUrl": "https://www.royalairmaroc.com/en-gb/blue-benefits",
+    "liveFinalUrl": "https://www.royalairmaroc.com/en-gb/blue-benefits",
+    "liveStatus": 200,
+    "targetUrl": "https://main--ram--cloudadoption.aem.live/en-gb/blue-benefits",
+    "targetFinalUrl": "https://main--ram--cloudadoption.aem.live/en-gb/blue-benefits",
+    "targetStatus": 200,
+    "thresholds": {
+      "minimumTextRatio": 0.3,
+      "maxContentHeightDelta": 8,
+      "maxBlockHeightDelta": 4,
+      "maxPositionDelta": 4
+    },
+    "text": {
+      "liveTextCharacters": 5927,
+      "targetTextCharacters": 2325,
+      "minimumRatio": 0.3,
+      "ratio": 0.392,
+      "passed": true
+    },
+    "geometry": {
+      "contentHeightDelta": 0,
+      "maxBlockHeightDelta": 0,
+      "maxPositionDelta": 0,
+      "maxHorizontalDelta": 0,
+      "rows": [
+        {
+          "name": "hero loyalty-tier",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 48,
+              "width": 375,
+              "height": 360
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 18.2px 0px 18.2px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 94,
+              "width": 375,
+              "height": 360
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "roboto 22px/35.2px 400",
+              "color": "rgb(19, 19, 19)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "roboto 22px/35.2px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(19, 19, 19)"
+            },
+            "padding": {
+              "live": "0px 18.2px 0px 18.2px",
+              "target": "0px 0px 0px 0px"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-intro",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 408,
+              "width": 375,
+              "height": 236
+            },
+            "normalizedY": 360,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 454,
+              "width": 375,
+              "height": 236
+            },
+            "normalizedY": 360,
+            "computedStyle": {
+              "font": "ram-page-font 22px/35.2px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 22px/35.2px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "cards loyalty-benefits",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 660,
+              "width": 375,
+              "height": 1601
+            },
+            "normalizedY": 612,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 706,
+              "width": 375,
+              "height": 1601
+            },
+            "normalizedY": 612,
+            "computedStyle": {
+              "font": "ram-page-font 22px/35.2px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 22px/35.2px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-cta primary",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 2261,
+              "width": 375,
+              "height": 97
+            },
+            "normalizedY": 2213,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 2307,
+              "width": 375,
+              "height": 97
+            },
+            "normalizedY": 2213,
+            "computedStyle": {
+              "font": "ram-page-font 22px/35.2px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 22px/35.2px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-content image-right new-benefits",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 2407,
+              "width": 375,
+              "height": 674
+            },
+            "normalizedY": 2359,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 2453,
+              "width": 375,
+              "height": 674
+            },
+            "normalizedY": 2359,
+            "computedStyle": {
+              "font": "ram-page-font 22px/35.2px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 22px/35.2px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-content image-left flyer-system",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 3080,
+              "width": 375,
+              "height": 582
+            },
+            "normalizedY": 3032,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 3126,
+              "width": 375,
+              "height": 582
+            },
+            "normalizedY": 3032,
+            "computedStyle": {
+              "font": "ram-page-font 22px/35.2px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 22px/35.2px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-content image-right silver-upgrade",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 3663,
+              "width": 375,
+              "height": 626
+            },
+            "normalizedY": 3615,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 3709,
+              "width": 375,
+              "height": 626
+            },
+            "normalizedY": 3615,
+            "computedStyle": {
+              "font": "ram-page-font 22px/35.2px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 22px/35.2px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-heading",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 4313,
+              "width": 375,
+              "height": 96
+            },
+            "normalizedY": 4265,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 4359,
+              "width": 375,
+              "height": 96
+            },
+            "normalizedY": 4265,
+            "computedStyle": {
+              "font": "ram-page-font 22px/35.2px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 22px/35.2px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "cards loyalty-benefits compact",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 4425,
+              "width": 375,
+              "height": 546
+            },
+            "normalizedY": 4377,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 4471,
+              "width": 375,
+              "height": 546
+            },
+            "normalizedY": 4377,
+            "computedStyle": {
+              "font": "ram-page-font 22px/35.2px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 22px/35.2px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-footnote",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 4994,
+              "width": 375,
+              "height": 34
+            },
+            "normalizedY": 4946,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 5040,
+              "width": 375,
+              "height": 34
+            },
+            "normalizedY": 4946,
+            "computedStyle": {
+              "font": "ram-page-font 10px/17px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 10px/17px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-cta secondary",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 5044,
+              "width": 375,
+              "height": 120
+            },
+            "normalizedY": 4996,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 5090,
+              "width": 375,
+              "height": 120
+            },
+            "normalizedY": 4996,
+            "computedStyle": {
+              "font": "ram-page-font 22px/35.2px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 22px/35.2px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        }
+      ],
+      "passed": true
+    },
+    "missingBlocks": [],
+    "unexpectedBlocks": [],
+    "passed": true
+  },
+  {
+    "slug": "blue-benefits",
+    "width": 900,
+    "liveUrl": "https://www.royalairmaroc.com/en-gb/blue-benefits",
+    "liveFinalUrl": "https://www.royalairmaroc.com/en-gb/blue-benefits",
+    "liveStatus": 200,
+    "targetUrl": "https://main--ram--cloudadoption.aem.live/en-gb/blue-benefits",
+    "targetFinalUrl": "https://main--ram--cloudadoption.aem.live/en-gb/blue-benefits",
+    "targetStatus": 200,
+    "thresholds": {
+      "minimumTextRatio": 0.3,
+      "maxContentHeightDelta": 8,
+      "maxBlockHeightDelta": 4,
+      "maxPositionDelta": 4
+    },
+    "text": {
+      "liveTextCharacters": 5927,
+      "targetTextCharacters": 2325,
+      "minimumRatio": 0.3,
+      "ratio": 0.392,
+      "passed": true
+    },
+    "geometry": {
+      "contentHeightDelta": 0,
+      "maxBlockHeightDelta": 0,
+      "maxPositionDelta": 0,
+      "maxHorizontalDelta": 63,
+      "rows": [
+        {
+          "name": "hero loyalty-tier",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 80,
+              "width": 900,
+              "height": 360
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 10.5px 0px 10.5px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 94,
+              "width": 900,
+              "height": 360
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "roboto 18px/28.8px 400",
+              "color": "rgb(19, 19, 19)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "roboto 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(19, 19, 19)"
+            },
+            "padding": {
+              "live": "0px 10.5px 0px 10.5px",
+              "target": "0px 0px 0px 0px"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-intro",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 440,
+              "width": 900,
+              "height": 172
+            },
+            "normalizedY": 360,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 454,
+              "width": 900,
+              "height": 172
+            },
+            "normalizedY": 360,
+            "computedStyle": {
+              "font": "ram-page-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "cards loyalty-benefits",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 628,
+              "width": 900,
+              "height": 779
+            },
+            "normalizedY": 548,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 32,
+              "y": 642,
+              "width": 837,
+              "height": 779
+            },
+            "normalizedY": 548,
+            "computedStyle": {
+              "font": "ram-page-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 32,
+            "y": 0,
+            "width": -63,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-cta primary",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 1407,
+              "width": 900,
+              "height": 97
+            },
+            "normalizedY": 1327,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 1421,
+              "width": 900,
+              "height": 97
+            },
+            "normalizedY": 1327,
+            "computedStyle": {
+              "font": "ram-page-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-content image-right new-benefits",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 1552,
+              "width": 900,
+              "height": 829
+            },
+            "normalizedY": 1472,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 1566,
+              "width": 900,
+              "height": 829
+            },
+            "normalizedY": 1472,
+            "computedStyle": {
+              "font": "ram-page-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-content image-left flyer-system",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 2381,
+              "width": 900,
+              "height": 789
+            },
+            "normalizedY": 2301,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 2395,
+              "width": 900,
+              "height": 789
+            },
+            "normalizedY": 2301,
+            "computedStyle": {
+              "font": "ram-page-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-content image-right silver-upgrade",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 3170,
+              "width": 900,
+              "height": 814
+            },
+            "normalizedY": 3090,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 3184,
+              "width": 900,
+              "height": 814
+            },
+            "normalizedY": 3090,
+            "computedStyle": {
+              "font": "ram-page-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-heading",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 4008,
+              "width": 900,
+              "height": 48
+            },
+            "normalizedY": 3928,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 4022,
+              "width": 900,
+              "height": 48
+            },
+            "normalizedY": 3928,
+            "computedStyle": {
+              "font": "ram-page-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "cards loyalty-benefits compact",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 4072,
+              "width": 900,
+              "height": 243
+            },
+            "normalizedY": 3992,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 32,
+              "y": 4086,
+              "width": 837,
+              "height": 243
+            },
+            "normalizedY": 3992,
+            "computedStyle": {
+              "font": "ram-page-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 32,
+            "y": 0,
+            "width": -63,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-footnote",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 4339,
+              "width": 900,
+              "height": 17
+            },
+            "normalizedY": 4259,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 4353,
+              "width": 900,
+              "height": 17
+            },
+            "normalizedY": 4259,
+            "computedStyle": {
+              "font": "ram-page-font 10px/17px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 10px/17px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-cta secondary",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 4372,
+              "width": 900,
+              "height": 97
+            },
+            "normalizedY": 4292,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 0,
+              "y": 4386,
+              "width": 900,
+              "height": 97
+            },
+            "normalizedY": 4292,
+            "computedStyle": {
+              "font": "ram-page-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        }
+      ],
+      "passed": true
+    },
+    "missingBlocks": [],
+    "unexpectedBlocks": [],
+    "passed": true
+  },
+  {
+    "slug": "blue-benefits",
+    "width": 1440,
+    "liveUrl": "https://www.royalairmaroc.com/en-gb/blue-benefits",
+    "liveFinalUrl": "https://www.royalairmaroc.com/en-gb/blue-benefits",
+    "liveStatus": 200,
+    "targetUrl": "https://main--ram--cloudadoption.aem.live/en-gb/blue-benefits",
+    "targetFinalUrl": "https://main--ram--cloudadoption.aem.live/en-gb/blue-benefits",
+    "targetStatus": 200,
+    "thresholds": {
+      "minimumTextRatio": 0.3,
+      "maxContentHeightDelta": 8,
+      "maxBlockHeightDelta": 4,
+      "maxPositionDelta": 4
+    },
+    "text": {
+      "liveTextCharacters": 5485,
+      "targetTextCharacters": 2325,
+      "minimumRatio": 0.3,
+      "ratio": 0.424,
+      "passed": true
+    },
+    "geometry": {
+      "contentHeightDelta": 0,
+      "maxBlockHeightDelta": 0,
+      "maxPositionDelta": 0,
+      "maxHorizontalDelta": 208,
+      "rows": [
+        {
+          "name": "hero loyalty-tier",
+          "live": {
+            "box": {
+              "x": 94,
+              "y": 80,
+              "width": 1253,
+              "height": 360
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 93.5px 0px 93.5px",
+              "padding": "0px 10.5px 0px 10.5px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 94,
+              "y": 118,
+              "width": 1253,
+              "height": 360
+            },
+            "normalizedY": 0,
+            "computedStyle": {
+              "font": "roboto 18px/28.8px 400",
+              "color": "rgb(19, 19, 19)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 93.5px 0px 93.5px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "roboto 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(19, 19, 19)"
+            },
+            "padding": {
+              "live": "0px 10.5px 0px 10.5px",
+              "target": "0px 0px 0px 0px"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-intro",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 440,
+              "width": 1440,
+              "height": 151
+            },
+            "normalizedY": 360,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 94,
+              "y": 478,
+              "width": 1253,
+              "height": 151
+            },
+            "normalizedY": 360,
+            "computedStyle": {
+              "font": "ram-page-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 93.5px 0px 93.5px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 94,
+            "y": 0,
+            "width": -187,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 93.5px 0px 93.5px"
+            }
+          }
+        },
+        {
+          "name": "cards loyalty-benefits",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 607,
+              "width": 1440,
+              "height": 710
+            },
+            "normalizedY": 527,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 94,
+              "y": 645,
+              "width": 1253,
+              "height": 710
+            },
+            "normalizedY": 527,
+            "computedStyle": {
+              "font": "ram-page-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 93.5px 0px 93.5px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 94,
+            "y": 0,
+            "width": -187,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 93.5px 0px 93.5px"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-cta primary",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 1317,
+              "width": 1440,
+              "height": 97
+            },
+            "normalizedY": 1237,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 94,
+              "y": 1355,
+              "width": 1253,
+              "height": 97
+            },
+            "normalizedY": 1237,
+            "computedStyle": {
+              "font": "ram-page-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 93.5px 0px 93.5px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 94,
+            "y": 0,
+            "width": -187,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 93.5px 0px 93.5px"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-content image-right new-benefits",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 1463,
+              "width": 1440,
+              "height": 506
+            },
+            "normalizedY": 1383,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 104,
+              "y": 1501,
+              "width": 1232,
+              "height": 506
+            },
+            "normalizedY": 1383,
+            "computedStyle": {
+              "font": "ram-page-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 104px 0px 104px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 104,
+            "y": 0,
+            "width": -208,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 104px 0px 104px"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-content image-left flyer-system",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 1969,
+              "width": 1440,
+              "height": 518
+            },
+            "normalizedY": 1889,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 104,
+              "y": 2007,
+              "width": 1232,
+              "height": 518
+            },
+            "normalizedY": 1889,
+            "computedStyle": {
+              "font": "ram-page-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 104px 0px 104px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 104,
+            "y": 0,
+            "width": -208,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 104px 0px 104px"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-content image-right silver-upgrade",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 2486,
+              "width": 1440,
+              "height": 594
+            },
+            "normalizedY": 2406,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 104,
+              "y": 2524,
+              "width": 1232,
+              "height": 594
+            },
+            "normalizedY": 2406,
+            "computedStyle": {
+              "font": "ram-page-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 104px 0px 104px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 104,
+            "y": 0,
+            "width": -208,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 104px 0px 104px"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-heading",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 3104,
+              "width": 1440,
+              "height": 48
+            },
+            "normalizedY": 3024,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 94,
+              "y": 3142,
+              "width": 1253,
+              "height": 48
+            },
+            "normalizedY": 3024,
+            "computedStyle": {
+              "font": "ram-page-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 93.5px 0px 93.5px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 94,
+            "y": 0,
+            "width": -187,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 93.5px 0px 93.5px"
+            }
+          }
+        },
+        {
+          "name": "cards loyalty-benefits compact",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 3168,
+              "width": 1440,
+              "height": 210
+            },
+            "normalizedY": 3088,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 94,
+              "y": 3206,
+              "width": 1253,
+              "height": 210
+            },
+            "normalizedY": 3088,
+            "computedStyle": {
+              "font": "ram-page-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 94,
+            "y": 0,
+            "width": -187,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-footnote",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 3402,
+              "width": 1440,
+              "height": 17
+            },
+            "normalizedY": 3322,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 94,
+              "y": 3440,
+              "width": 1253,
+              "height": 17
+            },
+            "normalizedY": 3322,
+            "computedStyle": {
+              "font": "ram-page-font 10px/17px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 93.5px 0px 93.5px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 94,
+            "y": 0,
+            "width": -187,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 10px/17px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 93.5px 0px 93.5px"
+            }
+          }
+        },
+        {
+          "name": "columns loyalty-cta secondary",
+          "live": {
+            "box": {
+              "x": 0,
+              "y": 3435,
+              "width": 1440,
+              "height": 97
+            },
+            "normalizedY": 3355,
+            "computedStyle": {
+              "font": "\"Museo Sans\" 14px/21px 300",
+              "color": "rgb(0, 0, 0)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 0px 0px 0px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "target": {
+            "box": {
+              "x": 94,
+              "y": 3473,
+              "width": 1253,
+              "height": 97
+            },
+            "normalizedY": 3355,
+            "computedStyle": {
+              "font": "ram-page-font 18px/28.8px 400",
+              "color": "rgb(26, 23, 23)",
+              "background": "rgba(0, 0, 0, 0)",
+              "margin": "0px 93.5px 0px 93.5px",
+              "padding": "0px 0px 0px 0px"
+            }
+          },
+          "delta": {
+            "x": 94,
+            "y": 0,
+            "width": -187,
+            "height": 0
+          },
+          "computedStyleDifferences": {
+            "font": {
+              "live": "\"Museo Sans\" 14px/21px 300",
+              "target": "ram-page-font 18px/28.8px 400"
+            },
+            "color": {
+              "live": "rgb(0, 0, 0)",
+              "target": "rgb(26, 23, 23)"
+            },
+            "margin": {
+              "live": "0px 0px 0px 0px",
+              "target": "0px 93.5px 0px 93.5px"
+            }
+          }
+        }
+      ],
+      "passed": true
+    },
+    "missingBlocks": [],
+    "unexpectedBlocks": [],
+    "passed": true
+  }
+]

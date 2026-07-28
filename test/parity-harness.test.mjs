@@ -32,6 +32,35 @@ test('rejects the observed partial Gold capture', async () => {
   }), /5\.0%.*30\.0%/);
 });
 
+test('does not round a capture up to the completeness floor', async () => {
+  const { evaluateCaptureCompleteness } = await import(
+    '../tools/parity/parity.js'
+  );
+
+  const result = evaluateCaptureCompleteness({
+    liveTextCharacters: 1000,
+    targetTextCharacters: 299,
+  });
+
+  assert.equal(result.ratio, 0.299);
+  assert.equal(result.passed, false);
+});
+
+test('rejects a capture that redirects to a different page', async () => {
+  const { assertExpectedNavigation } = await import(
+    '../tools/parity/parity.js'
+  );
+
+  assert.doesNotThrow(() => assertExpectedNavigation(
+    'https://example.com/en-gb/blue-benefits',
+    'https://example.com/en-gb/blue-benefits/',
+  ));
+  assert.throws(() => assertExpectedNavigation(
+    'https://example.com/en-gb/blue-benefits',
+    'https://example.com/en/blue-benefits',
+  ), /Navigation left requested page/);
+});
+
 test('compares normalized block geometry from deterministic fixtures', async () => {
   const { compareCaptures } = await import('../tools/parity/parity.js');
   const [live, target] = await Promise.all([
@@ -51,6 +80,27 @@ test('compares normalized block geometry from deterministic fixtures', async () 
   assert.equal(result.geometry.contentHeightDelta, -2);
   assert.equal(result.geometry.maxBlockHeightDelta, 2);
   assert.equal(result.geometry.maxPositionDelta, 1);
+  assert.equal(result.geometry.maxHorizontalDelta, 0);
+  assert.equal(result.geometry.passed, true);
+});
+
+test('records non-comparable horizontal wrapper deltas as evidence', async () => {
+  const { compareCaptures } = await import('../tools/parity/parity.js');
+  const [live, target] = await Promise.all([
+    readJson('./fixtures/parity/full-live.json'),
+    readJson('./fixtures/parity/complete-target.json'),
+  ]);
+  target.blocks[0].box.x = 20;
+  target.blocks[0].box.width = 335;
+
+  const result = compareCaptures(live, target, {
+    maxContentHeightDelta: 4,
+    maxBlockHeightDelta: 4,
+    maxPositionDelta: 4,
+  });
+
+  assert.equal(result.geometry.maxHorizontalDelta, 40);
+  assert.equal(result.geometry.passed, true);
 });
 
 test('reports a large delta instead of zero for a partial target', async () => {
@@ -65,6 +115,7 @@ test('reports a large delta instead of zero for a partial target', async () => {
   assert.equal(result.passed, false);
   assert.deepEqual(result.missingBlocks, ['content', 'support']);
   assert.equal(result.geometry.contentHeightDelta, -3880);
+  assert.equal(result.geometry.passed, false);
   assert.equal(result.text.passed, false);
 });
 

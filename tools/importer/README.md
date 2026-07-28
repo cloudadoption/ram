@@ -32,6 +32,10 @@ node tools/importer/import-editorial.mjs \
 The command performs:
 
 1. Analysis: captures the rendered live DOM, screenshot, metadata, and images.
+   A second independent live navigation checks that imported main text retains
+   at least 30 percent of fresh live main text. The command stops instead of
+   accepting an implausibly short capture and records
+   `capture-completeness.json`.
 2. Mapping: writes section, authoring, visual tree, and per-block source context.
 3. Infrastructure selection: validates the URL against the catalog template and
    uses the matching template import script, parser, and transformers.
@@ -125,3 +129,17 @@ node tools/importer/import-editorial.mjs \
   --work-dir .mossy/parity/12/imports/baggage-information \
   --output drafts/imported-baggage-information.plain.html
 ```
+
+## Fresh parity proof
+
+Run the committed parity harness after previewing or publishing the output. It
+navigates live independently at 375, 900, and 1440 instead of reusing
+`cleaned.html`:
+
+```sh
+node tools/parity/run-parity.mjs \
+  --config tools/parity/backfill-pages.json \
+  --output parity-results/backfill
+```
+
+See `tools/parity/README.md` for per-page configuration and generated evidence.
