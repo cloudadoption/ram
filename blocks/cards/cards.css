@@ -28,8 +28,8 @@
 
 main .cards.loyalty-benefits {
   width: 100%;
-  max-width: 1253px;
-  margin-inline: auto;
+  max-width: none;
+  margin-inline: 0;
   color: #1a1717;
   font-family: var(--ram-page-font-family);
 }
@@ -53,7 +53,10 @@ main .cards.loyalty-benefits > ul {
   grid-template-columns: 1fr;
   gap: 36px;
   align-content: space-around;
+  width: 100%;
+  max-width: 1253px;
   min-height: 1601px;
+  margin-inline: auto;
   text-align: center;
 }
 
@@ -152,7 +155,7 @@ main .cards.loyalty-benefits.compact > ul > li:nth-child(3) { top: 379px; }
 }
 
 @media (width >= 900px) {
-  main .cards.loyalty-benefits {
+  main .cards.loyalty-benefits > ul {
     width: calc(100% - 63px);
   }
 
@@ -268,7 +271,7 @@ main .cards.loyalty-benefits.compact > ul > li:nth-child(3) { top: 379px; }
 }
 
 @media (width >= 1200px) {
-  main .cards.loyalty-benefits {
+  main .cards.loyalty-benefits > ul {
     width: calc(100% - 187px);
   }
 

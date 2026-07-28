@@ -35,12 +35,21 @@ main .columns.loyalty-heading,
 main .columns.loyalty-footnote,
 main .columns.loyalty-cta,
 main .columns.loyalty-content {
+  --loyalty-inner-width: 100%;
+
   box-sizing: border-box;
   width: 100%;
-  max-width: 1253px;
-  margin-inline: auto;
+  max-width: none;
+  margin-inline: 0;
   color: #1a1717;
   font-family: var(--ram-page-font-family);
+}
+
+main .columns.loyalty-content > .columns-loyalty-layout,
+main .columns.loyalty-footnote > .columns-loyalty-copy {
+  width: var(--loyalty-inner-width);
+  max-width: 1253px;
+  margin-inline: auto;
 }
 
 main .columns-container:has(.columns[class*="loyalty-"]) .columns-wrapper {
@@ -122,9 +131,10 @@ main .columns.loyalty-status .columns-loyalty-status-picture img {
   height: auto;
 }
 
-main .columns.loyalty-status.tier-sibling {
+main .columns.loyalty-status.tier-sibling > .columns-loyalty-status-link {
   width: calc(100% - 21px);
   max-width: 1232px;
+  margin-inline: auto;
 }
 
 main .columns.loyalty-standfirst {
@@ -595,6 +605,15 @@ main .columns.loyalty-content.platinum-tier.maintain {
 }
 
 @media (width >= 1200px) {
+  main .columns.loyalty-content {
+    --loyalty-inner-width: calc(100% - 208px);
+  }
+
+  main .columns.loyalty-footnote,
+  main .columns.loyalty-content:not(.new-benefits, .flyer-system, .silver-upgrade) {
+    --loyalty-inner-width: calc(100% - 187px);
+  }
+
   main .columns-container:has(.columns.loyalty-presentation) {
     margin-block-start: 48px;
   }
@@ -609,21 +628,6 @@ main .columns.loyalty-content.platinum-tier.maintain {
 
   main .columns.loyalty-content.silver-upgrade {
     transform: translateY(-1px);
-  }
-
-  main .columns.loyalty-content {
-    width: calc(100% - 208px);
-  }
-
-  main .columns.loyalty-intro,
-  main .columns.loyalty-status,
-  main .columns.loyalty-standfirst,
-  main .columns.loyalty-presentation,
-  main .columns.loyalty-heading,
-  main .columns.loyalty-footnote,
-  main .columns.loyalty-cta,
-  main .columns.loyalty-content:not(.new-benefits, .flyer-system, .silver-upgrade) {
-    width: calc(100% - 187px);
   }
 
   main .columns.loyalty-presentation {
