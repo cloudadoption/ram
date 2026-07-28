@@ -6,7 +6,8 @@ import {
   classifyEditorialUrl,
   normalizeEditorialHref,
   transformEditorialDocument,
-} from '../tools/importer/editorial-pipeline.mjs';
+} from '../tools/importer/editorial-pipeline.js';
+import validateImageSource from '../tools/importer/lib/media.js';
 
 const readJson = async (path) => JSON.parse(
   await readFile(new URL(path, import.meta.url), 'utf8'),
@@ -43,6 +44,13 @@ test('normalizes known editorial links without changing deliberate locale links'
   );
   assert.equal(
     normalizeEditorialHref(
+      'https://www.royalairmaroc.com/en/checked-baggage',
+      ['/checked-baggage'],
+    ),
+    '/en-gb/checked-baggage',
+  );
+  assert.equal(
+    normalizeEditorialHref(
       'https://www.royalairmaroc.com/ma-en/-bagages-retard%C3%A9s',
       ['/checked-baggage'],
     ),
@@ -51,6 +59,25 @@ test('normalizes known editorial links without changing deliberate locale links'
   assert.equal(
     normalizeEditorialHref('/en/route-map', ['/checked-baggage']),
     '/en/route-map',
+  );
+});
+
+test('accepts only source-site HTTPS images with image responses', () => {
+  assert.doesNotThrow(() => validateImageSource(
+    'https://www.royalairmaroc.com/documents/d/ram/seats',
+    'image/png',
+  ));
+  assert.throws(
+    () => validateImageSource('http://www.royalairmaroc.com/image.jpg', 'image/jpeg'),
+    /HTTPS/,
+  );
+  assert.throws(
+    () => validateImageSource('https://127.0.0.1/image.jpg', 'image/jpeg'),
+    /host/,
+  );
+  assert.throws(
+    () => validateImageSource('https://www.royalairmaroc.com/image.jpg', 'text/html'),
+    /image response/,
   );
 });
 
@@ -96,6 +123,9 @@ test('imports the baggage hub into its three existing authored blocks', () => {
 
   const result = transformEditorialDocument(source, {
     url: 'https://www.royalairmaroc.com/en-gb/baggage-information',
+    imageSources: {
+      'https://www.royalairmaroc.com/image.jpg': './images/baggage-information/image.jpg',
+    },
   });
 
   assert.equal(result.template, 'feature-story');
@@ -105,6 +135,10 @@ test('imports the baggage hub into its three existing authored blocks', () => {
   assert.match(result.html, /class="restricted-items"/);
   assert.match(result.html, /href="\/en-gb\/checked-baggage"/);
   assert.match(result.html, /href="https:\/\/www\.royalairmaroc\.com\/ma-en\//);
+  assert.match(result.html, /src="\.\/images\/baggage-information\/image\.jpg"/);
+  assert.doesNotMatch(result.html, /src="https:\/\/www\.royalairmaroc\.com\/image\.jpg"/);
+  assert.match(result.html, /<div>Guidance<\/div><div><p>Guidance copy<\/p>/);
+  assert.equal((result.html.match(/<div>Restriction<\/div>/g) || []).length, 1);
   assert.doesNotMatch(result.html, /class="small-card"|class="support-section"/);
 });
 
@@ -151,5 +185,6 @@ test('imports seats into the shared interior hero and repeatable seat guide', ()
   assert.match(result.html, /class="seat-guide"/);
   assert.equal((result.html.match(/<div>Aircraft<\/div>/g) || []).length, 6);
   assert.match(result.html, /<picture>/);
+  assert.doesNotMatch(result.html, />PDF file, opens in a new window\.<\/a>/);
   assert.doesNotMatch(result.html, /target="_blank"|class="page-heading-clip"/);
 });

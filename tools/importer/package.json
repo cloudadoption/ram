@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "linkedom": "^0.18.12",
+    "puppeteer-core": "^25.4.0"
+  }
+}

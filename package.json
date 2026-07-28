@@ -29,5 +29,9 @@
     "eslint-plugin-import": "2.32.0",
     "stylelint": "17.14.1",
     "stylelint-config-standard": "40.0.0"
+  },
+  "dependencies": {
+    "linkedom": "^0.18.12",
+    "puppeteer-core": "^25.4.0"
   }
 }
