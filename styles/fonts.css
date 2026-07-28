@@ -1,5 +1,13 @@
 /* stylelint-disable max-line-length */
 @font-face {
+  font-family: ram-icons;
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('../fonts/ram-icons.woff') format('woff');
+}
+
+@font-face {
   font-family: roboto-condensed;
   font-style: normal;
   font-weight: 700;
