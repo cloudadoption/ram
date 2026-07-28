@@ -14,7 +14,11 @@ const source = await readFile(
   new URL('../blocks/homepage-hero/homepage-hero.js', import.meta.url),
   'utf8',
 );
-const heroModule = new vm.SourceTextModule(source, { context });
+const testSource = source.replace(
+  'function panelFields(panelKey)',
+  'export function panelFields(panelKey)',
+);
+const heroModule = new vm.SourceTextModule(testSource, { context });
 await heroModule.link(() => {});
 await heroModule.evaluate();
 
