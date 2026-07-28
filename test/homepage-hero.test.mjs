@@ -26,6 +26,22 @@ const {
 
 const plainObject = (value) => JSON.parse(JSON.stringify(value));
 
+const authoredValidationMessages = {
+  booking: {
+    destination: 'Destination is required',
+    origin: 'Origin is required',
+  },
+  manage: {
+    reservationCode: 'Booking reference is required',
+    surname: "Passenger's last name is required",
+  },
+  status: {
+    departureDate: 'Please select departure date',
+    destination: 'Destination is required',
+    origin: 'Origin is required',
+  },
+};
+
 const createToggleTarget = () => {
   const classes = new Set();
   const attributes = new Map();
@@ -71,29 +87,33 @@ test('reports the required fields for each flight search panel', () => {
   assert.deepEqual(
     plainObject(validateFlightSearchPanel('booking', {
       destination: '',
-      origin: 'Casablanca, Morocco',
-    })),
-    { destination: 'Select destination is required' },
+      origin: '',
+    }, authoredValidationMessages)),
+    {
+      destination: 'Destination is required',
+      origin: 'Origin is required',
+    },
   );
   assert.deepEqual(
     plainObject(validateFlightSearchPanel('manage', {
       reservationCode: '',
       surname: '',
-    })),
+    }, authoredValidationMessages)),
     {
-      reservationCode: 'Reservation Code is required',
-      surname: 'Surname is required',
+      reservationCode: 'Booking reference is required',
+      surname: "Passenger's last name is required",
     },
   );
   assert.deepEqual(
     plainObject(validateFlightSearchPanel('status', {
       departureDate: '',
       destination: '',
-      origin: 'Casablanca, Morocco',
-    })),
+      origin: '',
+    }, authoredValidationMessages)),
     {
-      departureDate: 'Departure date is required',
-      destination: 'Select destination is required',
+      departureDate: 'Please select departure date',
+      destination: 'Destination is required',
+      origin: 'Origin is required',
     },
   );
 });
@@ -107,6 +127,7 @@ test('returns the authored empty state without calling a search service', () => 
         origin: 'Casablanca, Morocco',
       },
       'No flights found!',
+      authoredValidationMessages,
     )),
     {
       errors: {},
