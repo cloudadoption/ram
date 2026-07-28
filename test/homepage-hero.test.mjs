@@ -38,12 +38,10 @@ const authoredValidationMessages = {
   },
   manage: {
     reservationCode: 'Booking reference is required',
-    surname: "Passenger's last name is required",
+    surname: "Passenger's name is required",
   },
   status: {
-    departureDate: 'Please select departure date',
     destination: 'Destination is required',
-    origin: 'Origin is required',
   },
 };
 
@@ -111,23 +109,27 @@ test('reports the required fields for each flight search panel', () => {
   );
   assert.deepEqual(
     plainObject(validateFlightSearchPanel('status', {
-      departureDate: '',
       destination: '',
-      origin: '',
+      origin: 'Casablanca, Morocco',
     }, authoredValidationMessages)),
     {
-      departureDate: 'Please select departure date',
       destination: 'Destination is required',
-      origin: 'Origin is required',
     },
   );
 });
 
-test('uses the verbatim live departure field label', () => {
-  const departureField = plainObject(panelFields('status'))
-    .find(({ name }) => name === 'departureDate');
+test('uses the field labels visible in the open live panels', () => {
+  const labels = (panelKey) => plainObject(panelFields(panelKey))
+    .map(({ label, name }) => ({ label, name }));
 
-  assert.equal(departureField.label, 'DEPARTURE');
+  assert.deepEqual(labels('manage'), [
+    { label: 'Reservation Code', name: 'reservationCode' },
+    { label: 'Surname', name: 'surname' },
+  ]);
+  assert.deepEqual(labels('status'), [
+    { label: 'Select origin', name: 'origin' },
+    { label: 'Select destination', name: 'destination' },
+  ]);
 });
 
 test('returns the authored empty state without calling a search service', () => {
