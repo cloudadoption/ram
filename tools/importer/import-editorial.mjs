@@ -292,6 +292,7 @@ async function main() {
     blocks: result.authoringAnalysis.contentSequences.map(({ blockName }) => blockName),
     description: result.metadata.description,
     deviations: result.metadata.deviations,
+    linkOverrides: result.metadata.linkOverrides,
     images: metadata.downloadedImages.map(({ source, file }) => ({
       source,
       file,

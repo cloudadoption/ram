@@ -102,6 +102,8 @@ function decorateInterior(block) {
 
 function decorateLoyaltyTier(block) {
   const rows = readLabeledRows(block);
+  const breadcrumbRow = rowWithLabel(rows, 'breadcrumb');
+  const heading = rowWithLabel(rows, 'heading')?.cells[0]?.querySelector('h1');
   const picture = requireElement(
     rowWithLabel(rows, 'image')?.cells[0]?.querySelector('picture'),
     'Loyalty tier hero requires an authored image',
@@ -114,7 +116,27 @@ function decorateLoyaltyTier(block) {
   image.decoding = 'async';
   image.fetchPriority = 'high';
   image.loading = 'eager';
-  block.replaceChildren(picture);
+
+  const content = document.createElement('div');
+  content.className = 'hero-loyalty-tier-content';
+  if (breadcrumbRow?.cells.length) {
+    const nav = document.createElement('nav');
+    nav.className = 'hero-loyalty-tier-breadcrumb';
+    nav.setAttribute('aria-label', 'Breadcrumb');
+    const list = document.createElement('ol');
+    breadcrumbRow.cells.forEach((cell) => {
+      const item = document.createElement('li');
+      moveCellContent(item, cell);
+      list.append(item);
+    });
+    nav.append(list);
+    content.append(nav);
+  }
+  if (heading) content.append(heading);
+
+  const children = content.childElementCount ? [content, picture] : [picture];
+  block.classList.toggle('has-page-heading', content.childElementCount > 0);
+  block.replaceChildren(...children);
 }
 
 /**

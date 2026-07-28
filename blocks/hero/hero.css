@@ -111,6 +111,32 @@ main .hero.loyalty-tier .hero-loyalty-tier-picture img {
   height: 313px;
 }
 
+main .hero.loyalty-tier.has-page-heading {
+  height: 416px;
+  min-height: 416px;
+  overflow: visible;
+}
+
+main .hero.loyalty-tier.has-page-heading .hero-loyalty-tier-content {
+  box-sizing: border-box;
+  height: 96px;
+  padding: 27px 10.5px 16px;
+}
+
+main .hero.loyalty-tier .hero-loyalty-tier-breadcrumb {
+  display: none;
+}
+
+main .hero.loyalty-tier .hero-loyalty-tier-content h1 {
+  margin: 0;
+  color: #1a1717;
+  font-family: var(--ram-homepage-heading-family);
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 32px;
+  text-transform: uppercase;
+}
+
 body:has(main .hero.homepage) header .header {
   background: rgb(26 23 23 / 55%);
 }
@@ -212,6 +238,28 @@ main .hero.homepage .hero-homepage-cta::after {
   transform: rotate(45deg);
 }
 
+main .hero.loyalty-tier.has-page-heading .hero-loyalty-tier-picture,
+main .hero.loyalty-tier.has-page-heading .hero-loyalty-tier-picture img {
+  width: 100%;
+  height: 320px;
+}
+
+main .hero.loyalty-tier.has-page-heading .hero-loyalty-tier-picture img {
+  object-fit: cover;
+}
+
+main .hero.loyalty-tier.tier-sibling:not(.has-page-heading),
+main .hero.loyalty-tier.tier-sibling:not(.has-page-heading) .hero-loyalty-tier-picture,
+main .hero.loyalty-tier.tier-sibling:not(.has-page-heading) .hero-loyalty-tier-picture img {
+  width: 100%;
+  height: 320px;
+  min-height: 320px;
+}
+
+main .hero.loyalty-tier.tier-sibling:not(.has-page-heading) .hero-loyalty-tier-picture img {
+  object-fit: cover;
+}
+
 @media (width >= 600px) {
   main .hero.homepage .hero-homepage-copy {
     inset-inline: 5%;
@@ -230,6 +278,42 @@ main .hero.homepage .hero-homepage-cta::after {
 }
 
 @media (width >= 1200px) {
+  main .hero.loyalty-tier.has-page-heading {
+    height: 517px;
+    min-height: 517px;
+  }
+
+  main .hero.loyalty-tier.has-page-heading .hero-loyalty-tier-content {
+    height: 197px;
+    padding: 24px 0 16px;
+  }
+
+  main .hero.loyalty-tier .hero-loyalty-tier-breadcrumb {
+    display: block;
+    margin-bottom: 24px;
+  }
+
+  main .hero.loyalty-tier .hero-loyalty-tier-breadcrumb ol {
+    display: flex;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  main .hero.loyalty-tier .hero-loyalty-tier-breadcrumb li {
+    display: flex;
+    gap: 12px;
+    color: #595855;
+  }
+
+  main .hero.loyalty-tier .hero-loyalty-tier-breadcrumb li:not(:last-child)::after {
+    color: #7b7a78;
+    content: '|';
+  }
+
   main .hero.interior {
     min-height: 408px;
   }
@@ -364,6 +448,11 @@ main .hero.homepage .hero-homepage-cta::after {
     padding: 10px 16px;
     font-size: 14px;
     line-height: 21px;
+  }
+
+  main .hero.loyalty-tier .hero-loyalty-tier-content h1 {
+    font-size: 50px;
+    line-height: 56px;
   }
 
 }
