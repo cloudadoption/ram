@@ -1,7 +1,47 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "site": "https://www.royalairmaroc.com",
-  "scopePrefixes": [
+  "siteNamespaces": {
+    "count": 3,
+    "countPattern": "Distinct live URL namespace prefixes explicitly modeled by this artifact",
+    "entries": [
+      {
+        "name": "english-catalog",
+        "prefix": "/en/",
+        "contentSet": "English generated catalog",
+        "discoveryMode": "sitemap-with-bounded-sampling",
+        "sitemapUrlCount": 37156,
+        "sitemapUrlCountPattern": "Unique exact <loc> strings with a case-sensitive pathname prefix \"/en/\" across English /en/sitemap.xml",
+        "sitemapSources": [
+          "https://www.royalairmaroc.com/en/sitemap.xml"
+        ]
+      },
+      {
+        "name": "english-gb-locale-catalog",
+        "prefix": "/en_gb/",
+        "contentSet": "Separate English GB generated locale catalog",
+        "discoveryMode": "sitemap",
+        "sitemapUrlCount": 1021,
+        "sitemapUrlCountPattern": "Unique exact <loc> strings with a case-sensitive pathname prefix \"/en_gb/\" across English GB /en_gb/sitemap.xml",
+        "sitemapSources": [
+          "https://www.royalairmaroc.com/en_gb/sitemap.xml"
+        ]
+      },
+      {
+        "name": "english-gb-editorial",
+        "prefix": "/en-gb/",
+        "contentSet": "English GB editorial site and navigation tree",
+        "discoveryMode": "chrome-crawl-only",
+        "sitemapUrlCount": 0,
+        "sitemapUrlCountPattern": "Unique exact <loc> strings with a case-sensitive pathname prefix \"/en-gb/\" across both English /en/sitemap.xml and English GB /en_gb/sitemap.xml",
+        "sitemapSources": [
+          "https://www.royalairmaroc.com/en/sitemap.xml",
+          "https://www.royalairmaroc.com/en_gb/sitemap.xml"
+        ]
+      }
+    ]
+  },
+  "crawlScopePrefixes": [
     "/en/",
     "/en-gb/"
   ],
@@ -65,7 +105,7 @@
     ]
   },
   "crawlCoverage": {
-    "statement": "The /en-gb/ tree and non-sitemap /en/ links are enumerated. Route-detail, destination-landing and origin-landing English sitemap families are sampled.",
+    "statement": "The sitemap-absent /en-gb/ editorial tree and non-sitemap /en/ links are enumerated. The separate sitemap-covered /en_gb/ locale catalog is recorded but not crawled. Route-detail, destination-landing and origin-landing English /en/ sitemap families are sampled.",
     "generatedSampleSize": 30,
     "generatedSampleSizePattern": "Configured maximum evenly spaced sample per large generated English sitemap family",
     "enumeratedFamilies": [
@@ -94,23 +134,46 @@
       "route-detail"
     ]
   },
+  "namedExclusions": [
+    {
+      "name": "liferay-accordion-fragment-artifact",
+      "urlPattern": "^https://www\\.royalairmaroc\\.com/en-gb/(?:[^/]+/)*accordion-[0-9]+-[0-9]+$",
+      "finalStatus": 404,
+      "rationale": "Liferay accordion widget fragment links are link-graph artifacts, not pages.",
+      "matchedRequestedUrlCount": 19,
+      "matchedRequestedUrlCountPattern": "Completed crawl records whose requested URL matches \"^https://www\\.royalairmaroc\\.com/en-gb/(?:[^/]+/)*accordion-[0-9]+-[0-9]+$\" and final status == 404",
+      "effect": "Excluded from live page counts; retained in raw requested-URL counts and records."
+    }
+  ],
   "summary": {
     "crawlRecordCount": 560,
-    "crawlRecordCountPattern": "Unique requested URLs with one completed crawl record under the bounded crawl plan",
-    "union": {
-      "count": 37572,
-      "countPattern": "Unique canonical URL union of English sitemap <loc> entries and completed crawl request URLs"
+    "crawlRecordCountPattern": "Unique requested URLs with one completed crawl record of any final status under the bounded crawl plan",
+    "livePagesOmittedByEnglishSitemap": {
+      "count": 88,
+      "countPattern": "Completed crawl records where final status == 200 and the exact finalUrl string is absent from exact English sitemap <loc> strings",
+      "statusScope": "Final status == 200 only."
     },
-    "deltaAgainstEnglishSitemap": {
+    "redirectAliasesIntoEnglishSitemap": {
+      "count": 58,
+      "countPattern": "Completed crawl records where final status == 200, the exact requested URL string is absent from exact English sitemap <loc> strings, and the exact finalUrl string is present",
+      "statusScope": "Final status == 200 only."
+    },
+    "rawRequestedUrlUnion": {
+      "count": 37572,
+      "countPattern": "Unique canonical URL union of English sitemap <loc> entries and completed crawl request URLs regardless of final status",
+      "statusScope": "Includes every final status recorded by the crawl."
+    },
+    "rawRequestedUrlDeltaAgainstEnglishSitemap": {
       "count": 416,
-      "countPattern": "Union URLs minus exact English sitemap URLs",
-      "scope": "This is a delta against the English /en/sitemap.xml only, not against the 72-locale site floor."
+      "countPattern": "Raw requested-URL union across every final status minus exact canonical English sitemap URLs",
+      "statusScope": "Includes every final status recorded by the crawl.",
+      "scope": "This is a raw requested-URL delta against the English /en/sitemap.xml only, not a live-page count and not a delta against the 72-locale site floor."
     },
     "knownStrays": {
       "expectedCount": 65,
       "expectedCountPattern": "Explicit URLs in observed-non-sitemap-alias catalog templates",
       "foundCount": 65,
-      "foundCountPattern": "Known stray URLs with a completed union record",
+      "foundCountPattern": "Known stray requested URLs with a completed crawl record of any final status",
       "missingCount": 0,
       "missingCountPattern": "expectedCount - foundCount"
     },
@@ -132,13 +195,13 @@
         "crawlMode": "enumerated",
         "crawlModePattern": "Mode declared by crawl plan for \"campaign-landing\"",
         "crawlRecordCount": 4,
-        "crawlRecordCountPattern": "Completed crawl records classified by: Exact membership in site-scope template \"campaign-landing\" URLs",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: Exact membership in site-scope template \"campaign-landing\" URLs",
         "englishSitemapCount": 4,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: Exact membership in site-scope template \"campaign-landing\" URLs",
-        "unionCount": 4,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: Exact membership in site-scope template \"campaign-landing\" URLs",
-        "deltaAgainstEnglishSitemap": 0,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 4,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: Exact membership in site-scope template \"campaign-landing\" URLs",
+        "rawDeltaAgainstEnglishSitemap": 0,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "Exact membership in site-scope template \"campaign-landing\" URLs"
       },
       {
@@ -146,13 +209,13 @@
         "crawlMode": "enumerated",
         "crawlModePattern": "Family discovered outside the English sitemap and therefore enumerated",
         "crawlRecordCount": 11,
-        "crawlRecordCountPattern": "Completed crawl records classified by: Exact membership in site-scope template \"collection-listing\" URLs",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: Exact membership in site-scope template \"collection-listing\" URLs",
         "englishSitemapCount": 0,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: Exact membership in site-scope template \"collection-listing\" URLs",
-        "unionCount": 11,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: Exact membership in site-scope template \"collection-listing\" URLs",
-        "deltaAgainstEnglishSitemap": 11,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 11,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: Exact membership in site-scope template \"collection-listing\" URLs",
+        "rawDeltaAgainstEnglishSitemap": 11,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "Exact membership in site-scope template \"collection-listing\" URLs"
       },
       {
@@ -160,13 +223,13 @@
         "crawlMode": "enumerated",
         "crawlModePattern": "Family discovered outside the English sitemap and therefore enumerated",
         "crawlRecordCount": 59,
-        "crawlRecordCountPattern": "Completed crawl records classified by: Exact membership in site-scope template \"destination-alias\" URLs",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: Exact membership in site-scope template \"destination-alias\" URLs",
         "englishSitemapCount": 0,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: Exact membership in site-scope template \"destination-alias\" URLs",
-        "unionCount": 59,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: Exact membership in site-scope template \"destination-alias\" URLs",
-        "deltaAgainstEnglishSitemap": 59,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 59,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: Exact membership in site-scope template \"destination-alias\" URLs",
+        "rawDeltaAgainstEnglishSitemap": 59,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "Exact membership in site-scope template \"destination-alias\" URLs"
       },
       {
@@ -174,13 +237,13 @@
         "crawlMode": "sampled",
         "crawlModePattern": "Mode declared by crawl plan for \"destination-landing\"",
         "crawlRecordCount": 30,
-        "crawlRecordCountPattern": "Completed crawl records classified by: ^https://www\\.royalairmaroc\\.com/en/flights-to-[^/]+$",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: ^https://www\\.royalairmaroc\\.com/en/flights-to-[^/]+$",
         "englishSitemapCount": 263,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: ^https://www\\.royalairmaroc\\.com/en/flights-to-[^/]+$",
-        "unionCount": 263,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: ^https://www\\.royalairmaroc\\.com/en/flights-to-[^/]+$",
-        "deltaAgainstEnglishSitemap": 0,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 263,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: ^https://www\\.royalairmaroc\\.com/en/flights-to-[^/]+$",
+        "rawDeltaAgainstEnglishSitemap": 0,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "^https://www\\.royalairmaroc\\.com/en/flights-to-[^/]+$"
       },
       {
@@ -188,13 +251,13 @@
         "crawlMode": "enumerated",
         "crawlModePattern": "Family discovered outside the English sitemap and therefore enumerated",
         "crawlRecordCount": 92,
-        "crawlRecordCountPattern": "Completed crawl records classified by: Canonical pathname starts /en-gb/ and has no exact site-scope URL match",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: Canonical pathname starts /en-gb/ and has no exact site-scope URL match",
         "englishSitemapCount": 0,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: Canonical pathname starts /en-gb/ and has no exact site-scope URL match",
-        "unionCount": 92,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: Canonical pathname starts /en-gb/ and has no exact site-scope URL match",
-        "deltaAgainstEnglishSitemap": 92,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 92,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: Canonical pathname starts /en-gb/ and has no exact site-scope URL match",
+        "rawDeltaAgainstEnglishSitemap": 92,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "Canonical pathname starts /en-gb/ and has no exact site-scope URL match"
       },
       {
@@ -202,13 +265,13 @@
         "crawlMode": "enumerated",
         "crawlModePattern": "Mode declared by crawl plan for \"en-homepage\"",
         "crawlRecordCount": 1,
-        "crawlRecordCountPattern": "Completed crawl records classified by: Exact membership in site-scope template \"en-homepage\" URLs",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: Exact membership in site-scope template \"en-homepage\" URLs",
         "englishSitemapCount": 1,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: Exact membership in site-scope template \"en-homepage\" URLs",
-        "unionCount": 1,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: Exact membership in site-scope template \"en-homepage\" URLs",
-        "deltaAgainstEnglishSitemap": 0,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 1,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: Exact membership in site-scope template \"en-homepage\" URLs",
+        "rawDeltaAgainstEnglishSitemap": 0,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "Exact membership in site-scope template \"en-homepage\" URLs"
       },
       {
@@ -216,13 +279,13 @@
         "crawlMode": "enumerated",
         "crawlModePattern": "Family discovered outside the English sitemap and therefore enumerated",
         "crawlRecordCount": 180,
-        "crawlRecordCountPattern": "Completed crawl records classified by: Canonical pathname starts /en/ and matches no catalog URL or generated-family pattern",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: Canonical pathname starts /en/ and matches no catalog URL or generated-family pattern",
         "englishSitemapCount": 0,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: Canonical pathname starts /en/ and matches no catalog URL or generated-family pattern",
-        "unionCount": 180,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: Canonical pathname starts /en/ and matches no catalog URL or generated-family pattern",
-        "deltaAgainstEnglishSitemap": 180,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 180,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: Canonical pathname starts /en/ and matches no catalog URL or generated-family pattern",
+        "rawDeltaAgainstEnglishSitemap": 180,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "Canonical pathname starts /en/ and matches no catalog URL or generated-family pattern"
       },
       {
@@ -230,13 +293,13 @@
         "crawlMode": "enumerated",
         "crawlModePattern": "Family discovered outside the English sitemap and therefore enumerated",
         "crawlRecordCount": 15,
-        "crawlRecordCountPattern": "Completed crawl records classified by: Exact membership in site-scope template \"feature-story\" URLs",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: Exact membership in site-scope template \"feature-story\" URLs",
         "englishSitemapCount": 0,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: Exact membership in site-scope template \"feature-story\" URLs",
-        "unionCount": 15,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: Exact membership in site-scope template \"feature-story\" URLs",
-        "deltaAgainstEnglishSitemap": 15,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 15,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: Exact membership in site-scope template \"feature-story\" URLs",
+        "rawDeltaAgainstEnglishSitemap": 15,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "Exact membership in site-scope template \"feature-story\" URLs"
       },
       {
@@ -244,13 +307,13 @@
         "crawlMode": "enumerated",
         "crawlModePattern": "Family discovered outside the English sitemap and therefore enumerated",
         "crawlRecordCount": 14,
-        "crawlRecordCountPattern": "Completed crawl records classified by: Exact membership in site-scope template \"interactive-service\" URLs",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: Exact membership in site-scope template \"interactive-service\" URLs",
         "englishSitemapCount": 0,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: Exact membership in site-scope template \"interactive-service\" URLs",
-        "unionCount": 14,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: Exact membership in site-scope template \"interactive-service\" URLs",
-        "deltaAgainstEnglishSitemap": 14,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 14,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: Exact membership in site-scope template \"interactive-service\" URLs",
+        "rawDeltaAgainstEnglishSitemap": 14,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "Exact membership in site-scope template \"interactive-service\" URLs"
       },
       {
@@ -258,13 +321,13 @@
         "crawlMode": "enumerated",
         "crawlModePattern": "Family discovered outside the English sitemap and therefore enumerated",
         "crawlRecordCount": 12,
-        "crawlRecordCountPattern": "Completed crawl records classified by: Exact membership in site-scope template \"live-not-found\" URLs",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: Exact membership in site-scope template \"live-not-found\" URLs",
         "englishSitemapCount": 0,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: Exact membership in site-scope template \"live-not-found\" URLs",
-        "unionCount": 12,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: Exact membership in site-scope template \"live-not-found\" URLs",
-        "deltaAgainstEnglishSitemap": 12,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 12,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: Exact membership in site-scope template \"live-not-found\" URLs",
+        "rawDeltaAgainstEnglishSitemap": 12,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "Exact membership in site-scope template \"live-not-found\" URLs"
       },
       {
@@ -272,13 +335,13 @@
         "crawlMode": "enumerated",
         "crawlModePattern": "Mode declared by crawl plan for \"mobile-app-campaign\"",
         "crawlRecordCount": 1,
-        "crawlRecordCountPattern": "Completed crawl records classified by: Exact membership in site-scope template \"mobile-app-campaign\" URLs",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: Exact membership in site-scope template \"mobile-app-campaign\" URLs",
         "englishSitemapCount": 1,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: Exact membership in site-scope template \"mobile-app-campaign\" URLs",
-        "unionCount": 1,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: Exact membership in site-scope template \"mobile-app-campaign\" URLs",
-        "deltaAgainstEnglishSitemap": 0,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 1,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: Exact membership in site-scope template \"mobile-app-campaign\" URLs",
+        "rawDeltaAgainstEnglishSitemap": 0,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "Exact membership in site-scope template \"mobile-app-campaign\" URLs"
       },
       {
@@ -286,13 +349,13 @@
         "crawlMode": "enumerated",
         "crawlModePattern": "Family discovered outside the English sitemap and therefore enumerated",
         "crawlRecordCount": 7,
-        "crawlRecordCountPattern": "Completed crawl records classified by: Exact membership in site-scope template \"navigation-landing-alias\" URLs",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: Exact membership in site-scope template \"navigation-landing-alias\" URLs",
         "englishSitemapCount": 0,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: Exact membership in site-scope template \"navigation-landing-alias\" URLs",
-        "unionCount": 7,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: Exact membership in site-scope template \"navigation-landing-alias\" URLs",
-        "deltaAgainstEnglishSitemap": 7,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 7,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: Exact membership in site-scope template \"navigation-landing-alias\" URLs",
+        "rawDeltaAgainstEnglishSitemap": 7,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "Exact membership in site-scope template \"navigation-landing-alias\" URLs"
       },
       {
@@ -300,13 +363,13 @@
         "crawlMode": "sampled",
         "crawlModePattern": "Mode declared by crawl plan for \"origin-landing\"",
         "crawlRecordCount": 30,
-        "crawlRecordCountPattern": "Completed crawl records classified by: ^https://www\\.royalairmaroc\\.com/en/flights-from-(?!.*-to-)[^/]+$",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: ^https://www\\.royalairmaroc\\.com/en/flights-from-(?!.*-to-)[^/]+$",
         "englishSitemapCount": 262,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: ^https://www\\.royalairmaroc\\.com/en/flights-from-(?!.*-to-)[^/]+$",
-        "unionCount": 262,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: ^https://www\\.royalairmaroc\\.com/en/flights-from-(?!.*-to-)[^/]+$",
-        "deltaAgainstEnglishSitemap": 0,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 262,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: ^https://www\\.royalairmaroc\\.com/en/flights-from-(?!.*-to-)[^/]+$",
+        "rawDeltaAgainstEnglishSitemap": 0,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "^https://www\\.royalairmaroc\\.com/en/flights-from-(?!.*-to-)[^/]+$"
       },
       {
@@ -314,13 +377,13 @@
         "crawlMode": "enumerated",
         "crawlModePattern": "Family discovered outside the English sitemap and therefore enumerated",
         "crawlRecordCount": 5,
-        "crawlRecordCountPattern": "Completed crawl records classified by: Exact membership in site-scope template \"regional-destination-landing\" URLs",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: Exact membership in site-scope template \"regional-destination-landing\" URLs",
         "englishSitemapCount": 0,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: Exact membership in site-scope template \"regional-destination-landing\" URLs",
-        "unionCount": 5,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: Exact membership in site-scope template \"regional-destination-landing\" URLs",
-        "deltaAgainstEnglishSitemap": 5,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 5,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: Exact membership in site-scope template \"regional-destination-landing\" URLs",
+        "rawDeltaAgainstEnglishSitemap": 5,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "Exact membership in site-scope template \"regional-destination-landing\" URLs"
       },
       {
@@ -328,13 +391,13 @@
         "crawlMode": "enumerated",
         "crawlModePattern": "Family discovered outside the English sitemap and therefore enumerated",
         "crawlRecordCount": 1,
-        "crawlRecordCountPattern": "Completed crawl records classified by: Exact membership in site-scope template \"route-alias\" URLs",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: Exact membership in site-scope template \"route-alias\" URLs",
         "englishSitemapCount": 0,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: Exact membership in site-scope template \"route-alias\" URLs",
-        "unionCount": 1,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: Exact membership in site-scope template \"route-alias\" URLs",
-        "deltaAgainstEnglishSitemap": 1,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 1,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: Exact membership in site-scope template \"route-alias\" URLs",
+        "rawDeltaAgainstEnglishSitemap": 1,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "Exact membership in site-scope template \"route-alias\" URLs"
       },
       {
@@ -342,13 +405,13 @@
         "crawlMode": "sampled",
         "crawlModePattern": "Mode declared by crawl plan for \"route-detail\"",
         "crawlRecordCount": 30,
-        "crawlRecordCountPattern": "Completed crawl records classified by: ^https://www\\.royalairmaroc\\.com/en/flights-from-[^/]+-to-[^/]+$",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: ^https://www\\.royalairmaroc\\.com/en/flights-from-[^/]+-to-[^/]+$",
         "englishSitemapCount": 36577,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: ^https://www\\.royalairmaroc\\.com/en/flights-from-[^/]+-to-[^/]+$",
-        "unionCount": 36577,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: ^https://www\\.royalairmaroc\\.com/en/flights-from-[^/]+-to-[^/]+$",
-        "deltaAgainstEnglishSitemap": 0,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 36577,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: ^https://www\\.royalairmaroc\\.com/en/flights-from-[^/]+-to-[^/]+$",
+        "rawDeltaAgainstEnglishSitemap": 0,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "^https://www\\.royalairmaroc\\.com/en/flights-from-[^/]+-to-[^/]+$"
       },
       {
@@ -356,13 +419,13 @@
         "crawlMode": "enumerated",
         "crawlModePattern": "Mode declared by crawl plan for \"route-map\"",
         "crawlRecordCount": 1,
-        "crawlRecordCountPattern": "Completed crawl records classified by: Exact membership in site-scope template \"route-map\" URLs",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: Exact membership in site-scope template \"route-map\" URLs",
         "englishSitemapCount": 1,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: Exact membership in site-scope template \"route-map\" URLs",
-        "unionCount": 1,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: Exact membership in site-scope template \"route-map\" URLs",
-        "deltaAgainstEnglishSitemap": 0,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 1,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: Exact membership in site-scope template \"route-map\" URLs",
+        "rawDeltaAgainstEnglishSitemap": 0,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "Exact membership in site-scope template \"route-map\" URLs"
       },
       {
@@ -370,13 +433,13 @@
         "crawlMode": "enumerated",
         "crawlModePattern": "Mode declared by crawl plan for \"sitemap-index\"",
         "crawlRecordCount": 42,
-        "crawlRecordCountPattern": "Completed crawl records classified by: ^https://www\\.royalairmaroc\\.com/en/sitemap/[^/]+/page-[0-9]+$",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: ^https://www\\.royalairmaroc\\.com/en/sitemap/[^/]+/page-[0-9]+$",
         "englishSitemapCount": 42,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: ^https://www\\.royalairmaroc\\.com/en/sitemap/[^/]+/page-[0-9]+$",
-        "unionCount": 42,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: ^https://www\\.royalairmaroc\\.com/en/sitemap/[^/]+/page-[0-9]+$",
-        "deltaAgainstEnglishSitemap": 0,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 42,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: ^https://www\\.royalairmaroc\\.com/en/sitemap/[^/]+/page-[0-9]+$",
+        "rawDeltaAgainstEnglishSitemap": 0,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "^https://www\\.royalairmaroc\\.com/en/sitemap/[^/]+/page-[0-9]+$"
       },
       {
@@ -384,13 +447,13 @@
         "crawlMode": "enumerated",
         "crawlModePattern": "Family discovered outside the English sitemap and therefore enumerated",
         "crawlRecordCount": 10,
-        "crawlRecordCountPattern": "Completed crawl records classified by: Exact membership in site-scope template \"standard-article\" URLs",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: Exact membership in site-scope template \"standard-article\" URLs",
         "englishSitemapCount": 0,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: Exact membership in site-scope template \"standard-article\" URLs",
-        "unionCount": 10,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: Exact membership in site-scope template \"standard-article\" URLs",
-        "deltaAgainstEnglishSitemap": 10,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 10,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: Exact membership in site-scope template \"standard-article\" URLs",
+        "rawDeltaAgainstEnglishSitemap": 10,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "Exact membership in site-scope template \"standard-article\" URLs"
       },
       {
@@ -398,13 +461,13 @@
         "crawlMode": "enumerated",
         "crawlModePattern": "Family discovered outside the English sitemap and therefore enumerated",
         "crawlRecordCount": 10,
-        "crawlRecordCountPattern": "Completed crawl records classified by: Exact membership in site-scope template \"structured-reference\" URLs",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: Exact membership in site-scope template \"structured-reference\" URLs",
         "englishSitemapCount": 0,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: Exact membership in site-scope template \"structured-reference\" URLs",
-        "unionCount": 10,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: Exact membership in site-scope template \"structured-reference\" URLs",
-        "deltaAgainstEnglishSitemap": 10,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 10,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: Exact membership in site-scope template \"structured-reference\" URLs",
+        "rawDeltaAgainstEnglishSitemap": 10,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "Exact membership in site-scope template \"structured-reference\" URLs"
       },
       {
@@ -412,13 +475,13 @@
         "crawlMode": "enumerated",
         "crawlModePattern": "Mode declared by crawl plan for \"travel-guide\"",
         "crawlRecordCount": 5,
-        "crawlRecordCountPattern": "Completed crawl records classified by: Exact membership in site-scope template \"travel-guide\" URLs",
+        "crawlRecordCountPattern": "Completed crawl records of every final status classified by: Exact membership in site-scope template \"travel-guide\" URLs",
         "englishSitemapCount": 5,
         "englishSitemapCountPattern": "Exact sitemap URLs classified by: Exact membership in site-scope template \"travel-guide\" URLs",
-        "unionCount": 5,
-        "unionCountPattern": "Unique union of English sitemap and crawl request URLs classified by: Exact membership in site-scope template \"travel-guide\" URLs",
-        "deltaAgainstEnglishSitemap": 0,
-        "deltaAgainstEnglishSitemapPattern": "unionCount - English sitemap count for this family",
+        "rawUnionCount": 5,
+        "rawUnionCountPattern": "Unique raw union of English sitemap and crawl request URLs regardless of final status, classified by: Exact membership in site-scope template \"travel-guide\" URLs",
+        "rawDeltaAgainstEnglishSitemap": 0,
+        "rawDeltaAgainstEnglishSitemapPattern": "Raw union count across every final status minus English sitemap count for this family",
         "familyPattern": "Exact membership in site-scope template \"travel-guide\" URLs"
       }
     ],
@@ -437,7 +500,7 @@
       "structured-reference"
     ],
     "changedFamilyCount": 12,
-    "changedFamilyCountPattern": "Family rows where union count minus English sitemap count is nonzero"
+    "changedFamilyCountPattern": "Family rows where raw union count across every final status minus English sitemap count is nonzero"
   },
   "records": [
     {
@@ -471,7 +534,8 @@
       "family": "editorial-unclassified",
       "finalFamily": "editorial-unclassified",
       "contentType": "text/html; charset=UTF-8",
-      "redirects": []
+      "redirects": [],
+      "namedExclusion": "liferay-accordion-fragment-artifact"
     },
     {
       "url": "https://www.royalairmaroc.com/en-gb/accordion-204006-2",
@@ -480,7 +544,8 @@
       "family": "editorial-unclassified",
       "finalFamily": "editorial-unclassified",
       "contentType": "text/html; charset=UTF-8",
-      "redirects": []
+      "redirects": [],
+      "namedExclusion": "liferay-accordion-fragment-artifact"
     },
     {
       "url": "https://www.royalairmaroc.com/en-gb/accordion-204006-3",
@@ -489,7 +554,8 @@
       "family": "editorial-unclassified",
       "finalFamily": "editorial-unclassified",
       "contentType": "text/html; charset=UTF-8",
-      "redirects": []
+      "redirects": [],
+      "namedExclusion": "liferay-accordion-fragment-artifact"
     },
     {
       "url": "https://www.royalairmaroc.com/en-gb/accordion-204006-4",
@@ -498,7 +564,8 @@
       "family": "editorial-unclassified",
       "finalFamily": "editorial-unclassified",
       "contentType": "text/html; charset=UTF-8",
-      "redirects": []
+      "redirects": [],
+      "namedExclusion": "liferay-accordion-fragment-artifact"
     },
     {
       "url": "https://www.royalairmaroc.com/en-gb/accordion-204006-5",
@@ -507,7 +574,8 @@
       "family": "editorial-unclassified",
       "finalFamily": "editorial-unclassified",
       "contentType": "text/html; charset=UTF-8",
-      "redirects": []
+      "redirects": [],
+      "namedExclusion": "liferay-accordion-fragment-artifact"
     },
     {
       "url": "https://www.royalairmaroc.com/en-gb/accordion-204402-1",
@@ -516,7 +584,8 @@
       "family": "editorial-unclassified",
       "finalFamily": "editorial-unclassified",
       "contentType": "text/html; charset=UTF-8",
-      "redirects": []
+      "redirects": [],
+      "namedExclusion": "liferay-accordion-fragment-artifact"
     },
     {
       "url": "https://www.royalairmaroc.com/en-gb/accordion-204402-2",
@@ -525,7 +594,8 @@
       "family": "editorial-unclassified",
       "finalFamily": "editorial-unclassified",
       "contentType": "text/html; charset=UTF-8",
-      "redirects": []
+      "redirects": [],
+      "namedExclusion": "liferay-accordion-fragment-artifact"
     },
     {
       "url": "https://www.royalairmaroc.com/en-gb/accordion-204402-3",
@@ -534,7 +604,8 @@
       "family": "editorial-unclassified",
       "finalFamily": "editorial-unclassified",
       "contentType": "text/html; charset=UTF-8",
-      "redirects": []
+      "redirects": [],
+      "namedExclusion": "liferay-accordion-fragment-artifact"
     },
     {
       "url": "https://www.royalairmaroc.com/en-gb/accordion-204402-4",
@@ -543,7 +614,8 @@
       "family": "editorial-unclassified",
       "finalFamily": "editorial-unclassified",
       "contentType": "text/html; charset=UTF-8",
-      "redirects": []
+      "redirects": [],
+      "namedExclusion": "liferay-accordion-fragment-artifact"
     },
     {
       "url": "https://www.royalairmaroc.com/en-gb/accordion-204621-1",
@@ -552,7 +624,8 @@
       "family": "editorial-unclassified",
       "finalFamily": "editorial-unclassified",
       "contentType": "text/html; charset=UTF-8",
-      "redirects": []
+      "redirects": [],
+      "namedExclusion": "liferay-accordion-fragment-artifact"
     },
     {
       "url": "https://www.royalairmaroc.com/en-gb/accordion-204621-2",
@@ -561,7 +634,8 @@
       "family": "editorial-unclassified",
       "finalFamily": "editorial-unclassified",
       "contentType": "text/html; charset=UTF-8",
-      "redirects": []
+      "redirects": [],
+      "namedExclusion": "liferay-accordion-fragment-artifact"
     },
     {
       "url": "https://www.royalairmaroc.com/en-gb/accordion-204621-3",
@@ -570,7 +644,8 @@
       "family": "editorial-unclassified",
       "finalFamily": "editorial-unclassified",
       "contentType": "text/html; charset=UTF-8",
-      "redirects": []
+      "redirects": [],
+      "namedExclusion": "liferay-accordion-fragment-artifact"
     },
     {
       "url": "https://www.royalairmaroc.com/en-gb/accordion-204621-4",
@@ -579,7 +654,8 @@
       "family": "editorial-unclassified",
       "finalFamily": "editorial-unclassified",
       "contentType": "text/html; charset=UTF-8",
-      "redirects": []
+      "redirects": [],
+      "namedExclusion": "liferay-accordion-fragment-artifact"
     },
     {
       "url": "https://www.royalairmaroc.com/en-gb/accordion-204683-1",
@@ -588,7 +664,8 @@
       "family": "editorial-unclassified",
       "finalFamily": "editorial-unclassified",
       "contentType": "text/html; charset=UTF-8",
-      "redirects": []
+      "redirects": [],
+      "namedExclusion": "liferay-accordion-fragment-artifact"
     },
     {
       "url": "https://www.royalairmaroc.com/en-gb/accordion-204683-2",
@@ -597,7 +674,8 @@
       "family": "editorial-unclassified",
       "finalFamily": "editorial-unclassified",
       "contentType": "text/html; charset=UTF-8",
-      "redirects": []
+      "redirects": [],
+      "namedExclusion": "liferay-accordion-fragment-artifact"
     },
     {
       "url": "https://www.royalairmaroc.com/en-gb/accordion-204683-3",
@@ -606,7 +684,8 @@
       "family": "editorial-unclassified",
       "finalFamily": "editorial-unclassified",
       "contentType": "text/html; charset=UTF-8",
-      "redirects": []
+      "redirects": [],
+      "namedExclusion": "liferay-accordion-fragment-artifact"
     },
     {
       "url": "https://www.royalairmaroc.com/en-gb/accordion-204683-4",
@@ -615,7 +694,8 @@
       "family": "editorial-unclassified",
       "finalFamily": "editorial-unclassified",
       "contentType": "text/html; charset=UTF-8",
-      "redirects": []
+      "redirects": [],
+      "namedExclusion": "liferay-accordion-fragment-artifact"
     },
     {
       "url": "https://www.royalairmaroc.com/en-gb/add-extra-luggage",
@@ -1438,7 +1518,8 @@
       "family": "editorial-unclassified",
       "finalFamily": "editorial-unclassified",
       "contentType": "text/html; charset=UTF-8",
-      "redirects": []
+      "redirects": [],
+      "namedExclusion": "liferay-accordion-fragment-artifact"
     },
     {
       "url": "https://www.royalairmaroc.com/en-gb/information/accordion-133658-2",
@@ -1447,7 +1528,8 @@
       "family": "editorial-unclassified",
       "finalFamily": "editorial-unclassified",
       "contentType": "text/html; charset=UTF-8",
-      "redirects": []
+      "redirects": [],
+      "namedExclusion": "liferay-accordion-fragment-artifact"
     },
     {
       "url": "https://www.royalairmaroc.com/en-gb/information/check-in-conditions",
