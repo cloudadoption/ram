@@ -15,6 +15,14 @@
 }
 
 @font-face {
+  font-family: ram-flight-swap;
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./assets/aall-swap.woff') format('woff');
+}
+
+@font-face {
   font-family: ram-homepage-heading;
   font-style: normal;
   font-weight: 300;
@@ -331,9 +339,10 @@ main .homepage-hero .flight-search-swap {
 }
 
 main .homepage-hero .flight-search-swap::before {
+  font-family: ram-flight-swap, sans-serif;
   font-size: 18px;
   line-height: 1;
-  content: '\21c4';
+  content: '\e92d';
 }
 
 main .homepage-hero .flight-search-swap:focus-visible {
