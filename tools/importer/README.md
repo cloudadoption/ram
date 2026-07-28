@@ -70,6 +70,25 @@ English Morocco locale links on live, and their targets currently exist only on
 the old stack. They remain unchanged until those targets have migrated URLs and
 an explicit mapping rule.
 
+## Metadata description policy
+
+Meta descriptions follow GUARDRAILS rule 8c:
+
+1. If live supplies a description, copy it verbatim and report its source as
+   `live`.
+2. If live supplies none, use only a reviewed
+   `metadata.descriptionWhenMissing` value from the page profile. Its
+   `basisSelectors` must resolve to visible source claims on that page.
+3. Record every fallback in `import-report.json` as an
+   `authored-meta-description` deviation with its value and source evidence.
+4. If live has no description and no reviewed fallback exists, stop the import
+   instead of inventing copy.
+
+This exception applies only to crawler metadata. The importer never authors or
+alters headings, body text, link text, or alternative text when live omits or
+supplies them. The seats profile retains the factual description reviewed for
+issue 7 as its missing-description fallback.
+
 ## Scratch proof
 
 Use a scratch output under `drafts/` for parity work. This never uploads or

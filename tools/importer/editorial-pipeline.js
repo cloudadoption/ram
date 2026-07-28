@@ -11,6 +11,7 @@ const mappingFile = new URL('./page-mappings.json', import.meta.url);
 const mappings = JSON.parse(readFileSync(mappingFile, 'utf8'));
 
 const normalizeUrl = (value) => value.replace(/\/$/, '');
+const normalizeSpace = (value = '') => value.replace(/\s+/g, ' ').trim();
 
 export function classifyEditorialUrl(url, catalog) {
   const normalized = normalizeUrl(url);
@@ -42,16 +43,58 @@ function appendValueCell(row, document, value) {
   row.append(cell);
 }
 
-function buildMetadataBlock(document, sourceDocument) {
+function resolveDescription(sourceDocument, profile) {
+  const descriptionKeys = new Set(['description', 'og:description']);
+  const live = [...sourceDocument.querySelectorAll('meta')]
+    .map((meta) => {
+      const key = meta.getAttribute('name') || meta.getAttribute('property') || '';
+      return descriptionKeys.has(key.toLowerCase())
+        ? meta.getAttribute('content')
+        : null;
+    })
+    .find((value) => value?.trim());
+
+  if (live) {
+    return {
+      description: { source: 'live', value: live },
+      deviations: [],
+    };
+  }
+
+  const fallback = profile.metadata?.descriptionWhenMissing;
+  if (!fallback?.value || !fallback.basisSelectors?.length) {
+    throw new Error(
+      `Live page ${profile.url} has no meta description. Add a reviewed metadata.descriptionWhenMissing mapping based only on existing page claims.`,
+    );
+  }
+
+  const basis = fallback.basisSelectors.map((selector) => {
+    const text = normalizeSpace(sourceDocument.querySelector(selector)?.textContent);
+    if (!text) {
+      throw new Error(`Metadata description basis selector not found: ${selector}`);
+    }
+    return { selector, text };
+  });
+
+  return {
+    description: { source: 'authored', value: fallback.value },
+    deviations: [{
+      type: 'authored-meta-description',
+      field: 'Description',
+      value: fallback.value,
+      rationale: 'Live supplied no meta description. Authored metadata only from existing page claims.',
+      basis,
+    }],
+  };
+}
+
+function buildMetadataBlock(document, sourceDocument, profile) {
   const block = document.createElement('div');
   block.className = 'metadata';
+  const metadataPolicy = resolveDescription(sourceDocument, profile);
   const values = [
     ['Title', sourceDocument.title],
-    [
-      'Description',
-      sourceDocument.querySelector('meta[name="description"], meta[property="og:description"]')
-        ?.getAttribute('content'),
-    ],
+    ['Description', metadataPolicy.description.value],
     ['HTML Lang', sourceDocument.documentElement.getAttribute('lang') || 'en-GB'],
   ].filter(([, value]) => value);
 
@@ -61,7 +104,7 @@ function buildMetadataBlock(document, sourceDocument) {
     appendValueCell(row, document, value);
     block.append(row);
   });
-  return block;
+  return { block, ...metadataPolicy };
 }
 
 function appendSection(root, document, block) {
@@ -70,7 +113,7 @@ function appendSection(root, document, block) {
   root.append(section);
 }
 
-function buildAnalysis(profile, outputDocument, sourceHtml) {
+function buildAnalysis(profile, outputDocument, sourceHtml, metadataPolicy) {
   const blocks = profile.blocks.map((block, index) => ({
     id: `section-${index + 1}`,
     name: block.name,
@@ -88,6 +131,8 @@ function buildAnalysis(profile, outputDocument, sourceHtml) {
       documentPath: profile.path,
       template: profile.template,
       images,
+      description: metadataPolicy.description,
+      deviations: metadataPolicy.deviations,
     },
     pageStructure: {
       sourceUrl: profile.url,
@@ -143,9 +188,10 @@ export function transformEditorialDocument(sourceHtml, { url, imageSources = {} 
       ),
     );
   });
-  appendSection(output, document, buildMetadataBlock(document, document));
+  const metadataPolicy = buildMetadataBlock(document, document, profile);
+  appendSection(output, document, metadataPolicy.block);
 
-  const analysis = buildAnalysis(profile, output, sourceHtml);
+  const analysis = buildAnalysis(profile, output, sourceHtml, metadataPolicy);
   return {
     template: profile.template,
     path: profile.path,

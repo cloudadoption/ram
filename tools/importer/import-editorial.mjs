@@ -261,6 +261,8 @@ async function main() {
     path: result.path,
     template: result.template,
     blocks: result.authoringAnalysis.contentSequences.map(({ blockName }) => blockName),
+    description: result.metadata.description,
+    deviations: result.metadata.deviations,
     images: metadata.downloadedImages.map(({ source, file }) => ({
       source,
       file,
