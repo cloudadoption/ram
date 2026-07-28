@@ -30,6 +30,44 @@
   height: 100%;
 }
 
+main .hero.interior {
+  box-sizing: border-box;
+  min-height: 0;
+  padding: 27px 0 0;
+  color: #1a1717;
+  font-family: var(--ram-page-font-family);
+}
+
+main .hero.interior .hero-interior-content {
+  position: relative;
+  z-index: 2;
+  width: calc(100% - 21px);
+  max-width: 1232px;
+  margin-inline: auto;
+}
+
+main .hero.interior .hero-interior-breadcrumb {
+  display: none;
+}
+
+main .hero.interior h1 {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding-bottom: 16px;
+  color: #1a1717;
+  font-family: var(--ram-homepage-heading-family);
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 32px;
+  text-transform: uppercase;
+}
+
+main .hero.interior .hero-interior-picture {
+  display: none;
+}
+
 main .hero.homepage {
   position: relative;
   box-sizing: border-box;
@@ -161,6 +199,88 @@ main .hero.homepage .hero-homepage-cta::after {
 }
 
 @media (width >= 1200px) {
+  main .hero.interior {
+    min-height: 408px;
+  }
+
+  main .hero.interior::after {
+    position: absolute;
+    z-index: 0;
+    inset: 55px 0 0;
+    background: url('./assets/page-heading-bg.png') center bottom / 1440px 405px no-repeat;
+    content: '';
+  }
+
+  main .hero.interior .hero-interior-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  main .hero.interior .hero-interior-breadcrumb {
+    display: block;
+  }
+
+  main .hero.interior .hero-interior-breadcrumb ol {
+    display: flex;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  main .hero.interior .hero-interior-breadcrumb li {
+    display: flex;
+    gap: 12px;
+    color: #8d2b61;
+    font-weight: 600;
+  }
+
+  main .hero.interior .hero-interior-breadcrumb li:not(:last-child)::after {
+    color: #7b7a78;
+    content: '|';
+  }
+
+  main .hero.interior .hero-interior-breadcrumb p {
+    margin: 0;
+  }
+
+  main .hero.interior .hero-interior-breadcrumb a:any-link {
+    color: #595855;
+    font-weight: 400;
+    text-decoration: none;
+  }
+
+  main .hero.interior h1 {
+    font-size: 50px;
+    line-height: 56px;
+  }
+
+  main .hero.interior .hero-interior-picture,
+  main .hero.interior .hero-interior-picture img {
+    position: absolute;
+    display: block;
+    width: min(calc(100% - 187px), 1253px);
+    height: 355px;
+  }
+
+  main .hero.interior .hero-interior-picture {
+    z-index: 1;
+    inset: 55px 0 auto;
+    margin-inline: auto;
+    clip-path: polygon(0 43%, 75px 15%, 100% 15%, 100% 95%, 0 95%);
+    overflow: hidden;
+  }
+
+  main .hero.interior .hero-interior-picture img {
+    inset: 0;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
   main .hero.homepage {
     height: 580px;
   }

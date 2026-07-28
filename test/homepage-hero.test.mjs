@@ -14,12 +14,22 @@ const source = await readFile(
   new URL('../blocks/hero/hero.js', import.meta.url),
   'utf8',
 );
+const helpersSource = await readFile(
+  new URL('../scripts/homepage-blocks.js', import.meta.url),
+  'utf8',
+);
 const testSource = source.replace(
   'function prepareHomepagePicture(cell, variant, eager = true)',
   'export function prepareHomepagePicture(cell, variant, eager = true)',
 );
 const heroModule = new vm.SourceTextModule(testSource, { context });
-await heroModule.link(() => {});
+const helpersModule = new vm.SourceTextModule(helpersSource, { context });
+await helpersModule.link(() => {});
+await helpersModule.evaluate();
+await heroModule.link((specifier) => {
+  if (specifier === '../../scripts/homepage-blocks.js') return helpersModule;
+  throw new Error(`Unexpected import: ${specifier}`);
+});
 await heroModule.evaluate();
 
 const { prepareHomepagePicture } = heroModule.namespace;
