@@ -15,7 +15,8 @@
         "minimumTextRatio": 0.3,
         "maxContentHeightDelta": 100,
         "maxBlockHeightDelta": 60,
-        "maxPositionDelta": 60
+        "maxPositionDelta": 60,
+        "maxHorizontalDelta": 4
       },
       "blocks": [
         {
@@ -83,7 +84,8 @@
         "minimumTextRatio": 0.3,
         "maxContentHeightDelta": 8,
         "maxBlockHeightDelta": 4,
-        "maxPositionDelta": 4
+        "maxPositionDelta": 4,
+        "maxHorizontalDelta": 4
       }
     },
     {
@@ -93,9 +95,14 @@
       "profilePath": "/en-gb/seats",
       "thresholds": {
         "minimumTextRatio": 0.3,
+        "completenessReview": {
+          "confirmed": true,
+          "reason": "Fresh screenshots at all three widths show both mapped blocks, the target block count is two, and no expected content is missing. The source text region includes chrome, so the 31.4 percent ratio is sufficient for capture completeness but does not override failing geometry."
+        },
         "maxContentHeightDelta": 8,
         "maxBlockHeightDelta": 4,
-        "maxPositionDelta": 4
+        "maxPositionDelta": 4,
+        "maxHorizontalDelta": 4
       }
     },
     {
@@ -107,7 +114,8 @@
         "minimumTextRatio": 0.3,
         "maxContentHeightDelta": 8,
         "maxBlockHeightDelta": 4,
-        "maxPositionDelta": 4
+        "maxPositionDelta": 4,
+        "maxHorizontalDelta": 4
       }
     }
   ]

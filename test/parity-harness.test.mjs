@@ -46,6 +46,47 @@ test('does not round a capture up to the completeness floor', async () => {
   assert.equal(result.passed, false);
 });
 
+test('requires a manual check within ten percent of the completeness floor', async () => {
+  const {
+    assertCaptureCompleteness,
+    evaluateCaptureCompleteness,
+  } = await import('../tools/parity/parity.js');
+
+  const pending = evaluateCaptureCompleteness({
+    liveTextCharacters: 1000,
+    targetTextCharacters: 314,
+  });
+
+  assert.equal(pending.reviewThreshold, 0.33);
+  assert.equal(pending.requiresManualReview, true);
+  assert.equal(pending.status, 'review-required');
+  assert.equal(pending.passed, false);
+  assert.throws(() => assertCaptureCompleteness({
+    liveTextCharacters: 1000,
+    targetTextCharacters: 314,
+  }), /manual spot-check required/);
+  assert.throws(() => assertCaptureCompleteness({
+    liveTextCharacters: 1000,
+    targetTextCharacters: 314,
+    manualReview: {
+      confirmed: true,
+      reason: ' ',
+    },
+  }), /manual spot-check required/);
+
+  const confirmed = assertCaptureCompleteness({
+    liveTextCharacters: 1000,
+    targetTextCharacters: 314,
+    manualReview: {
+      confirmed: true,
+      reason: 'Expected blocks and text are present in the fresh screenshots.',
+    },
+  });
+
+  assert.equal(confirmed.status, 'review-confirmed');
+  assert.equal(confirmed.passed, true);
+});
+
 test('rejects a capture that redirects to a different page', async () => {
   const { assertExpectedNavigation } = await import(
     '../tools/parity/parity.js'
@@ -72,6 +113,7 @@ test('compares normalized block geometry from deterministic fixtures', async () 
     maxContentHeightDelta: 4,
     maxBlockHeightDelta: 4,
     maxPositionDelta: 4,
+    maxHorizontalDelta: 4,
   });
 
   assert.equal(result.passed, true);
@@ -84,7 +126,7 @@ test('compares normalized block geometry from deterministic fixtures', async () 
   assert.equal(result.geometry.passed, true);
 });
 
-test('records non-comparable horizontal wrapper deltas as evidence', async () => {
+test('fails geometry when horizontal delta exceeds the tolerance', async () => {
   const { compareCaptures } = await import('../tools/parity/parity.js');
   const [live, target] = await Promise.all([
     readJson('./fixtures/parity/full-live.json'),
@@ -97,10 +139,12 @@ test('records non-comparable horizontal wrapper deltas as evidence', async () =>
     maxContentHeightDelta: 4,
     maxBlockHeightDelta: 4,
     maxPositionDelta: 4,
+    maxHorizontalDelta: 4,
   });
 
   assert.equal(result.geometry.maxHorizontalDelta, 40);
-  assert.equal(result.geometry.passed, true);
+  assert.equal(result.geometry.passed, false);
+  assert.equal(result.passed, false);
 });
 
 test('reports a large delta instead of zero for a partial target', async () => {
@@ -128,4 +172,5 @@ test('the importer enforces a fresh completeness control', async () => {
   assert.match(source, /assertCaptureCompleteness/);
   assert.match(source, /captureFreshLiveText/);
   assert.match(source, /capture-completeness\.json/);
+  assert.match(source, /completeness-review/);
 });

@@ -1,5 +1,6 @@
 export const PARITY_WIDTHS = [375, 900, 1440];
 export const DEFAULT_COMPLETENESS_RATIO = 0.3;
+export const DEFAULT_COMPLETENESS_REVIEW_MARGIN = 0.1;
 
 const round = (value, precision = 3) => Number(value.toFixed(precision));
 const absoluteMaximum = (values) => (
@@ -10,6 +11,8 @@ export function evaluateCaptureCompleteness({
   liveTextCharacters,
   targetTextCharacters,
   minimumRatio = DEFAULT_COMPLETENESS_RATIO,
+  reviewMargin = DEFAULT_COMPLETENESS_REVIEW_MARGIN,
+  manualReview,
 }) {
   if (!Number.isFinite(liveTextCharacters) || liveTextCharacters <= 0) {
     throw new Error('Fresh live capture has no measurable main text');
@@ -17,19 +20,50 @@ export function evaluateCaptureCompleteness({
   if (!Number.isFinite(targetTextCharacters) || targetTextCharacters < 0) {
     throw new Error('Target capture has an invalid main-text count');
   }
+  if (!Number.isFinite(reviewMargin) || reviewMargin < 0) {
+    throw new Error('Capture completeness review margin must be zero or greater');
+  }
   const rawRatio = targetTextCharacters / liveTextCharacters;
   const ratio = round(rawRatio);
+  const rawReviewThreshold = minimumRatio * (1 + reviewMargin);
+  const hardFloorPassed = rawRatio >= minimumRatio;
+  const requiresManualReview = hardFloorPassed && rawRatio < rawReviewThreshold;
+  const reviewReason = typeof manualReview?.reason === 'string'
+    ? manualReview.reason.trim()
+    : '';
+  const reviewConfirmed = manualReview?.confirmed === true && Boolean(reviewReason);
+  let status = 'passed';
+  if (!hardFloorPassed) status = 'failed';
+  else if (requiresManualReview) {
+    status = reviewConfirmed ? 'review-confirmed' : 'review-required';
+  }
   return {
     liveTextCharacters,
     targetTextCharacters,
     minimumRatio,
+    reviewMargin,
+    reviewThreshold: round(rawReviewThreshold),
     ratio,
-    passed: rawRatio >= minimumRatio,
+    requiresManualReview,
+    manualReview: requiresManualReview ? {
+      confirmed: reviewConfirmed,
+      reason: reviewReason || null,
+    } : null,
+    status,
+    passed: hardFloorPassed && (!requiresManualReview || reviewConfirmed),
   };
 }
 
 export function assertCaptureCompleteness(options) {
   const result = evaluateCaptureCompleteness(options);
+  if (result.status === 'review-required') {
+    throw new Error(
+      `Capture completeness ${round(result.ratio * 100, 1).toFixed(1)}% is within `
+      + `${round(result.minimumRatio * 100, 1).toFixed(1)}%-`
+      + `${round(result.reviewThreshold * 100, 1).toFixed(1)}%; `
+      + 'manual spot-check required',
+    );
+  }
   if (!result.passed) {
     throw new Error(
       `Capture completeness ${round(result.ratio * 100, 1).toFixed(1)}% is below `
@@ -79,15 +113,20 @@ export function compareCaptures(live, target, thresholds = {}) {
   }
   const limits = {
     minimumTextRatio: DEFAULT_COMPLETENESS_RATIO,
+    completenessReviewMargin: DEFAULT_COMPLETENESS_REVIEW_MARGIN,
+    completenessReview: null,
     maxContentHeightDelta: 8,
     maxBlockHeightDelta: 4,
     maxPositionDelta: 4,
+    maxHorizontalDelta: 4,
     ...thresholds,
   };
   const text = evaluateCaptureCompleteness({
     liveTextCharacters: live.textCharacters,
     targetTextCharacters: target.textCharacters,
     minimumRatio: limits.minimumTextRatio,
+    reviewMargin: limits.completenessReviewMargin,
+    manualReview: limits.completenessReview,
   });
   const liveBlocks = normalizeBlockPositions(live.blocks);
   const targetBlocks = normalizeBlockPositions(target.blocks);
@@ -136,13 +175,12 @@ export function compareCaptures(live, target, thresholds = {}) {
     ])),
     rows,
   };
-  // Legacy portlet wrappers and EDS block roots are not equivalent horizontal boxes.
-  // Keep x and width deltas as evidence, but gate comparable height and vertical flow.
   const geometryPassed = missingBlocks.length === 0
     && unexpectedBlocks.length === 0
     && Math.abs(geometry.contentHeightDelta) <= limits.maxContentHeightDelta
     && geometry.maxBlockHeightDelta <= limits.maxBlockHeightDelta
-    && geometry.maxPositionDelta <= limits.maxPositionDelta;
+    && geometry.maxPositionDelta <= limits.maxPositionDelta
+    && geometry.maxHorizontalDelta <= limits.maxHorizontalDelta;
   geometry.passed = geometryPassed;
   const passed = text.passed && geometryPassed;
 

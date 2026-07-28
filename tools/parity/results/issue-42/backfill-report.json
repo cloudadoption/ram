@@ -10,15 +10,23 @@
     "targetStatus": 200,
     "thresholds": {
       "minimumTextRatio": 0.3,
+      "completenessReviewMargin": 0.1,
+      "completenessReview": null,
       "maxContentHeightDelta": 100,
       "maxBlockHeightDelta": 60,
-      "maxPositionDelta": 60
+      "maxPositionDelta": 60,
+      "maxHorizontalDelta": 4
     },
     "text": {
-      "liveTextCharacters": 1903,
+      "liveTextCharacters": 1902,
       "targetTextCharacters": 1194,
       "minimumRatio": 0.3,
-      "ratio": 0.627,
+      "reviewMargin": 0.1,
+      "reviewThreshold": 0.33,
+      "ratio": 0.628,
+      "requiresManualReview": false,
+      "manualReview": null,
+      "status": "passed",
       "passed": true
     },
     "geometry": {
@@ -516,15 +524,23 @@
     "targetStatus": 200,
     "thresholds": {
       "minimumTextRatio": 0.3,
+      "completenessReviewMargin": 0.1,
+      "completenessReview": null,
       "maxContentHeightDelta": 100,
       "maxBlockHeightDelta": 60,
-      "maxPositionDelta": 60
+      "maxPositionDelta": 60,
+      "maxHorizontalDelta": 4
     },
     "text": {
-      "liveTextCharacters": 1903,
+      "liveTextCharacters": 1902,
       "targetTextCharacters": 1248,
       "minimumRatio": 0.3,
+      "reviewMargin": 0.1,
+      "reviewThreshold": 0.33,
       "ratio": 0.656,
+      "requiresManualReview": false,
+      "manualReview": null,
+      "status": "passed",
       "passed": true
     },
     "geometry": {
@@ -1026,15 +1042,23 @@
     "targetStatus": 200,
     "thresholds": {
       "minimumTextRatio": 0.3,
+      "completenessReviewMargin": 0.1,
+      "completenessReview": null,
       "maxContentHeightDelta": 100,
       "maxBlockHeightDelta": 60,
-      "maxPositionDelta": 60
+      "maxPositionDelta": 60,
+      "maxHorizontalDelta": 4
     },
     "text": {
-      "liveTextCharacters": 2212,
+      "liveTextCharacters": 2211,
       "targetTextCharacters": 1473,
       "minimumRatio": 0.3,
+      "reviewMargin": 0.1,
+      "reviewThreshold": 0.33,
       "ratio": 0.666,
+      "requiresManualReview": false,
+      "manualReview": null,
+      "status": "passed",
       "passed": true
     },
     "geometry": {
@@ -1532,15 +1556,23 @@
     "targetStatus": 200,
     "thresholds": {
       "minimumTextRatio": 0.3,
+      "completenessReviewMargin": 0.1,
+      "completenessReview": null,
       "maxContentHeightDelta": 8,
       "maxBlockHeightDelta": 4,
-      "maxPositionDelta": 4
+      "maxPositionDelta": 4,
+      "maxHorizontalDelta": 4
     },
     "text": {
       "liveTextCharacters": 2626,
       "targetTextCharacters": 1035,
       "minimumRatio": 0.3,
+      "reviewMargin": 0.1,
+      "reviewThreshold": 0.33,
       "ratio": 0.394,
+      "requiresManualReview": false,
+      "manualReview": null,
+      "status": "passed",
       "passed": true
     },
     "geometry": {
@@ -1720,15 +1752,23 @@
     "targetStatus": 200,
     "thresholds": {
       "minimumTextRatio": 0.3,
+      "completenessReviewMargin": 0.1,
+      "completenessReview": null,
       "maxContentHeightDelta": 8,
       "maxBlockHeightDelta": 4,
-      "maxPositionDelta": 4
+      "maxPositionDelta": 4,
+      "maxHorizontalDelta": 4
     },
     "text": {
       "liveTextCharacters": 2626,
       "targetTextCharacters": 1035,
       "minimumRatio": 0.3,
+      "reviewMargin": 0.1,
+      "reviewThreshold": 0.33,
       "ratio": 0.394,
+      "requiresManualReview": false,
+      "manualReview": null,
+      "status": "passed",
       "passed": true
     },
     "geometry": {
@@ -1908,15 +1948,23 @@
     "targetStatus": 200,
     "thresholds": {
       "minimumTextRatio": 0.3,
+      "completenessReviewMargin": 0.1,
+      "completenessReview": null,
       "maxContentHeightDelta": 8,
       "maxBlockHeightDelta": 4,
-      "maxPositionDelta": 4
+      "maxPositionDelta": 4,
+      "maxHorizontalDelta": 4
     },
     "text": {
       "liveTextCharacters": 2777,
       "targetTextCharacters": 1081,
       "minimumRatio": 0.3,
+      "reviewMargin": 0.1,
+      "reviewThreshold": 0.33,
       "ratio": 0.389,
+      "requiresManualReview": false,
+      "manualReview": null,
+      "status": "passed",
       "passed": true
     },
     "geometry": {
@@ -2096,15 +2144,29 @@
     "targetStatus": 200,
     "thresholds": {
       "minimumTextRatio": 0.3,
+      "completenessReviewMargin": 0.1,
+      "completenessReview": {
+        "confirmed": true,
+        "reason": "Fresh screenshots at all three widths show both mapped blocks, the target block count is two, and no expected content is missing. The source text region includes chrome, so the 31.4 percent ratio is sufficient for capture completeness but does not override failing geometry."
+      },
       "maxContentHeightDelta": 8,
       "maxBlockHeightDelta": 4,
-      "maxPositionDelta": 4
+      "maxPositionDelta": 4,
+      "maxHorizontalDelta": 4
     },
     "text": {
       "liveTextCharacters": 2707,
       "targetTextCharacters": 850,
       "minimumRatio": 0.3,
+      "reviewMargin": 0.1,
+      "reviewThreshold": 0.33,
       "ratio": 0.314,
+      "requiresManualReview": true,
+      "manualReview": {
+        "confirmed": true,
+        "reason": "Fresh screenshots at all three widths show both mapped blocks, the target block count is two, and no expected content is missing. The source text region includes chrome, so the 31.4 percent ratio is sufficient for capture completeness but does not override failing geometry."
+      },
+      "status": "review-confirmed",
       "passed": true
     },
     "geometry": {
@@ -2245,15 +2307,29 @@
     "targetStatus": 200,
     "thresholds": {
       "minimumTextRatio": 0.3,
+      "completenessReviewMargin": 0.1,
+      "completenessReview": {
+        "confirmed": true,
+        "reason": "Fresh screenshots at all three widths show both mapped blocks, the target block count is two, and no expected content is missing. The source text region includes chrome, so the 31.4 percent ratio is sufficient for capture completeness but does not override failing geometry."
+      },
       "maxContentHeightDelta": 8,
       "maxBlockHeightDelta": 4,
-      "maxPositionDelta": 4
+      "maxPositionDelta": 4,
+      "maxHorizontalDelta": 4
     },
     "text": {
       "liveTextCharacters": 2707,
       "targetTextCharacters": 850,
       "minimumRatio": 0.3,
+      "reviewMargin": 0.1,
+      "reviewThreshold": 0.33,
       "ratio": 0.314,
+      "requiresManualReview": true,
+      "manualReview": {
+        "confirmed": true,
+        "reason": "Fresh screenshots at all three widths show both mapped blocks, the target block count is two, and no expected content is missing. The source text region includes chrome, so the 31.4 percent ratio is sufficient for capture completeness but does not override failing geometry."
+      },
+      "status": "review-confirmed",
       "passed": true
     },
     "geometry": {
@@ -2394,15 +2470,26 @@
     "targetStatus": 200,
     "thresholds": {
       "minimumTextRatio": 0.3,
+      "completenessReviewMargin": 0.1,
+      "completenessReview": {
+        "confirmed": true,
+        "reason": "Fresh screenshots at all three widths show both mapped blocks, the target block count is two, and no expected content is missing. The source text region includes chrome, so the 31.4 percent ratio is sufficient for capture completeness but does not override failing geometry."
+      },
       "maxContentHeightDelta": 8,
       "maxBlockHeightDelta": 4,
-      "maxPositionDelta": 4
+      "maxPositionDelta": 4,
+      "maxHorizontalDelta": 4
     },
     "text": {
       "liveTextCharacters": 2325,
       "targetTextCharacters": 876,
       "minimumRatio": 0.3,
+      "reviewMargin": 0.1,
+      "reviewThreshold": 0.33,
       "ratio": 0.377,
+      "requiresManualReview": false,
+      "manualReview": null,
+      "status": "passed",
       "passed": true
     },
     "geometry": {
@@ -2547,15 +2634,23 @@
     "targetStatus": 200,
     "thresholds": {
       "minimumTextRatio": 0.3,
+      "completenessReviewMargin": 0.1,
+      "completenessReview": null,
       "maxContentHeightDelta": 8,
       "maxBlockHeightDelta": 4,
-      "maxPositionDelta": 4
+      "maxPositionDelta": 4,
+      "maxHorizontalDelta": 4
     },
     "text": {
       "liveTextCharacters": 5927,
       "targetTextCharacters": 2325,
       "minimumRatio": 0.3,
+      "reviewMargin": 0.1,
+      "reviewThreshold": 0.33,
       "ratio": 0.392,
+      "requiresManualReview": false,
+      "manualReview": null,
+      "status": "passed",
       "passed": true
     },
     "geometry": {
@@ -3147,15 +3242,23 @@
     "targetStatus": 200,
     "thresholds": {
       "minimumTextRatio": 0.3,
+      "completenessReviewMargin": 0.1,
+      "completenessReview": null,
       "maxContentHeightDelta": 8,
       "maxBlockHeightDelta": 4,
-      "maxPositionDelta": 4
+      "maxPositionDelta": 4,
+      "maxHorizontalDelta": 4
     },
     "text": {
       "liveTextCharacters": 5927,
       "targetTextCharacters": 2325,
       "minimumRatio": 0.3,
+      "reviewMargin": 0.1,
+      "reviewThreshold": 0.33,
       "ratio": 0.392,
+      "requiresManualReview": false,
+      "manualReview": null,
+      "status": "passed",
       "passed": true
     },
     "geometry": {
@@ -3730,11 +3833,11 @@
           }
         }
       ],
-      "passed": true
+      "passed": false
     },
     "missingBlocks": [],
     "unexpectedBlocks": [],
-    "passed": true
+    "passed": false
   },
   {
     "slug": "blue-benefits",
@@ -3747,15 +3850,23 @@
     "targetStatus": 200,
     "thresholds": {
       "minimumTextRatio": 0.3,
+      "completenessReviewMargin": 0.1,
+      "completenessReview": null,
       "maxContentHeightDelta": 8,
       "maxBlockHeightDelta": 4,
-      "maxPositionDelta": 4
+      "maxPositionDelta": 4,
+      "maxHorizontalDelta": 4
     },
     "text": {
       "liveTextCharacters": 5485,
       "targetTextCharacters": 2325,
       "minimumRatio": 0.3,
+      "reviewMargin": 0.1,
+      "reviewThreshold": 0.33,
       "ratio": 0.424,
+      "requiresManualReview": false,
+      "manualReview": null,
+      "status": "passed",
       "passed": true
     },
     "geometry": {
@@ -4366,10 +4477,10 @@
           }
         }
       ],
-      "passed": true
+      "passed": false
     },
     "missingBlocks": [],
     "unexpectedBlocks": [],
-    "passed": true
+    "passed": false
   }
 ]

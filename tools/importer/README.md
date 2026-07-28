@@ -35,7 +35,10 @@ The command performs:
    A second independent live navigation checks that imported main text retains
    at least 30 percent of fresh live main text. The command stops instead of
    accepting an implausibly short capture and records
-   `capture-completeness.json`.
+   `capture-completeness.json`. Ratios from 30 percent up to, but not including,
+   the known-good 33 percent control require a manual screenshot and content
+   spot-check. After checking, rerun with
+   `--completeness-review "<reason>"` to record the confirmation.
 2. Mapping: writes section, authoring, visual tree, and per-block source context.
 3. Infrastructure selection: validates the URL against the catalog template and
    uses the matching template import script, parser, and transformers.

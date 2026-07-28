@@ -194,12 +194,14 @@ async function validateCaptureCompleteness({
   workDir,
   textSelector,
   initialCaptureTextCharacters,
+  manualReview,
 }) {
   const liveTextCharacters = await captureFreshLiveText(url, textSelector);
   const targetTextCharacters = htmlTextCharacters(result.html);
   const options = {
     liveTextCharacters,
     targetTextCharacters,
+    manualReview,
   };
   const completeness = evaluateCaptureCompleteness(options);
   const artifact = {
@@ -323,6 +325,10 @@ async function main() {
   let sourceHtml;
   let metadata;
   const textSelector = profile?.completeness?.liveTextSelector || '.inner-layout';
+  const completenessReview = options['completeness-review'] ? {
+    confirmed: true,
+    reason: options['completeness-review'],
+  } : undefined;
   if (options.phase === 'all' || options.phase === 'analyze') {
     const capture = await captureLive(url, workDir, textSelector);
     sourceHtml = capture.html;
@@ -335,6 +341,7 @@ async function main() {
       workDir,
       textSelector,
       initialCaptureTextCharacters: capture.textCharacters,
+      manualReview: completenessReview,
     });
     const downloadedImages = await downloadImages(
       preliminary.metadata.images,
@@ -376,6 +383,7 @@ async function main() {
       workDir,
       textSelector,
       initialCaptureTextCharacters: metadata.capture?.textCharacters,
+      manualReview: completenessReview,
     });
   }
   if (options.phase === 'all' || options.phase === 'map') {
