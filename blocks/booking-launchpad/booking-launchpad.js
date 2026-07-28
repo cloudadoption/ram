@@ -412,13 +412,13 @@ function readValidationMessages(rows) {
     const message = cells[1]?.textContent.trim();
 
     if (cells.length !== 2 || !expectedKeys.has(key) || !message) {
-      throw new Error(`Invalid homepage hero validation message row: ${key || 'unnamed'}`);
+      throw new Error(`Invalid booking launchpad validation message row: ${key || 'unnamed'}`);
     }
 
     const [panelKey, name] = key.split('.');
     messages[panelKey] ||= {};
     if (messages[panelKey][name]) {
-      throw new Error(`Duplicate homepage hero validation message: ${key}`);
+      throw new Error(`Duplicate booking launchpad validation message: ${key}`);
     }
     messages[panelKey][name] = message;
   });
@@ -428,62 +428,24 @@ function readValidationMessages(rows) {
     return !messages[panelKey]?.[name];
   });
   if (missingKeys.length) {
-    throw new Error(`Missing homepage hero validation messages: ${missingKeys.join(', ')}`);
+    throw new Error(`Missing booking launchpad validation messages: ${missingKeys.join(', ')}`);
   }
 
   return messages;
 }
 
-function buildHeroMedia(desktopUrl, mobileUrl, copyCell) {
-  const media = createElement('div', 'homepage-hero-media');
-  const picture = createElement('picture', 'homepage-hero-picture');
-  const source = createElement('source');
-  const image = createElement('img');
-  const copy = createElement('div', 'homepage-hero-copy');
-  const heading = copyCell.querySelector('h1, h2, h3');
-  const subtitle = [...copyCell.querySelectorAll('p')].find((paragraph) => !paragraph.querySelector('a'));
-  const cta = copyCell.querySelector('a[href]');
-
-  if (!heading || !subtitle || !cta) {
-    throw new Error('Homepage hero copy requires a heading, subtitle, and CTA link');
-  }
-
-  source.media = '(min-width: 1200px)';
-  source.srcset = desktopUrl;
-  image.alt = 'Royal Air Maroc';
-  image.decoding = 'async';
-  image.fetchPriority = 'high';
-  image.loading = 'eager';
-  image.src = mobileUrl;
-  picture.append(source, image);
-
-  heading.className = 'homepage-hero-title';
-  heading.id = heading.id || 'homepage-hero-title';
-  subtitle.className = 'homepage-hero-subtitle';
-  cta.className = 'homepage-hero-cta';
-  cta.removeAttribute('title');
-  copy.append(heading, subtitle, cta);
-  media.append(picture, copy);
-  return media;
-}
-
 /**
- * Decorates the authored homepage hero and shell-only flight search widget.
- * @param {Element} block Homepage hero block
+ * Decorates the shell-only booking launchpad.
+ * @param {Element} block Booking launchpad block
  */
 export default function decorate(block) {
-  const [contentRow, emptyRow, ...validationRows] = [...block.children];
-  const [desktopCell, mobileCell, copyCell] = contentRow ? [...contentRow.children] : [];
-  const desktopAsset = desktopCell?.querySelector('a[href]');
-  const mobileAsset = mobileCell?.querySelector('a[href]');
+  const [emptyRow, ...validationRows] = [...block.children];
   const emptyMessage = emptyRow?.textContent.trim();
 
-  if (!desktopAsset || !mobileAsset || !copyCell || !emptyMessage) {
-    throw new Error('Homepage hero requires desktop and mobile assets, hero copy, and an empty state');
+  if (!emptyMessage) {
+    throw new Error('Booking launchpad requires an authored empty state');
   }
 
-  const media = buildHeroMedia(desktopAsset.href, mobileAsset.href, copyCell);
   const validationMessages = readValidationMessages(validationRows);
-  const search = buildFlightSearch(emptyMessage, validationMessages);
-  block.replaceChildren(media, search);
+  block.replaceChildren(buildFlightSearch(emptyMessage, validationMessages));
 }
