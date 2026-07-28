@@ -14,10 +14,23 @@ const source = await readFile(
   new URL('../blocks/homepage-hero/homepage-hero.js', import.meta.url),
   'utf8',
 );
-const testSource = source.replace(
-  'function panelFields(panelKey)',
-  'export function panelFields(panelKey)',
-);
+const testSource = source
+  .replace(
+    "const SWAP_LABEL = 'Swap origin and destination';",
+    "export const SWAP_LABEL = 'Swap origin and destination';",
+  )
+  .replace(
+    'function getPanelSubTabs(panelKey)',
+    'export function getPanelSubTabs(panelKey)',
+  )
+  .replace(
+    'function panelFields(panelKey)',
+    'export function panelFields(panelKey)',
+  )
+  .replace(
+    'function swapFlightSearchValues(values)',
+    'export function swapFlightSearchValues(values)',
+  );
 const heroModule = new vm.SourceTextModule(testSource, { context });
 await heroModule.link(() => {});
 await heroModule.evaluate();

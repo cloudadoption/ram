@@ -226,6 +226,10 @@ main .homepage-hero .flight-search-trip-types {
   background: #f7f7f7;
 }
 
+main .homepage-hero .flight-search-trip-types.has-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 main .homepage-hero .flight-search-trip-type {
   min-width: 0;
 }
@@ -311,6 +315,30 @@ main .homepage-hero .flight-search-field-suffix {
   margin-inline-start: 8px;
   color: #c20831;
   font-size: 12px;
+}
+
+main .homepage-hero .flight-search-swap {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  margin-inline-start: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: #7b7a78;
+  cursor: pointer;
+}
+
+main .homepage-hero .flight-search-swap::before {
+  font-size: 18px;
+  line-height: 1;
+  content: '\21c4';
+}
+
+main .homepage-hero .flight-search-swap:focus-visible {
+  outline: 2px solid #c20831;
+  outline-offset: 2px;
 }
 
 main .homepage-hero .flight-search-error {

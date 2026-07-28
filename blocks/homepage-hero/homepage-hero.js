@@ -22,6 +22,38 @@ const REQUIRED_FIELDS = {
   status: ['destination'],
 };
 
+const PANEL_SUBTABS = {
+  booking: ['Round trip', 'One-way', 'Multi-city'],
+  manage: ['Manage booking', 'Check-in'],
+  status: ['Flight route', 'Flight number'],
+};
+
+const SWAP_LABEL = 'Swap origin and destination';
+
+/**
+ * Returns the visible sub-tabs for a flight search panel.
+ * @param {string} panelKey Flight search panel name
+ * @returns {string[]} Panel sub-tab labels
+ */
+function getPanelSubTabs(panelKey) {
+  const subTabs = PANEL_SUBTABS[panelKey];
+  if (!subTabs) throw new RangeError(`Unknown flight search panel: ${panelKey}`);
+  return [...subTabs];
+}
+
+/**
+ * Swaps origin and destination without mutating the supplied values.
+ * @param {Object<string, string>} values Form values keyed by field name
+ * @returns {Object<string, string>} Form values with the route reversed
+ */
+function swapFlightSearchValues(values) {
+  return {
+    ...values,
+    destination: values.origin || '',
+    origin: values.destination || '',
+  };
+}
+
 /**
  * Synchronizes the selected flight search tab and its visible panel.
  * @param {Object<string, HTMLElement>} tabs Tab buttons keyed by panel name
@@ -131,23 +163,40 @@ function createField({
   error.id = errorId;
   error.setAttribute('aria-live', 'polite');
   control.append(input);
-  if (suffix) control.append(createElement('span', 'flight-search-field-suffix', suffix));
+  let suffixElement;
+  if (suffix) {
+    suffixElement = createElement('span', 'flight-search-field-suffix', suffix);
+    control.append(suffixElement);
+  }
   field.append(labelText, control, error);
 
-  return { error, field, input };
+  return {
+    control,
+    error,
+    field,
+    input,
+    suffix: suffixElement,
+  };
 }
 
-function createTripTypes() {
+function createPanelSubTabs(panelKey) {
+  const labels = getPanelSubTabs(panelKey);
   const group = createElement('fieldset', 'flight-search-trip-types');
-  const legend = createElement('legend', 'flight-search-sr-only', 'Trip type');
+  const panelLabel = PANEL_DEFINITIONS.find(({ key }) => key === panelKey)?.label;
+  const legend = createElement(
+    'legend',
+    'flight-search-sr-only',
+    panelKey === 'booking' ? 'Trip type' : panelLabel,
+  );
+  group.classList.add(`has-${labels.length}`);
   group.append(legend);
 
-  ['Round trip', 'One-way', 'Multi-city'].forEach((label, index) => {
+  labels.forEach((label, index) => {
     const option = createElement('label', 'flight-search-trip-type');
     const input = createElement('input');
     const text = createElement('span', '', label);
     input.type = 'radio';
-    input.name = 'tripType';
+    input.name = `${panelKey}SubTab`;
     input.value = label;
     input.checked = index === 0;
     option.append(input, text);
@@ -226,13 +275,21 @@ function buildPanel(panelKey, emptyState, validationMessages) {
   panel.setAttribute('aria-labelledby', `flight-search-tab-${panelKey}`);
   panel.setAttribute('role', 'tabpanel');
   form.noValidate = true;
-  if (panelKey === 'booking') form.append(createTripTypes());
+  form.append(createPanelSubTabs(panelKey));
 
   panelFields(panelKey).forEach((fieldConfig) => {
     const field = createField({ ...fieldConfig, panelKey });
     fields[fieldConfig.name] = field;
     fieldGrid.append(field.field);
   });
+
+  let swap;
+  if (panelKey === 'booking' || panelKey === 'status') {
+    swap = createElement('button', 'flight-search-swap');
+    swap.type = 'button';
+    swap.setAttribute('aria-label', SWAP_LABEL);
+    fields.origin.control.append(swap);
+  }
 
   submit.type = 'submit';
   if (panelKey === 'booking') {
@@ -267,6 +324,21 @@ function buildPanel(panelKey, emptyState, validationMessages) {
       );
       renderErrors(fields, errors[name] ? { [name]: errors[name] } : {});
     });
+  });
+
+  swap?.addEventListener('click', () => {
+    const values = swapFlightSearchValues(readFormValues(form));
+    fields.origin.input.value = values.origin;
+    fields.destination.input.value = values.destination;
+    const { suffix } = fields.origin;
+    if (suffix) {
+      const suffixOwner = fields.origin.control.contains(suffix)
+        ? fields.destination.control
+        : fields.origin.control;
+      suffixOwner.append(suffix);
+    }
+    renderErrors(fields, {});
+    updateState();
   });
 
   form.addEventListener('submit', (event) => {
