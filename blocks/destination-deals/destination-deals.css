@@ -14,7 +14,7 @@ main .destination-deals {
   margin-inline: calc(50% - 50vw);
   padding-block: 24px;
   overflow: hidden;
-  background: #f7f7f7 url('./assets/gray-plot.jpg') top center / auto 512px repeat-x;
+  background: #f7f7f7 url('./assets/gray-plot.webp') top center / auto 512px repeat-x;
   color: #1a1717;
   font-family: var(--ram-homepage-font-family);
 }

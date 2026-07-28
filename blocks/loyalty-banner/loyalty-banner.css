@@ -19,7 +19,7 @@ main .loyalty-banner {
   min-height: 620px;
   margin-inline: calc(50% - 50vw);
   padding: 56px 5% 20px;
-  background: #f7f7f7 url('./assets/light-gray-plot.png') top center / auto 588px repeat-x;
+  background: #f7f7f7 url('./assets/light-gray-plot.webp') top center / auto 588px repeat-x;
   color: #1a1717;
   font-family: var(--ram-homepage-font-family);
 }

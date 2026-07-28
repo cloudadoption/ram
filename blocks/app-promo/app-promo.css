@@ -15,7 +15,7 @@ main .app-promo {
   margin-inline: calc(50% - 50vw);
   padding-block-end: 60px;
   background:
-    url('./assets/plot.png') bottom center / auto 328px repeat-x,
+    url('./assets/plot.webp') bottom center / auto 328px repeat-x,
     linear-gradient(to bottom, #f7f7f7 calc(100% - 328px), #c20831 0);
   color: #1a1717;
   font-family: var(--ram-homepage-font-family);
