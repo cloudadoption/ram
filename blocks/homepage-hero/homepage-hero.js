@@ -141,8 +141,11 @@ function createField({
   const control = createElement('span', 'flight-search-field-control');
   const input = createElement('input', 'flight-search-input');
   const error = createElement('span', 'flight-search-error');
-  const errorId = `flight-search-${panelKey}-${name}-error`;
+  const inputId = `flight-search-${panelKey}-${name}`;
+  const errorId = `${inputId}-error`;
 
+  input.id = inputId;
+  field.htmlFor = inputId;
   input.name = name;
   input.type = type;
   input.value = value;
@@ -195,6 +198,9 @@ function createPanelSubTabs(panelKey) {
     const option = createElement('label', 'flight-search-trip-type');
     const input = createElement('input');
     const text = createElement('span', '', label);
+    const inputId = `flight-search-${panelKey}-subtab-${index}`;
+    input.id = inputId;
+    option.htmlFor = inputId;
     input.type = 'radio';
     input.name = `${panelKey}SubTab`;
     input.value = label;
