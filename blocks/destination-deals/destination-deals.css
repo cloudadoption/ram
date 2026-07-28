@@ -1,0 +1,282 @@
+main .destination-deals-container {
+  margin-block: 0;
+}
+
+main .destination-deals-container .destination-deals-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+main .destination-deals {
+  box-sizing: border-box;
+  width: 100vw;
+  min-height: 631px;
+  margin-inline: calc(50% - 50vw);
+  padding-block: 24px;
+  overflow: hidden;
+  background: #f7f7f7 url('./assets/gray-plot.webp') top center / auto 512px repeat-x;
+  color: #1a1717;
+  font-family: var(--ram-homepage-font-family);
+}
+
+main .destination-deals .destination-deals-inner {
+  display: grid;
+  grid-template-areas:
+    "heading"
+    "rail"
+    "see-all";
+  gap: 24px;
+  width: 100%;
+  min-width: 0;
+}
+
+main .destination-deals .destination-deals-heading {
+  grid-area: heading;
+  width: 90%;
+  max-width: 1240px;
+  margin-inline: auto;
+}
+
+main .destination-deals .destination-deals-heading h2 {
+  margin: 0;
+  font-family: var(--ram-homepage-heading-family);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 32px;
+}
+
+main .destination-deals .destination-deals-heading p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 23px;
+}
+
+main .destination-deals .destination-deals-rail {
+  position: relative;
+  grid-area: rail;
+  min-width: 0;
+}
+
+main .destination-deals .destination-deals-track {
+  --destination-card-width: min(370px, calc(100vw - 115px));
+
+  display: flex;
+  gap: 40px;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 calc((100vw - var(--destination-card-width)) / 2);
+  overflow: auto hidden;
+  list-style: none;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+main .destination-deals .destination-deals-track::-webkit-scrollbar {
+  display: none;
+}
+
+main .destination-deals .destination-deals-card {
+  position: relative;
+  flex: 0 0 var(--destination-card-width);
+  height: 424px;
+  border-start-end-radius: 20px;
+  border-end-start-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 6px rgb(0 0 0 / 12%);
+  scroll-snap-align: center;
+}
+
+main .destination-deals .destination-deals-picture,
+main .destination-deals .destination-deals-picture img {
+  display: block;
+  width: 100%;
+  height: 385px;
+}
+
+main .destination-deals .destination-deals-picture img {
+  object-fit: cover;
+}
+
+main .destination-deals .destination-deals-card-content {
+  position: absolute;
+  inset: auto 0 0;
+  min-height: 92px;
+  padding: 8px 16px;
+  background: #fff;
+}
+
+main .destination-deals .destination-deals-card-content h3 {
+  position: relative;
+  margin: 0;
+  padding-inline-start: 28px;
+  color: #1a1717;
+  font-family: var(--ram-homepage-heading-family);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+main .destination-deals .destination-deals-card-content h3::before {
+  position: absolute;
+  inset-block-start: 8px;
+  inset-inline-start: 0;
+  width: 20px;
+  height: 16px;
+  background: url('../hero/assets/ram-chevron.svg') center / contain no-repeat;
+  content: '';
+}
+
+main .destination-deals .destination-deals-card-content p {
+  margin: 0 0 0 28px;
+  color: #1a1717;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+main .destination-deals .destination-deals-card-content strong {
+  font-size: 16px;
+}
+
+main .destination-deals .destination-deals-book:any-link {
+  display: none;
+  justify-content: flex-end;
+  color: #c20831;
+  font-size: 14px;
+  line-height: 24px;
+  text-decoration: none;
+}
+
+main .destination-deals .destination-deals-book::after {
+  width: 7px;
+  height: 7px;
+  margin: 8px 3px 0 8px;
+  border-block-start: 1px solid currentcolor;
+  border-inline-end: 1px solid currentcolor;
+  content: '';
+  transform: rotate(45deg);
+}
+
+main .destination-deals .destination-deals-see-all:any-link {
+  box-sizing: border-box;
+  display: flex;
+  grid-area: see-all;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  max-width: 1240px;
+  min-height: 48px;
+  margin-inline: auto;
+  background: #c20831;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  text-decoration: none;
+}
+
+main .destination-deals .carousel-controls {
+  position: absolute;
+  z-index: 2;
+  inset: 50% 4px auto;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+main .destination-deals .carousel-control {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid #c20831;
+  border-radius: 5px;
+  background: #fff;
+  color: #c20831;
+  pointer-events: auto;
+}
+
+main .destination-deals .carousel-control::before {
+  position: absolute;
+  inset: 10px 9px;
+  width: 8px;
+  height: 8px;
+  border-block-start: 1px solid currentcolor;
+  border-inline-end: 1px solid currentcolor;
+  content: '';
+  transform: rotate(45deg);
+}
+
+main .destination-deals .carousel-control.is-previous::before {
+  inset-inline-start: 12px;
+  transform: rotate(-135deg);
+}
+
+@media (width >= 600px) {
+  main .destination-deals .destination-deals-book:any-link {
+    display: flex;
+  }
+}
+
+@media (width >= 1200px) {
+  main .destination-deals {
+    min-height: 751px;
+    padding-block-start: 112px;
+  }
+
+  main .destination-deals .destination-deals-inner {
+    grid-template:
+      "heading rail" auto
+      "see-all rail" 48px
+      ". rail" 1fr / 278px minmax(0, 1fr);
+    column-gap: 40px;
+    width: 100%;
+    max-width: 1240px;
+    margin-inline: auto;
+  }
+
+  main .destination-deals .destination-deals-heading {
+    width: auto;
+    margin: 0;
+  }
+
+  main .destination-deals .destination-deals-heading h2 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  main .destination-deals .destination-deals-heading p {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  main .destination-deals .destination-deals-track {
+    gap: 25px;
+    padding: 0;
+    scroll-padding-inline: 0;
+  }
+
+  main .destination-deals .destination-deals-card {
+    flex-basis: 274px;
+    height: 580px;
+    scroll-snap-align: start;
+  }
+
+  main .destination-deals .destination-deals-picture,
+  main .destination-deals .destination-deals-picture img {
+    height: 580px;
+  }
+
+  main .destination-deals .destination-deals-see-all:any-link {
+    align-self: start;
+    width: 278px;
+    margin: 0;
+  }
+
+  main .destination-deals .carousel-controls {
+    inset-inline-start: -32px;
+  }
+}

@@ -1,0 +1,179 @@
+main .promotions-container {
+  margin-block: 112px 64px;
+}
+
+main .promotions-container .promotions-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+main .promotions {
+  width: 90%;
+  max-width: 1240px;
+  margin-inline: auto;
+  color: #1a1717;
+  font-family: var(--ram-homepage-font-family);
+}
+
+main .promotions .promotions-heading h2 {
+  margin: 0 0 16px;
+  font-family: var(--ram-homepage-heading-family);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 32px;
+}
+
+main .promotions .promotions-viewport {
+  position: relative;
+  border-start-end-radius: 20px;
+  border-end-start-radius: 20px;
+  box-shadow: 0 0 6px rgb(0 0 0 / 12%);
+}
+
+main .promotions .promotions-track {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  overflow: auto hidden;
+  list-style: none;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+main .promotions .promotions-track::-webkit-scrollbar {
+  display: none;
+}
+
+main .promotions .promotions-item {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+
+main .promotions .promotions-link {
+  position: relative;
+  display: block;
+}
+
+main .promotions .promotions-picture,
+main .promotions .promotions-picture img {
+  display: block;
+  width: 100%;
+  height: 256px;
+}
+
+main .promotions .promotions-picture img {
+  object-fit: cover;
+  object-position: center;
+}
+
+main .promotions .promotions-picture.is-desktop {
+  display: none;
+}
+
+main .promotions .promotions-action {
+  position: absolute;
+  inset: auto 12px 12px auto;
+  padding: 9px 12px;
+  border: 1px solid #c20831;
+  border-radius: 3px;
+  background: #fff;
+  color: #1a1717;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+main .promotions .carousel-control {
+  position: absolute;
+  z-index: 2;
+  inset-block-start: 50%;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid #c20831;
+  border-radius: 5px;
+  opacity: 0;
+  background: #fff;
+  color: #c20831;
+  transform: translateY(-50%);
+}
+
+main .promotions .carousel-control:focus-visible,
+main .promotions .promotions-viewport:hover .carousel-control {
+  opacity: 1;
+}
+
+main .promotions .carousel-control.is-previous {
+  inset-inline-start: 10px;
+}
+
+main .promotions .carousel-control.is-next {
+  inset-inline-end: 10px;
+}
+
+main .promotions .carousel-indicators {
+  position: absolute;
+  inset: auto 0 -28px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+main .promotions .carousel-indicator {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: #c2c1be;
+}
+
+main .promotions .carousel-indicator[aria-current="true"] {
+  width: 20px;
+  background: #c20831;
+}
+
+@media (width >= 600px) {
+  main .promotions-container {
+    margin-block: 88px 65px;
+  }
+
+  main .promotions {
+    padding-block-end: 14px;
+  }
+
+  main .promotions .promotions-picture.is-mobile {
+    display: none;
+  }
+
+  main .promotions .promotions-picture.is-desktop {
+    display: block;
+  }
+
+  main .promotions .promotions-picture,
+  main .promotions .promotions-picture img {
+    height: auto;
+    aspect-ratio: 2.88;
+  }
+
+  main .promotions .promotions-action {
+    inset: auto 50px 50px auto;
+    font-size: 14px;
+    line-height: 21px;
+  }
+}
+
+@media (width >= 1200px) {
+  main .promotions-container {
+    margin-block: 88px 64px;
+  }
+
+  main .promotions .promotions-heading h2 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  main .promotions {
+    min-height: 488px;
+    padding-block-end: 0;
+  }
+}
