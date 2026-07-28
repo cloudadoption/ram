@@ -601,7 +601,7 @@ body.dreamafrica main h3 {
   line-height: 24px;
 }
 
-body.dreamafrica main > .section:nth-child(2) > div > a:has(picture) {
+body.dreamafrica main > .section:nth-child(2) a[href*="youtube.com/watch"] {
   position: relative;
   display: block;
   width: 200px;
@@ -611,12 +611,12 @@ body.dreamafrica main > .section:nth-child(2) > div > a:has(picture) {
   color: #fff;
 }
 
-body.dreamafrica main > .section:nth-child(2) > div > a img {
+body.dreamafrica main > .section:nth-child(2) a[href*="youtube.com/watch"] img {
   display: block;
   width: 100%;
 }
 
-body.dreamafrica main > .section:nth-child(2) > div > a:has(picture)::after {
+body.dreamafrica main > .section:nth-child(2) a[href*="youtube.com/watch"]::after {
   position: absolute;
   inset: 0;
   box-sizing: border-box;
@@ -744,7 +744,7 @@ body.dreamafrica main > .section:nth-child(6) img {
     line-height: 34px;
   }
 
-  body.dreamafrica main > .section:nth-child(2) > div > a:has(picture) {
+  body.dreamafrica main > .section:nth-child(2) a[href*="youtube.com/watch"] {
     width: 300px;
   }
 
@@ -817,7 +817,8 @@ body.dreamafrica main > .section:nth-child(6) img {
 
   body.dreamafrica main > .section:nth-child(1) { height: 97px; }
 
-  body.dreamafrica main > .section:nth-child(2) > div > a:has(picture) {
+  body.dreamafrica main > .section:nth-child(2) a[href*="youtube.com/watch"],
+  body.dreamafrica main > .section:nth-child(2) p:has(> a[href*="youtube.com/watch"]) {
     display: none;
   }
 
