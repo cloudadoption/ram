@@ -23,7 +23,8 @@
         {
           "name": "baggage-categories",
           "instances": [
-            ".bck-pattern-1"
+            ".bck-pattern-1",
+            ".page-heading"
           ],
           "rows": [
             {
@@ -143,7 +144,8 @@
         {
           "name": "restricted-items",
           "instances": [
-            ".prohibited-section"
+            ".prohibited-section",
+            ".prohibited-section + div"
           ],
           "rows": [
             {

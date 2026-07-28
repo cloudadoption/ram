@@ -78,7 +78,7 @@
     {
       "slug": "baggage-information",
       "liveUrl": "https://www.royalairmaroc.com/en-gb/baggage-information",
-      "targetUrl": "https://main--ram--cloudadoption.aem.live/baggage-information",
+      "targetUrl": "https://main--ram--cloudadoption.aem.live/en-gb/baggage-information",
       "profilePath": "/en-gb/baggage-information",
       "thresholds": {
         "minimumTextRatio": 0.3,

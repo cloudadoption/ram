@@ -18,7 +18,7 @@ main .baggage-categories .baggage-categories-header {
   width: 90%;
   max-width: 1240px;
   margin-inline: auto;
-  padding: 16px 0 48px;
+  padding: 24px 0;
 }
 
 main .baggage-categories .baggage-categories-breadcrumb {
@@ -53,7 +53,7 @@ main .baggage-categories .baggage-categories-standfirst p {
 main .baggage-categories .baggage-categories-panel {
   box-sizing: border-box;
   width: calc(100% - 30px);
-  margin-inline: auto;
+  margin: 24px auto 0;
   padding: 24px;
   padding-inline: 0;
   background: #f7f7f7 url('/blocks/destination-deals/assets/gray-plot.webp') top center repeat;
@@ -117,10 +117,6 @@ main .baggage-categories .baggage-categories-arrow {
 }
 
 @media (width >= 600px) {
-  main .baggage-categories .baggage-categories-header {
-    padding-top: 48px;
-  }
-
   main .baggage-categories .baggage-categories-standfirst p {
     white-space: nowrap;
   }
@@ -128,13 +124,12 @@ main .baggage-categories .baggage-categories-arrow {
 
 @media (width >= 1200px) {
   main .baggage-categories .baggage-categories-header {
-    padding-top: 32px;
-    padding-bottom: 56px;
+    padding: 32px 0;
   }
 
   main .baggage-categories .baggage-categories-breadcrumb {
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
 
   main .baggage-categories .baggage-categories-breadcrumb ol {
@@ -151,6 +146,10 @@ main .baggage-categories .baggage-categories-arrow {
     margin-inline-end: 14px;
     color: #7b7a78;
     content: '|';
+  }
+
+  main .baggage-categories .baggage-categories-breadcrumb li {
+    display: flex;
   }
 
   main .baggage-categories .baggage-categories-breadcrumb p {

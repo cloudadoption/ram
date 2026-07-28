@@ -65,7 +65,8 @@
         {
           "name": "baggage-categories",
           "instances": [
-            ".bck-pattern-1"
+            ".bck-pattern-1",
+            ".page-heading"
           ]
         },
         {
@@ -77,7 +78,223 @@
         {
           "name": "restricted-items",
           "instances": [
-            ".prohibited-section"
+            ".prohibited-section",
+            ".prohibited-section + div"
+          ]
+        },
+        {
+          "name": "hero loyalty-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"135464\"] #food-bg"
+          ]
+        },
+        {
+          "name": "columns loyalty-intro",
+          "instances": [
+            "[data-analytics-asset-id=\"135504\"]"
+          ]
+        },
+        {
+          "name": "cards loyalty-benefits",
+          "instances": [
+            "[data-analytics-asset-id=\"135513\"]",
+            "[data-analytics-asset-id=\"135570\"]",
+            "[data-analytics-asset-id=\"135599\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-cta primary",
+          "instances": [
+            "[data-analytics-asset-id=\"135618\"]",
+            "[data-analytics-asset-id=\"135980\"]",
+            "[data-analytics-asset-id=\"136351\"]",
+            "[data-analytics-asset-id=\"136773\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-right new-benefits",
+          "instances": [
+            "[data-analytics-asset-id=\"135627\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-left flyer-system",
+          "instances": [
+            "[data-analytics-asset-id=\"135673\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-right silver-upgrade",
+          "instances": [
+            "[data-analytics-asset-id=\"135692\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-heading",
+          "instances": [
+            "[data-analytics-asset-id=\"135720\"]",
+            "[data-analytics-asset-id=\"136055\"]",
+            "[data-analytics-asset-id=\"136426\"]"
+          ]
+        },
+        {
+          "name": "cards loyalty-benefits compact",
+          "instances": [
+            "[data-analytics-asset-id=\"135729\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-footnote",
+          "instances": [
+            "[data-analytics-asset-id=\"135768\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-cta secondary",
+          "instances": [
+            "[data-analytics-asset-id=\"135777\"]",
+            "[data-analytics-asset-id=\"136103\"]",
+            "[data-analytics-asset-id=\"136474\"]"
+          ]
+        },
+        {
+          "name": "hero loyalty-tier tier-sibling",
+          "instances": [
+            "[data-analytics-asset-id=\"135854\"] #food-bg-default",
+            "[data-analytics-asset-id=\"136112\"] #food-bg-default",
+            "[data-analytics-asset-id=\"136492\"] #food-bg-default"
+          ]
+        },
+        {
+          "name": "columns loyalty-intro tier-sibling",
+          "instances": [
+            "[data-analytics-asset-id=\"135865\"]",
+            "[data-analytics-asset-id=\"136123\"]",
+            "[data-analytics-asset-id=\"136523\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-status tier-sibling",
+          "instances": [
+            "[data-analytics-asset-id=\"135874\"]",
+            "[data-analytics-asset-id=\"136132\"]",
+            "[data-analytics-asset-id=\"136532\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-standfirst silver-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"135884\"]"
+          ]
+        },
+        {
+          "name": "cards loyalty-benefits tier-sibling",
+          "instances": [
+            "[data-analytics-asset-id=\"135893\"]",
+            "[data-analytics-asset-id=\"135952\"]",
+            "[data-analytics-asset-id=\"136160\"]",
+            "[data-analytics-asset-id=\"136294\"]",
+            "[data-analytics-asset-id=\"136323\"]",
+            "[data-analytics-asset-id=\"136590\"]",
+            "[data-analytics-asset-id=\"136629\"]",
+            "[data-analytics-asset-id=\"136687\"]",
+            "[data-analytics-asset-id=\"136735\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-footnote silver-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"135971\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-presentation silver-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"135989\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-left maintain silver-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136008\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-right upgrade silver-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136036\"]"
+          ]
+        },
+        {
+          "name": "cards loyalty-benefits compact silver-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136064\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-standfirst gold-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136142\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-footnote gold-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136342\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-right universe gold-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136369\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-left maintain gold-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136388\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-right upgrade gold-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136407\"]"
+          ]
+        },
+        {
+          "name": "cards loyalty-benefits compact gold-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136435\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-standfirst platinum-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136542\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-footnote platinum-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136764\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-right new-benefits platinum-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136782\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-right upgrade platinum-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136801\"]"
+          ]
+        },
+        {
+          "name": "columns loyalty-content image-left maintain platinum-tier",
+          "instances": [
+            "[data-analytics-asset-id=\"136829\"]"
           ]
         }
       ]
