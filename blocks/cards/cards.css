@@ -155,12 +155,16 @@ main .cards.loyalty-benefits.compact > ul > li:nth-child(3) { top: 379px; }
 }
 
 body.dreamafrica main > .section:nth-child(9) .cards img {
-  aspect-ratio: 8 / 3;
+  aspect-ratio: 7 / 3;
 }
 
 @media (width >= 600px) and (width < 1200px) {
   body.dreamafrica main > .section:nth-child(9) .cards > ul {
     grid-template-columns: 1fr;
+  }
+
+  body.dreamafrica main > .section:nth-child(9) .cards img {
+    aspect-ratio: 7 / 2;
   }
 }
 
@@ -321,6 +325,16 @@ body.dreamafrica main > .section:nth-child(9) .cards img {
 
   main .cards.loyalty-benefits.compact.gold-tier > ul {
     min-height: 230px;
+  }
+}
+
+@media (width >= 1200px) {
+  body.dreamafrica main > .section:nth-child(9) .cards > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  body.dreamafrica main > .section:nth-child(9) .cards img {
+    aspect-ratio: 2 / 1;
   }
 }
 

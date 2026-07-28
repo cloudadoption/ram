@@ -27,6 +27,39 @@
   display: block;
 }
 
+body.dreamafrica .columns img {
+  aspect-ratio: 7 / 3;
+  object-fit: cover;
+}
+
+@media (width >= 600px) and (width < 1200px) {
+  body.dreamafrica .columns img {
+    aspect-ratio: 13 / 3;
+  }
+}
+
+@media (width >= 900px) and (width < 1200px) {
+  body.dreamafrica .columns > div {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  body.dreamafrica .columns > div > div {
+    order: 1;
+    width: 100%;
+  }
+
+  body.dreamafrica .columns > div > .columns-img-col {
+    order: 0;
+  }
+}
+
+@media (width >= 1200px) {
+  body.dreamafrica .columns img {
+    aspect-ratio: auto;
+  }
+}
+
 main .columns.loyalty-intro,
 main .columns.loyalty-status,
 main .columns.loyalty-standfirst,
@@ -795,17 +828,6 @@ main .columns.loyalty-content.platinum-tier.maintain {
   .columns > div > div {
     flex: 1;
     order: unset;
-  }
-}
-
-@media (width >= 900px) and (width < 1200px) {
-  body.dreamafrica .columns > div {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  body.dreamafrica .columns > div > div {
-    width: 100%;
   }
 }
 
