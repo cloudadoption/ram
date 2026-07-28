@@ -1,0 +1,219 @@
+{
+  "metadata": {
+    "projectType": "da",
+    "sourceCatalog": "../../catalog/site-scope.json",
+    "editorialPrefix": "/en-gb/",
+    "generatedBy": "tools/importer/build-page-templates.mjs"
+  },
+  "templates": [
+    {
+      "name": "collection-listing",
+      "description": "Editorial landing with filters, tabs, cards or lists backed by a live collection portlet.",
+      "urls": [
+        "https://www.royalairmaroc.com/en-gb/cash-miles",
+        "https://www.royalairmaroc.com/en-gb/destinations/our-network",
+        "https://www.royalairmaroc.com/en-gb/help-and-support",
+        "https://www.royalairmaroc.com/en-gb/information/contact-us",
+        "https://www.royalairmaroc.com/en-gb/information/frequently-asked-questions",
+        "https://www.royalairmaroc.com/en-gb/information/news",
+        "https://www.royalairmaroc.com/en-gb/information/worldwide-agencies",
+        "https://www.royalairmaroc.com/en-gb/our-fleet",
+        "https://www.royalairmaroc.com/en-gb/safar-flyer/faq-and-contact",
+        "https://www.royalairmaroc.com/en-gb/safar-flyer/our-offers",
+        "https://www.royalairmaroc.com/en-gb/safar-flyer/our-partners"
+      ],
+      "blockPalette": [
+        "article-hero",
+        "breadcrumbs",
+        "filter-tabs",
+        "card-list",
+        "accordion",
+        "pagination"
+      ],
+      "blocks": []
+    },
+    {
+      "name": "feature-story",
+      "description": "Image-led or benefit-led editorial page composed from banners, cards, carousels and feature grids.",
+      "urls": [
+        "https://www.royalairmaroc.com/en-gb/baggage-information",
+        "https://www.royalairmaroc.com/en-gb/blue-benefits",
+        "https://www.royalairmaroc.com/en-gb/buy-and-transfer-miles",
+        "https://www.royalairmaroc.com/en-gb/corporate-program",
+        "https://www.royalairmaroc.com/en-gb/dreamafrica-meetmorocco",
+        "https://www.royalairmaroc.com/en-gb/en-cas-d-irr%C3%A9gularit%C3%A9s-vols",
+        "https://www.royalairmaroc.com/en-gb/family-program",
+        "https://www.royalairmaroc.com/en-gb/gold-benefits",
+        "https://www.royalairmaroc.com/en-gb/information/check-in-conditions",
+        "https://www.royalairmaroc.com/en-gb/information/special-attendance",
+        "https://www.royalairmaroc.com/en-gb/platinum-benefits",
+        "https://www.royalairmaroc.com/en-gb/ram-resale",
+        "https://www.royalairmaroc.com/en-gb/royal-air-maroc-app",
+        "https://www.royalairmaroc.com/en-gb/silver-benefits",
+        "https://www.royalairmaroc.com/en-gb/status-booster"
+      ],
+      "blockPalette": [
+        "article-hero",
+        "breadcrumbs",
+        "feature-grid",
+        "image-card",
+        "media",
+        "promo-banner",
+        "cta"
+      ],
+      "blocks": [
+        {
+          "name": "baggage-categories",
+          "instances": [
+            ".bck-pattern-1"
+          ]
+        },
+        {
+          "name": "baggage-support",
+          "instances": [
+            ".support-section"
+          ]
+        },
+        {
+          "name": "restricted-items",
+          "instances": [
+            ".prohibited-section"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "interactive-service",
+      "description": "Editorial service shell around a booking, lookup, calculator or contact form surface.",
+      "urls": [
+        "https://www.royalairmaroc.com/en-gb/add-extra-luggage",
+        "https://www.royalairmaroc.com/en-gb/booking/book-a-flight",
+        "https://www.royalairmaroc.com/en-gb/booking/flight-info",
+        "https://www.royalairmaroc.com/en-gb/booking/manage-booking",
+        "https://www.royalairmaroc.com/en-gb/booking/online-check-in",
+        "https://www.royalairmaroc.com/en-gb/booking/payment-methods",
+        "https://www.royalairmaroc.com/en-gb/booking/select-seat",
+        "https://www.royalairmaroc.com/en-gb/flight-schedule",
+        "https://www.royalairmaroc.com/en-gb/get-my-card-number",
+        "https://www.royalairmaroc.com/en-gb/information/service-claims",
+        "https://www.royalairmaroc.com/en-gb/information/travel-with-animals",
+        "https://www.royalairmaroc.com/en-gb/information/visa-and-vaccinations",
+        "https://www.royalairmaroc.com/en-gb/miles-calculator",
+        "https://www.royalairmaroc.com/en-gb/safar-flyer/forgot-my-pin"
+      ],
+      "blockPalette": [
+        "article-hero",
+        "breadcrumbs",
+        "service-widget-shell",
+        "form-shell",
+        "info-card",
+        "accordion",
+        "responsive-table",
+        "app-promo"
+      ],
+      "blocks": []
+    },
+    {
+      "name": "live-not-found",
+      "description": "Nav target whose working lowercase /en-gb/ path currently renders the live 404 shell.",
+      "urls": [
+        "https://www.royalairmaroc.com/en-gb/applications-mobile",
+        "https://www.royalairmaroc.com/en-gb/baggage-assistance",
+        "https://www.royalairmaroc.com/en-gb/business-class",
+        "https://www.royalairmaroc.com/en-gb/children-and-pregnancy",
+        "https://www.royalairmaroc.com/en-gb/dining-on-board",
+        "https://www.royalairmaroc.com/en-gb/economy-class",
+        "https://www.royalairmaroc.com/en-gb/experience/entertainment",
+        "https://www.royalairmaroc.com/en-gb/how-to-spend-miles",
+        "https://www.royalairmaroc.com/en-gb/lounge-areas",
+        "https://www.royalairmaroc.com/en-gb/oneworld",
+        "https://www.royalairmaroc.com/en-gb/safar-flyer/sign-in",
+        "https://www.royalairmaroc.com/en-gb/special-services"
+      ],
+      "blockPalette": [
+        "error-hero"
+      ],
+      "blocks": []
+    },
+    {
+      "name": "navigation-landing-alias",
+      "description": "Nav grouping target whose URL currently renders the live homepage shell rather than distinct page content.",
+      "urls": [
+        "https://www.royalairmaroc.com/en-gb/before-travel",
+        "https://www.royalairmaroc.com/en-gb/booking",
+        "https://www.royalairmaroc.com/en-gb/discover-safar-flyer",
+        "https://www.royalairmaroc.com/en-gb/earn-and-spend-miles",
+        "https://www.royalairmaroc.com/en-gb/get-help",
+        "https://www.royalairmaroc.com/en-gb/information/special-needs",
+        "https://www.royalairmaroc.com/en-gb/loyalty"
+      ],
+      "blockPalette": [
+        "homepage-shell"
+      ],
+      "blocks": []
+    },
+    {
+      "name": "standard-article",
+      "description": "Single-column editorial detail with hero, breadcrumbs and rich content.",
+      "urls": [
+        "https://www.royalairmaroc.com/en-gb/discover-morocco",
+        "https://www.royalairmaroc.com/en-gb/dreamliner",
+        "https://www.royalairmaroc.com/en-gb/experience/children",
+        "https://www.royalairmaroc.com/en-gb/information/travel-documents",
+        "https://www.royalairmaroc.com/en-gb/royal-air-maroc-joins-the-united-for-wildlife-taskforce",
+        "https://www.royalairmaroc.com/en-gb/royal-air-maroc-lounges",
+        "https://www.royalairmaroc.com/en-gb/safar-flyer/claim-missing-miles",
+        "https://www.royalairmaroc.com/en-gb/safar-flyer/terms-and-conditions",
+        "https://www.royalairmaroc.com/en-gb/seats",
+        "https://www.royalairmaroc.com/en-gb/sky-press"
+      ],
+      "blockPalette": [
+        "article-hero",
+        "breadcrumbs",
+        "rich-text",
+        "media",
+        "cta"
+      ],
+      "blocks": [
+        {
+          "name": "hero interior",
+          "instances": [
+            ".page-heading-container"
+          ]
+        },
+        {
+          "name": "seat-guide",
+          "instances": [
+            ".container.seat-content"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "structured-reference",
+      "description": "Reference-heavy editorial detail organized by accordions, tables, callouts and feature lists.",
+      "urls": [
+        "https://www.royalairmaroc.com/en-gb/airport-transit",
+        "https://www.royalairmaroc.com/en-gb/how-it-works",
+        "https://www.royalairmaroc.com/en-gb/information/fare-conditions",
+        "https://www.royalairmaroc.com/en-gb/information/services-fees",
+        "https://www.royalairmaroc.com/en-gb/information/special-meals",
+        "https://www.royalairmaroc.com/en-gb/partners-lounge",
+        "https://www.royalairmaroc.com/en-gb/reduced-mobility",
+        "https://www.royalairmaroc.com/en-gb/safar-flyer-and-oneworld",
+        "https://www.royalairmaroc.com/en-gb/safar-flyer/earn-miles",
+        "https://www.royalairmaroc.com/en-gb/unattendance-minors"
+      ],
+      "blockPalette": [
+        "article-hero",
+        "breadcrumbs",
+        "rich-text",
+        "accordion",
+        "responsive-table",
+        "info-callout",
+        "feature-grid"
+      ],
+      "blocks": []
+    }
+  ]
+}

@@ -1,0 +1,320 @@
+{
+  "metadata": {
+    "projectType": "da",
+    "sourceCatalog": "../../catalog/site-scope.json",
+    "editorialPrefix": "/en-gb/"
+  },
+  "profiles": [
+    {
+      "url": "https://www.royalairmaroc.com/en-gb/baggage-information",
+      "template": "feature-story",
+      "path": "/en-gb/baggage-information",
+      "editorialPaths": [
+        "/information",
+        "/before-travel",
+        "/checked-baggage",
+        "/carry-on-baggage",
+        "/special-baggage",
+        "/sport-equipment",
+        "/excess-baggage",
+        "/tips-for-baggage"
+      ],
+      "blocks": [
+        {
+          "name": "baggage-categories",
+          "instances": [
+            ".bck-pattern-1"
+          ],
+          "rows": [
+            {
+              "label": "Breadcrumb",
+              "repeatAsCells": ".page-heading .breadcrumbs__list > li",
+              "cell": {
+                "kind": "link-or-text"
+              }
+            },
+            {
+              "label": "Heading",
+              "cells": [
+                {
+                  "kind": "element",
+                  "tag": "h1",
+                  "selectors": [
+                    ".page-heading .journal-content-article h2"
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Standfirst",
+              "cells": [
+                {
+                  "kind": "element",
+                  "tag": "p",
+                  "selectors": [
+                    ".page-heading .journal-content-article h4"
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Category",
+              "repeat": [
+                ".bck-pattern-1 .small-card"
+              ],
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    "img"
+                  ],
+                  "loading": "lazy"
+                },
+                {
+                  "kind": "link",
+                  "selectors": [
+                    "a"
+                  ],
+                  "textSelectors": [
+                    "h4",
+                    ".small-card__title__text",
+                    "strong"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "baggage-support",
+          "instances": [
+            ".support-section"
+          ],
+          "rows": [
+            {
+              "label": "Heading",
+              "cells": [
+                {
+                  "kind": "element",
+                  "tag": "h2",
+                  "selectors": [
+                    ".support-section h3"
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Support",
+              "repeat": [
+                ".support-section .baggage-card"
+              ],
+              "cells": [
+                {
+                  "kind": "mapped-text",
+                  "selectors": [
+                    "strong"
+                  ],
+                  "map": {
+                    "Delayed baggage": "clock",
+                    "Damaged baggage": "alert",
+                    "Missing items": "search",
+                    "Items left on board": "package"
+                  }
+                },
+                {
+                  "kind": "link",
+                  "selectors": [
+                    ":scope"
+                  ],
+                  "textSelectors": [
+                    "strong"
+                  ]
+                },
+                {
+                  "kind": "text",
+                  "selectors": [
+                    "p"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "restricted-items",
+          "instances": [
+            ".prohibited-section"
+          ],
+          "rows": [
+            {
+              "label": "Heading",
+              "cells": [
+                {
+                  "kind": "element",
+                  "tag": "h2",
+                  "selectors": [
+                    ".prohibited-section h3"
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Restriction",
+              "repeat": [
+                ".prohibited-section > div:first-of-type > div",
+                ".prohibited-section > div:not(:last-child)"
+              ],
+              "cells": [
+                {
+                  "kind": "mapped-text",
+                  "selectors": [
+                    "strong"
+                  ],
+                  "map": {
+                    "Explosives:": "explosives",
+                    "Toxic products:": "alert",
+                    "Radioactive materials:": "radioactive",
+                    "Magnetism:": "magnetism",
+                    "Flammables:": "flammable",
+                    "Corrosives:": "corrosive",
+                    "Compressed gases:": "compressed-gas",
+                    "Lithium Batteries:": "battery",
+                    "Weapons & Sharp objects:": "sharp-objects"
+                  }
+                },
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    "p"
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Guidance",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    ".prohibited-section + div",
+                    ".prohibited-section > div:last-child"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "https://www.royalairmaroc.com/en-gb/seats",
+      "template": "standard-article",
+      "path": "/en-gb/seats",
+      "editorialPaths": [
+        "/experience",
+        "/experience/on-board"
+      ],
+      "metadata": {
+        "descriptionWhenMissing": {
+          "value": "Choose your preferred seat on Royal Air Maroc flights and enjoy a more comfortable travel experience.",
+          "basisSelectors": [
+            ".page-heading-container .page-heading__title",
+            ".container.seat-content > p.seat-content-body"
+          ]
+        }
+      },
+      "blocks": [
+        {
+          "name": "hero interior",
+          "instances": [
+            ".page-heading-container"
+          ],
+          "rows": [
+            {
+              "label": "Breadcrumb",
+              "repeatAsCells": ".page-heading-container .breadcrumbs__list > li",
+              "cell": {
+                "kind": "link-or-text"
+              }
+            },
+            {
+              "label": "Heading",
+              "cells": [
+                {
+                  "kind": "element",
+                  "tag": "h1",
+                  "selectors": [
+                    ".page-heading-container .page-heading__title"
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Image",
+              "cells": [
+                {
+                  "kind": "picture",
+                  "selectors": [
+                    ".page-heading-container .page-heading-clip img"
+                  ],
+                  "loading": "eager"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "seat-guide",
+          "instances": [
+            ".container.seat-content"
+          ],
+          "rows": [
+            {
+              "label": "Heading",
+              "cells": [
+                {
+                  "kind": "element",
+                  "tag": "h2",
+                  "selectors": [
+                    ".container.seat-content h2"
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Intro",
+              "cells": [
+                {
+                  "kind": "rich",
+                  "selectors": [
+                    ".container.seat-content > p.seat-content-body"
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Aircraft",
+              "repeat": [
+                ".container.seat-content > ul > li"
+              ],
+              "cells": [
+                {
+                  "kind": "direct-text"
+                },
+                {
+                  "kind": "link",
+                  "selectors": [
+                    "a"
+                  ],
+                  "excludeSelectors": [
+                    ".sr-only"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
