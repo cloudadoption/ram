@@ -17,19 +17,9 @@ const PANEL_DEFINITIONS = [
 ];
 
 const REQUIRED_FIELDS = {
-  booking: {
-    destination: 'Select destination',
-    origin: 'Select origin',
-  },
-  manage: {
-    reservationCode: 'Reservation Code',
-    surname: 'Surname',
-  },
-  status: {
-    departureDate: 'Departure date',
-    destination: 'Select destination',
-    origin: 'Select origin',
-  },
+  booking: ['destination', 'origin'],
+  manage: ['reservationCode', 'surname'],
+  status: ['departureDate', 'destination', 'origin'],
 };
 
 /**
@@ -62,15 +52,22 @@ export function setActiveFlightSearchPanel(tabs, panels, activeKey) {
  * Validates the required fields for a flight search panel.
  * @param {string} panelKey Flight search panel name
  * @param {Object<string, string>} values Form values keyed by field name
+ * @param {Object<string, Object<string, string>>} messages Authored validation messages
  * @returns {Object<string, string>} Validation messages keyed by field name
  */
-export function validateFlightSearchPanel(panelKey, values) {
+export function validateFlightSearchPanel(panelKey, values, messages) {
   const fields = REQUIRED_FIELDS[panelKey];
   if (!fields) throw new RangeError(`Unknown flight search panel: ${panelKey}`);
 
-  return Object.fromEntries(Object.entries(fields)
-    .filter(([name]) => !String(values[name] || '').trim())
-    .map(([name, label]) => [name, `${label} is required`]));
+  fields.forEach((name) => {
+    if (!messages?.[panelKey]?.[name]) {
+      throw new Error(`Missing authored validation message: ${panelKey}.${name}`);
+    }
+  });
+
+  return Object.fromEntries(fields
+    .filter((name) => !String(values[name] || '').trim())
+    .map((name) => [name, messages[panelKey][name]]));
 }
 
 /**
@@ -78,10 +75,11 @@ export function validateFlightSearchPanel(panelKey, values) {
  * @param {string} panelKey Flight search panel name
  * @param {Object<string, string>} values Form values keyed by field name
  * @param {string} emptyMessage Authored empty-state message
+ * @param {Object<string, Object<string, string>>} messages Authored validation messages
  * @returns {{ errors: Object<string, string>, message: string, submitted: boolean }}
  */
-export function submitFlightSearch(panelKey, values, emptyMessage) {
-  const errors = validateFlightSearchPanel(panelKey, values);
+export function submitFlightSearch(panelKey, values, emptyMessage, messages) {
+  const errors = validateFlightSearchPanel(panelKey, values, messages);
   const submitted = Object.keys(errors).length === 0;
   return {
     errors,
@@ -178,7 +176,7 @@ function panelFields(panelKey) {
   if (panelKey === 'manage') {
     return [
       {
-        label: 'Reservation Code',
+        label: 'Reservation code',
         name: 'reservationCode',
       },
       {
@@ -221,7 +219,7 @@ function renderErrors(fields, errors) {
   });
 }
 
-function buildPanel(panelKey, emptyState) {
+function buildPanel(panelKey, emptyState, validationMessages) {
   const panel = createElement('section', 'flight-search-panel');
   const form = createElement('form', 'flight-search-form');
   const fieldGrid = createElement('div', 'flight-search-fields');
@@ -252,7 +250,11 @@ function buildPanel(panelKey, emptyState) {
   panel.append(form);
 
   const updateState = () => {
-    const errors = validateFlightSearchPanel(panelKey, readFormValues(form));
+    const errors = validateFlightSearchPanel(
+      panelKey,
+      readFormValues(form),
+      validationMessages,
+    );
     if (panelKey === 'booking') {
       submit.hidden = Boolean(errors.destination);
     } else {
@@ -263,14 +265,23 @@ function buildPanel(panelKey, emptyState) {
   Object.entries(fields).forEach(([name, { input }]) => {
     input.addEventListener('input', updateState);
     input.addEventListener('blur', () => {
-      const errors = validateFlightSearchPanel(panelKey, readFormValues(form));
+      const errors = validateFlightSearchPanel(
+        panelKey,
+        readFormValues(form),
+        validationMessages,
+      );
       renderErrors(fields, errors[name] ? { [name]: errors[name] } : {});
     });
   });
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    const result = submitFlightSearch(panelKey, readFormValues(form), emptyState.textContent);
+    const result = submitFlightSearch(
+      panelKey,
+      readFormValues(form),
+      emptyState.textContent,
+      validationMessages,
+    );
     renderErrors(fields, result.errors);
     emptyState.hidden = !result.submitted;
     if (result.submitted) emptyState.focus();
@@ -279,7 +290,7 @@ function buildPanel(panelKey, emptyState) {
   return panel;
 }
 
-function buildFlightSearch(emptyMessage) {
+function buildFlightSearch(emptyMessage, validationMessages) {
   const search = createElement('div', 'flight-search');
   const items = createElement('div', 'flight-search-items');
   const emptyState = createElement('p', 'flight-search-empty', emptyMessage);
@@ -298,7 +309,7 @@ function buildFlightSearch(emptyMessage) {
     const iconElement = createElement('span', `flight-search-icon is-${icon}`);
     const labelElement = createElement('span', 'flight-search-tab-label', label);
     const chevron = createElement('span', 'flight-search-chevron');
-    const panel = buildPanel(key, emptyState);
+    const panel = buildPanel(key, emptyState, validationMessages);
 
     tab.id = `flight-search-tab-${key}`;
     tab.type = 'button';
@@ -321,6 +332,39 @@ function buildFlightSearch(emptyMessage) {
   search.append(items, emptyState);
   setActiveFlightSearchPanel(tabs, panels, 'booking');
   return search;
+}
+
+function readValidationMessages(rows) {
+  const messages = {};
+  const expectedKeys = new Set(Object.entries(REQUIRED_FIELDS)
+    .flatMap(([panelKey, fields]) => fields.map((name) => `${panelKey}.${name}`)));
+
+  rows.forEach((row) => {
+    const cells = [...row.children];
+    const key = cells[0]?.textContent.trim();
+    const message = cells[1]?.textContent.trim();
+
+    if (cells.length !== 2 || !expectedKeys.has(key) || !message) {
+      throw new Error(`Invalid homepage hero validation message row: ${key || 'unnamed'}`);
+    }
+
+    const [panelKey, name] = key.split('.');
+    messages[panelKey] ||= {};
+    if (messages[panelKey][name]) {
+      throw new Error(`Duplicate homepage hero validation message: ${key}`);
+    }
+    messages[panelKey][name] = message;
+  });
+
+  const missingKeys = [...expectedKeys].filter((key) => {
+    const [panelKey, name] = key.split('.');
+    return !messages[panelKey]?.[name];
+  });
+  if (missingKeys.length) {
+    throw new Error(`Missing homepage hero validation messages: ${missingKeys.join(', ')}`);
+  }
+
+  return messages;
 }
 
 function buildHeroMedia(desktopUrl, mobileUrl, copyCell) {
@@ -361,7 +405,7 @@ function buildHeroMedia(desktopUrl, mobileUrl, copyCell) {
  * @param {Element} block Homepage hero block
  */
 export default function decorate(block) {
-  const [contentRow, emptyRow] = [...block.children];
+  const [contentRow, emptyRow, ...validationRows] = [...block.children];
   const [desktopCell, mobileCell, copyCell] = contentRow ? [...contentRow.children] : [];
   const desktopAsset = desktopCell?.querySelector('a[href]');
   const mobileAsset = mobileCell?.querySelector('a[href]');
@@ -372,6 +416,7 @@ export default function decorate(block) {
   }
 
   const media = buildHeroMedia(desktopAsset.href, mobileAsset.href, copyCell);
-  const search = buildFlightSearch(emptyMessage);
+  const validationMessages = readValidationMessages(validationRows);
+  const search = buildFlightSearch(emptyMessage, validationMessages);
   block.replaceChildren(media, search);
 }
