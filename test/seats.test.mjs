@@ -15,7 +15,7 @@ test('models the seats page as an interior hero and repeatable aircraft rows', a
   assert.equal(count('Heading'), 2);
   assert.equal(count('Intro'), 1);
   assert.equal(count('Aircraft'), 6);
-  assert.equal((fixture.match(/target="_blank"/g) || []).length, 6);
+  assert.doesNotMatch(fixture, /target="_blank"/);
   assert.equal((fixture.match(/<picture>/g) || []).length, 1);
   assert.match(fixture, /src="https:\/\/www\.royalairmaroc\.com\/documents\/d\/ram\/seats"/);
   assert.equal((fixture.match(/href="\/en-gb\//g) || []).length, 2);
@@ -43,6 +43,9 @@ test('provides a semantic seat guide collection with accessible PDF links', asyn
   assert.match(guideJS, /export default function decorate\(block\)/);
   assert.match(guideJS, /readLabeledRows/);
   assert.match(guideJS, /rowsWithLabel\(rows, 'aircraft'\)/);
+  assert.match(guideJS, /document\.createElement\('p'\)/);
+  assert.match(guideJS, /moveCellContent\(intro, introCell\)/);
+  assert.match(guideJS, /link\.target = '_blank'/);
   assert.match(guideJS, /PDF file, opens in a new window\./);
   assert.match(guideCSS, /\.seat-guide/);
 });

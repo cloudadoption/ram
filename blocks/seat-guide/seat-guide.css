@@ -1,0 +1,92 @@
+main .seat-guide-container {
+  margin-top: 44px;
+}
+
+main .seat-guide-container .seat-guide-wrapper {
+  box-sizing: content-box;
+  max-width: 1232px;
+  margin-inline: auto;
+  padding: 0 10.5px;
+}
+
+main .seat-guide {
+  color: #1a1717;
+  font-family: var(--ram-page-font-family);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+}
+
+main .seat-guide h2 {
+  margin: 0;
+  color: #c2002f;
+  font-family: var(--ram-homepage-heading-family);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 38.4px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+main .seat-guide > p {
+  margin: 0 0 16px;
+  font-size: 14px;
+  line-height: 16.8px;
+}
+
+main .seat-guide ul {
+  margin: 0;
+  padding: 0;
+  list-style-position: inside;
+}
+
+main .seat-guide li {
+  margin: 0;
+  padding: 0;
+}
+
+main .seat-guide li::marker {
+  color: #c2002f;
+}
+
+main .seat-guide li p {
+  margin: 0 0 16px;
+  font-size: 14px;
+  line-height: 16.8px;
+}
+
+main .seat-guide .seat-guide-pdf:any-link {
+  position: relative;
+  top: -1px;
+  display: inline-block;
+  color: #c2002f;
+  text-decoration: none;
+}
+
+main .seat-guide li:nth-child(4) .seat-guide-pdf:any-link {
+  letter-spacing: 0.01px;
+}
+
+main .seat-guide .seat-guide-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+}
+
+@media (width < 1200px) {
+  main .seat-guide > p {
+    position: relative;
+    top: 1px;
+  }
+
+  main .seat-guide ul {
+    position: relative;
+    top: 0.2px;
+  }
+}

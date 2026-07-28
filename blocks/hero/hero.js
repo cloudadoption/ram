@@ -1,3 +1,10 @@
+import {
+  moveCellContent,
+  readLabeledRows,
+  requireElement,
+  rowWithLabel,
+} from '../../scripts/homepage-blocks.js';
+
 function createElement(tagName, className) {
   const element = document.createElement(tagName);
   if (className) element.className = className;
@@ -51,10 +58,53 @@ function decorateHomepage(block) {
   block.replaceChildren(media);
 }
 
+function buildInteriorBreadcrumb(row) {
+  const nav = createElement('nav', 'hero-interior-breadcrumb');
+  nav.setAttribute('aria-label', 'Breadcrumb');
+
+  const list = document.createElement('ol');
+  row?.cells.forEach((cell) => {
+    const item = document.createElement('li');
+    moveCellContent(item, cell);
+    list.append(item);
+  });
+  nav.append(list);
+  return nav;
+}
+
+function decorateInterior(block) {
+  const rows = readLabeledRows(block);
+  const heading = requireElement(
+    rowWithLabel(rows, 'heading')?.cells[0]?.querySelector('h1'),
+    'Interior hero requires an authored h1',
+  );
+  const picture = requireElement(
+    rowWithLabel(rows, 'image')?.cells[0]?.querySelector('picture'),
+    'Interior hero requires an authored image',
+  );
+  const image = requireElement(
+    picture.querySelector('img'),
+    'Interior hero picture requires an image',
+  );
+
+  const content = createElement('div', 'hero-interior-content');
+  content.append(
+    buildInteriorBreadcrumb(rowWithLabel(rows, 'breadcrumb')),
+    heading,
+  );
+
+  picture.className = 'hero-interior-picture';
+  image.decoding = 'async';
+  image.fetchPriority = 'high';
+  image.loading = 'eager';
+  block.replaceChildren(content, picture);
+}
+
 /**
  * Decorates hero variants.
  * @param {Element} block Hero block
  */
 export default function decorate(block) {
   if (block.classList.contains('homepage')) decorateHomepage(block);
+  if (block.classList.contains('interior')) decorateInterior(block);
 }
