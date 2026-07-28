@@ -104,7 +104,7 @@ test('reports the required fields for each flight search panel', () => {
     }, authoredValidationMessages)),
     {
       reservationCode: 'Booking reference is required',
-      surname: "Passenger's last name is required",
+      surname: "Passenger's name is required",
     },
   );
   assert.deepEqual(
