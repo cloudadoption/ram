@@ -1,17 +1,9 @@
 @font-face {
-  font-family: ram-footer-icons;
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('./assets/ram-icons.woff') format('woff');
-}
-
-@font-face {
   font-family: ram-primary-font;
   font-style: normal;
   font-weight: 300;
   font-display: swap;
-  src: url('./assets/museosans-300.woff2') format('woff2');
+  src: url('https://onesait-travel.azureedge.net/statics/RAM/fonts/museosans/museosans300.woff2') format('woff2');
 }
 
 footer {
@@ -154,7 +146,7 @@ footer .footer .footer-search-button {
 }
 
 footer .footer .footer-icon {
-  font-family: ram-footer-icons, sans-serif;
+  font-family: ram-icons, sans-serif;
   font-style: normal;
   font-weight: 400;
   speak: never;
@@ -195,7 +187,7 @@ footer .footer .footer-group-trigger {
 
 footer .footer .footer-group-trigger::after {
   content: '\e909';
-  font-family: ram-footer-icons, sans-serif;
+  font-family: ram-icons, sans-serif;
   font-size: 12px;
   line-height: 1;
   transform: rotate(90deg);

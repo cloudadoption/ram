@@ -3,15 +3,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('./assets/museosans-400.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: ram-homepage-icons;
-  font-style: normal;
-  font-weight: 400;
-  font-display: block;
-  src: url('./assets/ram-icons.woff') format('woff');
+  src: url('https://onesait-travel.azureedge.net/statics/RAM/fonts/museosans/museosans400.woff2') format('woff2');
 }
 
 @font-face {
@@ -19,7 +11,7 @@
   font-style: normal;
   font-weight: 300;
   font-display: swap;
-  src: url('./assets/museo-300.woff2') format('woff2');
+  src: url('https://onesait-travel.azureedge.net/statics/RAM/fonts/museo/museo300.woff2') format('woff2');
 }
 
 main .homepage-hero {
@@ -163,7 +155,7 @@ main .homepage-hero .flight-search-tab {
 main .homepage-hero .flight-search-icon,
 main .homepage-hero .flight-search-chevron {
   color: #7b7a78;
-  font-family: ram-homepage-icons, sans-serif;
+  font-family: ram-icons, sans-serif;
   font-size: 14px;
 }
 
