@@ -1,0 +1,122 @@
+{
+  "widths": [
+    375,
+    900,
+    1440
+  ],
+  "pages": [
+    {
+      "slug": "homepage",
+      "liveUrl": "https://www.royalairmaroc.com/en-us",
+      "targetUrl": "https://main--ram--cloudadoption.aem.live/",
+      "liveTextSelector": "body",
+      "targetTextSelector": "main",
+      "thresholds": {
+        "minimumTextRatio": 0.3,
+        "maxContentHeightDelta": 100,
+        "maxBlockHeightDelta": 60,
+        "maxPositionDelta": 60,
+        "maxHorizontalDelta": 4
+      },
+      "blocks": [
+        {
+          "name": "hero homepage",
+          "liveSelectors": [
+            "#portlet_es_indra_ibe_ram_singleSite_portlet_CachePortlet_INSTANCE_ZZZHEROCONTENT"
+          ]
+        },
+        {
+          "name": "booking-launchpad",
+          "liveSelectors": [
+            "#portlet_es_indra_ibe_ram_singleSite_portlet_CachePortlet_INSTANCE_ZZZSEARCHENGINEV"
+          ]
+        },
+        {
+          "name": "quick-links",
+          "liveSelectors": [
+            "#portlet_es_indra_ibe_ram_singleSite_portlet_CachePortlet_INSTANCE_ZZZQUICKLINK"
+          ]
+        },
+        {
+          "name": "destination-deals",
+          "liveSelectors": [
+            "#portlet_ram_airways_portlet_BestOffersPortlet_INSTANCE_BEST_OFFERS_HOME"
+          ]
+        },
+        {
+          "name": "promotions",
+          "liveSelectors": [
+            "#portlet_es_indra_ibe_ram_singleSite_portlet_CachePortlet_INSTANCE_ZZZOFFERSANDUPDATES"
+          ]
+        },
+        {
+          "name": "travel-benefits",
+          "liveSelectors": [
+            "#portlet_es_indra_ibe_ram_singleSite_portlet_CachePortlet_INSTANCE_ZZZWHYRAM"
+          ]
+        },
+        {
+          "name": "loyalty-banner",
+          "liveSelectors": [
+            "#portlet_es_indra_ibe_ram_singleSite_portlet_CachePortlet_INSTANCE_ZZZSAFARFLYER"
+          ]
+        },
+        {
+          "name": "newsletter-signup",
+          "liveSelectors": [
+            "#portlet_es_indra_ibe_ram_singleSite_portlet_CachePortlet_INSTANCE_ZZZNEWSLTTR"
+          ]
+        },
+        {
+          "name": "app-promo",
+          "liveSelectors": [
+            "#portlet_es_indra_ibe_ram_singleSite_portlet_CachePortlet_INSTANCE_ZZZAPPDOWNLOAD"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "baggage-information",
+      "liveUrl": "https://www.royalairmaroc.com/en-gb/baggage-information",
+      "targetUrl": "https://main--ram--cloudadoption.aem.live/baggage-information",
+      "profilePath": "/en-gb/baggage-information",
+      "thresholds": {
+        "minimumTextRatio": 0.3,
+        "maxContentHeightDelta": 8,
+        "maxBlockHeightDelta": 4,
+        "maxPositionDelta": 4,
+        "maxHorizontalDelta": 4
+      }
+    },
+    {
+      "slug": "seats",
+      "liveUrl": "https://www.royalairmaroc.com/en-gb/seats",
+      "targetUrl": "https://main--ram--cloudadoption.aem.live/seats",
+      "profilePath": "/en-gb/seats",
+      "thresholds": {
+        "minimumTextRatio": 0.3,
+        "completenessReview": {
+          "confirmed": true,
+          "reason": "Fresh screenshots at all three widths show both mapped blocks, the target block count is two, and no expected content is missing. The source text region includes chrome, so the 31.4 percent ratio is sufficient for capture completeness but does not override failing geometry."
+        },
+        "maxContentHeightDelta": 8,
+        "maxBlockHeightDelta": 4,
+        "maxPositionDelta": 4,
+        "maxHorizontalDelta": 4
+      }
+    },
+    {
+      "slug": "blue-benefits",
+      "liveUrl": "https://www.royalairmaroc.com/en-gb/blue-benefits",
+      "targetUrl": "https://main--ram--cloudadoption.aem.live/en-gb/blue-benefits",
+      "profilePath": "/en-gb/blue-benefits",
+      "thresholds": {
+        "minimumTextRatio": 0.3,
+        "maxContentHeightDelta": 8,
+        "maxBlockHeightDelta": 4,
+        "maxPositionDelta": 4,
+        "maxHorizontalDelta": 4
+      }
+    }
+  ]
+}

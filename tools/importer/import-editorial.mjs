@@ -20,6 +20,11 @@ import {
 } from './editorial-pipeline.js';
 import validateImageSource from './lib/media.js';
 import cleanupDocument from './transformers/cleanup.js';
+import {
+  assertCaptureCompleteness,
+  assertExpectedNavigation,
+  evaluateCaptureCompleteness,
+} from '../parity/parity.js';
 
 const CHROME_CANDIDATES = [
   process.env.CHROME_PATH,
@@ -93,16 +98,33 @@ async function settle(page) {
   });
 }
 
-async function captureLive(url, workDir) {
+async function captureTextCharacters(page, selector) {
+  return page.evaluate((textSelector) => {
+    const elements = [...document.querySelectorAll(textSelector)];
+    if (!elements.length) throw new Error(`No live content matches ${textSelector}`);
+    return elements
+      .map((element) => element.innerText || '')
+      .join(' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .length;
+  }, selector);
+}
+
+async function captureLive(url, workDir, textSelector) {
   const browser = await launch({
     executablePath: await findChrome(),
     headless: true,
-    args: ['--disable-dev-shm-usage'],
+    args: ['--no-sandbox', '--disable-dev-shm-usage'],
   });
   try {
     const page = await browser.newPage();
     await page.setViewport({ width: 1440, height: 900, deviceScaleFactor: 1 });
-    await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
+    const response = await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
+    if (!response || response.status() >= 400) {
+      throw new Error(`${url} returned ${response?.status() || 'no response'}`);
+    }
+    assertExpectedNavigation(url, page.url());
     await settle(page);
     await page.evaluate(() => {
       document.querySelectorAll('body *').forEach((element) => {
@@ -117,8 +139,36 @@ async function captureLive(url, workDir) {
       });
     });
     const html = await page.content();
+    const textCharacters = await captureTextCharacters(page, textSelector);
     await page.screenshot({ path: join(workDir, 'screenshot.png'), fullPage: true });
-    return html;
+    return { html, textCharacters };
+  } finally {
+    await browser.close();
+  }
+}
+
+async function captureFreshLiveText(url, textSelector) {
+  const browser = await launch({
+    executablePath: await findChrome(),
+    headless: true,
+    args: ['--no-sandbox', '--disable-dev-shm-usage'],
+  });
+  try {
+    const page = await browser.newPage();
+    await page.setViewport({ width: 1440, height: 900, deviceScaleFactor: 1 });
+    const response = await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
+    try {
+      if (!response || response.status() >= 400) {
+        throw new Error(`${url} returned ${response?.status() || 'no response'}`);
+      }
+      assertExpectedNavigation(url, page.url());
+      await settle(page);
+      return await captureTextCharacters(page, textSelector);
+    } catch (error) {
+      throw new Error(`Fresh live completeness capture failed: ${error.message}`, {
+        cause: error,
+      });
+    }
   } finally {
     await browser.close();
   }
@@ -128,6 +178,44 @@ function cleanHtml(sourceHtml) {
   const { document } = parseHTML(sourceHtml);
   cleanupDocument(document);
   return document.toString();
+}
+
+function htmlTextCharacters(html) {
+  const { document } = parseHTML(`<html><body>${html}</body></html>`);
+  return (document.body?.textContent || '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .length;
+}
+
+async function validateCaptureCompleteness({
+  url,
+  result,
+  workDir,
+  textSelector,
+  initialCaptureTextCharacters,
+  manualReview,
+}) {
+  const liveTextCharacters = await captureFreshLiveText(url, textSelector);
+  const targetTextCharacters = htmlTextCharacters(result.html);
+  const options = {
+    liveTextCharacters,
+    targetTextCharacters,
+    manualReview,
+  };
+  const completeness = evaluateCaptureCompleteness(options);
+  const artifact = {
+    sourceUrl: url,
+    textSelector,
+    initialCaptureTextCharacters,
+    ...completeness,
+  };
+  await writeFile(
+    join(workDir, 'capture-completeness.json'),
+    `${JSON.stringify(artifact, null, 2)}\n`,
+  );
+  assertCaptureCompleteness(options);
+  return artifact;
 }
 
 function contentTypeExtension(contentType) {
@@ -236,11 +324,25 @@ async function main() {
 
   let sourceHtml;
   let metadata;
+  const textSelector = profile?.completeness?.liveTextSelector || '.inner-layout';
+  const completenessReview = options['completeness-review'] ? {
+    confirmed: true,
+    reason: options['completeness-review'],
+  } : undefined;
   if (options.phase === 'all' || options.phase === 'analyze') {
-    sourceHtml = await captureLive(url, workDir);
+    const capture = await captureLive(url, workDir, textSelector);
+    sourceHtml = capture.html;
     const cleaned = cleanHtml(sourceHtml);
     await writeFile(join(workDir, 'cleaned.html'), cleaned);
     const preliminary = transformEditorialDocument(cleaned, { url });
+    await validateCaptureCompleteness({
+      url,
+      result: preliminary,
+      workDir,
+      textSelector,
+      initialCaptureTextCharacters: capture.textCharacters,
+      manualReview: completenessReview,
+    });
     const downloadedImages = await downloadImages(
       preliminary.metadata.images,
       join(workDir, 'images'),
@@ -249,6 +351,10 @@ async function main() {
       ...preliminary.metadata,
       catalogTemplate: catalogTemplate.name,
       downloadedImages,
+      capture: {
+        textSelector,
+        textCharacters: capture.textCharacters,
+      },
     };
     await writeFile(
       join(workDir, 'metadata.json'),
@@ -270,6 +376,16 @@ async function main() {
     options['media-base'],
   );
   const result = transformEditorialDocument(sourceHtml, { url, imageSources });
+  if (options.phase === 'import') {
+    await validateCaptureCompleteness({
+      url,
+      result,
+      workDir,
+      textSelector,
+      initialCaptureTextCharacters: metadata.capture?.textCharacters,
+      manualReview: completenessReview,
+    });
+  }
   if (options.phase === 'all' || options.phase === 'map') {
     await writeMappingArtifacts(result, workDir);
   }

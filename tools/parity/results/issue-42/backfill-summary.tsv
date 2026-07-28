@@ -1,0 +1,13 @@
+page	width	text-ratio	content-height-delta	block-height-delta	position-delta	horizontal-delta	text-status	text-passed	geometry-passed	passed
+homepage	375	0.628	-40	64	40	0	passed	true	false	false
+homepage	900	0.656	-8	64	56	0	passed	true	false	false
+homepage	1440	0.666	24	50	48	0	passed	true	true	true
+baggage-information	375	0.394	470	248	222	30	passed	true	false	false
+baggage-information	900	0.394	363	187	187	30	passed	true	false	false
+baggage-information	1440	0.389	398	247	247	30	passed	true	false	false
+seats	375	0.314	-17	17	0	21	review-confirmed	true	false	false
+seats	900	0.314	-17	16	0	21	review-confirmed	true	false	false
+seats	1440	0.377	-16	16	0	21	passed	true	false	false
+blue-benefits	375	0.392	0	0	0	0	passed	true	true	true
+blue-benefits	900	0.392	0	0	0	63	passed	true	false	false
+blue-benefits	1440	0.424	0	0	0	208	passed	true	false	false

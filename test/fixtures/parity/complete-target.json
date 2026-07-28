@@ -1,0 +1,40 @@
+{
+  "url": "https://main--ram--cloudadoption.aem.live/en-gb/example",
+  "width": 375,
+  "textCharacters": 4800,
+  "contentBox": {
+    "x": 0,
+    "y": 86,
+    "width": 375,
+    "height": 4198
+  },
+  "blocks": [
+    {
+      "name": "hero",
+      "box": {
+        "x": 0,
+        "y": 86,
+        "width": 375,
+        "height": 320
+      }
+    },
+    {
+      "name": "content",
+      "box": {
+        "x": 0,
+        "y": 407,
+        "width": 375,
+        "height": 2499
+      }
+    },
+    {
+      "name": "support",
+      "box": {
+        "x": 0,
+        "y": 2906,
+        "width": 375,
+        "height": 1378
+      }
+    }
+  ]
+}

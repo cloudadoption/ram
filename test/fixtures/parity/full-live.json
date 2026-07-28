@@ -1,0 +1,40 @@
+{
+  "url": "https://www.royalairmaroc.com/en-gb/example",
+  "width": 375,
+  "textCharacters": 9903,
+  "contentBox": {
+    "x": 0,
+    "y": 94,
+    "width": 375,
+    "height": 4200
+  },
+  "blocks": [
+    {
+      "name": "hero",
+      "box": {
+        "x": 0,
+        "y": 94,
+        "width": 375,
+        "height": 320
+      }
+    },
+    {
+      "name": "content",
+      "box": {
+        "x": 0,
+        "y": 414,
+        "width": 375,
+        "height": 2500
+      }
+    },
+    {
+      "name": "support",
+      "box": {
+        "x": 0,
+        "y": 2914,
+        "width": 375,
+        "height": 1380
+      }
+    }
+  ]
+}
