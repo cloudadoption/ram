@@ -3,9 +3,36 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import vm from 'node:vm';
 
+const createTestElement = (tagName) => {
+  const classes = new Set();
+  const attributes = new Map();
+  return {
+    attributes,
+    children: [],
+    classList: {
+      add: (...names) => names.forEach((name) => classes.add(name)),
+      contains: (name) => classes.has(name),
+    },
+    className: '',
+    tagName: tagName.toUpperCase(),
+    textContent: '',
+    append(...children) {
+      this.children.push(...children);
+    },
+    getAttribute(name) {
+      return attributes.get(name);
+    },
+    setAttribute(name, value) {
+      attributes.set(name, value);
+    },
+  };
+};
+
 const context = vm.createContext({
   console,
-  document: {},
+  document: {
+    createElement: createTestElement,
+  },
   URL,
   window: {},
 });
@@ -24,6 +51,14 @@ const testSource = source
     'export function getPanelSubTabs(panelKey)',
   )
   .replace(
+    'function createField({',
+    'export function createField({',
+  )
+  .replace(
+    'function createPanelSubTabs(panelKey)',
+    'export function createPanelSubTabs(panelKey)',
+  )
+  .replace(
     'function panelFields(panelKey)',
     'export function panelFields(panelKey)',
   )
@@ -36,6 +71,8 @@ await heroModule.link(() => {});
 await heroModule.evaluate();
 
 const {
+  createField,
+  createPanelSubTabs,
   getPanelSubTabs,
   panelFields,
   setActiveFlightSearchPanel,
@@ -146,6 +183,32 @@ test('uses the field labels visible in the open live panels', () => {
     { label: 'Select origin', name: 'origin' },
     { label: 'Select destination', name: 'destination' },
   ]);
+});
+
+test('associates every form label with a unique input id', () => {
+  const ids = [];
+
+  ['booking', 'manage', 'status'].forEach((panelKey) => {
+    panelFields(panelKey).forEach((fieldConfig) => {
+      const { field, input } = createField({ ...fieldConfig, panelKey });
+      assert.equal(field.tagName, 'LABEL');
+      assert.ok(input.id);
+      assert.equal(field.htmlFor, input.id);
+      ids.push(input.id);
+    });
+
+    const group = createPanelSubTabs(panelKey);
+    group.children.slice(1).forEach((option) => {
+      const [input] = option.children;
+      assert.equal(option.tagName, 'LABEL');
+      assert.ok(input.id);
+      assert.equal(option.htmlFor, input.id);
+      ids.push(input.id);
+    });
+  });
+
+  assert.equal(ids.length, 13);
+  assert.equal(new Set(ids).size, ids.length);
 });
 
 test('uses the Manage booking and Check-in sub-tab row from live', () => {
